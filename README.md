@@ -1,4 +1,4 @@
-# cgp_frontend
+# storybook-component
 
 i18n-json-to-xlsx-converter
 
