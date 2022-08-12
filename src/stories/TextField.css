@@ -43,3 +43,20 @@
 .cgp-input.success {
   border: solid 1px #00b78b;
 }
+.help-text {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.54;
+  letter-spacing: -0.26px;
+  color: #777;
+}
+.help-text.error {
+  color: #ff2a55;
+}
+.help-text.success {
+  color: #00b78b;
+}
+.cgp-input-field {
+  display: flex;
+  flex-direction: column;
+}

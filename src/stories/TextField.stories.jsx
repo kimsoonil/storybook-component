@@ -10,4 +10,4 @@ export default {
 const Template = (args) => <TextField {...args} />;
 
 export const page = Template.bind({});
-page.args = { numPages: 5 };
+page.args = {};
