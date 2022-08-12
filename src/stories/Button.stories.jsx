@@ -17,6 +17,7 @@ contained.args = {
   size: "M",
   disabled: false,
   line: false,
+  width: 140,
 };
 
 export const outlined = Template.bind({});
@@ -26,4 +27,5 @@ outlined.args = {
   size: "M",
   disabled: false,
   line: true,
+  width: 140,
 };
