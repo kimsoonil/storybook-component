@@ -1,0 +1,97 @@
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.relative {
+  position: relative;
+}
+
+.wrapper {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  height: 94px;
+  background-color: #9013fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 94px;
+  width: 1280px;
+}
+
+.menu {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  margin: 6px;
+  object-fit: contain;
+  cursor: pointer;
+}
+.menu:hover {
+  background-color: #8022d5;
+}
+.menu:active {
+  background-color: #ff45a1;
+}
+.loginBtn {
+  width: 84px;
+  height: 36px;
+  border-radius: 18px;
+  border: solid 1px #fff;
+  font-family: NanumSquareRoundOTF;
+  font-size: 16px;
+  color: #fff;
+  margin-right: 12px;
+  cursor: pointer;
+}
+.seachBar {
+  width: 400px;
+  height: 44px;
+  padding-left: 16px;
+  border-radius: 8px;
+  background-color: #7d0edf;
+  border: 0;
+  outline: 0;
+  color: #fff;
+}
+.seachBar::placeholder {
+  opacity: 0.5;
+  font-family: NanumSquareRoundOTF;
+  font-size: 15px;
+  color: #fff;
+}
+.seachIc {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+}
+.tootip {
+  display: none;
+  height: 23px;
+
+  opacity: 0.8;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  background-color: #121212;
+  font-family: Poppins;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 4px;
+}
+.menu:hover .tootip {
+  display: flex;
+}
+.tootip::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 10px solid #121212;
+  position: absolute;
+  top: -18px;
+}
