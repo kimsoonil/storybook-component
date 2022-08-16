@@ -11,7 +11,6 @@ import "./Pageination.css";
 export const Pageination = ({ numPages }) => {
   return (
     <div className="paginations">
-      <div className="title">Paginations</div>
       <div className="flex-center">
         <Pagination
           className="ant-pagination"

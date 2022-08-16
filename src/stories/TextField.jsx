@@ -13,7 +13,6 @@ export const TextField = ({
 }) => {
   return (
     <div className="text-field">
-      <div className="title">TEXT FIELD</div>
       <div className="cgp-input-field">
         <input
           className={state + " cgp-input"}

@@ -1,62 +1,193 @@
-.text-field .title {
-  height: 61px;
-  font-family: Poppins;
-  font-size: 32px;
-  font-weight: bold;
-  text-align: left;
-  color: #242a3c;
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.cgp-input {
-  width: 200px;
-  height: 26px;
-  padding: 14.5px 260px 14.5px 16px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #121212;
+.none {
+  display: none;
+}
+.filter {
+  width: 360px;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px #e0e0e0;
   background-color: #fff;
+  border-radius: 8px;
 }
-.cgp-input::placeholder {
-  color: #bdbdbd;
-  font-weight: 400;
+.filter-conent {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid #e0e0e0;
 }
-.cgp-input:disabled {
-  border: solid 1px #e0e0e0;
-  background-color: #f8f8f8;
-  color: #bdbdbd;
-}
-.cgp-input:read-only {
-  border: solid 1px #e0e0e0;
-  background-color: #f8f8f8;
+.filter-title {
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: 500;
   color: #777;
 }
-.cgp-input:focus-visible {
-  border: solid 1px #ff45a1;
-  background-color: #fff;
+.sort-box {
+  box-sizing: border-box;
+  flex-flow: row wrap;
+}
+.sort-box div {
+  width: 127px;
+  height: 40px;
+  flex: 1 0 auto;
+  border: solid 1px #e0e0e0;
+  /* margin-right: -1px; */
+  cursor: pointer;
+}
+
+.filter-box {
+  font-family: Mplus1p;
+  font-size: 13px;
+  font-weight: 400;
   color: #121212;
+}
+.filter-box.active {
+  border: 1px solid #9013fe;
+  color: #9013fe;
+  margin-right: 0px;
+  font-weight: 500;
+}
+.date-box div {
+  width: 74px;
+  height: 40px;
+  margin-right: -1px;
+  border: solid 1px #e0e0e0;
+  background-color: #fff;
+  cursor: pointer;
+}
+.date-start {
+  width: 127px;
+  height: 40px;
+  margin: 8px 4px 12px 11px;
+  padding: 8px 6px 8px 14px;
+  border-radius: 8px;
+  border: solid 1px #e0e0e0;
+  background-color: #fff;
+}
+.box-left {
+  border-radius: 8px 0 0 8px;
+}
+.box-right {
+  min-width: 106px;
+  border-radius: 0 8px 8px 0;
+}
+.filter-hr {
+  box-sizing: border-box;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.keyword-input {
+  width: 244px;
+  height: 40px;
+  padding: 0;
+  padding-left: 14px;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+  border: 0;
   outline: 0;
 }
-.cgp-input.error {
-  border: solid 1px #ff2a55;
+.keyword-input::placeholder {
+  color: #a7a8ab;
 }
-.cgp-input.success {
-  border: solid 1px #00b78b;
+.keyword .seachIc img {
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+  object-fit: cover;
+  filter: contrast(0.5);
+  cursor: pointer;
 }
-.help-text {
-  margin-top: 4px;
+.filter-acctions {
+  padding: 12px 20px;
+}
+.filter-done {
+  width: 79px;
+  height: 32px;
+  border-radius: 4px;
+  border: solid 1px #bdbdbd;
+  background-color: #f8f8f8;
   font-size: 13px;
-  line-height: 1.54;
+  font-weight: 500;
+  color: #242a3c;
+  cursor: pointer;
+}
+.filter-cancle {
+  width: 45px;
+  height: 19px;
+  font-family: Poppins;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.85;
   letter-spacing: -0.26px;
-  color: #777;
+  color: #bdbdbd;
+  cursor: pointer;
 }
-.help-text.error {
-  color: #ff2a55;
+
+.calendar {
+  margin: 8px 0 8px 58px;
 }
-.help-text.success {
-  color: #00b78b;
+.date-input {
+  width: 109px;
+  height: 38px;
+  padding: 0;
+  padding-left: 16px;
+  border-radius: 8px;
+  border: solid 1px #e0e0e0;
+  background-color: #fff;
+  margin-left: 4px;
 }
-.cgp-input-field {
-  display: flex;
-  flex-direction: column;
+.ic_calendar {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-image: url("./assets/ic_calendar_gr.svg");
+  background-size: cover;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.date-input:hover .ic_calendar {
+  background-image: url("./assets/ic_calendar_hover.svg");
+}
+.ic_calendar:hover {
+  background-image: url("./assets/ic_calendar_hover.svg");
+}
+.react-calendar.hide {
+  display: none;
+}
+.react-calendar {
+  position: absolute;
+  z-index: 1000;
+  top: 180px;
+  left: 84px;
+  width: 340px;
+  height: 320px;
+  padding: 16px 20px 26.5px;
+}
+.react-calendar__month-view__weekdays abbr {
+  color: #dedede;
+  font-size: 12px;
+  text-decoration: none;
+}
+.react-calendar__tile--now {
+  border-radius: 50%;
+  background-color: #eee;
+  color: #242a3c;
+}
+.react-calendar__tile--active {
+  color: #fff;
+  background-color: #9013fe;
+  border-radius: 50%;
+}
+.react-calendar__month-view__days button {
+  width: 36px;
+  height: 36px;
+
+  padding: 0;
+}
+.react-calendar__tile--now:enabled:hover {
+  background-color: #eee;
 }
