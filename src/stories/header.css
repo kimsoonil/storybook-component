@@ -8,7 +8,7 @@
 }
 
 .wrapper {
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   height: 94px;
   background-color: #9013fe;
   display: flex;
@@ -36,6 +36,19 @@
 }
 .menu:active {
   background-color: #ff45a1;
+}
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 4px;
+  background-image: linear-gradient(141deg, #ffd300 14%, #ff45a1 86%);
+}
+.user-icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #8022d5;
 }
 .loginBtn {
   width: 84px;
@@ -85,7 +98,7 @@
   display: flex;
 }
 .tootip::before {
-  content: '';
+  content: "";
   width: 0;
   height: 0;
   border-top: 10px solid transparent;
