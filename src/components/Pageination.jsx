@@ -6,7 +6,7 @@ import { Header } from "./Header";
 import Pagination from "rc-pagination";
 
 import "rc-pagination/assets/index.css";
-import "./Pageination.css";
+import "../assets/css/components.css";
 
 export const Pageination = ({ numPages }) => {
   return (

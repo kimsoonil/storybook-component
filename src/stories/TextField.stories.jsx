@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TextField } from "./TextField";
+import { TextField } from "../components/TextField";
 
 export default {
   title: "Example/TextField",

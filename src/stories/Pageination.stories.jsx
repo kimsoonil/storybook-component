@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import { Pageination } from './Pageination';
+import { Pageination } from "../components/Pageination";
 
 export default {
-  title: 'Example/Pageination',
-  component: Pageination
+  title: "Example/Pageination",
+  component: Pageination,
 };
 
 const Template = (args) => <Pageination {...args} />;

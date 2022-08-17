@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import "./Fliter.css";
+import "../assets/css/components.css";
 import { DateRangePicker } from "rsuite";
 import * as dayjs from "dayjs";
+
 export const Fliter = ({}) => {
   const [sort, setSort] = useState("new"); //popularity
   const [date, setDate] = useState("All"); // All 3month Select
@@ -137,7 +138,10 @@ export const Fliter = ({}) => {
               onChange={(e) => setKeyword(e.target.value)}
             />
             <div className="seachIc">
-              <img src={require("./assets/ic_search_wh.svg").default} alt="" />
+              <img
+                src={require("../assets/components/ic_search_wh.svg").default}
+                alt=""
+              />
             </div>
           </div>
         </div>

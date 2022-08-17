@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Fliter } from "./Fliter";
+import { Fliter } from "../components/Fliter";
 
 export default {
   title: "Example/Fliter",

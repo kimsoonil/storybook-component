@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import "./TextField.css";
+import "../assets/css/components.css";
 
 export const TextField = ({
   Placeholder,
