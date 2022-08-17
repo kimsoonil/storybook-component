@@ -9,5 +9,5 @@ export default {
 
 const Template = (args) => <Fliter {...args} />;
 
-export const page = Template.bind({});
-page.args = {};
+export const fliterBox = Template.bind({});
+fliterBox.args = {};

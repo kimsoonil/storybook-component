@@ -9,5 +9,5 @@ export default {
 
 const Template = (args) => <TextField {...args} />;
 
-export const page = Template.bind({});
-page.args = {};
+export const textfield = Template.bind({});
+textfield.args = {};

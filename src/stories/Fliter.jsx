@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./Fliter.css";
+import { DateRangePicker } from "rsuite";
 import * as dayjs from "dayjs";
 export const Fliter = ({}) => {
   const [sort, setSort] = useState("new"); //popularity
@@ -88,7 +89,7 @@ export const Fliter = ({}) => {
             </div>
           </div>
           <div className={date !== "select" ? "none" : "calendar flex-center"}>
-            <div className="relative">
+            <div className={"relative " + (startDateShow && "active")}>
               <input
                 className="date-input"
                 value={dayjs(startDate).format("YYYY-MM-DD")}
@@ -99,24 +100,29 @@ export const Fliter = ({}) => {
                 onClick={() => startDateFouce()}
               ></div>
             </div>
-            <div>
+            <div className={"relative " + (endDateShow && "active")}>
               <input
                 className="date-input"
                 value={dayjs(endDate).format("YYYY-MM-DD")}
                 onFocus={() => endDateFouce()}
               />
+              <div
+                className={"ic_calendar"}
+                onClick={() => endDateFouce()}
+              ></div>
             </div>
+
             <Calendar
               className={startDateShow ? "" : "hide"}
               onChange={startDateChange}
               locale="en-EN"
-              selectRange={true}
+              // selectRange={true}
             />
             <Calendar
               className={endDateShow ? "" : "hide"}
               onChange={endDateChange}
               locale="en-EN"
-              selectRange={true}
+              // selectRange={true}
             />
           </div>
         </div>
