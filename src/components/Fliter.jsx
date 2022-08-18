@@ -1,37 +1,19 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Calendar from 'react-calendar';
+
 import 'react-calendar/dist/Calendar.css';
 import '../assets/css/components.css';
-import * as dayjs from 'dayjs';
 import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@material-ui/pickers/adapter/date-fns';
 import { DateRangePicker, LocalizationProvider, DateRangeDelimiter } from '@material-ui/pickers';
 
-export const Fliter = ({}) => {
-  const [sort, setSort] = useState('new'); //popularity
-  const [date, setDate] = useState('All'); // All 3month Select
+export function Fliter({}) {
+  const [sort, setSort] = useState('new');
+  const [date, setDate] = useState('All');
 
   const [keyword, setKeyword] = useState('');
 
   const [selectedDate, handleDateChange] = React.useState([null, null]);
 
-  const startDateChange = (value) => {
-    setStartDate(value);
-    setStartDateShow(false);
-  };
-  const endDateChange = (value) => {
-    setEndDate(value);
-    setEndDateShow(false);
-  };
-  const startDateFouce = () => {
-    setStartDateShow(true);
-    setEndDateShow(false);
-  };
-  const endDateFouce = () => {
-    setStartDateShow(false);
-    setEndDateShow(true);
-  };
   return (
     <div className="filter relative">
       <div className="filter-conent">
@@ -39,13 +21,13 @@ export const Fliter = ({}) => {
           <div className="filter-title">Sort by</div>
           <div className="flex-center sort-box">
             <div
-              className={'box-left filter-box flex-center ' + (sort === 'new' && 'active')}
+              className={`box-left filter-box flex-center ${sort === 'new' && 'active'}`}
               onClick={() => setSort('new')}
             >
               최신순
             </div>
             <div
-              className={'box-right filter-box flex-center ' + (sort === 'popularity' && 'active')}
+              className={`box-right filter-box flex-center ${sort === 'popularity' && 'active'}`}
               onClick={() => setSort('popularity')}
             >
               인기순
@@ -63,13 +45,13 @@ export const Fliter = ({}) => {
                 A week
               </div>
               <div
-                className={'filter-box flex-center ' + (date === '3month' && 'active')}
+                className={`filter-box flex-center ${date === '3month' && 'active'}`}
                 onClick={() => setDate('3month')}
               >
                 3 month
               </div>
               <div
-                className={'box-right filter-box flex-center ' + (date === 'select' && 'active')}
+                className={`box-right filter-box flex-center ${date === 'select' && 'active'}`}
                 onClick={() => setDate('select')}
               >
                 Select a Date
@@ -79,14 +61,16 @@ export const Fliter = ({}) => {
           <div className={date !== 'select' ? 'none' : 'calendar flex-center'}>
             <LocalizationProvider dateAdapter={DateFnsUtils}>
               <DateRangePicker
-                startText="Check-in"
-                endText="Check-out"
+                inputFormat="yyyy-mm-dd"
+                calendars={1}
+                startText=""
+                endText=""
                 value={selectedDate}
                 onChange={(date) => handleDateChange(date)}
                 renderInput={(startProps, endProps) => (
                   <>
                     <TextField {...startProps} />
-                    <DateRangeDelimiter> to </DateRangeDelimiter>
+                    <DateRangeDelimiter> </DateRangeDelimiter>
                     <TextField {...endProps} />
                   </>
                 )}
@@ -116,7 +100,7 @@ export const Fliter = ({}) => {
       </div>
     </div>
   );
-};
+}
 Fliter.propTypes = {};
 
 Fliter.defaultProps = {};

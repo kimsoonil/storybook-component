@@ -1,45 +1,38 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-import "../assets/css/components.css";
+import '../assets/css/components.css';
 
-export const TextField = ({
-  Placeholder,
-  Disabled,
-  Readonly,
-  state,
-  value,
-  helpText,
-}) => {
+export function TextField({ Placeholder, Disabled, Readonly, state, value, helpText }) {
   return (
     <div className="text-field">
       <div className="cgp-input-field">
         <input
-          className={state + " cgp-input"}
+          className={`${state} cgp-input`}
           Placeholder={Placeholder}
           Disabled={Disabled}
-          Readonly={Readonly}
+          readOnly={Readonly}
           value={value}
         />
-        <span className={state + " help-text"}>{helpText}</span>
+        <span className={`${state} help-text`}>{helpText}</span>
       </div>
     </div>
   );
-};
+}
 TextField.propTypes = {
   Placeholder: PropTypes.string,
   Disabled: PropTypes.bool,
   Readonly: PropTypes.bool,
-  state: PropTypes.oneOf(["", "success", "error"]),
+  state: PropTypes.oneOf(['', 'success', 'error']),
   value: PropTypes.string,
-  helpText: PropTypes.string,
+  helpText: PropTypes.string
 };
 
 TextField.defaultProps = {
-  Placeholder: "Placeholder text",
+  Placeholder: 'Placeholder text',
   Disabled: false,
   Readonly: false,
-  state: "",
+  state: '',
   value: PropTypes.string,
-  helpText: PropTypes.string,
+  helpText: PropTypes.string
 };
