@@ -58,10 +58,11 @@ export function Fliter({}) {
               </div>
             </div>
           </div>
-          <div className={date !== 'select' ? 'none' : 'calendar flex-center'}>
+          <div className={date !== 'select' ? 'none' : 'calendar '}>
             <LocalizationProvider dateAdapter={DateFnsUtils}>
               <DateRangePicker
                 inputFormat="yyyy-mm-dd"
+                displayStaticWrapperAs="mobile"
                 calendars={1}
                 startText=""
                 endText=""
@@ -69,9 +70,15 @@ export function Fliter({}) {
                 onChange={(date) => handleDateChange(date)}
                 renderInput={(startProps, endProps) => (
                   <>
-                    <TextField {...startProps} />
+                    <div className="relative">
+                      <TextField {...startProps} placeholder="start" />
+                      <div className="ic_calendar" />
+                    </div>
                     <DateRangeDelimiter> </DateRangeDelimiter>
-                    <TextField {...endProps} />
+                    <div className="relative">
+                      <TextField {...endProps} placeholder="end" />
+                      <div className="ic_calendar" />
+                    </div>
                   </>
                 )}
               />

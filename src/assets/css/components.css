@@ -18,7 +18,7 @@
 
 /* TODO: Button */
 .storybook-button {
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 700;
   border: 0;
   cursor: pointer;
@@ -217,93 +217,61 @@
 .calendar {
   margin: 8px 0 8px 58px;
 }
-.date-input {
+.calendar .MuiOutlinedInput-input {
   width: 109px;
   height: 38px;
   padding: 0;
   padding-left: 16px;
   border-radius: 8px;
-  border: solid 1px #e0e0e0;
+  /* border: solid 1px #e0e0e0; */
   background-color: #fff;
   margin-left: 4px;
   outline: 0;
+  color: #121212;
+  font-size: 13px;
+}
+.calendar .MuiFormHelperText-contained {
+  display: none;
+}
+.calendar .WithStyles\(ForwardRef\(Typography\)\)-root-5 {
+  margin: 0 4px;
 }
 .ic_calendar {
   position: absolute;
   width: 20px;
   height: 20px;
-  background-image: url("../components/ic_calendar_gr.svg");
+  background-image: url('../components/ic_calendar_gr.svg');
   background-size: cover;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
   cursor: pointer;
 }
 .calendar .relative:hover .ic_calendar {
-  background-image: url("../components/ic_calendar_hover.svg");
+  background-image: url('../components/ic_calendar_hover.svg');
+}
+.MuiPickersDay-daySelected {
+  background-color: #9013fe !important;
+  color: #fff !important;
+}
+.MuiPickersDateRangeDay-rangeIntervalDayHighlight {
+  background-color: #f4e7ff !important;
+}
+.MuiPickersDateRangeDay-rangeIntervalDayHighlight button {
+  color: #242a3c;
+}
+.MuiPickersDesktopDateRangeCalendar-dateRangeContainer .MuiPickersDesktopDateRangeCalendar-calendar {
+  min-height: 230px;
 }
 .active .ic_calendar {
-  background-image: url("../components/ic_calendar_on.svg");
+  background-image: url('../components/ic_calendar_on.svg');
 }
 .ic_calendar:hover {
-  background-image: url("../components/ic_calendar_hover.svg");
-}
-.react-calendar.hide {
-  display: none;
-}
-.react-calendar {
-  position: absolute;
-  z-index: 1000;
-  top: 180px;
-  left: 84px;
-  width: 252px;
-  height: 232px;
-  padding: 16px 20px 26.5px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
-  border: solid 1px #a7a8ab;
-}
-.react-calendar__month-view__weekdays abbr {
-  color: #dedede;
-  font-size: 10px;
-  text-decoration: none;
-  font-weight: 500;
-}
-.react-calendar__month-view__days__day {
-  color: #242a3c;
-  font-size: 12px;
-  font-weight: 600;
-}
-.react-calendar__tile--now {
-  border-radius: 50%;
-  background-color: #eee;
-  color: #242a3c;
-}
-.react-calendar__tile--active {
-  color: #fff;
-  background-color: #9013fe;
-  border-radius: 50%;
-}
-.react-calendar__month-view__days button {
-  width: 24px;
-  height: 24px;
-  padding: 0;
-}
-.react-calendar__tile--now:enabled:hover {
-  background-color: #eee;
-}
-.react-calendar__navigation__next2-button {
-  display: none;
-}
-.react-calendar__navigation__prev2-button {
-  display: none;
-}
-.react-calendar__navigation {
-  margin: 0;
+  background-image: url('../components/ic_calendar_hover.svg');
 }
 
 /* TODO: Header */
 .wrapper {
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   height: 94px;
   background-color: #9013fe;
   display: flex;
@@ -393,7 +361,7 @@
   display: flex;
 }
 .tootip::before {
-  content: "";
+  content: '';
   width: 0;
   height: 0;
   border-top: 10px solid transparent;
