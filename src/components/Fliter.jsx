@@ -96,7 +96,7 @@ export function Fliter({}) {
               onChange={(e) => setKeyword(e.target.value)}
             />
             <div className="seachIc">
-              <img src={require('../assets/components/ic_search_wh.svg').default} alt="" />
+              <img src={require('../images/components/ic_search_wh.svg').default} alt="" />
             </div>
           </div>
         </div>

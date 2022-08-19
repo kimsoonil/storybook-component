@@ -106,3 +106,5 @@ export const activityList = [
   { img: 'activity-item7.png', name: 'Andrian Dean L', greetings: 'Have a nice day~' },
   { img: 'activity-item8.png', name: 'Andrian Dean L', greetings: 'Have a nice day~' }
 ];
+
+export const wholeClubList = [{ img: 'whole-club1.png' }];

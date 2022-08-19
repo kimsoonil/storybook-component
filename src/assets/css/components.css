@@ -240,14 +240,14 @@
   position: absolute;
   width: 20px;
   height: 20px;
-  background-image: url('../components/ic_calendar_gr.svg');
+  background-image: url('../../images/components/ic_calendar_gr.svg');
   background-size: cover;
   top: 8px;
   right: 8px;
   cursor: pointer;
 }
 .calendar .relative:hover .ic_calendar {
-  background-image: url('../components/ic_calendar_hover.svg');
+  background-image: url('../../images/components/ic_calendar_hover.svg');
 }
 .MuiPickersDay-daySelected {
   background-color: #9013fe !important;
@@ -263,10 +263,10 @@
   min-height: 230px;
 }
 .active .ic_calendar {
-  background-image: url('../components/ic_calendar_on.svg');
+  background-image: url('../../images/components/ic_calendar_on.svg');
 }
 .ic_calendar:hover {
-  background-image: url('../components/ic_calendar_hover.svg');
+  background-image: url('../../images/components/ic_calendar_hover.svg');
 }
 
 /* TODO: Header */

@@ -10,7 +10,7 @@ function Home() {
     <div id="root">
       <Header />
       <div className="slideView">
-        <img src={require('../../assets/components/slide.png')} alt="" />
+        <img src={require('../../images/home/slide.png')} alt="" />
       </div>
       <div className="main">
         <div className="container">
@@ -22,20 +22,20 @@ function Home() {
                 <div className="item">Manage Clubs</div>
               </div>
               <div className="clubs-tab">
-                <div className="item active">All</div>
-                <div className="item">Game</div>
-                <div className="item">NFT</div>
-                <div className="item">Sports</div>
-                <div className="item">Stoak</div>
-                <div className="item">Fandom</div>
-                <div className="item">Cumunity</div>
+                <div className="item active flex-center">All</div>
+                <div className="item flex-center">Game</div>
+                <div className="item flex-center">NFT</div>
+                <div className="item flex-center">Sports</div>
+                <div className="item flex-center">Stoak</div>
+                <div className="item flex-center">Fandom</div>
+                <div className="item flex-center">Cumunity</div>
               </div>
               <div className="content">
                 {myClubList.map((clubItem, clubIndex) => {
                   return (
                     <div className="club-list" key={clubIndex}>
                       <div className="list-img">
-                        <img src={require(`../../assets/components/${clubItem.img}`)} alt="" />
+                        <img src={require(`../../images/home/${clubItem.img}`)} alt="" />
                       </div>
                       <div className="list-item">
                         <div className="list-item-title">{clubItem.title}</div>
@@ -61,7 +61,7 @@ function Home() {
           <div className="item">
             <div className="side-box profile">
               <div className="profile-img flex-center">
-                <img src={require('../../assets/components/profile.png')} alt="" />
+                <img src={require('../../images/home/profile.png')} alt="" />
                 <div className="profile-name">Kate</div>
               </div>
               <div className="flex-center">
@@ -87,13 +87,13 @@ function Home() {
               <div className="flex-between">
                 <div className="activity-title">Activity</div>
                 <div className="activity-category">
-                  <img src={require('../../assets/components/category.png')} alt="" />
+                  <img src={require('../../images/home/category.png')} alt="" />
                 </div>
               </div>
               <div className="activity-meun">
                 <div className="flex-center">
-                  <div className="activity-tap active">General</div>
-                  <div className="activity-tap ">Club</div>
+                  <div className="activity-tap flex-center active">General</div>
+                  <div className="activity-tap flex-center">Club</div>
                 </div>
                 <div className="flex-center">
                   <select className="activity-select">
@@ -109,7 +109,7 @@ function Home() {
                     return (
                       <div className="activity-item" key={index}>
                         <div className="activity-item-img">
-                          <img src={require(`../../assets/components/${activityItem.img}`)} />
+                          <img src={require(`../../images/home/${activityItem.img}`)} />
                         </div>
                         <div className="activity-item-content">
                           <div className="activity-item-name">{activityItem.name}</div>
@@ -124,20 +124,20 @@ function Home() {
           </div>
           <div className="item">
             <div className="clubs whole-club">
-              <div className="title">How About This Clubs?</div>
-              <div className="whole-club-tab">
-                <div className="active whole-club-tab-item">Popular</div>
-                <div className=" whole-club-tab-item">New</div>
-                <div className=" whole-club-tab-item">Suggest</div>
+              <div className="whole-club-title">How About This Clubs?</div>
+              <div className="whole-club-about">
+                <div className="active whole-club-about-item">Popular</div>
+                <div className=" whole-club-about-item">New</div>
+                <div className=" whole-club-about-item">Suggest</div>
               </div>
-              <div className="tab">
-                <div className="item active">All</div>
-                <div className="item">Game</div>
-                <div className="item">NFT</div>
-                <div className="item">Sports</div>
-                <div className="item">Stoak</div>
-                <div className="item">Fandom</div>
-                <div className="item">Cumunity</div>
+              <div className="whole-club-tab">
+                <div className="item active flex-center">All</div>
+                <div className="item flex-center">Game</div>
+                <div className="item flex-center">NFT</div>
+                <div className="item flex-center">Sports</div>
+                <div className="item flex-center">Stoak</div>
+                <div className="item flex-center">Fandom</div>
+                <div className="item flex-center">Cumunity</div>
               </div>
               <div className="content">
                 <Pageination numPages={10} />
