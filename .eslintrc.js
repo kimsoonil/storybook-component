@@ -16,6 +16,8 @@ module.exports = {
   plugins: ['react', 'react-hooks', 'prettier'],
   rules: {
     // More rules
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'no-use-before-define': 'off',
     'linebreak-style': 0,
     'prefer-const': 'error',
     'no-var': 'error',
@@ -48,7 +50,6 @@ module.exports = {
     'react/sort-comp': 'error',
     'react/no-unknown-property': [2, { ignore: ['inputMode'] }],
     'react-hooks/rules-of-hooks': 'error',
-    'react/jsx-filename-extension': [0],
     'import/extensions': 'off',
     'import/prefer-default-export': 'off',
     'prettier/prettier': [

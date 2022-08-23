@@ -335,4 +335,72 @@
       }
     }
   }
+  .whole-club-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    // width: 881px;
+    margin-top: 56px;
+  }
+  &-item {
+    &-content {
+      padding: 16px;
+    }
+    &-category {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 11px;
+      padding: 4px 6px;
+      width: max-content;
+      height: 12px;
+      border-radius: 2px;
+      color: #fff;
+      margin-bottom: 16px;
+      &.Game {
+        background-color: #5631e7;
+      }
+      &.Fan {
+        background-color: #cd4ced;
+      }
+      &.Sports {
+        background-color: #1f7deb;
+      }
+      &.Cartton {
+        background-color: #00cc7f;
+      }
+    }
+    &-name {
+      width: 234px;
+      height: 48px;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 24px;
+      color: #333333;
+    }
+    &-info {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0px;
+      gap: 8px;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 18px;
+      width: 234px;
+      height: 18px;
+      color: #777;
+    }
+  }
+}
+
+.clubs-rank {
 }

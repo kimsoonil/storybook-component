@@ -1,9 +1,11 @@
+/* eslint-disable */
+
 import React, { useState } from 'react';
 import { Header } from '../../components/Header';
 import '../../assets/scss/reset.scss';
 import '../../assets/scss/home.scss';
 import { Pageination } from '../../components/Pageination';
-import { myClubList, activityList } from './homeDate.js';
+import { myClubList, activityList, wholeClubList, ClubsRank } from './homeDate.js';
 
 function Home() {
   return (
@@ -55,6 +57,44 @@ function Home() {
                 })}
 
                 <Pageination numPages={10} />
+              </div>
+            </div>
+            <div className="whole-club">
+              <div className="whole-club-title">How About This Clubs?</div>
+              <div className="whole-club-about">
+                <div className="active whole-club-about-item">Popular</div>
+                <div className=" whole-club-about-item">New</div>
+                <div className=" whole-club-about-item">Suggest</div>
+              </div>
+              <div className="whole-club-tab">
+                <div className="item active flex-center">All</div>
+                <div className="item flex-center">Game</div>
+                <div className="item flex-center">NFT</div>
+                <div className="item flex-center">Sports</div>
+                <div className="item flex-center">Stoak</div>
+                <div className="item flex-center">Fandom</div>
+                <div className="item flex-center">Cumunity</div>
+              </div>
+              <div className="whole-club-list">
+                {wholeClubList.map((wholeItem, index) => {
+                  return (
+                    <div className="whole-club-item" key={index}>
+                      <div className="whole-club-item-img">
+                        <img src={require(`../../images/home/${wholeItem.img}`)} alt="" />
+                      </div>
+                      <div className="whole-club-item-content">
+                        <div className={'whole-club-item-category ' + wholeItem.category}>{wholeItem.category}</div>
+                        <div className="whole-club-item-name">{wholeItem.name}</div>
+                        <div className="whole-club-item-info">
+                          Members {wholeItem.members} ・ Like {wholeItem.like}{' '}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+                <div style={{ width: '100%' }}>
+                  <Pageination numPages={10} />
+                </div>
               </div>
             </div>
           </div>
@@ -119,28 +159,6 @@ function Home() {
                     );
                   })}
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="item">
-            <div className="clubs whole-club">
-              <div className="whole-club-title">How About This Clubs?</div>
-              <div className="whole-club-about">
-                <div className="active whole-club-about-item">Popular</div>
-                <div className=" whole-club-about-item">New</div>
-                <div className=" whole-club-about-item">Suggest</div>
-              </div>
-              <div className="whole-club-tab">
-                <div className="item active flex-center">All</div>
-                <div className="item flex-center">Game</div>
-                <div className="item flex-center">NFT</div>
-                <div className="item flex-center">Sports</div>
-                <div className="item flex-center">Stoak</div>
-                <div className="item flex-center">Fandom</div>
-                <div className="item flex-center">Cumunity</div>
-              </div>
-              <div className="content">
-                <Pageination numPages={10} />
               </div>
             </div>
           </div>
