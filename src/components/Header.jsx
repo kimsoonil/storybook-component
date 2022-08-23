@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable */
+
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import '../assets/css/components.css';
