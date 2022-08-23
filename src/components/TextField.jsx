@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 
 import '../assets/css/components.css';
@@ -9,8 +10,8 @@ export function TextField({ Placeholder, Disabled, Readonly, state, value, helpT
       <div className="cgp-input-field">
         <input
           className={`${state} cgp-input`}
-          Placeholder={Placeholder}
-          Disabled={Disabled}
+          placeholder={Placeholder}
+          disabled={Disabled}
           readOnly={Readonly}
           value={value}
         />
