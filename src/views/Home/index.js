@@ -1,13 +1,21 @@
 /* eslint-disable */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from '../../components/Header';
 import '../../assets/scss/reset.scss';
 import '../../assets/scss/home.scss';
 import { Pageination } from '../../components/Pageination';
 import { myClubList, activityList, wholeClubList, ClubsRank } from './homeDate.js';
+import { useDispatch } from 'react-redux';
+import { getTest } from 'redux/store/testSlice';
 
 function Home() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTest());
+  }, [dispatch]);
+
   return (
     <div id="root">
       <Header />

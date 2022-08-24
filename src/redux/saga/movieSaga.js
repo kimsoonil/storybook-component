@@ -9,6 +9,7 @@ function* onLoadMovieAsync({ payload }) {
     const movieId = payload;
     const response = yield call(fetchMovie, movieId);
     if (response.status === 200) {
+      console.log(response);
       yield put(getMovieSuccess({ ...response.data }));
     }
     // const data = Api.getMockMovie();
