@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Header } from '../../components/Header';
 import '../../assets/scss/reset.scss';
 import '../../assets/scss/home.scss';
-import { Pageination } from '../../components/Pageination';
+
 import { myClubList, activityList, wholeClubList, ClubsRank } from './homeDate.js';
 import { useDispatch } from 'react-redux';
 import { getTest } from 'redux/store/testSlice';
@@ -63,8 +63,6 @@ function Home() {
                     </div>
                   );
                 })}
-
-                <Pageination numPages={10} />
               </div>
             </div>
             <div className="whole-club">
@@ -100,9 +98,7 @@ function Home() {
                     </div>
                   );
                 })}
-                <div style={{ width: '100%' }}>
-                  <Pageination numPages={10} />
-                </div>
+                <div style={{ width: '100%' }}></div>
               </div>
             </div>
           </div>

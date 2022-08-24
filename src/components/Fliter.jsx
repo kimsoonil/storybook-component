@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-
 import 'react-calendar/dist/Calendar.css';
-import '../assets/css/components.css';
 import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@material-ui/pickers/adapter/date-fns';
 import { DateRangePicker, LocalizationProvider, DateRangeDelimiter } from '@material-ui/pickers';
+import '../assets/scss/components.scss';
 
 export function Fliter({}) {
   const [sort, setSort] = useState('new');

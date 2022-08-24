@@ -2,14 +2,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import '../assets/css/components.css';
-
+import '../assets/scss/components.scss';
 export function Header({ user, country }) {
   return (
     <header>
-      <div className="wrapper">
-        <div className="wrapper-content">
+      <div className="header flex-center">
+        <div className="header-content flex-between">
           <div>
             <img src={require('../images/components/logo_top.svg').default} alt="logo_top" />
           </div>

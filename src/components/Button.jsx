@@ -1,29 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../assets/css/components.css';
+import '../assets/scss/components.scss';
 
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({ primary, size, line, label, width, disabled, ...props }) => {
+export function Button({ primary, size, line, label, width, disabled, ...props }) {
   const variant = line ? 'line' : 'contained';
   return (
     <button
       type="button"
       disabled={disabled}
-      style={{ width: width + 'px' }}
-      className={['storybook-button', `button-${size}`, `button-${primary}`, `button-${variant}`].join(' ')}
+      style={{ width: `${width}px` }}
+      className={['button-component', `button-size-${size}`, `button-${primary}`, `button-${variant}`].join(' ')}
       {...props}
     >
       {label}
     </button>
   );
-};
+}
 
 Button.propTypes = {
-  primary: PropTypes.oneOf(['Primary', 'Secondary', 'Point']),
+  primary: PropTypes.oneOf(['primary', 'secondary', 'point']),
   line: PropTypes.bool,
-  size: PropTypes.oneOf(['XL', 'L', 'M', 'S']),
+  size: PropTypes.oneOf(['xl', 'l', 'm', 's']),
   width: PropTypes.number,
   label: PropTypes.string,
   disabled: PropTypes.bool

@@ -1,31 +1,31 @@
-import React from "react";
+import React from 'react';
 
-import { Button } from "../components/Button";
+import { Button } from '../components/Button';
 
 export default {
-  title: "Example/Button",
+  title: 'Example/Button',
   component: Button,
-  line: false,
+  line: false
 };
 
 const Template = (args) => <Button {...args} />;
 
 export const contained = Template.bind({});
 contained.args = {
-  primary: "Primary",
-  label: "Button",
-  size: "M",
+  primary: 'primary',
+  label: 'Button',
+  size: 'm',
   disabled: false,
   line: false,
-  width: 140,
+  width: 140
 };
 
 export const outlined = Template.bind({});
 outlined.args = {
-  primary: "Primary",
-  label: "Button",
-  size: "M",
+  primary: 'primary',
+  label: 'Button',
+  size: 'm',
   disabled: false,
   line: true,
-  width: 140,
+  width: 140
 };
