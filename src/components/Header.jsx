@@ -41,7 +41,7 @@ export function Header({ user, country, seachFunc }) {
           </div>
           <div className="flex-center relative">
             <input className="seachBar" placeholder="검색어를 입력하세요." />
-            <div className="seachIc" onClick={seachFunc()}>
+            <div className="seachIc" onClick={() => seachFunc()}>
               <img src={require('../images/components/ic_search_wh.svg').default} alt="" />
             </div>
           </div>

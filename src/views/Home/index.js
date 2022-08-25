@@ -14,10 +14,14 @@ function Home() {
   useEffect(() => {
     dispatch(getTest());
   }, [dispatch]);
-  const seachFunc = () => {};
+
+  const seachFunc = () => {
+    window.location.href = '/search';
+  };
+
   return (
     <div id="root">
-      <Header />
+      <Header seachFunc={seachFunc} />
       <div className="slideView">
         <img src={require('../../images/home/slide.png')} alt="" />
       </div>
