@@ -2,10 +2,11 @@ import React from 'react';
 import history from 'util/history';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './assets/scss/reset.scss';
+import loadable from '@loadable/component';
 
-const Home = React.lazy(() => import('views/Home'));
-const Search = React.lazy(() => import('views/Search'));
-const Club = React.lazy(() => import('views/Club'));
+const Home = loadable(() => import('views/Home'));
+const Search = loadable(() => import('views/Search'));
+const Club = loadable(() => import('views/Club'));
 
 function App() {
   return (

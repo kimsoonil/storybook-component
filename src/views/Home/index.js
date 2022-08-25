@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getTest } from 'redux/store/testSlice';
+import { useNavigate } from 'react-router-dom';
 
 import { Header } from '../../components/Header';
 import { myClubList, activityList, wholeClubList, ClubsRank } from './homeDate.js';
@@ -10,13 +11,14 @@ import '../../assets/scss/home.scss';
 
 function Home() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getTest());
   }, [dispatch]);
 
   const seachFunc = () => {
-    window.location.href = '/search';
+    navigate('/search');
   };
 
   return (

@@ -13,6 +13,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@loadable/component": "^5.15.2",
     "@material-ui/core": "4.9.14",
     "@material-ui/pickers": "4.0.0-alpha.7",
     "@reduxjs/toolkit": "^1.8.5",
@@ -23,7 +24,11 @@
     "date-fns": "^2.29.1",
     "dayjs": "^1.11.5",
     "env-cmd": "^10.1.0",
+    "eslint": "^8.21.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.1",
     "i18next": "^21.9.1",
     "node-sass": "^7.0.1",
     "patch-package": "^6.4.7",
@@ -36,11 +41,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "redux-saga": "^1.2.1",
-    "web-vitals": "^2.1.0",
-    "eslint": "^8.21.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.30.1"
+    "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
