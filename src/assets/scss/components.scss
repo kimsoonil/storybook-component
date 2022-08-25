@@ -1,21 +1,3 @@
-/* TODO: All  */
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.flex-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.none {
-  display: none;
-}
-.relative {
-  position: relative;
-}
-
 /* TODO: Button */
 .button {
   &-component {
@@ -347,6 +329,7 @@
     border: 0;
     outline: 0;
     color: #fff;
+    box-sizing: border-box;
   }
   .seachBar::placeholder {
     opacity: 0.5;

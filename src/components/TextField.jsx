@@ -1,6 +1,7 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
+import '../assets/scss/reset.scss';
 import '../assets/scss/components.scss';
 
 export function TextField({ Placeholder, Disabled, Readonly, state, value, helpText }) {

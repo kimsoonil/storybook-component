@@ -143,3 +143,20 @@ input:focus-visible {
   box-sizing: border-box;
   border-radius: 5px;
 }
+/* TODO: All  */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.none {
+  display: none;
+}
+.relative {
+  position: relative;
+}

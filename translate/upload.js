@@ -1,5 +1,4 @@
 const fs = require('fs');
-
 const {
   loadSpreadsheet,
   localesPath,
@@ -24,8 +23,7 @@ async function addNewSheet(doc, title, sheetId) {
 }
 
 async function updateTranslationsFromKeyMapToSheet(doc, keyMap) {
-  // 시트 타이틀
-  const title = '[SUPERCLUB] 번역';
+  const title = '시트3';
   let sheet = doc.sheetsById[sheetId];
   if (!sheet) {
     sheet = await addNewSheet(doc, title, sheetId);
@@ -36,7 +34,6 @@ async function updateTranslationsFromKeyMapToSheet(doc, keyMap) {
   // find exsit keys
   const exsitKeys = {};
   const addedRows = [];
-
   rows.forEach((row) => {
     const key = row[columnKeyToHeader.key];
     if (keyMap[key]) {
@@ -44,7 +41,6 @@ async function updateTranslationsFromKeyMapToSheet(doc, keyMap) {
     }
   });
 
-  // 스프레트시트에 row 넣는 부분
   for (const [key, translations] of Object.entries(keyMap)) {
     if (!exsitKeys[key]) {
       const row = {
@@ -65,7 +61,6 @@ async function updateTranslationsFromKeyMapToSheet(doc, keyMap) {
   await sheet.addRows(addedRows);
 }
 
-// key값에 따른 언어 value
 function toJson(keyMap) {
   const json = {};
 
@@ -80,7 +75,6 @@ function toJson(keyMap) {
   return json;
 }
 
-// 언어 key : value 값 저장
 function gatherKeyMap(keyMap, lng, json) {
   for (const [keyWithPostfix, translated] of Object.entries(json)) {
     const key = getPureKey(keyWithPostfix);
@@ -115,13 +109,12 @@ async function updateSheetFromJson() {
     lngs.forEach((lng) => {
       const localeJsonFilePath = `${localesPath}/${lng}/${ns}.json`;
 
-      // s.json file read
       // eslint-disable-next-line no-sync
       const json = fs.readFileSync(localeJsonFilePath, 'utf8');
 
       gatherKeyMap(keyMap, lng, JSON.parse(json));
     });
-    // 스프레드 시트에 업데이트
+
     updateTranslationsFromKeyMapToSheet(doc, toJson(keyMap));
   });
 }

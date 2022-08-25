@@ -2,8 +2,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../assets/scss/reset.scss';
 import '../assets/scss/components.scss';
-export function Header({ user, country }) {
+
+export function Header({ user, country, seachFunc }) {
   return (
     <header>
       <div className="header flex-center">
@@ -39,7 +41,7 @@ export function Header({ user, country }) {
           </div>
           <div className="flex-center relative">
             <input className="seachBar" placeholder="검색어를 입력하세요." />
-            <div className="seachIc">
+            <div className="seachIc" onClick={seachFunc()}>
               <img src={require('../images/components/ic_search_wh.svg').default} alt="" />
             </div>
           </div>
@@ -81,10 +83,12 @@ export function Header({ user, country }) {
 
 Header.propTypes = {
   user: PropTypes.shape({}),
-  country: PropTypes.oneOf(['ko', 'us', 'jp'])
+  country: PropTypes.oneOf(['ko', 'us', 'jp']),
+  seachFunc: PropTypes.func
 };
 
 Header.defaultProps = {
   user: null,
-  country: 'ko'
+  country: 'ko',
+  seachFunc: () => {}
 };

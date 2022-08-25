@@ -1,13 +1,12 @@
 /* eslint-disable */
 
-import React, { useState, useEffect } from 'react';
-import { Header } from '../../components/Header';
-import '../../assets/scss/reset.scss';
-import '../../assets/scss/home.scss';
-
-import { myClubList, activityList, wholeClubList, ClubsRank } from './homeDate.js';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getTest } from 'redux/store/testSlice';
+
+import { Header } from '../../components/Header';
+import { myClubList, activityList, wholeClubList, ClubsRank } from './homeDate.js';
+import '../../assets/scss/home.scss';
 
 function Home() {
   const dispatch = useDispatch();
@@ -15,7 +14,7 @@ function Home() {
   useEffect(() => {
     dispatch(getTest());
   }, [dispatch]);
-
+  const seachFunc = () => {};
   return (
     <div id="root">
       <Header />

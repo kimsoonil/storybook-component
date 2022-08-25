@@ -3,9 +3,10 @@ import 'react-calendar/dist/Calendar.css';
 import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@material-ui/pickers/adapter/date-fns';
 import { DateRangePicker, LocalizationProvider, DateRangeDelimiter } from '@material-ui/pickers';
+import '../assets/scss/reset.scss';
 import '../assets/scss/components.scss';
 
-export function Fliter({}) {
+export function Fliter() {
   const [sort, setSort] = useState('new');
   const [date, setDate] = useState('All');
 

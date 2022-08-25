@@ -146,3 +146,114 @@ export const ClubsRank = [
   { img: 'rank9.png', name: 'GIRLS’ GENERATION Offical Fan Club', members: 950, like: 250, rank: 9 },
   { img: 'rank10.png', name: 'GIRLS’ GENERATION Offical Fan Club', members: 950, like: 250, rank: 10 }
 ];
+
+export const postsList = [
+  {
+    img: 'club_img1.png',
+    title: 'League of Lenends',
+    nickname: 'jerry',
+    content: 'Why are they crazy about the strange monkey lace?Why are the...',
+    view: '1.1k',
+    comment: 250,
+    data: '08.16'
+  },
+  {
+    img: 'club_img2.png',
+    title: 'League of Lenends',
+    nickname: 'jerry',
+    content: 'Why are they crazy about the strange monkey lace?Why are the...',
+    view: '1.1k',
+    comment: 250,
+    data: '08.16'
+  },
+  {
+    img: 'club_img3.png',
+    title: 'League of Lenends',
+    nickname: 'jerry',
+    content: 'Why are they crazy about the strange monkey lace?Why are the...',
+    view: '1.1k',
+    comment: 250,
+    data: '08.16'
+  },
+  {
+    img: 'club_img4.png',
+    title: 'League of Lenends',
+    nickname: 'jerry',
+    content: 'Why are they crazy about the strange monkey lace?Why are the...',
+    view: '1.1k',
+    comment: 250,
+    data: '08.16'
+  },
+  {
+    img: 'club_img5.png',
+    title: 'League of Lenends',
+    nickname: 'jerry',
+    content: 'Why are they crazy about the strange monkey lace?Why are the...',
+    view: '1.1k',
+    comment: 250,
+    data: '08.16'
+  },
+  {
+    img: 'club_img5.png',
+    title: 'League of Lenends',
+    nickname: 'jerry',
+    content: 'Why are they crazy about the strange monkey lace?Why are the...',
+    view: '1.1k',
+    comment: 250,
+    data: '08.16'
+  },
+  {
+    img: 'club_img3.png',
+    title: 'League of Lenends',
+    nickname: 'jerry',
+    content: 'Why are they crazy about the strange monkey lace?Why are the...',
+    view: '1.1k',
+    comment: 250,
+    data: '08.16'
+  },
+  {
+    img: 'club_img1.png',
+    title: 'League of Lenends',
+    nickname: 'jerry',
+    content: 'Why are they crazy about the strange monkey lace?Why are the...',
+    view: '1.1k',
+    comment: 250,
+    data: '08.16'
+  },
+  {
+    img: 'club_img4.png',
+    title: 'League of Lenends',
+    nickname: 'jerry',
+    content: 'Why are they crazy about the strange monkey lace?Why are the...',
+    view: '1.1k',
+    comment: 250,
+    data: '08.16'
+  },
+  {
+    img: 'club_img2.png',
+    title: 'League of Lenends',
+    nickname: 'jerry',
+    content: 'Why are they crazy about the strange monkey lace?Why are the...',
+    view: '1.1k',
+    comment: 250,
+    data: '08.16'
+  },
+  {
+    img: 'club_img5.png',
+    title: 'League of Lenends',
+    nickname: 'jerry',
+    content: 'Why are they crazy about the strange monkey lace?Why are the...',
+    view: '1.1k',
+    comment: 250,
+    data: '08.16'
+  },
+  {
+    img: 'club_img3.png',
+    title: 'League of Lenends',
+    nickname: 'jerry',
+    content: 'Why are they crazy about the strange monkey lace?Why are the...',
+    view: '1.1k',
+    comment: 250,
+    data: '08.16'
+  }
+];
