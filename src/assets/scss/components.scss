@@ -1,3 +1,4 @@
+@import 'common.scss';
 /* TODO: Button */
 .button {
   &-component {
@@ -513,4 +514,74 @@
   margin-top: 16px;
   font-size: 15px;
   color: #9013fe;
+}
+
+//profile
+.side-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 32px 25px;
+  box-sizing: border-box;
+  width: 305px;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  margin-bottom: 36px;
+}
+.profile {
+  &-img {
+    width: 266px;
+    flex-direction: column;
+    margin-top: 30px;
+    padding-bottom: 29px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  &-name {
+    margin-top: 9px;
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 30px;
+    color: $gray-900;
+  }
+  &-info {
+    flex-direction: column;
+    padding: 0px;
+    width: 88.67px;
+    height: 50px;
+    margin-top: 17px;
+    &-title {
+      color: $gray-800;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 32px;
+    }
+    &-content {
+      width: 88.67px;
+      height: 18px;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 18px;
+      text-align: center;
+      color: #999999;
+    }
+  }
+  &-btn {
+    margin-top: 30px;
+    width: 205px;
+    height: 48px;
+    background: #8801fe;
+    padding: 0 30px;
+    font-family: 'Poppins';
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    color: #ffffff;
+  }
 }

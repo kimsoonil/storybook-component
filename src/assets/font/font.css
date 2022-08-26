@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'Poppins-Bold';
+  src: url('Poppins-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Poppins-Light';
+  src: url('Poppins-Light.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Poppins-Medium';
+  src: url('Poppins-Medium.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Poppins-Regular';
+  src: url('Poppins-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Poppins-SemiBold';
+  src: url('Poppins-SemiBold.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+}

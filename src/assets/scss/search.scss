@@ -1,3 +1,4 @@
+@import 'common.scss';
 .search {
   width: 1280px;
   margin: 120px auto;
@@ -6,11 +7,9 @@
     display: flex;
     gap: 40px;
     &-item {
-      font-family: 'Poppins';
-      font-style: normal;
-      font-weight: 700;
+      font-family: 'Poppins-Bold';
       font-size: 36px;
-      color: #111111;
+      color: $gray-900;
       opacity: 0.5;
       cursor: pointer;
       &.active {
@@ -50,13 +49,10 @@
   &-club {
     margin-top: 90px;
     &-title {
-      width: 206px;
       height: 58px;
-      font-family: 'Poppins';
-      font-style: normal;
-      font-weight: 700;
+      font-family: 'Poppins-Bold';
       font-size: 36px;
-      color: #111111;
+      color: $gray-900;
     }
     &-tab {
       display: flex;
@@ -99,7 +95,7 @@
           font-family: 'Inter';
           font-weight: 600;
           font-size: 18px;
-          color: #000000;
+          color: $black;
           height: 24px;
         }
         &-info {
@@ -123,9 +119,9 @@
         padding: 12px 10px;
         background: #fff;
         border-radius: 8px;
-        color: #000000;
+        color: $black;
         font-size: 16px;
-        border: 1px solid #000000;
+        border: 1px solid $black;
         cursor: pointer;
         &.active {
           background: #8801fe;
@@ -147,32 +143,26 @@
           padding-right: 26px;
         }
         &-nick {
-          font-family: 'Poppins';
-          font-weight: 700;
+          font-family: 'Poppins-Bold';
           font-size: 14px;
-          color: #444444;
+          color: $gray-700;
         }
         &-title {
           margin-top: 16px;
-          font-family: 'Poppins';
-          font-weight: 700;
+          font-family: 'Poppins-Bold';
           font-size: 29px;
-          color: #333333;
+          color: $gray-800;
         }
         &-content {
           margin-top: 4px;
-          font-family: 'Poppins';
-          font-style: normal;
-          font-weight: 400;
+          font-family: 'Poppins-Regular';
           font-size: 16px;
           height: 45px;
-          color: #666666;
+          color: $gray-500;
         }
         &-info {
           margin-top: 16px;
-          font-family: 'Poppins';
-
-          font-weight: 400;
+          font-family: 'Poppins-Regular';
           font-size: 18px;
           color: #999999;
         }

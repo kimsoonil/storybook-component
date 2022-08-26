@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { getTest } from 'redux/store/testSlice';
 import { useNavigate } from 'react-router-dom';
 
+import { Button } from '../../components/Button.jsx';
 import { Header } from '../../components/Header';
 import { myClubList, activityList, wholeClubList, ClubsRank } from './homeDate.js';
 import '../../assets/scss/home.scss';
@@ -127,10 +128,20 @@ function Home() {
                   <div className="profile-info-content">Comments</div>
                 </div>
               </div>
-              <div className="profile-btn flex-between">
-                <div>Create Club</div>
-                <div>→</div>
+              <div className="m-1">
+                <Button primary={'primary'} label={'Create Club'} size={'m'} width={265} />
               </div>
+              <div className="m-1">
+                <Button
+                  primary={'primary'}
+                  label={'Club Management'}
+                  size={'m'}
+                  style={{ opacity: 0.5, width: '265px' }}
+                />
+              </div>
+            </div>
+            <div className="chatting">
+              <img src={require(`../../images/home/chatting.png`)} alt="" />
             </div>
             <div className="side-box activity">
               <div className="flex-between">
