@@ -8,7 +8,7 @@ const config = getToken();
 // TODO: user me
 function* getUSer() {
   try {
-    const response = yield call(() => axios.get(`${process.env.REACT_APP_API_URL}/api/user/me`, config), '');
+    const response = yield call(() => axios.get(`${process.env.REACT_APP_API_URL}/api/v1/user/me`, config), '');
     if (response.status === 200) {
       yield put(actionTypes.getUserSuccess({ ...response.data }));
       console.log(response.data);
@@ -22,7 +22,10 @@ function* getUSer() {
 // TODO: patch user
 function* patchUser({ payload }) {
   try {
-    const response = yield call(() => axios.post(`${process.env.REACT_APP_API_URL}/api/user/me`, payload, config), '');
+    const response = yield call(
+      () => axios.post(`${process.env.REACT_APP_API_URL}/api/v1/user/me`, payload, config),
+      ''
+    );
     if (response.status === 200) {
       yield put(actionTypes.patchUserSuccess({ ...response.data }));
       console.log(response.data);
