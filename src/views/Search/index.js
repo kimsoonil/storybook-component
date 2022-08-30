@@ -1,9 +1,9 @@
 /* eslint-disable */
 
 import React, { useState } from 'react';
-import { Header } from '../../components/Header';
+import { Header } from 'components/Header';
 
-import '../../assets/scss/search.scss';
+import 'assets/scss/search.scss';
 import SearchClub from './SearchClub';
 import SearchPosts from './SearchPosts';
 
@@ -46,8 +46,14 @@ function Search() {
             <img src={require('../../images/components/ic_search_wh.svg').default} alt="" />
           </div>
         </div>
-        {searchTab !== 'Posts' && <SearchClub />}
-        {searchTab !== 'Clubs' && <SearchPosts />}
+        {searchTab === 'All' && (
+          <>
+            <SearchClub limit={12} searchTab={searchTab} setSearchTab={setSearchTab} />
+            <SearchPosts />
+          </>
+        )}
+        {searchTab === 'Clubs' && <SearchClub limit={12} searchTab={searchTab} />}
+        {searchTab === 'Posts' && <SearchPosts />}
       </div>
     </div>
   );

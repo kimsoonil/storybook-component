@@ -1,10 +1,11 @@
 /* TODO: All  */
 $color-primary: #8701fe;
+$color-secondary: #6563ff;
 $gray-000: #fff;
-$gray-100: #f8f9fa;
-$gray-200: #e9ecef;
-$gray-300: #dee2e6;
-$gray-400: #ced4da;
+$gray-100: #bdbdbd;
+$gray-200: #cdcdd1;
+$gray-300: #999;
+$gray-400: #767676;
 $gray-500: #666;
 $gray-600: #555;
 $gray-700: #444;
@@ -22,6 +23,13 @@ $black: #000;
     family: $family;
   }
   color: $color;
+}
+.root-center {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .flex-center {
   display: flex;

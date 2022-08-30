@@ -4,8 +4,9 @@
   &-banner {
     width: 100%;
     height: 380px;
-    background: url('../../images/club/club-banner.png') no-repeat;
+    background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
   }
   &-tag {
     width: 1280px;
@@ -30,6 +31,11 @@
     justify-content: flex-end;
     width: 1280px;
     margin: 0 auto;
+    img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+    }
   }
   &-content {
     width: 1280px;
@@ -43,7 +49,7 @@
       color: $gray-900;
     }
     &-explan {
-      width: 326px;
+      width: 1000px;
       height: 48px;
       font-family: 'Poppins-Regular';
       font-size: 12px;
@@ -228,6 +234,7 @@
   color: $gray-800;
   display: flex;
   align-items: center;
+
   &-tag {
     margin-right: 10px;
     font-family: 'Poppins-Regular';
@@ -237,6 +244,54 @@
     width: 58px;
     height: 24px;
     background: rgba(135, 1, 254, 0.1);
+    padding: 2px 8px;
     border-radius: 4px;
+  }
+}
+.member {
+  margin-top: 44px;
+  width: 272px;
+  border: 1px solid #e8e8e8;
+  padding: 32px 16px 16px;
+  border-radius: 8px;
+  &-title {
+    font-family: 'Poppins-Bold';
+    font-size: 22px;
+  }
+  &-see {
+    font-family: 'Poppins-Bold';
+    color: $gray-300;
+    font-size: 14px;
+  }
+  &-list {
+    margin-top: 24px;
+    display: flex;
+    justify-self: flex-start;
+    gap: 24px;
+
+    &-item {
+      flex-direction: column;
+    }
+    &-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2.4px solid #8801fe;
+      img {
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        padding: 0;
+        margin: 0;
+      }
+    }
+    &-name {
+      margin-top: 8px;
+      font-family: 'Poppins-Bold';
+      font-size: 18px;
+      width: 80px;
+      text-align: center;
+      word-break: break-all;
+    }
   }
 }

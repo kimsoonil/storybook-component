@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const clubSlice = createSlice({
-  name: 'getClubs',
+  name: 'clubs',
   initialState: {
     isLoading: false,
     clubs: {},

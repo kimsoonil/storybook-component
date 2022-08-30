@@ -1,23 +1,20 @@
 /* eslint-disable */
 
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getClubInit } from 'redux/store/clubSlice';
-import { getUserInit } from 'redux/store/userSlice';
 import { useNavigate } from 'react-router-dom';
 
-import { Header } from '../../components/Header';
+import { Header } from 'components/Header';
+import { Loader } from 'components/Loader';
 import { myClubList, activityList, wholeClubList, ClubsRank } from './homeDate.js';
-import '../../assets/scss/home.scss';
+import 'assets/scss/home.scss';
 import Profile from 'components/Profile.js';
 
 function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    dispatch(getClubInit());
-  }, [dispatch]);
+  const clubState = useSelector((state) => state.club);
 
   const seachFunc = () => {
     navigate('/search');
@@ -110,7 +107,7 @@ function Home() {
             </div>
           </div>
           <div className="item">
-            {/* <Profile /> */}
+            <Profile />
             <div className="chatting">
               <img src={require(`../../images/home/chatting.png`)} alt="" />
             </div>

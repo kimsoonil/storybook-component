@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { postsList } from '../Home/homeDate';
-import '../../assets/scss/search.scss';
-import { Button } from '../../components/Button';
+import 'assets/scss/search.scss';
+import { Button } from 'components/Button';
 
 function SearchPosts() {
   return (

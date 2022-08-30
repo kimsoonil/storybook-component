@@ -2,19 +2,21 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import '../assets/scss/reset.scss';
 import '../assets/scss/components.scss';
 
 export function Header({ user, country, seachFunc }) {
+  const navigate = useNavigate();
   return (
     <header>
       <div className="header flex-center">
         <div className="header-content flex-between">
-          <div>
+          <div onClick={() => navigate('/')}>
             <img src={require('../images/components/logo_top.svg').default} alt="logo_top" />
           </div>
           <div className="flex-center">
-            <div className="menu activate">
+            <div className="menu activate" onClick={() => navigate('/')}>
               <img src={require('../images/components/menu_home.svg').default} alt="menu_home" />
               <div className="tootip flex-center relative">Home</div>
             </div>

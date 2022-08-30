@@ -50,14 +50,17 @@ function* getIdClub({ payload }) {
 // TODO: club Members
 function* getClubMembers({ payload }) {
   try {
-    const response = yield call(() => axios.get(`${process.env.REACT_APP_API_URL}/api/club/${payload}/members`), '');
+    const response = yield call(
+      () => axios.get(`${process.env.REACT_APP_API_URL}/api/club/${payload}/members`, config),
+      ''
+    );
     if (response.status === 200) {
       yield put(actionTypes.getClubMembersSuccess({ ...response.data }));
-      console.log(response);
+      console.log(response.data);
     }
   } catch (error) {
     yield put(actionTypes.clubFailure(error));
-    console.log(error);
+    console.log('Member : ', error);
   }
 }
 

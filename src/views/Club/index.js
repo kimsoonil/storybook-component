@@ -1,19 +1,45 @@
 /* eslint-disable */
 
 import React, { useState, useEffect } from 'react';
-import { Header } from '../../components/Header';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIdClubInit, getClubMembersInit } from 'redux/store/clubSlice';
+import { useParams } from 'react-router';
+import { useNavigate } from 'react-router-dom';
+
+import { Header } from 'components/Header';
 import { postsList } from '../Home/homeDate';
-import Profile from '../../components/Profile';
-import '../../assets/scss/club.scss';
-import '../../assets/scss/reset.scss';
+import { Loader } from 'components/Loader';
+import Profile from 'components/Profile';
+import 'assets/scss/club.scss';
+import 'assets/scss/reset.scss';
 
 function Club() {
-  const [searchTab, setSearchTab] = useState('All');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const clubState = useSelector((state) => state.club);
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(getIdClubInit(id));
+    dispatch(getClubMembersInit(id));
+  }, [dispatch]);
+
+  const seachFunc = () => {
+    navigate('/search');
+  };
+  const { isLoading, clubId, members } = clubState;
+  console.log(clubState);
+  if (isLoading || clubId.message !== 'ok')
+    return (
+      <div className="root-center">
+        <Loader />
+      </div>
+    );
   return (
     <div id="root">
-      <Header />
+      <Header seachFunc={seachFunc} />
       <div className="club">
-        <div className="club-banner relative">
+        <div className="club-banner relative" style={{ backgroundImage: `url(${clubId.data.bannerImage})` }}>
           <div className="club-tag">
             <div className="item flex-center">#Kpop</div>
             <div className="item flex-center">#JYP</div>
@@ -21,32 +47,31 @@ function Club() {
             <div className="item flex-center">#POPPOP</div>
           </div>
           <div className="club-profile">
-            <img src={require(`../../images/club/club-banner-profile.png`)} alt="" />
+            <img src={clubId.data.profileImage} alt="" />
           </div>
         </div>
         <div className="club-content">
           <div className="club">
             <div className="club-content-title">
-              TWICE KOREA OFFICIAL{' '}
+              {clubId.data.name}
               <div className="manager">
-                <div className="manager-tag flex-center">manager</div>Twice love
+                <div className="manager-tag flex-center">manager</div>
+                {clubId.data.userData.username}
               </div>
             </div>
-            <div className="club-content-explan">
-              TWICE 대표 팬카페 Twinkle 입니다. <br /> 나연/정연/모모/사나/지효/미나/다현/채영/쯔위
-            </div>
+            <div className="club-content-explan">{clubId.data.description}</div>
             <div className="flex-between">
               <div className="club-content-info">
                 <div className="club-content-info-box">
-                  <div className="club-content-info-number">125</div>
+                  <div className="club-content-info-number">{clubId.data.memberCount}</div>
                   <div className="club-content-info-title">Memeber</div>
                 </div>
                 <div className="club-content-info-box">
-                  <div className="club-content-info-number">420K</div>
+                  <div className="club-content-info-number">{clubId.data.postCount}</div>
                   <div className="club-content-info-title">Post</div>
                 </div>
                 <div className="club-content-info-box">
-                  <div className="club-content-info-number">125</div>
+                  <div className="club-content-info-number">{clubId.data.pinCount}</div>
                   <div className="club-content-info-title">Pin Clip</div>
                 </div>
               </div>
@@ -130,6 +155,30 @@ function Club() {
             <Profile />
             <div className="chatting">
               <img src={require(`../../images/home/chatting.png`)} alt="" />
+            </div>
+            <div className="member">
+              <div className="flex-between">
+                <div className="member-title">Member</div>
+                <div className="member-see">See All</div>
+              </div>
+              {members.message !== 'ok' ? (
+                <div className="root-center">
+                  <Loader />
+                </div>
+              ) : (
+                <div className="member-list">
+                  {members.data.map((members, index) => {
+                    return (
+                      <div key={index} className="member-list-item flex-center">
+                        <div className="member-list-img">
+                          <img src={members.userData.profileImage} alt="" />
+                        </div>
+                        <div className="member-list-name">{members.userData.username}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         </div>

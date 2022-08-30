@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
-import { getUserInit } from 'redux/store/userSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button } from './Button.jsx';
-import '../assets/scss/components.scss';
+import { getUserInit } from 'redux/store/userSlice';
+
+import { Button } from './Button.js';
+import { Loader } from './Loader';
+import 'assets/scss/components.scss';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -12,14 +14,14 @@ function Profile() {
     dispatch(getUserInit());
   }, [dispatch]);
 
-  const { isLoading, user, error } = userState;
-  console.log(userState);
-  if (isLoading) return <div />;
+  const { isLoading, user } = userState;
+
+  if (isLoading || user.message !== 'ok') return <Loader />;
 
   return (
     <div className="side-box profile">
       <div className="profile-img flex-center">
-        <img src={user.data.profileImageUrl} alt="" />
+        <img src={user.data.profileImage} alt="" />
         <div className="profile-name">{user.data.username}</div>
       </div>
       <div className="flex-center">
