@@ -10,9 +10,11 @@ import { Loader } from 'components/Loader';
 import { myClubList, activityList, wholeClubList, ClubsRank } from './homeDate.js';
 import 'assets/scss/home.scss';
 import Profile from 'components/Profile.js';
+import { useTranslation } from 'react-i18next';
 
 function Home() {
   const dispatch = useDispatch();
+  const i18next = useTranslation();
   const navigate = useNavigate();
   const clubState = useSelector((state) => state.club);
 

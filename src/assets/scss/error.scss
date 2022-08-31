@@ -1,0 +1,13 @@
+@import 'common.scss';
+
+.error {
+  width: 100%;
+  height: calc(100vh - 100px);
+  flex-direction: column;
+
+  &-title {
+    font-family: 'Poppins-Bold';
+  }
+  &-content {
+  }
+}

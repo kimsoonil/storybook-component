@@ -52,7 +52,7 @@ function SearchClub(props) {
             >
               <div className="search-club-item-img ">
                 <div className="super-icon flex-center">★</div>
-                <img src={clubItem.thumbnailImage} alt="" />
+                <img src={clubItem.thumbnailImageUrl} alt="" />
               </div>
               <div className="search-club-list-item-content">
                 <div className="search-club-list-item-name">{clubItem.name}</div>

@@ -10,7 +10,7 @@ const {
   NOT_AVAILABLE_CELL
 } = require('./index');
 
-const headerValues = ['키', '한글', '영어', '일본어', '중국어'];
+const headerValues = ['키', '한글', '영어', '일본어'];
 
 async function addNewSheet(doc, title, sheetId) {
   const sheet = await doc.addSheet({
@@ -23,7 +23,7 @@ async function addNewSheet(doc, title, sheetId) {
 }
 
 async function updateTranslationsFromKeyMapToSheet(doc, keyMap) {
-  const title = '시트3';
+  const title = '번역';
   let sheet = doc.sheetsById[sheetId];
   if (!sheet) {
     sheet = await addNewSheet(doc, title, sheetId);

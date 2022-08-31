@@ -2,7 +2,19 @@ const fs = require('fs');
 const mkdirp = require('mkdirp');
 const { loadSpreadsheet, localesPath, ns, lngs, sheetId, columnKeyToHeader, NOT_AVAILABLE_CELL } = require('./index');
 
-// 스프레드시트 -> json
+/**
+ * fetch translations from google spread sheet and transform to json
+ * @param {GoogleSpreadsheet} doc GoogleSpreadsheet document
+ * @returns [object] translation map
+ * {
+ *   "ko-KR": {
+ *     "key": "value"
+ *   },
+ *   "en-US": {
+ *     "key": "value"
+ *   },
+ * }
+ */
 async function fetchTranslationsFromSheetToJson(doc) {
   const sheet = doc.sheetsById[sheetId];
   if (!sheet) {
@@ -32,7 +44,6 @@ async function fetchTranslationsFromSheetToJson(doc) {
   return lngsMap;
 }
 
-// 디렉토리 설정
 function checkAndMakeLocaleDir(dirPath, subDirs) {
   return new Promise((resolve) => {
     subDirs.forEach((subDir, index) => {
@@ -49,7 +60,6 @@ function checkAndMakeLocaleDir(dirPath, subDirs) {
   });
 }
 
-// json 파일 업데이트
 async function updateJsonFromSheet() {
   await checkAndMakeLocaleDir(localesPath, lngs);
 

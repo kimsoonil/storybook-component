@@ -39,7 +39,7 @@ function Club() {
     <div id="root">
       <Header seachFunc={seachFunc} />
       <div className="club">
-        <div className="club-banner relative" style={{ backgroundImage: `url(${clubId.data.bannerImage})` }}>
+        <div className="club-banner relative" style={{ backgroundImage: `url(${clubId.data.bannerImageUrl})` }}>
           <div className="club-tag">
             <div className="item flex-center">#Kpop</div>
             <div className="item flex-center">#JYP</div>
@@ -47,7 +47,7 @@ function Club() {
             <div className="item flex-center">#POPPOP</div>
           </div>
           <div className="club-profile">
-            <img src={clubId.data.profileImage} alt="" />
+            <img src={clubId.data.profileImageUrl} alt="" />
           </div>
         </div>
         <div className="club-content">
@@ -171,7 +171,7 @@ function Club() {
                     return (
                       <div key={index} className="member-list-item flex-center">
                         <div className="member-list-img">
-                          <img src={members.userData.profileImage} alt="" />
+                          <img src={members.userData.profileImageUrl} alt="" />
                         </div>
                         <div className="member-list-name">{members.userData.username}</div>
                       </div>

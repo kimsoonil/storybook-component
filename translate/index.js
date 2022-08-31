@@ -1,21 +1,21 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
-const creds = require('./credentials/sheet-api-360408-639a610d8ded.json');
+const ENV = require('./.credentials/index.js');
+const creds = require('./.credentials/' + ENV.CREDS);
 const i18nextConfig = require('../i18next-scanner.config');
 
-const spreadsheetDocId = '1jpJqLrKNAFp8zPSO6hg-3-64QaOuLoVXwtPS-7xo55o';
+const spreadsheetDocId = ENV.SHEET_DOC_ID;
 const ns = 'translation';
 const { lngs } = i18nextConfig.options;
 const { loadPath } = i18nextConfig.options.resource;
 const localesPath = loadPath.replace('/{{lng}}/{{ns}}.json', '');
 const rePluralPostfix = new RegExp(/_plural|_[\d]/g);
-const sheetId = 952648658; // your sheet id
+const sheetId = ENV.SHEET_ID; // your sheet id
 const NOT_AVAILABLE_CELL = '_N/A';
 const columnKeyToHeader = {
   key: '키',
   'ko-KR': '한글',
   'en-US': '영어',
-  'ja-JP': '일본어',
-  'zh-CN': '중국어'
+  'ja-JP': '일본어'
 };
 
 /**
@@ -27,7 +27,7 @@ async function loadSpreadsheet() {
     '\u001B[32m',
     '=====================================================================================================================\n',
     '# i18next auto-sync using Spreadsheet\n\n',
-    '  * Download translation resources from Spreadsheet and make /assets/locales/{{lng}}/{{ns}}.json\n',
+    '  * Download translation resources from Spreadsheet and make /src/i18n/locales/{{lng}}/{{ns}}.json\n',
     '  * Upload translation resources to Spreadsheet.\n\n',
     `The Spreadsheet for translation is here (\u001B[34mhttps://docs.google.com/spreadsheets/d/${spreadsheetDocId}/#gid=${sheetId}\u001B[0m)\n`,
     '=====================================================================================================================',

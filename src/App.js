@@ -8,6 +8,7 @@ import ScrollToTop from 'util/scrollTop';
 const Home = loadable(() => import('views/Home'));
 const Search = loadable(() => import('views/Search'));
 const Club = loadable(() => import('views/Club'));
+const Notfound = loadable(() => import('views/Error/Notfound'));
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/club" element={<Club />} />
           <Route path="/club/:id" element={<Club />} />
+          <Route path="*" element={<Notfound />} />
         </Routes>
       </BrowserRouter>
     </div>
