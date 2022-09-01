@@ -16,7 +16,10 @@ function Profile() {
 
   const { isLoading, user } = userState;
 
-  if (isLoading || user.message !== 'ok') return <Loader />;
+  if (isLoading || user.message !== 'ok') return;
+  <div className="flex-center">
+    <Loader />
+  </div>;
 
   return (
     <div className="side-box profile">

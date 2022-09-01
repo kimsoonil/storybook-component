@@ -166,7 +166,7 @@
     padding-bottom: 12px;
     margin-bottom: 12px;
   }
-  &-acctions {
+  &-actions {
     padding: 12px 20px;
   }
   &-done {
@@ -618,5 +618,144 @@
   &-nextbtn {
     border: 0;
     margin-left: 16px;
+  }
+}
+
+// borard
+.borard-album {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  &-item {
+    width: 300px;
+    height: 386px;
+    &-container {
+      margin-top: 4px;
+    }
+    &-nick {
+      font-family: 'Poppins-bold';
+      font-size: 12px;
+      line-height: 12px;
+      color: #444444;
+    }
+    &-title {
+      margin-top: 4px;
+      font-family: 'Poppins-bold';
+      font-size: 20px;
+      line-height: 30px;
+    }
+    &-info {
+      margin-top: 15px;
+      font-family: 'Poppins-Regular';
+      font-size: 16px;
+      line-height: 24px;
+      color: #999999;
+    }
+  }
+  &-img {
+    width: 300px;
+    height: 285px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+.borard-list {
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 208px;
+    margin-bottom: 32px;
+    &-container {
+      margin-top: 12px;
+      margin-right: 88px;
+    }
+    &-nick {
+      font-family: 'Poppins-bold';
+      font-size: 12px;
+      line-height: 12px;
+      color: #444444;
+    }
+    &-title {
+      margin-top: 4px;
+      font-family: 'Poppins-bold';
+      font-size: 20px;
+      line-height: 30px;
+    }
+    &-info {
+      margin-top: 15px;
+      font-family: 'Poppins-Regular';
+      font-size: 16px;
+      line-height: 24px;
+      color: #999999;
+    }
+    &-content {
+      height: 64px;
+      line-height: 32px;
+      font-family: 'Poppins-Regular';
+      font-size: 20px;
+      line-height: 32px;
+      color: #666666;
+    }
+  }
+  &-img {
+    width: 211px;
+    height: 206px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+.borard-card {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  &-item {
+    width: 463px;
+    height: 815px;
+    &-container {
+      margin-top: 4px;
+    }
+    &-nick {
+      font-family: 'Poppins-bold';
+      font-size: 12px;
+      line-height: 12px;
+      color: #444444;
+    }
+    &-title {
+      margin-top: 4px;
+      font-family: 'Poppins-bold';
+      font-size: 32px;
+      line-height: 38px;
+      margin-bottom: 24px;
+    }
+    &-info {
+      margin-top: 24px;
+      font-family: 'Poppins-Regular';
+      font-size: 22px;
+      line-height: 24px;
+      color: #999999;
+    }
+    &-content {
+      font-family: 'Poppins-Regular';
+      font-size: 28px;
+      line-height: 36px;
+      color: #666666;
+    }
+  }
+  &-img {
+    width: 463px;
+    height: 432px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 }

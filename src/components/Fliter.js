@@ -6,7 +6,7 @@ import { DateRangePicker, LocalizationProvider, DateRangeDelimiter } from '@mate
 import '../assets/scss/reset.scss';
 import '../assets/scss/components.scss';
 
-export function Fliter() {
+export function Fliter({ doneFuc }) {
   const [sort, setSort] = useState('new');
   const [date, setDate] = useState('All');
 
@@ -101,9 +101,11 @@ export function Fliter() {
           </div>
         </div>
       </div>
-      <div className="flex-between filter-acctions">
+      <div className="flex-between filter-actions">
         <div className="filter-cancle">Cancle</div>
-        <div className="filter-done flex-center">Done</div>
+        <div className="filter-done flex-center" onClick={doneFuc}>
+          Done
+        </div>
       </div>
     </div>
   );

@@ -6,8 +6,35 @@
   flex-direction: column;
 
   &-title {
+    font-size: 48px;
+    margin-top: 36px;
     font-family: 'Poppins-Bold';
   }
   &-content {
+    font-family: 'Poppins-Light';
+    line-height: 1.56;
+    color: #a7a8ab;
+    margin-top: 16px;
+    text-align: center;
+  }
+  .actions {
+    margin-top: 60px;
+    display: flex;
+    div {
+      width: 220px;
+      height: 56px;
+      border-radius: 10px;
+      font-family: 'Poppins-Regular';
+      font-size: 20px;
+    }
+    .back {
+      margin-right: 20px;
+      border: solid 1px $color-primary;
+      color: $color-primary;
+    }
+    .home {
+      color: $gray-000;
+      background-color: $color-primary;
+    }
   }
 }

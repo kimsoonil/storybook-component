@@ -2,17 +2,21 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import koKR from './locales/ko-KR/translation.json';
 import enUS from './locales/en-US/translation.json';
+import jaJP from './locales/ja-JP/translation.json';
+import zhCN from './locales/zh-CN/translation.json';
 
 const resources = {
   ko: { translation: koKR },
-  en: { translation: enUS }
+  en: { translation: enUS },
+  ja: { translation: jaJP },
+  zh: { translation: zhCN }
 };
 
 // 브라우저 언어 설정 가져오기
 const browserLang = window.navigator.language.split('-')[0];
 
 // localStorage에서 언어 설정 가져오기
-const userLanguage = localStorage.setitem('lang') ?? browserLang;
+const userLanguage = localStorage.getitem('lang') ?? browserLang;
 
 i18n.use(initReactI18next).init({
   resources,

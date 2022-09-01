@@ -6,7 +6,6 @@ import { getClubInit } from 'redux/store/clubSlice';
 import { useNavigate } from 'react-router-dom';
 
 import { Header } from 'components/Header';
-import { Loader } from 'components/Loader';
 import { myClubList, activityList, wholeClubList, ClubsRank } from './homeDate.js';
 import 'assets/scss/home.scss';
 import Profile from 'components/Profile.js';
@@ -14,13 +13,16 @@ import { useTranslation } from 'react-i18next';
 
 function Home() {
   const dispatch = useDispatch();
-  const i18next = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const clubState = useSelector((state) => state.club);
 
   const seachFunc = () => {
     navigate('/search');
   };
+  // useEffect(() => {
+  //   i18n.changeLanguage('ko');
+  // });
 
   return (
     <div id="root">
@@ -39,7 +41,7 @@ function Home() {
               </div>
               <div className="clubs-tab">
                 <div className="item active flex-center">All</div>
-                <div className="item flex-center">Game</div>
+                <div className="item flex-center">{t('GAME')}</div>
                 <div className="item flex-center">NFT</div>
                 <div className="item flex-center">Sports</div>
                 <div className="item flex-center">Stoak</div>

@@ -15,7 +15,8 @@ const columnKeyToHeader = {
   key: '키',
   'ko-KR': '한글',
   'en-US': '영어',
-  'ja-JP': '일본어'
+  'ja-JP': '일본어',
+  'zh-CN': '중국어'
 };
 
 /**

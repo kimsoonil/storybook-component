@@ -10,7 +10,7 @@ module.exports = {
     debug: false,
     // removeUnusedKeys: true,
     defaultLng: 'ko-KR',
-    lngs: ['ko-KR', 'en-US'],
+    lngs: ['ko-KR', 'en-US', 'ja-JP', 'zh-CN'],
     func: {
       list: ['i18next.t', 'i18n.t', '$i18n.t', '$i18next.t', 'i18nextScanKey'],
       extensions: ['.js', '.jsx']
@@ -39,7 +39,7 @@ module.exports = {
         const value = key.includes(separator) ? '' : key;
         return value;
       }
-      return false;
+      return;
     },
     keySeparator: false,
     nsSeparator: false,

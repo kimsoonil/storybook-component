@@ -25,7 +25,12 @@ function SearchClub(props) {
 
   const { isLoading, clubs } = clubState;
 
-  if (isLoading || clubs.message !== 'ok') return <Loader />;
+  if (isLoading || clubs.message !== 'ok')
+    return (
+      <div className="flex-center">
+        <Loader />
+      </div>
+    );
   return (
     <div className="search-club">
       <div className="search-club-title"> 2,108 Clubs</div>
