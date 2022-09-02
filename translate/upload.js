@@ -10,7 +10,7 @@ const {
   NOT_AVAILABLE_CELL
 } = require('./index');
 
-const headerValues = ['키', '한글', '영어', '일본어'];
+const headerValues = ['키', '한글', '영어', '일본어', '중국어'];
 
 async function addNewSheet(doc, title, sheetId) {
   const sheet = await doc.addSheet({

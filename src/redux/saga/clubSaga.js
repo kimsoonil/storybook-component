@@ -64,6 +64,23 @@ function* getClubMembers({ payload }) {
   }
 }
 
+// TODO: club Members
+function* postClubPin({ payload }) {
+  try {
+    const response = yield call(
+      () => axios.get(`${process.env.REACT_APP_API_URL}/api/v1/club/${payload}/pin`, config),
+      ''
+    );
+    if (response.status === 200) {
+      yield put(actionTypes.postClubPinSuccess({ ...response.data }));
+      console.log(response.data);
+    }
+  } catch (error) {
+    yield put(actionTypes.clubFailure(error));
+    console.log('Member : ', error);
+  }
+}
+
 // TODO: club boards
 function* getClubBoards({ payload }) {
   try {
@@ -83,6 +100,7 @@ function* clubSaga() {
     takeLatest(actionTypes.getClubInit, getClubs),
     takeLatest(actionTypes.postClubInit, postClubs),
     takeLatest(actionTypes.getIdClubInit, getIdClub),
+    takeLatest(actionTypes.postClubPinInit, postClubPin),
     takeLatest(actionTypes.getClubMembersInit, getClubMembers),
     takeLatest(actionTypes.getClubBoardsInit, getClubBoards)
   ]);

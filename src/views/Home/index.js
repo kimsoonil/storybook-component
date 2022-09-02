@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 
 function Home() {
   const dispatch = useDispatch();
-  const { t, i18n } = useTranslation();
+  const i18next = useTranslation();
   const navigate = useNavigate();
   const clubState = useSelector((state) => state.club);
 
@@ -41,7 +41,7 @@ function Home() {
               </div>
               <div className="clubs-tab">
                 <div className="item active flex-center">All</div>
-                <div className="item flex-center">{t('GAME')}</div>
+                <div className="item flex-center">{i18next.t('GAME')}</div>
                 <div className="item flex-center">NFT</div>
                 <div className="item flex-center">Sports</div>
                 <div className="item flex-center">Stoak</div>

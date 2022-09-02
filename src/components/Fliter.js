@@ -5,26 +5,28 @@ import DateFnsUtils from '@material-ui/pickers/adapter/date-fns';
 import { DateRangePicker, LocalizationProvider, DateRangeDelimiter } from '@material-ui/pickers';
 import '../assets/scss/reset.scss';
 import '../assets/scss/components.scss';
+import { useTranslation } from 'react-i18next';
 
 export function Fliter({ doneFuc }) {
   const [sort, setSort] = useState('new');
   const [date, setDate] = useState('All');
-
+  const i18next = useTranslation();
   const [keyword, setKeyword] = useState('');
 
   const [selectedDate, handleDateChange] = React.useState([null, null]);
+  const freeEndTime = 3;
 
   return (
     <div className="filter relative">
       <div className="filter-conent">
         <div className="flex-between filter-hr">
-          <div className="filter-title">Sort by</div>
+          <div className="filter-title">{i18next.t(`정렬{{freeEndTime}}`, { freeEndTime: freeEndTime })}</div>
           <div className="flex-center sort-box">
             <div
               className={`box-left filter-box flex-center ${sort === 'new' && 'active'}`}
               onClick={() => setSort('new')}
             >
-              최신순
+              등록순
             </div>
             <div
               className={`box-right filter-box flex-center ${sort === 'popularity' && 'active'}`}
@@ -36,25 +38,25 @@ export function Fliter({ doneFuc }) {
         </div>
         <div className="filter-hr">
           <div className="flex-between ">
-            <div className="filter-title">Date</div>
+            <div className="filter-title">기간</div>
             <div className="flex-center date-box">
               <div
                 className={'box-left filter-box flex-center ' + (date === 'All' && 'active')}
                 onClick={() => setDate('All')}
               >
-                A week
+                일주일
               </div>
               <div
                 className={`filter-box flex-center ${date === '3month' && 'active'}`}
                 onClick={() => setDate('3month')}
               >
-                3 month
+                3개월
               </div>
               <div
                 className={`box-right filter-box flex-center ${date === 'select' && 'active'}`}
                 onClick={() => setDate('select')}
               >
-                Select a Date
+                직접선택
               </div>
             </div>
           </div>
@@ -87,7 +89,7 @@ export function Fliter({ doneFuc }) {
         </div>
 
         <div className="flex-between keyword">
-          <div className="filter-title">Keyword</div>
+          <div className="filter-title">검색어</div>
           <div className="flex-center relative">
             <input
               className="keyword-input"
@@ -102,9 +104,9 @@ export function Fliter({ doneFuc }) {
         </div>
       </div>
       <div className="flex-between filter-actions">
-        <div className="filter-cancle">Cancle</div>
+        <div className="filter-cancle">초기화</div>
         <div className="filter-done flex-center" onClick={doneFuc}>
-          Done
+          적용
         </div>
       </div>
     </div>
