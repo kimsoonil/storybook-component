@@ -38,19 +38,19 @@ function Board(props) {
           <div className="board-allow">
             <div>
               Allow Comments
-              <ToggleBtn />
+              <ToggleBtn id="toggleBtn2" />
             </div>
             <div>
               Allow Sharing
-              <ToggleBtn />
+              <ToggleBtn id="toggleBtn3" />
             </div>
             <div>
               Allow Search
-              <ToggleBtn />
+              <ToggleBtn id="toggleBtn4" />
             </div>
             <div>
               Register as a Notice
-              <ToggleBtn />
+              <ToggleBtn id="toggleBtn5" />
             </div>
           </div>
         </div>

@@ -30,7 +30,7 @@ function Basic(props) {
             <div className="flex-center">
               <div className="feed">
                 My feed
-                <ToggleBtn />
+                <ToggleBtn id="toggleBtn1" />
               </div>
               <div className="fliter-icon relative">
                 <div onClick={() => setOpenFilter(!openFilter)}>

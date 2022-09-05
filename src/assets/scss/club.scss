@@ -372,11 +372,11 @@
 }
 
 /* 체크박스가 체크되면 변경 이벤트 */
-#toggle:checked ~ .toggleSwitch {
+input[name='toggleBtn']:checked ~ .toggleSwitch {
   background: #8801fe;
 }
 
-#toggle:checked ~ .toggleSwitch .toggleButton {
+input[name='toggleBtn']:checked ~ .toggleSwitch .toggleButton {
   left: 18px;
   background: #fff;
 }

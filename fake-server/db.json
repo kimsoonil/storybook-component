@@ -1,0 +1,65 @@
+{
+  "memos": [
+    {
+      "id": 1,
+      "title": "첫 메모 제목",
+      "body": "첫 메모 내용"
+    }
+  ],
+  "club": [
+    {
+      "id": 33,
+      "name": "",
+      "address": "",
+      "category": [],
+      "bannerImage": "",
+      "profileImage": "",
+      "description": "",
+      "tags": [],
+      "withoutApproval": true,
+      "visitCount": {
+        "total": "0",
+        "today": "1"
+      },
+      "postCount": {
+        "total": "12341234",
+        "today": "123523446234"
+      },
+      "commentCount": {
+        "total": "123412351245",
+        "today": "12351251235122135"
+      },
+      "memberCount": {
+        "total": "125125612653145",
+        "today": "123"
+      }
+    },
+    {
+      "id": 32,
+      "name": "",
+      "address": "",
+      "category": [],
+      "bannerImage": "",
+      "profileImage": "",
+      "description": "",
+      "tags": [],
+      "withoutApproval": true,
+      "visitCount": {
+        "total": "0",
+        "today": "1"
+      },
+      "postCount": {
+        "total": "12341234",
+        "today": "123523446234"
+      },
+      "commentCount": {
+        "total": "123412351245",
+        "today": "12351251235122135"
+      },
+      "memberCount": {
+        "total": "125125612653145",
+        "today": "123"
+      }
+    }
+  ]
+}
