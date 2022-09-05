@@ -1,0 +1,33 @@
+@import '../base';
+
+.tag-root {
+  display: flex;
+  @include row;
+  @include flexCenter;
+  height: 28px;
+  padding: 4px 10px;
+  color: $black;
+  line-height: 1.43;
+  letter-spacing: -0.28px;
+  font-size: 14px;
+  background-color: $gray200;
+  border-radius: 14px;
+  box-sizing: border-box;
+  border: 1px solid $gray200;
+
+  &:hover {
+    .deletable {
+      display: flex;
+    }
+    border-color: $gray500;
+  }
+
+  .deletable {
+    display: none;
+    margin-left: 2px;
+    color: $gray500;
+    &:hover {
+      color: $black;
+    }
+  }
+}

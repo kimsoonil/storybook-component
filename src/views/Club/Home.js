@@ -72,7 +72,7 @@ function Home(props) {
             <div className="member-title">Member</div>
             <div className="member-see">See All</div>
           </div>
-          {props.members.message !== 'ok' ? (
+          {/* {props.members.message !== 'ok' ? (
             <div className="root-center">
               <Loader />
             </div>
@@ -89,7 +89,7 @@ function Home(props) {
                 );
               })}
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

@@ -7,13 +7,15 @@ import { useNavigate } from 'react-router-dom';
 
 import { Header } from 'components/Header';
 import { myClubList, activityList, wholeClubList } from './homeDate.js';
+import 'assets/scss/reset.scss';
 import 'assets/scss/home.scss';
 import Profile from 'components/Profile.js';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 function Home() {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const clubState = useSelector((state) => state.club);
 
@@ -24,6 +26,7 @@ function Home() {
   return (
     <div id="root">
       <Header seachFunc={seachFunc} />
+      <TempLinkCompoenet />
       <div className="slideView">
         <img src={require('images/home/slide.png')} alt="" />
       </div>
@@ -38,7 +41,7 @@ function Home() {
               </div>
               <div className="clubs-tab">
                 <div className="item active flex-center">All</div>
-                <div className="item flex-center">{t('GAME')}</div>
+                <div className="item flex-center">{`${t("GAME")}!`}</div>
                 <div className="item flex-center">NFT</div>
                 <div className="item flex-center">Sports</div>
                 <div className="item flex-center">Stoak</div>
@@ -158,3 +161,28 @@ function Home() {
 }
 
 export default Home;
+
+const TempLinkCompoenet = () => {
+  const linkStyle = {
+    backgroundColor: '#9013fe',
+    border: '2px solid #5a0a9f',
+    borderRadius: '6px',
+    padding: '12px 16px',
+    margin: '10px',
+    textDecoration: 'none',
+    color: 'white'
+  };
+
+  const divStyle = {
+    display: 'flex',
+    backgroundColor: 'black'
+  };
+
+  return (
+    <div style={divStyle}>
+      <Link style={linkStyle} to={'/create'} children={'create'} />
+      <Link style={linkStyle} to={'/manage'} children={'manage'} />
+      <Link style={linkStyle} to={'/manage/information'} children={'modify'} />
+    </div>
+  );
+};

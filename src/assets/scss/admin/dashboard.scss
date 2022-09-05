@@ -1,0 +1,55 @@
+@import '../base';
+
+.dashboard {
+  @include limitWidth(1280);
+  padding-bottom: 180px;
+
+  &-section {
+    margin-top: 80px;
+  }
+
+  &-item-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 30px;
+  }
+
+  &-item {
+    width: 290px;
+    height: 290px;
+    background-color: #d9d9d9;
+    cursor: pointer;
+  }
+
+  .statistic-item {
+    &-title {
+      margin: 30px auto 0 auto;
+      text-align: center;
+    }
+    &-value-wrapper {
+      @include row;
+      margin-top: 60px;
+      justify-content: space-evenly;
+    }
+
+    &-value {
+      @include col;
+      align-items: center;
+      gap: 15px;
+    }
+  }
+
+  .menu-item {
+    &-title {
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    &-desc {
+      margin: 30px 15px 0 15px;
+      text-align: center;
+      word-wrap: break-word;
+    }
+  }
+}

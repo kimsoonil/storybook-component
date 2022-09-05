@@ -1,0 +1,157 @@
+@import '../base';
+
+.jg-button {
+  @include row;
+  @include flexCenter;
+  cursor: pointer;
+  line-height: 1.47;
+  letter-spacing: -0.3px;
+  box-sizing: border-box;
+}
+
+.jg-button {
+  &-contain {
+    &-primary {
+      background-color: $color-primary100;
+      border: 1px solid $color-primary200;
+      color: white;
+      &:hover {
+        background-color: $color-primary200;
+      }
+      &:active {
+        border: 2px solid $color-primary300;
+      }
+    }
+
+    &-secondary {
+      background-color: $color-secondary100;
+      border: 1px solid $color-secondary200;
+      color: white;
+      &:hover {
+        background-color: $color-secondary200;
+      }
+      &:active {
+        border: 2px solid $color-secondary300;
+      }
+    }
+
+    &-point {
+      background-color: $color-point100;
+      border: 1px solid $color-point200;
+      color: white;
+      &:hover {
+        background-color: $color-point200;
+      }
+      &:active {
+        border: 2px solid $color-point300;
+      }
+    }
+
+    &-disabled {
+      border: none;
+      outline: none;
+      font-weight: normal;
+      background-color: $gray400;
+      color: white;
+      &:hover {
+        border: none;
+        outline: none;
+        font-weight: normal;
+        background-color: $gray400;
+        color: white;
+        cursor: default;
+      }
+    }
+  }
+}
+
+.jg-button {
+  &-outline {
+    &:hover {
+      background-color: $gray100;
+    }
+    &:active {
+      background-color: $gray200;
+    }
+
+    &-primary {
+      background-color: white;
+      border: 1px solid $color-primary200;
+      color: $color-primary100;
+    }
+
+    &-secondary {
+      background-color: white;
+      border: 1px solid $color-secondary200;
+      color: $color-secondary100;
+    }
+
+    &-point {
+      background-color: white;
+      border: 1px solid $color-point200;
+      color: $color-point100;
+    }
+
+    &-none {
+      background-color: $gray100;
+      border: 1px solid $gray500;
+      color: $black;
+      &:hover {
+        background-color: $gray200;
+      }
+      &:active {
+        background-color: $gray300;
+      }
+    }
+
+    &-disabled {
+      border: 1px solid $gray500;
+      color: $gray500;
+      background-color: $gray100;
+      &:hover {
+        border: 1px solid $gray500;
+        color: $gray500;
+        background-color: $gray100;
+      }
+    }
+  }
+}
+
+.jg-button {
+  &-s {
+    height: 40px;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    line-height: 1.71;
+    letter-spacing: -0.28px;
+  }
+  &-m {
+    height: 48px;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 8px;
+    line-height: 1.47;
+    letter-spacing: -0.3px;
+  }
+  &-l {
+    height: 52px;
+    padding: 0 16px;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 10px;
+    line-height: 1.41;
+    letter-spacing: -0.34px;
+  }
+  &-xl {
+    height: 56px;
+    padding: 0 20px;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 12px;
+    line-height: 1.5;
+    letter-spacing: -0.4px;
+  }
+}

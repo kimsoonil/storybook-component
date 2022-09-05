@@ -1,0 +1,90 @@
+@import '../base';
+
+.select-wrapper {
+  div {
+    @include col;
+  }
+  @include col;
+
+  border-radius: 8px;
+  border: 1px solid $gray300;
+  background-color: white;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 30;
+
+  &-extended {
+    border-color: $black;
+  }
+
+  &:focus {
+    border-color: $black;
+    outline: none;
+  }
+
+  &-success {
+    border-color: $color-success100;
+  }
+
+  &-error {
+    border-color: $color-error100;
+  }
+
+  .selected {
+    @include row;
+    height: 52px;
+    min-height: 52px;
+    padding-left: 16px;
+    padding-right: 12px;
+    align-items: center;
+    // border: 1px solid $color-success100;
+
+    &-value {
+      flex: 1;
+      color: $black;
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: -0.32px;
+    }
+
+    &-default {
+      color: $gray500;
+    }
+  }
+
+  .option-list {
+    // z-index: ;
+    // display: none;
+    visibility: hidden;
+    max-height: 220px;
+    overflow: scroll;
+    .option-item {
+      min-height: 48px;
+      height: 48px;
+      padding: 0 15px;
+      justify-content: center;
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: -0.32px;
+      color: $black;
+
+      &:hover {
+        background-color: $gray100;
+        color: $black;
+        cursor: pointer;
+        font-weight: 500;
+      }
+    }
+
+    .option-current {
+      background-color: $gray100;
+    }
+
+    &-extended {
+      visibility: visible;
+      // display: block;
+    }
+  }
+}

@@ -1,0 +1,136 @@
+@import '../base';
+@import '../resource';
+
+.admin {
+  .layout-banner {
+    position: relative;
+    height: 460px;
+
+    .banner {
+      &-inner {
+        @include col;
+        @include limitWidth(1280);
+        height: inherit;
+        justify-content: space-between;
+      }
+
+      // background: linear-gradient(to top, rgba(4, 4, 4, 0.7), transparent 160px),
+      //   no-repeat center/cover
+      //     url(https://store.nintendo.co.kr/media/catalog/product/cache/8e3c84988db1fdb90470f4d01453d879/f/1/f1715bebde9ecc2e1cecc33e35166cbf87233ae35cc4dd6649645acc3a036696.jpg);
+
+      &-tags {
+        display: flex;
+        max-width: 840px;
+        margin-bottom: 24px;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      &-profile {
+        position: absolute;
+        right: 0;
+        bottom: -80px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+
+        &-image {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          // position: absolute;
+          width: 160px;
+          height: 160px;
+          border-radius: 50%;
+          // overflow: hidden;
+
+          img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+
+  .layout-title {
+    @include col;
+    @include limitWidth(1280);
+    height: 195px;
+    box-sizing: border-box;
+    gap: 15px;
+    padding-top: 40px;
+  }
+}
+
+.image-picker-input-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  height: inherit;
+  width: 100%;
+  position: absolute;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  border-radius: inherit;
+  box-sizing: border-box;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.text {
+  &-h1 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 52px;
+    color: $black;
+  }
+  &-h2 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 60px;
+    color: $black;
+  }
+  &-h3 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 60px;
+    color: $black;
+  }
+  &-h4 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    color: $black;
+  }
+  &-h5 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: $black;
+  }
+  &-h6 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 23px;
+  }
+}

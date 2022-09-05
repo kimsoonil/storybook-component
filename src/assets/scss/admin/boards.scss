@@ -1,0 +1,51 @@
+@import '../base';
+
+.boards {
+  @include limitWidth(1280);
+  &-title {
+    margin-top: 30px;
+  }
+  &-subtitle {
+    margin-top: 4px;
+  }
+  &-contents-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 65px;
+    margin-bottom: 200px;
+  }
+
+  &-menu {
+    width: 304px;
+    height: 827px;
+    border: 1px solid $gray900;
+    box-sizing: border-box;
+
+    .add-group {
+      width: inherit;
+      line-height: 30px;
+      padding: 15px 0;
+      background-color: $color-primary100;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+      &:hover {
+        background-color: $color-primary200;
+        color: $gray100;
+      }
+      &:active {
+        background-color: $color-primary300;
+        color: $gray200;
+      }
+    }
+  }
+
+  &-contents {
+    width: 956px;
+    min-height: 827px;
+    max-height: 1480px;
+    overflow: scroll;
+    border: 3px solid #999999;
+    box-sizing: border-box;
+  }
+}

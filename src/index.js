@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store';
 import './assets/font/font.css';
+import './i18n/index'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

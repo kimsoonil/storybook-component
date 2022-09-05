@@ -1,0 +1,112 @@
+@import '../base';
+
+.radio-button-container {
+  @include row;
+  flex: 1;
+}
+
+.radio-button-wrapper {
+  @include col;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.radio-button-label {
+  @include row;
+  margin-bottom: 15px;
+  padding-right: 15px;
+
+  // padding-left: 35px;
+  // margin-bottom: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &:hover {
+    .checkmark {
+      background-color: #ccc;
+    }
+  }
+
+  .default-input {
+    display: none;
+    &:checked ~ .checkmark {
+      background-color: $color-primary100;
+      border: none;
+
+      &::after {
+        content: '';
+        background-color: white;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .checkmark {
+    @include col;
+    @include flexCenter;
+    height: 18px;
+    width: 18px;
+    margin-right: 15px;
+    border-radius: 50%;
+    background-color: white;
+    box-sizing: border-box;
+    border: 1px solid $gray500;
+  }
+}
+
+.radio-button-explain {
+  font-size: 16px;
+  color: $gray500;
+  line-height: 22px;
+}
+/* Create the indicator (the dot/circle - hidden when not checked) */
+// .checkmark:after {
+//   content: '';
+//   position: absolute;
+//   display: none;
+// }
+// /* Show the indicator (dot/circle) when checked */
+// .radio-button-container input:checked ~ .checkmark:after {
+//   display: block;
+// }
+// /* Style the indicator (dot/circle) */
+// .radio-button-container .checkmark:after {
+//   top: 9px;
+//   left: 9px;
+//   width: 8px;
+//   height: 8px;
+//   border-radius: 50%;
+//   background: white;
+// }
+
+// .radio-button-wrapper {
+//   @include row;
+//   background-color: pink;
+
+//   .default-input {
+//     display: none;
+
+//     &:checked ~ .radio-button-mark {
+//       background-color: $color-primary100;
+
+//     }
+//   }
+
+//   .radio-button-mark {
+//     width: 18px;
+//     height: 18px;
+//     border-radius: 18px;
+//     background-color: white;
+//     box-sizing: border-box;
+//     border: 1px solid $gray500;
+//   }
+// }

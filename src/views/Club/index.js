@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIdClubInit, getClubMembersInit } from 'redux/store/clubSlice';
 import { useParams } from 'react-router';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 
 import { Header } from 'components/Header';
 import { Loader } from 'components/Loader';
@@ -89,7 +89,7 @@ function Club() {
           elements={[
             {
               tabTitle: 'Home',
-              tabBody: <Home members={members} />,
+              tabBody: <Outlet />,
               path: 'Home'
             },
             {
@@ -99,7 +99,7 @@ function Club() {
             },
             {
               tabTitle: 'Community',
-              tabBody: <Board members={members} />,
+              tabBody: <Board />,
               path: 'Community'
             },
             {

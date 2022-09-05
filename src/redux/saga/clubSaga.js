@@ -1,7 +1,7 @@
 import { takeLatest, all, put, fork, call } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actionTypes from 'redux/store/clubSlice';
-import { getToken } from 'util/Cookies/Cookies';
+import { getToken } from 'utils/Cookies/Cookies';
 
 const config = getToken();
 

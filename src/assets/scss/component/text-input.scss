@@ -1,0 +1,75 @@
+@import '../base';
+
+.jg-text-input-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 52px;
+  border: 1px solid $gray300;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &-focus {
+    border-color: $color-point100;
+  }
+  &-success {
+    border-color: $color-success100;
+  }
+  &-error {
+    border-color: $color-error100;
+  }
+
+  .mark {
+    width: 6px;
+    height: 6px;
+    border-radius: 6px;
+    margin: 0 20px;
+    align-self: center;
+
+    &-success {
+      background-color: $color-success100;
+    }
+
+    &-error {
+      background-color: $color-error100;
+    }
+  }
+}
+
+.jg-text-input {
+  // padding: 0 16px;
+  // box-sizing: border-box;
+  flex: 1;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.32px;
+  border: none;
+  outline: none;
+  padding-left: 16px;
+  color: $black;
+
+  &::placeholder {
+    color: $gray500;
+  }
+
+  &:focus {
+    border-color: #ff45a1;
+    outline: none;
+    box-sizing: border-box;
+    border-radius: 8px;
+  }
+
+  &:read-only {
+    border: solid 1px $gray300;
+    background-color: $gray100;
+    color: $gray900;
+    &::placeholder {
+      color: $gray900;
+    }
+  }
+
+  &:disabled {
+    border: solid 1px $gray300;
+    background-color: $gray100;
+    color: $gray500;
+  }
+}

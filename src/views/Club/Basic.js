@@ -30,7 +30,7 @@ function Basic(props) {
             <div className="flex-center">
               <div className="feed">
                 My feed
-                <ToggleBtn id="toggleBtn1" />
+                <ToggleBtn />
               </div>
               <div className="fliter-icon relative">
                 <div onClick={() => setOpenFilter(!openFilter)}>
@@ -75,7 +75,7 @@ function Basic(props) {
             <div className="member-title">Member</div>
             <div className="member-see">See All</div>
           </div>
-          {props.members.message !== 'ok' ? (
+          {/* {props.members.message !== 'ok' ? (
             <div className="root-center">
               <Loader />
             </div>
@@ -92,7 +92,7 @@ function Basic(props) {
                 );
               })}
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

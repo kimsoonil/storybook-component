@@ -1,0 +1,21 @@
+@import '../base';
+
+.jg-image-picker {
+  // .image-picker {
+  //   background-color: $gray1000;
+  //   width: 400px;
+  //   height: 225px;
+
+  //   &::file-selector-button {
+  //     display: none;
+  //   }
+
+  //   &::content {
+  //     display: none;
+  //   }
+  // }
+
+  #input-file {
+    display: none;
+  }
+}
