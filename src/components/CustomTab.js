@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Tabs } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 
 export function CustomTab({ elements }) {
   const navigate = useNavigate();

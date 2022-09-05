@@ -22,10 +22,11 @@ i18n.use(initReactI18next).init({
   resources,
   lng: userLanguage || 'ko',
   fallbackLng: 'ko',
-  debug: false,
+  debug: true,
   defaultNS: 'translation',
   ns: 'translation',
-  keySeparator: false,
+  initImmediate: false,
+  keySeparator: '.',
   interpolation: {
     escapeValue: false,
     alwaysFormat: true,

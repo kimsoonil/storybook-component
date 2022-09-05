@@ -11,6 +11,8 @@ import { Loader } from 'components/Loader';
 import { CustomTab } from 'components/CustomTab';
 import Home from './Home';
 import Basic from './Basic';
+import Board from './Board';
+
 import 'assets/scss/club.scss';
 import 'assets/scss/reset.scss';
 
@@ -97,7 +99,7 @@ function Club() {
             },
             {
               tabTitle: 'Community',
-              tabBody: <Basic members={members} />,
+              tabBody: <Board members={members} />,
               path: 'Community'
             },
             {

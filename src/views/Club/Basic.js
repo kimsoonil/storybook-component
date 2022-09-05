@@ -12,6 +12,7 @@ import BorardCard from 'components/BorardCard';
 import 'assets/scss/club.scss';
 import 'assets/scss/reset.scss';
 import { Fliter } from 'components/Fliter';
+import ToggleBtn from 'components/ToggleBtn';
 
 function Basic(props) {
   const [boardState, setBoardState] = useState('album');
@@ -29,10 +30,7 @@ function Basic(props) {
             <div className="flex-center">
               <div className="feed">
                 My feed
-                <input type="checkbox" id="toggle" hidden />
-                <label htmlFor="toggle" className="toggleSwitch">
-                  <span className="toggleButton"></span>
-                </label>
+                <ToggleBtn />
               </div>
               <div className="fliter-icon relative">
                 <div onClick={() => setOpenFilter(!openFilter)}>

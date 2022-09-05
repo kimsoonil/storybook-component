@@ -2,33 +2,30 @@
 
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getClubInit } from 'redux/store/clubSlice';
+
 import { useNavigate } from 'react-router-dom';
 
 import { Header } from 'components/Header';
-import { myClubList, activityList, wholeClubList, ClubsRank } from './homeDate.js';
+import { myClubList, activityList, wholeClubList } from './homeDate.js';
 import 'assets/scss/home.scss';
 import Profile from 'components/Profile.js';
 import { useTranslation } from 'react-i18next';
 
 function Home() {
   const dispatch = useDispatch();
-  const i18next = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const clubState = useSelector((state) => state.club);
 
   const seachFunc = () => {
     navigate('/search');
   };
-  // useEffect(() => {
-  //   i18n.changeLanguage('ko');
-  // });
 
   return (
     <div id="root">
       <Header seachFunc={seachFunc} />
       <div className="slideView">
-        <img src={require('../../images/home/slide.png')} alt="" />
+        <img src={require('images/home/slide.png')} alt="" />
       </div>
       <div className="main">
         <div className="container">
@@ -41,7 +38,7 @@ function Home() {
               </div>
               <div className="clubs-tab">
                 <div className="item active flex-center">All</div>
-                <div className="item flex-center">{i18next.t('GAME')}</div>
+                <div className="item flex-center">{t('GAME')}</div>
                 <div className="item flex-center">NFT</div>
                 <div className="item flex-center">Sports</div>
                 <div className="item flex-center">Stoak</div>
