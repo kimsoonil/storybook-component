@@ -125,6 +125,7 @@
       color: $gray-900;
     }
   }
+
   &-post {
     margin-top: 50px;
     &-hashtag {
@@ -376,7 +377,7 @@
 }
 
 #toggle:checked ~ .toggleSwitch .toggleButton {
-  left: 15px;
+  left: 18px;
   background: #fff;
 }
 
@@ -390,4 +391,45 @@
   top: 50px;
   left: -100px;
   z-index: 1000;
+}
+.ant-tabs-content {
+  background-color: $gray-100;
+}
+.board {
+  padding: 24px 0 0px;
+  border-radius: 20px;
+  background-color: $gray-000;
+  &-title {
+    width: 104px;
+    height: 39px;
+    margin: 8px 23px 24px 28px;
+    font-family: 'Poppins-bold';
+    font-size: 28px;
+    letter-spacing: -0.56px;
+    color: $gray-900;
+  }
+  &-input {
+    width: 100%;
+    border-top: 1px solid $gray-200;
+    input {
+      border: 0;
+      padding: 24px 28px;
+      font-family: 'Poppins-Medium';
+      font-size: 24px;
+      color: $gray-900;
+      outline: 0;
+      &::placeholder {
+        color: #a7a8ab;
+      }
+    }
+  }
+  &-allow {
+    display: flex;
+    padding: 28px;
+    gap: 60px;
+    paddtop > div {
+      display: flex;
+      gap: 12px;
+    }
+  }
 }
