@@ -2,16 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIdClubInit, getClubMembersInit } from 'redux/store/clubSlice';
+import { getIdClubInit, getClubBoardsInit } from 'redux/store/clubSlice';
 import { useParams } from 'react-router';
 import { useNavigate, Outlet } from 'react-router-dom';
 
 import { Header } from 'components/Header';
 import { Loader } from 'components/Loader';
-import { CustomTab } from 'components/CustomTab';
-import Home from './Home';
-import Basic from './Basic';
-import Board from './Board';
 
 import 'assets/scss/club.scss';
 import 'assets/scss/reset.scss';
@@ -21,18 +17,20 @@ function Club() {
   const navigate = useNavigate();
   const clubState = useSelector((state) => state.club);
   const { id } = useParams();
+  const boardGrop = window.location.pathname.split('/');
 
   useEffect(() => {
     dispatch(getIdClubInit(id));
-    dispatch(getClubMembersInit(id));
+    dispatch(getClubBoardsInit(id));
   }, [dispatch]);
 
   const seachFunc = () => {
     navigate('/search');
   };
-  const { isLoading, clubId, members } = clubState;
+  const { isLoading, clubId, clubBoards } = clubState;
+  console.log(clubBoards);
 
-  if (isLoading || clubId.message !== 'ok')
+  if (clubId.message !== 'ok')
     return (
       <div className="root-center">
         <Loader />
@@ -85,45 +83,27 @@ function Club() {
           </div>
         </div>
         <hr className="club-hr" />
-        <CustomTab
-          elements={[
-            {
-              tabTitle: 'Home',
-              tabBody: <Outlet />,
-              path: 'Home'
-            },
-            {
-              tabTitle: 'Basic',
-              tabBody: <Outlet />,
-              path: 'Basic'
-            },
-            {
-              tabTitle: 'Board',
-              tabBody: <Board />,
-              path: 'Board'
-            },
-            {
-              tabTitle: 'Photo',
-              tabBody: <Outlet />,
-              path: 'Photo'
-            },
-            {
-              tabTitle: 'Certified',
-              tabBody: <Outlet />,
-              path: 'Certified'
-            },
-            {
-              tabTitle: 'Twice',
-              tabBody: <Outlet />,
-              path: 'Twice'
-            },
-            {
-              tabTitle: 'Link',
-              tabBody: <Outlet />,
-              path: 'Link'
-            }
-          ]}
-        />
+
+        {clubBoards.message !== 'ok' ? (
+          <div className="root-center">
+            <Loader />
+          </div>
+        ) : (
+          <div className="club-tap">
+            {clubBoards.data.map((item, index) => {
+              return (
+                <div
+                  className={'club-tap-item ' + (boardGrop[3] === item.name ? 'active' : '')}
+                  onClick={() => navigate(item.name)}
+                  key={index}
+                >
+                  {item.name}
+                </div>
+              );
+            })}
+          </div>
+        )}
+        <Outlet />
       </div>
     </div>
   );

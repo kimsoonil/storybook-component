@@ -39,7 +39,7 @@ function* getIdClub({ payload }) {
     const response = yield call(() => axios.get(`${process.env.REACT_APP_API_URL}/api/v1/club/${payload}`), '');
     if (response.status === 200) {
       yield put(actionTypes.getIdClubSuccess({ ...response.data }));
-      console.log(response);
+      console.log(response.data);
     }
   } catch (error) {
     yield put(actionTypes.clubFailure(error));
@@ -89,7 +89,7 @@ function* getClubBoards({ payload }) {
     );
     if (response.status === 200) {
       yield put(actionTypes.getClubBoardsSuccess({ ...response.data }));
-      console.log(response);
+      console.log(response.data);
     }
   } catch (error) {
     yield put(actionTypes.clubFailure(error));

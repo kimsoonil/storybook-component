@@ -1,6 +1,9 @@
 /* eslint-disable */
 
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getClubMembersInit } from 'redux/store/clubSlice';
+import { useParams } from 'react-router';
 
 import { postsList } from '../Home/homeDate';
 import { Loader } from 'components/Loader';
@@ -9,6 +12,16 @@ import 'assets/scss/club.scss';
 import 'assets/scss/reset.scss';
 
 function Home(props) {
+  const dispatch = useDispatch();
+  const clubState = useSelector((state) => state.club);
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(getClubMembersInit(id));
+  }, [dispatch]);
+
+  const { isLoading, members } = clubState;
+
   return (
     <div className="club-home container">
       <div className="item">
@@ -72,24 +85,24 @@ function Home(props) {
             <div className="member-title">Member</div>
             <div className="member-see">See All</div>
           </div>
-          {/* {props.members.message !== 'ok' ? (
+          {members.message !== 'ok' ? (
             <div className="root-center">
               <Loader />
             </div>
           ) : (
             <div className="member-list">
-              {props.members.data.map((members, index) => {
+              {members.data.map((members, index) => {
                 return (
                   <div key={index} className="member-list-item flex-center">
                     <div className="member-list-img">
-                      <img src={members.userData.profileImageUrl} alt="" />
+                      <img src={members.user.profileImageUrl} alt="" />
                     </div>
-                    <div className="member-list-name">{members.userData.username}</div>
+                    <div className="member-list-name">{members.user.username}</div>
                   </div>
                 );
               })}
             </div>
-          )} */}
+          )}
         </div>
       </div>
     </div>
