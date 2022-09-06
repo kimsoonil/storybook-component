@@ -42,22 +42,22 @@ function Home(props) {
           <div className="club-home-title">Gallery</div>
           <div className="club-gallery-list">
             <div className="item">
-              <img src={require(`../../images/club/gallery1.png`)} alt="" />
+              <img src={require(`images/club/gallery1.png`)} alt="" />
             </div>
             <div className="item">
-              <img src={require(`../../images/club/gallery2.png`)} alt="" />
+              <img src={require(`images/club/gallery2.png`)} alt="" />
             </div>
             <div className="item">
-              <img src={require(`../../images/club/gallery3.png`)} alt="" />
+              <img src={require(`images/club/gallery3.png`)} alt="" />
             </div>
             <div className="item">
-              <img src={require(`../../images/club/gallery4.png`)} alt="" />
+              <img src={require(`images/club/gallery4.png`)} alt="" />
             </div>
             <div className="item">
-              <img src={require(`../../images/club/gallery1.png`)} alt="" />
+              <img src={require(`images/club/gallery1.png`)} alt="" />
             </div>
             <div className="item">
-              <img src={require(`../../images/club/gallery2.png`)} alt="" />
+              <img src={require(`images/club/gallery2.png`)} alt="" />
             </div>
           </div>
         </div>

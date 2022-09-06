@@ -10,17 +10,16 @@ import { useTranslation } from 'react-i18next';
 export function Fliter({ doneFuc }) {
   const [sort, setSort] = useState('new');
   const [date, setDate] = useState('All');
-  const i18next = useTranslation();
+  const { t } = useTranslation();
   const [keyword, setKeyword] = useState('');
 
   const [selectedDate, handleDateChange] = React.useState([null, null]);
-  const freeEndTime = 3;
 
   return (
     <div className="filter relative">
       <div className="filter-conent">
         <div className="flex-between filter-hr">
-          <div className="filter-title">{i18next.t(`정렬{{freeEndTime}}`, { freeEndTime: freeEndTime })}</div>
+          <div className="filter-title">{t(`정렬`)}</div>
           <div className="flex-center sort-box">
             <div
               className={`box-left filter-box flex-center ${sort === 'new' && 'active'}`}
@@ -63,6 +62,7 @@ export function Fliter({ doneFuc }) {
           <div className={date !== 'select' ? 'none' : 'calendar '}>
             <LocalizationProvider dateAdapter={DateFnsUtils}>
               <DateRangePicker
+                className="date-rangepicker"
                 inputFormat="yyyy-mm-dd"
                 displayStaticWrapperAs="mobile"
                 calendars={1}

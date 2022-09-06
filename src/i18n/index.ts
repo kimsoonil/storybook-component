@@ -38,6 +38,7 @@ i18n.use(initReactI18next).init({
     }
   },
   react: {
+    useSuspense: false,
     defaultTransParent: 'div',
     transEmptyNodeValue: '',
     transSupportBasicHtmlNodes: true,
@@ -45,7 +46,8 @@ i18n.use(initReactI18next).init({
     transKeepBasicHtmlNodesFor: ['br', 'strong', 'i', 'button', 'a', 'span', 'div', 'input'],
     transWrapTextNodes: ''
   },
-  nsSeparator: '=>' // default: ':', :가 번역 키에 포함되는 사례가 있어, 번역 키로 사용되지 않을 것 같은 seperator를 설정
+  nsSeparator: '=>', // default: ':', :가 번역 키에 포함되는 사례가 있어, 번역 키로 사용되지 않을 것 같은 seperator를 설정
+  nonExplicitSupportedLngs: true
 });
 
 export default i18n;

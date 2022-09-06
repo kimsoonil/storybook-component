@@ -84,7 +84,9 @@ function* postClubPin({ payload }) {
 // TODO: club boards
 function* getClubBoards({ payload }) {
   try {
-    const response = yield call(() => axios.get(`${process.env.REACT_APP_API_URL}/api/v1/club/${payload}/boards`), '');
+    const response = yield call(() =>
+      axios.get(`${process.env.REACT_APP_API_URL}/api/v1/club/${payload}/board-groups`)
+    );
     if (response.status === 200) {
       yield put(actionTypes.getClubBoardsSuccess({ ...response.data }));
       console.log(response);

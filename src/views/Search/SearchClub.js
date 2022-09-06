@@ -52,7 +52,7 @@ function SearchClub(props) {
               className="search-club-list-item relative"
               key={index}
               onClick={() => {
-                navigate(`/club/${clubItem.id}`);
+                navigate(`/club/${clubItem.id}/Home`);
               }}
             >
               <div className="search-club-item-img ">

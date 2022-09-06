@@ -7,7 +7,7 @@ const clubSlice = createSlice({
     clubs: {},
     clubId: {},
     members: {},
-    boards: {},
+    clubBoards: {},
     error: ''
   },
   reducers: {
@@ -65,7 +65,7 @@ const clubSlice = createSlice({
     },
     getClubBoardsSuccess: (state, { payload }) => {
       state.isLoading = false;
-      state.members = payload;
+      state.clubBoards = payload;
     },
 
     clubFailure: (state, error) => {

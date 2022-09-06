@@ -31,7 +31,7 @@ function Club() {
     navigate('/search');
   };
   const { isLoading, clubId, members } = clubState;
-  console.log(clubState);
+
   if (isLoading || clubId.message !== 'ok')
     return (
       <div className="root-center">
@@ -54,7 +54,7 @@ function Club() {
               {clubId.data.name}
               <div className="manager">
                 <div className="manager-tag flex-center">manager</div>
-                {clubId.data.userData.username}
+                {clubId.data.user.username}
               </div>
             </div>
             <div className="club-content-explan">{clubId.data.description}</div>
@@ -75,10 +75,10 @@ function Club() {
               </div>
               <div className="club-icon-btn">
                 <div className="item flex-center">
-                  <img src={require(`../../images/club/rank.png`)} alt="" />
+                  <img src={require(`images/club/rank.png`)} alt="" />
                 </div>
                 <div className="item flex-center">
-                  <img src={require(`../../images/club/club-bookmark.png`)} alt="" />
+                  <img src={require(`images/club/club-bookmark.png`)} alt="" />
                 </div>
               </div>
             </div>
@@ -94,32 +94,32 @@ function Club() {
             },
             {
               tabTitle: 'Basic',
-              tabBody: <Basic members={members} />,
+              tabBody: <Outlet />,
               path: 'Basic'
             },
             {
-              tabTitle: 'Community',
+              tabTitle: 'Board',
               tabBody: <Board />,
-              path: 'Community'
+              path: 'Board'
             },
             {
               tabTitle: 'Photo',
-              tabBody: <Basic members={members} />,
+              tabBody: <Outlet />,
               path: 'Photo'
             },
             {
               tabTitle: 'Certified',
-              tabBody: <Basic members={members} />,
+              tabBody: <Outlet />,
               path: 'Certified'
             },
             {
               tabTitle: 'Twice',
-              tabBody: <Basic members={members} />,
+              tabBody: <Outlet />,
               path: 'Twice'
             },
             {
               tabTitle: 'Link',
-              tabBody: <Basic members={members} />,
+              tabBody: <Outlet />,
               path: 'Link'
             }
           ]}

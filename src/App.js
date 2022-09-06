@@ -20,7 +20,6 @@ import Information from 'views/Admin/Information';
 import Design from 'views/Admin/Design';
 import Operation from 'views/Admin/Operation';
 
-
 const Home = loadable(() => import('views/Home'));
 const Search = loadable(() => import('views/Search'));
 const Club = loadable(() => import('views/Club'));

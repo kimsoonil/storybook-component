@@ -25,7 +25,7 @@ function Home() {
 
   return (
     <div id="root">
-      <Header seachFunc={seachFunc} />
+      <Header seachFunc={seachFunc} user={{}} />
       <TempLinkCompoenet />
       <div className="slideView">
         <img src={require('images/home/slide.png')} alt="" />
@@ -41,7 +41,7 @@ function Home() {
               </div>
               <div className="clubs-tab">
                 <div className="item active flex-center">All</div>
-                <div className="item flex-center">{`${t("GAME")}!`}</div>
+                <div className="item flex-center">{t('GAME')}</div>
                 <div className="item flex-center">NFT</div>
                 <div className="item flex-center">Sports</div>
                 <div className="item flex-center">Stoak</div>
