@@ -6,9 +6,9 @@ import { getToken } from 'utils/Cookies/Cookies';
 const config = getToken();
 
 // TODO: club list
-function* getClubs() {
+function* getClubs({ payload }) {
   try {
-    const response = yield call(() => axios.get(`${process.env.REACT_APP_API_URL}/api/v1/clubs`), '');
+    const response = yield call(() => axios.get(`${process.env.REACT_APP_API_URL}/api/v1/clubs?search=${payload}`), '');
     if (response.status === 200) {
       yield put(actionTypes.getClubSuccess({ ...response.data }));
       console.log(response);

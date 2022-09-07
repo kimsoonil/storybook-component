@@ -14,15 +14,19 @@ function Board(props) {
   const [boardSelect, setBoardSelect] = useState('Please select a Board');
   const [openSelect, setOpenSelect] = useState(false);
   const [checkedList, setCheckedList] = useState([]);
+  const [tagList, setTagList] = useState([]);
+
   const config = {
     readonly: false,
     height: 600,
     placeholder: 'Please leave a comment that you want to share.'
   };
+
   const closeSelect = (text) => {
     setBoardSelect(text);
     setOpenSelect(false);
   };
+
   const onCheckedElement = (checked, id) => {
     console.log(checked);
     console.log(checkedList);

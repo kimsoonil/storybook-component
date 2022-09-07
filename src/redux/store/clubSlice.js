@@ -12,8 +12,9 @@ const clubSlice = createSlice({
   },
   reducers: {
     // TODO getClubs
-    getClubInit: (state) => {
+    getClubInit: ({ payload }, state) => {
       state.isLoading = true;
+      return payload;
     },
     getClubSuccess: (state, { payload }) => {
       state.isLoading = false;
@@ -64,6 +65,16 @@ const clubSlice = createSlice({
       return payload;
     },
     getClubBoardsSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.clubBoards = payload;
+    },
+
+    // TODO postShare
+    postClubShareInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    postClubShareSuccess: (state, { payload }) => {
       state.isLoading = false;
       state.clubBoards = payload;
     },

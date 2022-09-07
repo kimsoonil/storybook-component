@@ -14,12 +14,21 @@ function Profile() {
     dispatch(getUserInit());
   }, [dispatch]);
 
-  const { isLoading, user } = userState;
+  const { user, error } = userState;
+  console.log(userState);
+  if (user.message !== 'ok' || error !== '')
+    return (
+      <div className="side-box profile">
+        <div className="profile-img flex-center">
+          <div className="profile-imgBox" />
+          <div className="profile-name">Enter the club!</div>
+        </div>
 
-  if (isLoading || user.message !== 'ok') return;
-  <div className="flex-center">
-    <Loader />
-  </div>;
+        <div className="m-1">
+          <Button primary="primary" label="Login" size="m" width={265} />
+        </div>
+      </div>
+    );
 
   return (
     <div className="side-box profile">

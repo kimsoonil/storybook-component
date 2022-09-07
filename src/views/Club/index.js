@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getIdClubInit, getClubBoardsInit } from 'redux/store/clubSlice';
 import { useParams } from 'react-router';
 import { useNavigate, Outlet } from 'react-router-dom';
+import { RWebShare } from 'react-web-share';
 
 import { Header } from 'components/Header';
 import { Loader } from 'components/Loader';
@@ -27,7 +28,7 @@ function Club() {
   const seachFunc = () => {
     navigate('/search');
   };
-  const { isLoading, clubId, clubBoards } = clubState;
+  const { clubId, clubBoards } = clubState;
   console.log(clubBoards);
 
   if (clubId.message !== 'ok')
@@ -36,6 +37,18 @@ function Club() {
         <Loader />
       </div>
     );
+
+  const handle = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: '슈퍼클럽',
+        text: 'Super club',
+        url: 'https://super-club.netlify.app/'
+      });
+    } else {
+      alert('공유하기가 지원되지 않는 환경 입니다.');
+    }
+  };
   return (
     <div id="root">
       <Header seachFunc={seachFunc} />
@@ -73,7 +86,16 @@ function Club() {
               </div>
               <div className="club-icon-btn">
                 <div className="item flex-center">
-                  <img src={require(`images/club/rank.png`)} alt="" />
+                  <RWebShare
+                    data={{
+                      title: '슈퍼클럽',
+                      text: 'Super club',
+                      url: 'https://super-club.netlify.app/'
+                    }}
+                    onClick={() => console.info('share successful!')}
+                  >
+                    <img src={require(`images/club/rank.png`)} alt="" />
+                  </RWebShare>
                 </div>
                 <div className="item flex-center">
                   <img src={require(`images/club/club-bookmark.png`)} alt="" />

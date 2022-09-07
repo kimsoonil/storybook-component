@@ -20,12 +20,13 @@ function SearchClub(props) {
   const offset = (page - 1) * limit;
 
   useEffect(() => {
-    dispatch(getClubInit());
-  }, [dispatch, page]);
+    console.log(props.search);
+    dispatch(getClubInit(props.search));
+  }, [dispatch, props.search]);
 
   const { isLoading, clubs } = clubState;
 
-  if (isLoading || clubs.message !== 'ok')
+  if (clubs.message !== 'ok')
     return (
       <div className="flex-center">
         <Loader />

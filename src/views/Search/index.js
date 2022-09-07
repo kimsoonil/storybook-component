@@ -9,7 +9,7 @@ import SearchPosts from './SearchPosts';
 
 function Search() {
   const [searchTab, setSearchTab] = useState('All');
-
+  const [searchText, setSearchText] = useState('');
   return (
     <div id="root">
       <Header />
@@ -41,18 +41,24 @@ function Search() {
           </div>
         </div>
         <div className="search-input relative">
-          <input type="test" placeholder="Please enter a search term" />
+          <input
+            type="test"
+            placeholder="Please enter a search term"
+            maxLength={300}
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
           <div className="search-input-btn flex-center">
             <img src={require('../../images/components/ic_search_wh.svg').default} alt="" />
           </div>
         </div>
         {searchTab === 'All' && (
           <>
-            <SearchClub limit={12} searchTab={searchTab} setSearchTab={setSearchTab} />
+            <SearchClub limit={12} searchTab={searchTab} setSearchTab={setSearchTab} search={searchText} />
             <SearchPosts />
           </>
         )}
-        {searchTab === 'Clubs' && <SearchClub limit={12} searchTab={searchTab} />}
+        {searchTab === 'Clubs' && <SearchClub limit={12} searchTab={searchTab} search={searchText} />}
         {searchTab === 'Posts' && <SearchPosts />}
       </div>
     </div>

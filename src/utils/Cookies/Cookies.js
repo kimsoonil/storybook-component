@@ -1,5 +1,5 @@
 export const getToken = () => {
-  const token = 'd59b2f154aab1bd43023258deb8f461936f939a8';
+  const token = '10f973b74bd0ad70224806415f570155adf1006f';
   const config = {
     headers: { Authorization: `Token ${token}` }
   };
