@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIdClubInit, getClubBoardsInit } from 'redux/store/clubSlice';
+import { getIdClubInit, getClubBoardsInit, postClubShareInit } from 'redux/store/clubSlice';
 import { useParams } from 'react-router';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { RWebShare } from 'react-web-share';
@@ -19,7 +19,7 @@ function Club() {
   const clubState = useSelector((state) => state.club);
   const { id } = useParams();
   const boardGrop = window.location.pathname.split('/');
-
+  const [bookmark, setBookmark] = useState(false);
   useEffect(() => {
     dispatch(getIdClubInit(id));
     dispatch(getClubBoardsInit(id));
@@ -38,17 +38,6 @@ function Club() {
       </div>
     );
 
-  const handle = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: '슈퍼클럽',
-        text: 'Super club',
-        url: 'https://super-club.netlify.app/'
-      });
-    } else {
-      alert('공유하기가 지원되지 않는 환경 입니다.');
-    }
-  };
   return (
     <div id="root">
       <Header seachFunc={seachFunc} />
@@ -97,8 +86,11 @@ function Club() {
                     <img src={require(`images/club/rank.png`)} alt="" />
                   </RWebShare>
                 </div>
-                <div className="item flex-center">
-                  <img src={require(`images/club/club-bookmark.png`)} alt="" />
+                <div className="item flex-center" onClick={() => setBookmark(!bookmark)}>
+                  <img
+                    src={require(bookmark ? `images/club/club-bookmark.png` : `images/club/icon-bookmark-line.png`)}
+                    alt=""
+                  />
                 </div>
               </div>
             </div>

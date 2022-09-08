@@ -1,4 +1,4 @@
-import { takeLatest, all, put, fork, call } from 'redux-saga/effects';
+import { takeEvery, all, put, fork, call } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actionTypes from 'redux/store/clubSlice';
 import { getToken } from 'utils/Cookies/Cookies';
@@ -36,7 +36,7 @@ function* postClubs({ payload }) {
 // TODO: club id
 function* getIdClub({ payload }) {
   try {
-    const response = yield call(() => axios.get(`${process.env.REACT_APP_API_URL}/api/v1/club/${payload}`), '');
+    const response = yield call(() => axios.get(`${process.env.REACT_APP_API_URL}/api/v1/club/${payload}`));
     if (response.status === 200) {
       yield put(actionTypes.getIdClubSuccess({ ...response.data }));
       console.log(response.data);
@@ -47,6 +47,19 @@ function* getIdClub({ payload }) {
   }
 }
 
+// TODO: club list
+function* getClubMe({ payload }) {
+  try {
+    const response = yield call(() => axios.get(`${process.env.REACT_APP_API_URL}/api/v1/clubs/${payload}/me`));
+    if (response.status === 200) {
+      yield put(actionTypes.getClubMeSuccess({ ...response.data }));
+      console.log(response);
+    }
+  } catch (error) {
+    yield put(actionTypes.clubFailure(error));
+    console.log(error);
+  }
+}
 // TODO: club Members
 function* getClubMembers({ payload }) {
   try {
@@ -64,7 +77,7 @@ function* getClubMembers({ payload }) {
   }
 }
 
-// TODO: club Members
+// TODO: club Pin
 function* postClubPin({ payload }) {
   try {
     const response = yield call(
@@ -96,15 +109,30 @@ function* getClubBoards({ payload }) {
     console.log(error);
   }
 }
+// TODO postShare
+
+function* postShare({ payload }) {
+  try {
+    const response = yield call(() => axios.post(`${process.env.REACT_APP_API_URL}/api/v1/club/${payload}/share`));
+    if (response.status === 200) {
+      console.log(response.data);
+    }
+  } catch (error) {
+    yield put(actionTypes.clubFailure(error));
+    console.log(error);
+  }
+}
 
 function* clubSaga() {
   yield all([
-    takeLatest(actionTypes.getClubInit, getClubs),
-    takeLatest(actionTypes.postClubInit, postClubs),
-    takeLatest(actionTypes.getIdClubInit, getIdClub),
-    takeLatest(actionTypes.postClubPinInit, postClubPin),
-    takeLatest(actionTypes.getClubMembersInit, getClubMembers),
-    takeLatest(actionTypes.getClubBoardsInit, getClubBoards)
+    takeEvery(actionTypes.getClubInit, getClubs),
+    takeEvery(actionTypes.postClubInit, postClubs),
+    takeEvery(actionTypes.getIdClubInit, getIdClub),
+    takeEvery(actionTypes.getClubMeInit, getClubMe),
+    takeEvery(actionTypes.postClubPinInit, postClubPin),
+    takeEvery(actionTypes.getClubMembersInit, getClubMembers),
+    takeEvery(actionTypes.getClubBoardsInit, getClubBoards),
+    takeEvery(actionTypes.postClubShareInit, postShare)
   ]);
 }
 

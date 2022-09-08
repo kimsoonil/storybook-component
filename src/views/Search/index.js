@@ -58,7 +58,7 @@ function Search() {
             <SearchPosts />
           </>
         )}
-        {searchTab === 'Clubs' && <SearchClub limit={12} searchTab={searchTab} search={searchText} />}
+        {searchTab === 'Clubs' && <SearchClub limit={16} searchTab={searchTab} search={searchText} />}
         {searchTab === 'Posts' && <SearchPosts />}
       </div>
     </div>

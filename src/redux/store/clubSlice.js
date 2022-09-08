@@ -39,6 +39,17 @@ const clubSlice = createSlice({
       state.isLoading = false;
       state.clubId = payload;
     },
+
+    // TODO getIdClub
+    getClubMeInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    getIdClubMeSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.clubId = payload;
+    },
+
     // TODO postClubsPin
     postClubPinInit: ({ payload }, state) => {
       state.isLoading = true;
@@ -94,12 +105,15 @@ export const {
   postClubSuccess,
   getIdClubInit,
   getIdClubSuccess,
+  getClubMeInit,
+  getClubMeSuccess,
   postClubPinInit,
   postClubPinSuccess,
   getClubMembersInit,
   getClubMembersSuccess,
   getClubBoardsInit,
   getClubBoardsSuccess,
+  postClubShareInit,
   clubFailure
 } = clubSlice.actions;
 

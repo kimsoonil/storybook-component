@@ -1,22 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserInit } from 'redux/store/userSlice';
+import { getClubMeInit } from 'redux/store/clubSlice';
 
 import { Button } from './Button.js';
 import { Loader } from './Loader';
 import 'assets/scss/components.scss';
 
-function Profile() {
+function Profile(props) {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
+  const clubtate = useSelector((state) => state.club);
+  const [userData, setUserData] = useState();
 
   useEffect(() => {
-    dispatch(getUserInit());
+    if (props.club !== undefined) {
+      dispatch(getClubMeInit(props.club));
+    } else {
+      dispatch(getUserInit());
+    }
   }, [dispatch]);
 
   const { user, error } = userState;
-  console.log(userState);
-  if (user.message !== 'ok' || error !== '')
+  const { club } = clubtate;
+
+  useEffect(() => {
+    if (props.club !== undefined) {
+      setUserData(club);
+    } else {
+      setUserData(user);
+    }
+  });
+
+  if (userData !== '' || userData.message !== 'ok')
     return (
       <div className="side-box profile">
         <div className="profile-img flex-center">

@@ -76,7 +76,7 @@ function Home(props) {
         </div>
       </div>
       <div className="item">
-        <Profile />
+        <Profile club={id} />
         <div className="chatting">
           <img src={require(`../../images/home/chatting.png`)} alt="" />
         </div>

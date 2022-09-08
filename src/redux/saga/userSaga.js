@@ -1,4 +1,4 @@
-import { takeLatest, all, put, fork, call } from 'redux-saga/effects';
+import { takeEvery, all, put, fork, call } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actionTypes from 'redux/store/userSlice';
 import { getToken } from 'utils/Cookies/Cookies';
@@ -37,7 +37,7 @@ function* patchUser({ payload }) {
 }
 
 function* clubSaga() {
-  yield all([takeLatest(actionTypes.getUserInit, getUSer), takeLatest(actionTypes.patchUserInit, patchUser)]);
+  yield all([takeEvery(actionTypes.getUserInit, getUSer), takeEvery(actionTypes.patchUserInit, patchUser)]);
 }
 
 export const UserSaga = [fork(clubSaga)];

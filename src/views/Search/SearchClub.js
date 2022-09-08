@@ -6,7 +6,6 @@ import { getClubInit } from 'redux/store/clubSlice';
 import { useNavigate } from 'react-router-dom';
 import Pagination from 'components/Pagination';
 
-import { wholeClubList, postsList } from '../Home/homeDate';
 import 'assets/scss/search.scss';
 import { Button } from 'components/Button';
 import { Loader } from 'components/Loader';
@@ -20,7 +19,6 @@ function SearchClub(props) {
   const offset = (page - 1) * limit;
 
   useEffect(() => {
-    console.log(props.search);
     dispatch(getClubInit(props.search));
   }, [dispatch, props.search]);
 

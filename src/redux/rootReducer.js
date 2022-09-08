@@ -8,6 +8,7 @@ import ClubAdnimReducer from 'redux/store/club/clubSlice';
 import PopupReducer from 'redux/store/popupSlice';
 import userReducer from 'redux/store/userSlice';
 import clubReducer from 'redux/store/clubSlice';
+import postReducer from 'redux/store/postsSlice';
 import ClubEditingReducer from './store/club/clubEditingSlice';
 // import history from 'utils/history';
 
@@ -22,7 +23,8 @@ const rootReducer = () =>
     clubEditing: ClubEditingReducer,
     popup: PopupReducer,
     user: userReducer,
-    club: clubReducer
+    club: clubReducer,
+    post: postReducer
   });
 
 export default rootReducer;

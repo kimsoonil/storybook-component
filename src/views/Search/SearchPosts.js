@@ -1,11 +1,31 @@
 /* eslint-disable */
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPostsInit } from 'redux/store/postsSlice';
+
 import { postsList } from '../Home/homeDate';
 import 'assets/scss/search.scss';
 import { Button } from 'components/Button';
+import { Loader } from 'components/Loader';
 
 function SearchPosts() {
+  const dispatch = useDispatch();
+  const postState = useSelector((state) => state.post);
+
+  useEffect(() => {
+    dispatch(getPostsInit());
+  }, []);
+  const { isLoading, posts } = postState;
+
+  console.log(postState);
+
+  if (posts.message !== 'ok')
+    return (
+      <div className="flex-center">
+        <Loader />
+      </div>
+    );
   return (
     <div className="search-post">
       <div className="search-club-title"> 2,494 Posts</div>
@@ -21,19 +41,19 @@ function SearchPosts() {
         <div className="item flex-center">Animals</div>
       </div>
       <div className="search-post-list">
-        {postsList.map((postsItem, index) => {
+        {posts.data.map((postsItem, index) => {
           return (
             <div className="search-post-list-item relative" key={index}>
               <div className="search-post-list-item-container">
-                <div className="search-post-list-item-nick">{postsItem.nickname}</div>
+                <div className="search-post-list-item-nick">{postsItem.user.username}</div>
                 <div className="search-post-list-item-title">{postsItem.title}</div>
-                <div className="search-post-list-item-content">{postsItem.content}</div>
+                <div className="search-post-list-item-content"></div>
                 <div className="search-post-list-item-info">
-                  View {postsItem.view} ・ Comment {postsItem.comment} {postsItem.data}
+                  View {postsItem.likeCount} ・ Comment {postsItem.commentCount}
                 </div>
               </div>
               <div className="search-post-img ">
-                <img src={require(`../../images/home/${postsItem.img}`)} alt="" />
+                <img src={postsItem.thumbnailImageUrl} alt="" />
               </div>
             </div>
           );
