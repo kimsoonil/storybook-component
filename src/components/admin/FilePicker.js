@@ -1,8 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import 'assets/scss/_base.scss';
 
-const FilePicker = ({ state, setState, children, tabIndex, type, multiple, ...props }) => {
+const FilePicker = ({
+  state,
+  setState,
+  children,
+  tabIndex,
+  type,
+  multiple,
+  maxSize = { value: 0, unit: 'byte' },
+  ...props
+}) => {
   const inputFileRef = useRef();
+  const unitList = useMemo(() => ['byte', 'kb', 'mb', 'gb', 'tb', 'pb', 'eb', 'zb', 'yb'], []);
   const onClick = (e) => {
     inputFileRef.current.click();
   };
@@ -16,11 +26,17 @@ const FilePicker = ({ state, setState, children, tabIndex, type, multiple, ...pr
     e.preventDefault();
 
     let reader = new FileReader();
-    let _file = e.target.files[0];
+    let _file = e.target?.files?.[0];
+
     reader.onloadend = () => {
-      setState({ file: _file, data: reader.result });
+      if (_file.size > maxSize.value * Math.pow(1024, unitList.indexOf(maxSize.unit))) {
+        confirm('허용 용량을 초과하였습니다!', 'ok');
+      } else {
+        setState({ file: _file, data: reader.result });
+      }
     };
-    reader.readAsDataURL(_file);
+    _file && reader.readAsDataURL(_file);
+    e.target.value = null;
   };
 
   const accept = type === 'image' ? 'image/*' : '';

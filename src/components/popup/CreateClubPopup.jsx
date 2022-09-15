@@ -6,6 +6,7 @@ import { closeCreateClubPopup } from 'redux/store/popupSlice';
 import { PopupWrapper, PopupLayer } from 'components/popup/PopupLayer';
 import JButton from 'components/admin/JButton';
 import { navigate } from '@storybook/addon-links';
+import { createClubInit } from 'redux/store/admin/createClubSlice';
 
 // export enum LEAVE_ALERT_TYPE {
 //     TEST_POPUP = 'TEST_POPUP',
@@ -26,7 +27,21 @@ export const CreateClubPopup = ({}) => {
   const onApply = () => {
     dispatch(closeCreateClubPopup());
     if (popup.type === 'create') {
-      navigate('/dashboard');
+      const _club = popup.club;
+      // const formData = new FormData();
+      // // formData.append({...popup.club})
+      // for (const key in _club) {
+      //   if (Object.hasOwnProperty.call(_club, key)) {
+      //     // console.log(key, _club[key]);
+      //     formData.append(key, _club[key]);
+      //   }
+      // }
+      // for (let value of formData.values()) {
+      //   console.log(value);
+      // }
+      // dispatch(createClubInit(formData));
+      dispatch(createClubInit(_club));
+      navigate('/manage/dashboard');
     } else {
       navigate(-1);
     }

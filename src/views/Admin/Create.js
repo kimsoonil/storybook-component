@@ -1,12 +1,11 @@
 import { Header } from 'components/Header';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import 'assets/scss/create.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { getClub } from 'redux/store/club/clubSlice';
 
 import { TextInput } from 'components/admin/TextInput';
-import Select from 'components/admin/Select';
+import JSelect from 'components/admin/JSelect';
 import RadioButton from 'components/admin/RadioButton';
 import FilePicker from 'components/admin/FilePicker';
 import Tag from 'components/admin/Tag';
@@ -14,67 +13,103 @@ import JButton from 'components/admin/JButton';
 import { openCreateClubPopup } from 'redux/store/popupSlice';
 import { CreateClubPopup } from 'components/popup/CreateClubPopup';
 import { admin as constants, loadState } from 'constants';
+import { numFM, fileSizeFM } from 'utils/formatter';
+import { reqCheckClubName, resetCheckClubName } from 'redux/store/admin/checkClubNameSlice';
+import { reqCheckClubAddress, resetCheckClubAddress } from 'redux/store/admin/checkClubAddressSlice';
+import { categoriesInit } from 'redux/store/admin/categoriesSlice';
 
 const Create = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const categories = useSelector((state) => state.categories.list);
+
+  useEffect(() => {
+    console.log('Create index useEffect');
+    if (!categories?.[0]) {
+      dispatch(categoriesInit());
+    }
+    init();
+    return () => {
+      init();
+    };
+  }, []);
+  const init = () => {
+    dispatch(resetCheckClubName());
+    dispatch(resetCheckClubAddress());
+  };
+
+  const checkClubNameState = useSelector((state) => state.checkClubName);
   const [tmpName, setTmpName] = useState('');
   const [nameInputState, setNameInputState] = useState(constants.inputState.blur);
-  const [nameValid, setNameValid] = useState({ status: loadState.LOADING, type: '' });
+  const [nameValid, setNameValid] = useState({ status: loadState.NONE, errorText: ' ' });
+
   const checkName = (e) => {
-    const txt = e.target.value;
-    // 대충 이름 체크 로직
-    if (txt === '') {
+    const _name = e.target.value;
+    if (_name === '') {
       setNameInputState(constants.inputState.error);
-      setNameValid({ status: loadState.ERROR, type: 'empty' });
-    } else if (txt === 'admin') {
-      setNameInputState(constants.inputState.error);
-      setNameValid({ status: loadState.ERROR, type: 'duplicate' });
+      setNameValid({ status: loadState.ERROR, errorText: constants.errorText.name.empty });
     } else {
-      setNameInputState(constants.inputState.success);
-      setNameValid({ status: loadState.SUCCESS, type: '' });
+      dispatch(reqCheckClubName({ name: _name }));
     }
   };
 
+  useEffect(() => {
+    if (checkClubNameState.status === loadState.SUCCESS) {
+      setNameValid({ status: checkClubNameState.status, errorText: ' ' });
+      setNameInputState(constants.inputState.success);
+    }
+    if (checkClubNameState.status === loadState.ERROR) {
+      setNameValid({ status: checkClubNameState.status, errorText: checkClubNameState.error });
+      setNameInputState(constants.inputState.error);
+    }
+  }, [checkClubNameState]);
+
+  const checkClubAddressState = useSelector((state) => state.checkClubAddress);
   const [tmpAddress, setTmpAddress] = useState('');
   const [addressInputState, setAddressInputState] = useState(constants.inputState.blur);
-  const [addressValid, setAddressValid] = useState({ status: loadState.LOADING, type: '' });
+  const [addressValid, setAddressValid] = useState({ status: loadState.NONE, errorText: ' ' });
   const checkAddress = (e) => {
-    const txt = e.target.value;
+    const _address = e.target.value;
     // valid 로직
-    if (txt === '') {
+    if (_address === '') {
       setAddressInputState(constants.inputState.error);
-      setAddressValid({ status: loadState.ERROR, type: 'empty' });
-    } else if (txt === 'address') {
-      setAddressInputState(constants.inputState.error);
-      setAddressValid({ status: loadState.ERROR, type: 'duplicate' });
+      setAddressValid({ status: loadState.ERROR, errorText: constants.errorText.address.empty });
     } else {
-      setAddressInputState(constants.inputState.success);
-      setAddressValid({ status: loadState.SUCCESS, type: '' });
+      dispatch(reqCheckClubAddress({ address: _address }));
     }
   };
+  useEffect(() => {
+    if (checkClubAddressState.status === loadState.SUCCESS) {
+      setAddressValid({ status: checkClubAddressState.status, errorText: ' ' });
+      setAddressInputState(constants.inputState.success);
+    }
+    if (checkClubAddressState.status === loadState.ERROR) {
+      setAddressValid({ status: checkClubAddressState.status, errorText: checkClubAddressState.error });
+      setAddressInputState(constants.inputState.error);
+    }
+  }, [checkClubAddressState]);
 
-  const [currentCategory, setCurrentCategory] = useState('');
+  const [categoryId, setCategoryId] = useState(-1);
   const [categoryInputState, setCategoryInputState] = useState(constants.inputState.blur);
-  const [categoryValid, setCategoryValid] = useState({ status: loadState.LOADING, type: '' });
+  const [categoryValid, setCategoryValid] = useState({ status: loadState.NONE, errorText: '' });
   const checkCategory = (e) => {
-    if (!currentCategory) {
+    if (categoryId < 0) {
       setCategoryInputState(constants.inputState.error);
-      setCategoryValid({ status: loadState.ERROR, type: 'empty' });
+      setCategoryValid({ status: loadState.ERROR, errorText: constants.errorText.category.empty });
     } else {
       setCategoryInputState(constants.inputState.success);
-      setCategoryValid({ status: loadState.SUCCESS, type: '' });
+      setCategoryValid({ status: loadState.SUCCESS, errorText: '' });
     }
   };
 
   const [profileImageData, setProfileImageData] = useState({
-    file: '',
+    file: {},
     data: ''
   });
 
   const [bannerImageData, setBannerImageData] = useState({
-    file: '',
+    file: {},
     data: ''
   });
 
@@ -83,8 +118,6 @@ const Create = () => {
   const checkDescription = () => {
     if (tmpDescription === '') {
       setDescriptionInputState(constants.inputState.blur);
-    } else if (tmpDescription === 'asdf') {
-      setDescriptionInputState(constants.inputState.error);
     } else {
       setDescriptionInputState(constants.inputState.success);
     }
@@ -100,31 +133,39 @@ const Create = () => {
   const addTags = () => {
     // Todo : 태그 추가 유효성 검사 추가하기
     if (currentTagText) {
-      const tagValid = !tags.includes(currentTagText);
-      if (tagValid) {
-        setTags((prev) => [...prev, currentTagText]);
+      const tmpText = currentTagText
+        .match(/[a-zA-Z0-9가-힇ㄱ-ㅎㅏ-ㅣぁ-ゔァ-ヴー々〆〤一-龥]/g)
+        ?.join('')
+        ?.toLowerCase();
+      if (tmpText) {
+        const ret = tmpText.charAt(0).toUpperCase() + tmpText.slice(1);
+        const tagValid = !tags.includes(ret);
+        if (tagValid) {
+          setTags((prev) => [...prev, ret]);
+        }
+        setCurrentTagText('');
+      } else {
+        setCurrentTagText('');
       }
-      setCurrentTagText('');
-      // else {
-      //   setValidState((prev) => ({ ...prev, tags: loadState.ERROR }));
-      // }
     }
   };
   const onChnageCurrentTagText = useCallback((e) => {
     setCurrentTagText(e.target.value);
   }, []);
 
+  const errorImage = useMemo(() => require('images/admin/valid-error.svg').default, []);
+
   const [autoApproval, setAutoApproval] = useState(1);
 
-  const club = {
+  const _club = {
     name: tmpName,
     address: tmpAddress,
-    category: currentCategory,
-    profileImage: profileImageData,
-    bannderImage: bannerImageData,
+    category: categoryId,
+    profileImage: profileImageData.data,
+    bannerImage: bannerImageData.data,
     description: tmpDescription,
     tags: tags,
-    autoApproval: autoApproval === 1
+    isAutoApproval: autoApproval === 1
   };
 
   return (
@@ -191,6 +232,7 @@ const Create = () => {
                 state={nameInputState}
                 onChange={(e) => {
                   setTmpName(e.target.value);
+                  checkName(e);
                 }}
                 onFocus={() => {
                   setNameInputState(constants.inputState.focus);
@@ -203,9 +245,9 @@ const Create = () => {
           </div>
           {nameValid.status === loadState.ERROR && (
             <div className="form-side-wrapper">
-              <div className="flex-row flex-center">
-                <img src={require('images/admin/valid-error.svg').default} />
-                <div className="error-text">{constants.errorText.name[nameValid.type]}</div>
+              <div className="form-side-inner">
+                <img src={errorImage} />
+                <div className="error-text">{nameValid.errorText || ' '}</div>
               </div>
             </div>
           )}
@@ -224,13 +266,17 @@ const Create = () => {
                     value={tmpAddress}
                     state={addressInputState}
                     onChange={(e) => {
-                      setTmpAddress(e.target.value);
+                      if (e.target.value.match(/^[a-z0-9]*$/) != null) {
+                        checkAddress(e);
+                        setTmpAddress(e.target.value);
+                      }
                     }}
                     onFocus={() => {
                       setAddressInputState(constants.inputState.focus);
                     }}
                     onBlur={checkAddress}
                     maxLength={20}
+                    lowerCase
                   />
                 </div>
               </div>
@@ -239,9 +285,9 @@ const Create = () => {
           </div>
           {addressValid.status === loadState.ERROR && (
             <div className="form-side-wrapper">
-              <div className="flex-row flex-center">
-                <img src={require('images/admin/valid-error.svg').default} />
-                <div className="error-text">{constants.errorText.address[addressValid.type]}</div>
+              <div className="form-side-inner">
+                <img src={errorImage} />
+                <div className="error-text">{addressValid.errorText}</div>
               </div>
             </div>
           )}
@@ -256,21 +302,26 @@ const Create = () => {
               isEssential={true}
             />
             <div className="category">
-              <Select
-                selectedValue={currentCategory}
-                setSelectedValue={setCurrentCategory}
+              <JSelect
+                selectedValue={categories.filter((item) => item.id === categoryId)[0]?.name || ''}
+                setSelectedValue={(value) => {
+                  setCategoryId(categories.filter((item) => item.name === value)[0]?.id || -1);
+                }}
                 state={categoryInputState}
-                options={constants.categories.map((item) => item.text)}
+                options={categories.map((item) => item.name)}
                 placeholder={'Select category'}
                 onBlur={checkCategory}
+                onFocus={() => {
+                  setCategoryValid({ status: loadState.NONE, errorText: '' });
+                }}
               />
             </div>
           </div>
           {categoryValid.status === loadState.ERROR && (
             <div className="form-side-wrapper">
-              <div className="flex-row flex-center">
-                <img src={require('images/admin/valid-error.svg').default} />
-                <div className="error-text">{constants.errorText.category[categoryValid.type]}</div>
+              <div className="form-side-inner">
+                <img src={errorImage} />
+                <div className="error-text">{categoryValid.errorText}</div>
               </div>
             </div>
           )}
@@ -287,6 +338,7 @@ const Create = () => {
                 tabIndex={0}
                 type={'image'}
                 multiple={true}
+                maxSize={{ value: 10, unit: 'mb' }}
               >
                 <div className="image-picker">
                   {profileImageData.data ? (
@@ -305,7 +357,7 @@ const Create = () => {
               </FilePicker>
               <div
                 style={{ marginTop: '3px', fontWeight: 500, fontSize: '16px', lineHeight: '22px', color: '#808080' }}
-              >{`${profileImageData.file.size || '0'}${constants.profileImages.extraText}`}</div>
+              >{`${fileSizeFM(profileImageData.file.size) || '0'}${constants.profileImages.extraText}`}</div>
             </div>
           </div>
         </div>
@@ -321,6 +373,7 @@ const Create = () => {
                 tabIndex={0}
                 type={'image'}
                 multiple={true}
+                maxSize={{ value: 20, unit: 'mb' }}
               >
                 <div className="image-picker ">
                   {bannerImageData.data ? (
@@ -339,7 +392,7 @@ const Create = () => {
               </FilePicker>
               <div
                 style={{ marginTop: '3px', fontWeight: 500, fontSize: '16px', lineHeight: '22px', color: '#808080' }}
-              >{`${bannerImageData.file.size || '0'}${constants.bannerImage.extraText}`}</div>
+              >{`${fileSizeFM(bannerImageData.file.size) || '0'}${constants.bannerImage.extraText}`}</div>
             </div>
           </div>
         </div>
@@ -431,7 +484,7 @@ const Create = () => {
           <JButton
             label={'Create'}
             onClick={() => {
-              dispatch(openCreateClubPopup({ type: 'create', text: constants.popupText.create, club }));
+              dispatch(openCreateClubPopup({ type: 'create', text: constants.popupText.create, club: _club }));
             }}
             tabIndex={0}
             disabled={

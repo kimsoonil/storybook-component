@@ -1,7 +1,15 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import 'assets/scss/component/select.scss';
 
-const Select = ({ selectedValue, setSelectedValue, state, options = [], placeholder = '', onBlur = () => {} }) => {
+const Select = ({
+  selectedValue,
+  setSelectedValue,
+  state,
+  options = [],
+  placeholder = '',
+  onFocus = () => {},
+  onBlur = () => {}
+}) => {
   const selectRef = useRef();
   const selectScrollRef = useRef();
 
@@ -25,8 +33,9 @@ const Select = ({ selectedValue, setSelectedValue, state, options = [], placehol
   const onClickSelect = () => {
     setExtended((prev) => !prev);
   };
-  const onFocus = () => {
+  const _onFocus = () => {
     setFocused(true);
+    onFocus();
   };
   const _onBlur = () => {
     onClose({ applyed: false });
@@ -109,10 +118,11 @@ const Select = ({ selectedValue, setSelectedValue, state, options = [], placehol
       className={[
         'select-wrapper',
         ...(isExtended ? ['select-wrapper-extended'] : []),
-        ...(!isExtended && selectedValue ? ['select-wrapper-success'] : []),
-        ...(state === 'error' ? ['select-wrapper-error'] : [])
+        // ...(!isExtended && selectedValue ? ['select-wrapper-success'] : []),
+        ...(state === 'error' ? ['select-wrapper-error'] : []),
+        ...(state === 'success' ? ['select-wrapper-success'] : [])
       ].join(' ')}
-      onFocus={onFocus}
+      onFocus={_onFocus}
       onKeyDown={onKeyDown}
       onBlur={_onBlur}
     >
@@ -122,10 +132,10 @@ const Select = ({ selectedValue, setSelectedValue, state, options = [], placehol
           <img src={require('images/admin/ic-select-arrow-close-on.svg').default} />
         ) : !selectedValue ? (
           <img src={require('images/admin/ic-select-arrow-open.svg').default} />
-        ) : isFocused ? (
-          <img src={require('images/admin/ic-select-arrow-open-on.svg').default} />
-        ) : (
+        ) : !isFocused && state === 'success' ? (
           <img src={require('images/admin/ic-select-arrow-open-on-success.svg').default} />
+        ) : (
+          <img src={require('images/admin/ic-select-arrow-open-on.svg').default} />
         )}
       </div>
 

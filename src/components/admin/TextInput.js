@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import 'assets/scss/component/text-input.scss';
 
-export function TextInput({ value, onChange, disabled, readOnly, onFocus, onBlur, state, ...props }) {
+export function TextInput({ value, onChange, disabled, readOnly, onFocus, onBlur, state, lowerCase, ...props }) {
   // const className = `jg-input ${disabled ? 'disabled' : ''} ${readOnly ? 'read-only' : ''}`;
   // console.log(className);
 

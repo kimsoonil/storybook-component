@@ -7,14 +7,13 @@ const clubSlice = createSlice({
     clubs: {},
     clubId: {},
     members: {},
-    clubBoards: {},
+    boardGroups: {},
     error: ''
   },
   reducers: {
     // TODO getClubs
-    getClubInit: ({ payload }, state) => {
+    getClubInit: (state) => {
       state.isLoading = true;
-      return payload;
     },
     getClubSuccess: (state, { payload }) => {
       state.isLoading = false;
@@ -70,24 +69,38 @@ const clubSlice = createSlice({
       state.members = payload;
     },
 
-    // TODO getClubBoards
-    getClubBoardsInit: ({ payload }, state) => {
+    // TODO getClubBoardGroups
+    getClubBoardGroupsInit: ({ payload }, state) => {
       state.isLoading = true;
       return payload;
     },
-    getClubBoardsSuccess: (state, { payload }) => {
+    getClubBoardGroupsSuccess: (state, { payload }) => {
       state.isLoading = false;
-      state.clubBoards = payload;
+      state.boardGroups = payload;
     },
 
-    // TODO postShare
+    postClubBoardGroupInit: (state) => {
+      state.isLoading = true;
+    },
+    postClubBoardGroupSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      const prevBoardGroups = JSON.parse(JSON.stringify(state.boardGroups.data));
+      state.boardGroups = { ...payload, data: [...prevBoardGroups, ...[payload.data]] };
+    },
+
+    patchIdClubBannerImageInit: (state) => {
+      state.isLoading = true;
+    },
+    patchIdClubProfileImageInit: (state) => {
+      state.isLoading = true;
+    },
+
     postClubShareInit: ({ payload }, state) => {
       state.isLoading = true;
       return payload;
     },
     postClubShareSuccess: (state, { payload }) => {
       state.isLoading = false;
-      state.clubBoards = payload;
     },
 
     clubFailure: (state, error) => {
@@ -101,19 +114,31 @@ const clubSlice = createSlice({
 export const {
   getClubInit,
   getClubSuccess,
+
   postClubInit,
   postClubSuccess,
+
   getIdClubInit,
   getIdClubSuccess,
   getClubMeInit,
   getClubMeSuccess,
   postClubPinInit,
   postClubPinSuccess,
+
   getClubMembersInit,
   getClubMembersSuccess,
-  getClubBoardsInit,
-  getClubBoardsSuccess,
+
+  getClubBoardGroupsInit,
+  getClubBoardGroupsSuccess,
+
+  postClubBoardGroupInit,
+  postClubBoardGroupSuccess,
+
+  patchIdClubBannerImageInit,
+  patchIdClubProfileImageInit,
+
   postClubShareInit,
+  postClubShareSuccess,
   clubFailure
 } = clubSlice.actions;
 

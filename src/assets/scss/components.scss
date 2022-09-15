@@ -528,19 +528,7 @@
   border-radius: 8px;
   margin-bottom: 36px;
 }
-.admin {
-  position: absolute;
-  right: 16px;
-  top: 15px;
-  cursor: pointer;
-  font-family: 'Poppins-Regular';
-  font-size: 16px;
-  height: 24px;
-  color: #444444;
-  img {
-    margin-right: 9px;
-  }
-}
+
 .profile {
   background-color: $gray-000;
   &-img {
@@ -623,6 +611,19 @@
     background: rgba(135, 1, 254, 0.1);
     border-radius: 4px;
     color: #8701fe;
+  }
+  .admin-nav {
+    position: absolute;
+    right: 16px;
+    top: 15px;
+    cursor: pointer;
+    font-family: 'Poppins-Regular';
+    font-size: 16px;
+    height: 24px;
+    color: #444444;
+    img {
+      margin-right: 9px;
+    }
   }
 }
 

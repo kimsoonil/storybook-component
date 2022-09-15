@@ -1,6 +1,7 @@
 import { takeEvery, all, put, fork, call } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actionTypes from 'redux/store/clubSlice';
+import * as adminTypes from 'redux/store/adminSlice';
 import { getToken } from 'utils/Cookies/Cookies';
 
 const config = getToken();
@@ -39,7 +40,7 @@ function* getIdClub({ payload }) {
     const response = yield call(() => axios.get(`${process.env.REACT_APP_API_URL}/api/v1/club/${payload}`, config));
     if (response.status === 200) {
       yield put(actionTypes.getIdClubSuccess({ ...response.data }));
-      console.log(response.data);
+      // console.log(response);
     }
   } catch (error) {
     yield put(actionTypes.clubFailure(error));
@@ -95,14 +96,14 @@ function* postClubPin({ payload }) {
 }
 
 // TODO: club boards
-function* getClubBoards({ payload }) {
+function* getClubBoardGroups({ payload }) {
   try {
     const response = yield call(() =>
       axios.get(`${process.env.REACT_APP_API_URL}/api/v1/club/${payload}/board-groups`, config)
     );
     if (response.status === 200) {
-      yield put(actionTypes.getClubBoardsSuccess({ ...response.data }));
-      console.log(response.data);
+      yield put(actionTypes.getClubBoardGroupsSuccess({ ...response.data }));
+      console.log('clubSaga getClubBoardGroups success data : ', response?.data?.data.data);
     }
   } catch (error) {
     yield put(actionTypes.clubFailure(error));
@@ -123,6 +124,57 @@ function* postShare({ payload }) {
   }
 }
 
+function* postClubBoardGroup({ payload }) {
+  try {
+    const response = yield call(() =>
+      axios.post(`${process.env.REACT_APP_API_URL}/api/v1/club/${payload.id}/board-group`, payload.data, config)
+    );
+    if (response.status === 200 || response.status === 201) {
+      yield put(actionTypes.postClubBoardGroupSuccess({ ...response.data }));
+      // yield put(actionTypes.getClubBoardGroupsInit({ id: payload.id }));
+      yield put(
+        adminTypes.setAdminBoards((prev) => ({ ...prev, selected: { id: response?.data?.data?.id, type: 0 } }))
+      );
+      console.log('clubSaga postClubBoardGroup success data : ', response?.data?.data);
+    }
+  } catch (error) {
+    yield put(actionTypes.clubFailure(error));
+    console.log('postClubBoardGroup : ', error);
+  }
+}
+
+function* patchIdClubBannerImage({ payload }) {
+  try {
+    const response = yield call(() =>
+      axios.patch(`${process.env.REACT_APP_API_URL}/api/v1/club/${payload.id}/banner-image`, payload.data, config)
+    );
+    if (response.status === 200 || response.status === 201) {
+      console.log('clubSaga patchIdClubBannerImage response : ', response);
+      yield put(actionTypes.getIdClubInit(payload.id));
+      // console.log('clubSaga postClubBoardGroup success data : ', response?.data?.data);
+    }
+  } catch (error) {
+    yield put(actionTypes.clubFailure(error));
+    console.log('postClubBoardGroup : ', error);
+  }
+}
+
+function* patchIdClubProfileImage({ payload }) {
+  try {
+    const response = yield call(() =>
+      axios.patch(`${process.env.REACT_APP_API_URL}/api/v1/club/${payload.id}/profile-image`, payload.data, config)
+    );
+    if (response.status === 200 || response.status === 201) {
+      console.log('clubSaga patchIdClubProfileImage response : ', response);
+      yield put(actionTypes.getIdClubInit(payload.id));
+      // console.log('clubSaga postClubBoardGroup success data : ', response?.data?.data);
+    }
+  } catch (error) {
+    yield put(actionTypes.clubFailure(error));
+    console.log('postClubBoardGroup : ', error);
+  }
+}
+
 function* clubSaga() {
   yield all([
     takeEvery(actionTypes.getClubInit, getClubs),
@@ -131,7 +183,10 @@ function* clubSaga() {
     takeEvery(actionTypes.getClubMeInit, getClubMe),
     takeEvery(actionTypes.postClubPinInit, postClubPin),
     takeEvery(actionTypes.getClubMembersInit, getClubMembers),
-    takeEvery(actionTypes.getClubBoardsInit, getClubBoards),
+    takeEvery(actionTypes.getClubBoardGroupsInit, getClubBoardGroups),
+    takeEvery(actionTypes.postClubBoardGroupInit, postClubBoardGroup),
+    takeEvery(actionTypes.patchIdClubBannerImageInit, patchIdClubBannerImage),
+    takeEvery(actionTypes.patchIdClubProfileImageInit, patchIdClubProfileImage),
     takeEvery(actionTypes.postClubShareInit, postShare)
   ]);
 }

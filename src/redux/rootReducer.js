@@ -4,12 +4,14 @@ import { combineReducers } from 'redux';
 // import SignUpReducer from 'redux/store/signUpSlice';
 // import MovieInfoReducer from 'redux/store/movieSlice';
 // import CheckEmailReducer from 'redux/store/checkEmailSlice';
-import ClubAdnimReducer from 'redux/store/club/clubSlice';
 import PopupReducer from 'redux/store/popupSlice';
 import userReducer from 'redux/store/userSlice';
 import clubReducer from 'redux/store/clubSlice';
 import postReducer from 'redux/store/postsSlice';
-import ClubEditingReducer from './store/club/clubEditingSlice';
+import BoardGroupReducer from './store/boardGroupSlice';
+import BoardReducer from './store/boardSlice';
+import AdminReducer from './store/adminSlice';
+import rootAdminReducer from './store/admin/rootAdminReducer';
 // import history from 'utils/history';
 
 const rootReducer = () =>
@@ -19,12 +21,14 @@ const rootReducer = () =>
     // movieInfo: MovieInfoReducer,
     // signUp: SignUpReducer,
     // checkEmail: CheckEmailReducer
-    clubAdnim: ClubAdnimReducer,
-    clubEditing: ClubEditingReducer,
     popup: PopupReducer,
     user: userReducer,
     club: clubReducer,
-    post: postReducer
+    post: postReducer,
+    boardGroup: BoardGroupReducer,
+    board: BoardReducer,
+    admin: AdminReducer,
+    ...rootAdminReducer
   });
 
 export default rootReducer;

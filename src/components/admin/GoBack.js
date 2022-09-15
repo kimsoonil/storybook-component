@@ -8,7 +8,7 @@ const GoBack = ({ label, ...props }) => {
   };
 
   return (
-    <div>
+    <div style={{ zIndex: 10 }}>
       <button
         style={{
           display: 'flex',
@@ -16,8 +16,7 @@ const GoBack = ({ label, ...props }) => {
           color: 'white',
           fontSize: '16px',
           fontFamily: 'Poppins',
-          padding: '10px',
-          zIndex: 30
+          padding: '10px'
         }}
         onClick={onClick}
         {...props}

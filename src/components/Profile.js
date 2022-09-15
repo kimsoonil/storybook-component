@@ -24,7 +24,7 @@ function Profile(props) {
         </div>
       ) : props.type === 'login' ? (
         <div className="side-box profile relative">
-          <div className="admin flex-center" onClick={() => navigate('/manage')}>
+          <div className="admin-nav flex-center" onClick={() => navigate('/manage')}>
             <img src={require(`images/home/admin.png`)} alt="" /> Admin
           </div>
           <div className="profile-img flex-center">
@@ -47,12 +47,12 @@ function Profile(props) {
             </div>
           </div>
           <div className="m-1">
-            <Button primary="primary" label="Create Club" size="m" width={265} />
+            <Button primary="primary" label="Create Club" size="m" width={265} onClick={() => navigate('/create')} />
           </div>
         </div>
       ) : props.userData.club ? (
         <div className="side-box profile relative">
-          <div className="admin flex-center" onClick={() => navigate('/manage')}>
+          <div className="admin-nav flex-center" onClick={() => navigate('/manage')}>
             <img src={require(`images/home/admin.png`)} alt="" /> Admin
           </div>
           <div className="profile-img flex-center">

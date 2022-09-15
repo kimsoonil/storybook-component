@@ -1,8 +1,13 @@
 import React, { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import 'assets/scss/admin/dashboard.scss';
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  // const _club = useSelector((state) => state.createClub.club);
+  // const categ = useSelector((state) => state.categories.list);
+
   const statisticsList = useMemo(
     () => [
       { title: 'Visits', total: 11, today: 88 },
