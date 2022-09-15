@@ -2,43 +2,34 @@
 
 import React, { useState } from 'react';
 import { Header } from 'components/Header';
+import { useNavigate, Outlet } from 'react-router-dom';
 
 import 'assets/scss/search.scss';
 import SearchClub from './SearchClub';
 import SearchPosts from './SearchPosts';
 
 function Search() {
-  const [searchTab, setSearchTab] = useState('All');
+  const searchTab = window.location.pathname.split('/');
+  const navigate = useNavigate();
   const [searchText, setSearchText] = useState('');
+  const searchTabArr = ['All', 'clubs', 'posts'];
+
   return (
     <div id="root">
       <Header />
       <div className="search ">
         <div className="search-tabs">
-          <div
-            className={'search-tabs-item ' + (searchTab === 'All' && 'active')}
-            onClick={() => {
-              setSearchTab('All');
-            }}
-          >
-            All
-          </div>
-          <div
-            className={'search-tabs-item ' + (searchTab === 'Clubs' && 'active')}
-            onClick={() => {
-              setSearchTab('Clubs');
-            }}
-          >
-            Clubs
-          </div>
-          <div
-            className={'search-tabs-item ' + (searchTab === 'Posts' && 'active')}
-            onClick={() => {
-              setSearchTab('Posts');
-            }}
-          >
-            Posts
-          </div>
+          {searchTabArr.map((item, index) => {
+            return (
+              <div
+                className={'search-tabs-item ' + (searchTab[2] === item.toLocaleLowerCase() && 'active')}
+                key={index}
+                onClick={() => navigate(item)}
+              >
+                {item}
+              </div>
+            );
+          })}
         </div>
         <div className="search-input relative">
           <input

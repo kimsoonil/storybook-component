@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getClubMembersInit } from 'redux/store/clubSlice';
 import { useParams } from 'react-router';
-
+import { useOutletContext } from 'react-router-dom';
 import { postsList } from '../Home/homeDate';
 import { Loader } from 'components/Loader';
 import Profile from 'components/Profile';
@@ -23,6 +23,7 @@ function Basic(props) {
   const dispatch = useDispatch();
   const clubState = useSelector((state) => state.club);
   const { id } = useParams();
+  const clubId = useOutletContext();
 
   useEffect(() => {
     dispatch(getClubMembersInit(id));
@@ -81,14 +82,14 @@ function Basic(props) {
         </div>
       </div>
       <div className="item">
-        <Profile />
+        <Profile userData={clubId.data.profile} type="club" />
 
         <div className="member">
           <div className="flex-between">
             <div className="member-title">Member</div>
             <div className="member-see">See All</div>
           </div>
-          {members.message !== 'ok' ? (
+          {/* {members.message !== 'ok' ? (
             <div className="root-center">
               <Loader />
             </div>
@@ -100,12 +101,12 @@ function Basic(props) {
                     <div className="member-list-img">
                       <img src={members.user.profileImageUrl} alt="" />
                     </div>
-                    <div className="member-list-name">{members.user.username}</div>
+                    <div className="member-list-name">{members.user.user}</div>
                   </div>
                 );
               })}
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

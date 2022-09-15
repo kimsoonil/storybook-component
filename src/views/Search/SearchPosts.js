@@ -18,8 +18,6 @@ function SearchPosts() {
   }, []);
   const { isLoading, posts } = postState;
 
-  console.log(postState);
-
   if (posts.message !== 'ok')
     return (
       <div className="flex-center">
@@ -45,7 +43,7 @@ function SearchPosts() {
           return (
             <div className="search-post-list-item relative" key={index}>
               <div className="search-post-list-item-container">
-                <div className="search-post-list-item-nick">{postsItem.user.username}</div>
+                <div className="search-post-list-item-nick">{postsItem.user.user}</div>
                 <div className="search-post-list-item-title">{postsItem.title}</div>
                 <div className="search-post-list-item-content"></div>
                 <div className="search-post-list-item-info">

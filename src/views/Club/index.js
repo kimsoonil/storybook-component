@@ -2,16 +2,16 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIdClubInit, getClubBoardsInit, postClubShareInit } from 'redux/store/clubSlice';
+import { getIdClubInit, postClubShareInit } from 'redux/store/clubSlice';
 import { useParams } from 'react-router';
 import { useNavigate, Outlet } from 'react-router-dom';
-import { RWebShare } from 'react-web-share';
-
 import { Header } from 'components/Header';
 import { Loader } from 'components/Loader';
 
 import 'assets/scss/club.scss';
 import 'assets/scss/reset.scss';
+import SharePopup from '../../components/SharePopup';
+import { Button } from 'components/Button';
 
 function Club() {
   const dispatch = useDispatch();
@@ -20,16 +20,21 @@ function Club() {
   const { id } = useParams();
   const boardGrop = window.location.pathname.split('/');
   const [bookmark, setBookmark] = useState(false);
+  const [openPopup, setOpenPopup] = useState(false);
   useEffect(() => {
     dispatch(getIdClubInit(id));
-    dispatch(getClubBoardsInit(id));
   }, [dispatch]);
 
   const seachFunc = () => {
-    navigate('/search');
+    navigate('/search/all');
   };
-  const { clubId, clubBoards } = clubState;
-  console.log(clubBoards);
+  const { clubId } = clubState;
+
+  useEffect(() => {
+    if (clubId.data) {
+      setBookmark(clubId.data.pin.isActive);
+    }
+  }, [clubId]);
 
   if (clubId.message !== 'ok')
     return (
@@ -54,7 +59,7 @@ function Club() {
               {clubId.data.name}
               <div className="manager">
                 <div className="manager-tag flex-center">manager</div>
-                {clubId.data.user.username}
+                {clubId.data.master.username}
               </div>
             </div>
             <div className="club-content-explan">{clubId.data.description}</div>
@@ -74,17 +79,8 @@ function Club() {
                 </div>
               </div>
               <div className="club-icon-btn">
-                <div className="item flex-center">
-                  <RWebShare
-                    data={{
-                      title: '슈퍼클럽',
-                      text: 'Super club',
-                      url: 'https://super-club.netlify.app/'
-                    }}
-                    onClick={() => console.info('share successful!')}
-                  >
-                    <img src={require(`images/club/rank.png`)} alt="" />
-                  </RWebShare>
+                <div className="item flex-center" onClick={() => setOpenPopup(!openPopup)}>
+                  <img src={require(`images/club/rank.png`)} alt="" />
                 </div>
                 <div className="item flex-center" onClick={() => setBookmark(!bookmark)}>
                   <img
@@ -92,33 +88,31 @@ function Club() {
                     alt=""
                   />
                 </div>
+                {clubId.data.profile ? '' : <Button label={'Join'} size="m" />}
               </div>
             </div>
           </div>
         </div>
         <hr className="club-hr" />
 
-        {clubBoards.message !== 'ok' ? (
-          <div className="root-center">
-            <Loader />
-          </div>
-        ) : (
-          <div className="club-tap">
-            {clubBoards.data.map((item, index) => {
-              return (
-                <div
-                  className={'club-tap-item ' + (boardGrop[3] === item.name ? 'active' : '')}
-                  onClick={() => navigate(item.name)}
-                  key={index}
-                >
-                  {item.name}
-                </div>
-              );
-            })}
-          </div>
-        )}
-        <Outlet />
+        <div className="club-tap">
+          {clubId.data.boardGroups.map((item, index) => {
+            return (
+              <div
+                className={'club-tap-item ' + (boardGrop[3] === item.name ? 'active' : '')}
+                onClick={() => navigate(item.name)}
+                key={index}
+              >
+                {item.name}
+              </div>
+            );
+          })}
+        </div>
+
+        <Outlet context={clubId} />
       </div>
+
+      <SharePopup open={openPopup} setOpen={setOpenPopup} />
     </div>
   );
 }

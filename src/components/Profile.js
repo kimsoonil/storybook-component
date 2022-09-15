@@ -1,78 +1,102 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getUserInit } from 'redux/store/userSlice';
-import { getClubMeInit } from 'redux/store/clubSlice';
+/* eslint-disable */
 
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from './Button.js';
-import { Loader } from './Loader';
+
 import 'assets/scss/components.scss';
+import TokenLogin from './TokenLogin';
 
 function Profile(props) {
-  const dispatch = useDispatch();
-  const userState = useSelector((state) => state.user);
-  const clubtate = useSelector((state) => state.club);
-  const [userData, setUserData] = useState();
-
-  useEffect(() => {
-    if (props.club !== undefined) {
-      dispatch(getClubMeInit(props.club));
-    } else {
-      dispatch(getUserInit());
-    }
-  }, [dispatch]);
-
-  const { user, error } = userState;
-  const { club } = clubtate;
-
-  useEffect(() => {
-    if (props.club !== undefined) {
-      setUserData(club);
-    } else {
-      setUserData(user);
-    }
-  });
-
-  if (userData !== '' || userData.message !== 'ok')
-    return (
-      <div className="side-box profile">
-        <div className="profile-img flex-center">
-          <div className="profile-imgBox" />
-          <div className="profile-name">Enter the club!</div>
-        </div>
-
-        <div className="m-1">
-          <Button primary="primary" label="Login" size="m" width={265} />
-        </div>
-      </div>
-    );
-
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   return (
-    <div className="side-box profile">
-      <div className="profile-img flex-center">
-        <img src={user.data.profileImage} alt="" />
-        <div className="profile-name">{user.data.username}</div>
-      </div>
-      <div className="flex-center">
-        <div className="profile-info flex-center">
-          <div className="profile-info-title">{user.data.joinCount}</div>
-          <div className="profile-info-content">Join</div>
+    <>
+      {props.type === 'logout' ? (
+        <div className="side-box profile ">
+          <div className="profile-img flex-center">
+            <div className="profile-imgBox" />
+            <div className="profile-name">Enter the club!</div>
+          </div>
+          <div className="m-1">
+            <Button primary="primary" label="Login" size="m" width={265} onClick={() => setOpen(!open)} />
+          </div>
         </div>
-        <div className="profile-info flex-center">
-          <div className="profile-info-title">{user.data.postCount}</div>
-          <div className="profile-info-content">Posts</div>
+      ) : props.type === 'login' ? (
+        <div className="side-box profile relative">
+          <div className="admin flex-center" onClick={() => navigate('/manage')}>
+            <img src={require(`images/home/admin.png`)} alt="" /> Admin
+          </div>
+          <div className="profile-img flex-center">
+            <img src={props.userData.profileImage} alt="" />
+            <div className="profile-name">{props.userData.user}</div>
+          </div>
+
+          <div className="flex-center">
+            <div className="profile-info flex-center">
+              <div className="profile-info-title">{props.userData.joinCount}</div>
+              <div className="profile-info-content">Join</div>
+            </div>
+            <div className="profile-info flex-center">
+              <div className="profile-info-title">{props.userData.postCount}</div>
+              <div className="profile-info-content">Posts</div>
+            </div>
+            <div className="profile-info flex-center">
+              <div className="profile-info-title">{props.userData.commentCount}</div>
+              <div className="profile-info-content">Comments</div>
+            </div>
+          </div>
+          <div className="m-1">
+            <Button primary="primary" label="Create Club" size="m" width={265} />
+          </div>
         </div>
-        <div className="profile-info flex-center">
-          <div className="profile-info-title">{user.data.commentCount}</div>
-          <div className="profile-info-content">Comments</div>
+      ) : props.userData.club ? (
+        <div className="side-box profile relative">
+          <div className="admin flex-center" onClick={() => navigate('/manage')}>
+            <img src={require(`images/home/admin.png`)} alt="" /> Admin
+          </div>
+          <div className="profile-img flex-center">
+            <img src={props.userData.user.profileImage} alt="" />
+            <div className="profile-name">{props.userData.user.username}</div>
+            <div className="flex-center">
+              <div className="profile-staff flex-center">{props.userData.staff}</div>
+              <div className="profile-level">LV {props.userData.level}</div>
+            </div>
+          </div>
+          <div className="flex-center">
+            <div className="profile-info flex-center">
+              <div className="profile-info-title">{props.userData.visitCount}</div>
+              <div className="profile-info-content">Visit</div>
+            </div>
+
+            <div className="profile-info flex-center">
+              <div className="profile-info-title">{props.userData.postCount}</div>
+              <div className="profile-info-content">Posts</div>
+            </div>
+
+            <div className="profile-info flex-center">
+              <div className="profile-info-title">{props.userData.commentCount}</div>
+              <div className="profile-info-content">Comments</div>
+            </div>
+          </div>
+
+          <div className="m-1">
+            <Button primary="primary" label="Writing" size="m" width={265} />
+          </div>
         </div>
-      </div>
-      <div className="m-1">
-        <Button primary="primary" label="Create Club" size="m" width={265} />
-      </div>
-      <div className="m-1">
-        <Button primary="primary" label="Club Management" size="m" style={{ opacity: 0.5, width: '265px' }} />
-      </div>
-    </div>
+      ) : (
+        <div className="side-box profile relative">
+          <div className="profile-img flex-center">
+            <img src={props.userData.profileImage} alt="" />
+            <div className="profile-name">{props.userData.user}</div>
+          </div>
+          <div className="m-1">
+            <Button primary="primary" label="Join" size="m" width={265} />
+          </div>
+        </div>
+      )}
+      <TokenLogin open={open} setOpen={setOpen} />
+    </>
   );
 }
 

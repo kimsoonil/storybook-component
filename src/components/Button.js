@@ -6,7 +6,7 @@ import '../assets/scss/components.scss';
 /**
  * Primary UI component for user interaction
  */
-export function Button({ primary, size, line, label, width, disabled, ...props }) {
+export function Button({ primary, size, line, label, width, disabled, onClick, ...props }) {
   const variant = line ? 'line' : 'contained';
   return (
     <button
@@ -15,6 +15,7 @@ export function Button({ primary, size, line, label, width, disabled, ...props }
       style={{ width: `${width}px` }}
       className={['button-component', `button-size-${size}`, `button-${primary}`, `button-${variant}`].join(' ')}
       {...props}
+      onClick={() => onClick()}
     >
       {label}
     </button>

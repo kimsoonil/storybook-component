@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { getUserInit } from 'redux/store/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 import { Header } from 'components/Header';
@@ -17,16 +17,20 @@ function Home() {
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const clubState = useSelector((state) => state.club);
 
+  const userState = useSelector((state) => state.user);
   const seachFunc = () => {
-    navigate('/search');
+    navigate('/search/all');
   };
+  useEffect(() => {
+    dispatch(getUserInit());
+  }, [dispatch]);
+  const { user, error } = userState;
 
   return (
     <div id="root">
       <Header seachFunc={seachFunc} user={{}} />
-      <TempLinkCompoenet />
+
       <div className="slideView">
         <img src={require('images/home/slide.png')} alt="" />
       </div>
@@ -53,7 +57,7 @@ function Home() {
                   return (
                     <div className="club-list" key={clubIndex}>
                       <div className="list-img">
-                        <img src={require(`../../images/home/${clubItem.img}`)} alt="" />
+                        <img src={require(`images/home/${clubItem.img}`)} alt="" />
                       </div>
                       <div className="list-item">
                         <div className="list-item-title">{clubItem.title}</div>
@@ -111,7 +115,7 @@ function Home() {
             </div>
           </div>
           <div className="item">
-            <Profile />
+            {user.message === 'ok' ? <Profile userData={user.data} type={'login'} /> : <Profile type={'logout'} />}
             <div className="chatting">
               <img src={require(`../../images/home/chatting.png`)} alt="" />
             </div>

@@ -37,13 +37,16 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/create" element={<Create />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/club/:id" element={<Club />}>
-              <Route path="Home" element={<ClubHome />} />
-              <Route path="Basic" element={<Basic />} />
-              <Route path="Board" element={<Board />} />
+            <Route path="/search" element={<Search />}>
+              <Route path="all" element={<Search />} />
+              <Route path="clubs" element={<Search />} />
+              <Route path="posts" element={<Search />} />
             </Route>
-            <Route path="*" element={<Notfound />} />
+            <Route path="/club/:id" element={<Club />}>
+              <Route path="home" element={<ClubHome />} />
+              <Route path="basic" element={<Basic />} />
+              <Route path="board" element={<Board />} />
+            </Route>
             <Route path="/manage" element={<Admin visibleMenu={true} />}>
               <Route path="" element={<Navigate replace to={'dashboard'} />} />
               <Route path="dashboard" element={<Dashboard />} />
@@ -56,6 +59,7 @@ function App() {
               <Route path="design" element={<Design />} />
               <Route path="operation" element={<Operation />} />
             </Route>
+            <Route path="*" element={<Notfound />} />
           </Routes>
         </BrowserRouter>
       </Provider>
