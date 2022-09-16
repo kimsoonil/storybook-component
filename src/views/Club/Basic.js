@@ -2,20 +2,20 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getClubMembersInit } from 'redux/store/clubSlice';
+import { getClubMembersInit } from 'redux/idistStore/clubSlice';
 import { useParams } from 'react-router';
 import { useOutletContext } from 'react-router-dom';
 import { postsList } from '../Home/homeDate';
-import { Loader } from 'components/Loader';
-import Profile from 'components/Profile';
-import BorardAlbum from 'components/BorardAlbum';
-import BorardList from 'components/BorardList';
-import BorardCard from 'components/BorardCard';
+import { Loader } from 'components/idist/Loader';
+import Profile from 'components/idist/Profile';
+import BorardAlbum from 'components/idist/BorardAlbum';
+import BorardList from 'components/idist/BorardList';
+import BorardCard from 'components/idist/BorardCard';
 
 import 'assets/scss/club.scss';
 import 'assets/scss/reset.scss';
-import { Fliter } from 'components/Fliter';
-import ToggleBtn from 'components/ToggleBtn';
+import { Fliter } from 'components/idist/Fliter';
+import ToggleBtn from 'components/idist/ToggleBtn';
 
 function Basic(props) {
   const [boardState, setBoardState] = useState('album');

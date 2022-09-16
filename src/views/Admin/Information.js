@@ -1,4 +1,4 @@
-import { Header } from 'components/Header';
+import { Header } from 'components/idist/Header';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
@@ -6,20 +6,20 @@ import { useOutletContext } from 'react-router-dom';
 import 'assets/scss/create.scss';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { TextInput } from 'components/admin/TextInput';
-import JSelect from 'components/admin/JSelect';
-import RadioButton from 'components/admin/RadioButton';
-import FilePicker from 'components/admin/FilePicker';
-import Tag from 'components/admin/Tag';
-import JButton from 'components/admin/JButton';
-import { openCreateClubPopup } from 'redux/store/popupSlice';
-import { CreateClubPopup } from 'components/popup/CreateClubPopup';
-import { admin as constants, loadState } from 'constants';
-import { getIdClubInit } from 'redux/store/clubSlice';
+import { TextInput } from 'components/idist/admin/TextInput';
+import JSelect from 'components/idist/admin/JSelect';
+import RadioButton from 'components/idist/admin/RadioButton';
+import FilePicker from 'components/idist/admin/FilePicker';
+import Tag from 'components/idist/admin/Tag';
+import JButton from 'components/idist/admin/JButton';
+import { openCreateClubPopup } from 'redux/idistStore/popupSlice';
+import { CreateClubPopup } from 'components/idist/popup/CreateClubPopup';
+import { AVD, IVD, loadState } from 'views/Admin';
+import { getIdClubInit } from 'redux/idistStore/clubSlice';
 import { numFM, fileSizeFM } from 'utils/formatter';
-import { categoriesInit } from 'redux/store/admin/categoriesSlice';
-import { reqCheckClubName } from 'redux/store/admin/checkClubNameSlice';
-import { reqCheckClubAddress } from 'redux/store/admin/checkClubAddressSlice';
+import { categoriesInit } from 'redux/idistStore/admin/categoriesSlice';
+import { reqCheckClubName } from 'redux/idistStore/admin/checkClubNameSlice';
+import { reqCheckClubAddress } from 'redux/idistStore/admin/checkClubAddressSlice';
 
 const Information = () => {
   const navigate = useNavigate();
@@ -48,14 +48,14 @@ const Information = () => {
 
   const checkClubNameState = useSelector((state) => state.checkClubName);
   const [tmpName, setTmpName] = useState(_club?.name || '');
-  const [nameInputState, setNameInputState] = useState(constants.inputState.success);
+  const [nameInputState, setNameInputState] = useState(IVD.success);
   const [nameValid, setNameValid] = useState({ status: loadState.SUCCESS, errorText: ' ' });
 
   const checkName = (e) => {
     const _name = e.target.value;
     if (_name === '') {
-      setNameInputState(constants.inputState.error);
-      setNameValid({ status: loadState.ERROR, errorText: constants.errorText.name.empty });
+      setNameInputState(IVD.error);
+      setNameValid({ status: loadState.ERROR, errorText: AVD.errorText.name.empty });
     } else {
       dispatch(reqCheckClubName({ id: _club?.id, name: _name }));
     }
@@ -63,24 +63,24 @@ const Information = () => {
   useEffect(() => {
     if (checkClubNameState.status === loadState.SUCCESS) {
       setNameValid({ status: checkClubNameState.status, errorText: ' ' });
-      setNameInputState(constants.inputState.success);
+      setNameInputState(IVD.success);
     }
     if (checkClubNameState.status === loadState.ERROR) {
       setNameValid({ status: checkClubNameState.status, errorText: checkClubNameState.error });
-      setNameInputState(constants.inputState.error);
+      setNameInputState(IVD.error);
     }
   }, [checkClubNameState]);
 
   const checkClubAddressState = useSelector((state) => state.checkClubAddress);
   const [tmpAddress, setTmpAddress] = useState(_club?.address || '');
-  const [addressInputState, setAddressInputState] = useState(constants.inputState.success);
+  const [addressInputState, setAddressInputState] = useState(IVD.success);
   const [addressValid, setAddressValid] = useState({ status: loadState.SUCCESS, errorText: '' });
 
   const checkAddress = (e) => {
     const _address = e.target.value;
     if (_address === '') {
-      setAddressInputState(constants.inputState.error);
-      setAddressValid({ status: loadState.ERROR, errorText: constants.errorText.address.empty });
+      setAddressInputState(IVD.error);
+      setAddressValid({ status: loadState.ERROR, errorText: AVD.errorText.address.empty });
     } else {
       dispatch(reqCheckClubAddress({ id: _club?.id, address: _address }));
     }
@@ -88,23 +88,23 @@ const Information = () => {
   useEffect(() => {
     if (checkClubAddressState.status === loadState.SUCCESS) {
       setAddressValid({ status: checkClubAddressState.status, errorText: ' ' });
-      setAddressInputState(constants.inputState.success);
+      setAddressInputState(IVD.success);
     }
     if (checkClubAddressState.status === loadState.ERROR) {
       setAddressValid({ status: checkClubAddressState.status, errorText: checkClubAddressState.error });
-      setAddressInputState(constants.inputState.error);
+      setAddressInputState(IVD.error);
     }
   }, [checkClubAddressState]);
 
   const [categoryId, setCategoryId] = useState(_club?.category || 'Game');
-  const [categoryInputState, setCategoryInputState] = useState(constants.inputState.success);
+  const [categoryInputState, setCategoryInputState] = useState(IVD.success);
   const [categoryValid, setCategoryValid] = useState({ status: loadState.SUCCESS, errorText: '' });
   const checkCategory = (e) => {
     if (categoryId < 0) {
-      setCategoryInputState(constants.inputState.error);
-      setCategoryValid({ status: loadState.ERROR, errorText: constants.errorText.category.empty });
+      setCategoryInputState(IVD.error);
+      setCategoryValid({ status: loadState.ERROR, errorText: AVD.errorText.category.empty });
     } else {
-      setCategoryInputState(constants.inputState.success);
+      setCategoryInputState(IVD.success);
       setCategoryValid({ status: loadState.SUCCESS, errorText: '' });
     }
   };
@@ -120,12 +120,12 @@ const Information = () => {
   });
 
   const [tmpDescription, setTmpDescription] = useState(_club?.description || '');
-  const [descriptionInputState, setDescriptionInputState] = useState(constants.inputState.blur);
+  const [descriptionInputState, setDescriptionInputState] = useState(IVD.blur);
   const checkDescription = () => {
     if (tmpDescription === '') {
-      setDescriptionInputState(constants.inputState.blur);
+      setDescriptionInputState(IVD.blur);
     } else {
-      setDescriptionInputState(constants.inputState.success);
+      setDescriptionInputState(IVD.success);
     }
   };
 
@@ -194,10 +194,10 @@ const Information = () => {
         {/* Club Name */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={constants.name.title} description={constants.name.description} isEssential={true} />
+            <FormLabel title={AVD.name.title} description={AVD.name.description} isEssential={true} />
             <div className="name">
               <TextInput
-                placeholder={constants.name.placeholder}
+                placeholder={AVD.name.placeholder}
                 value={tmpName}
                 state={nameInputState}
                 onChange={(e) => {
@@ -205,12 +205,12 @@ const Information = () => {
                   checkName(e);
                 }}
                 onFocus={() => {
-                  setNameInputState(constants.inputState.focus);
+                  setNameInputState(IVD.focus);
                 }}
                 onBlur={checkName}
                 maxLength={60}
               />
-              <div className="under-text"> {`${tmpName.length}${constants.name.extraText}`}</div>
+              <div className="under-text"> {`${tmpName.length}${AVD.name.extraText}`}</div>
             </div>
           </div>
           {nameValid.status === loadState.ERROR && (
@@ -226,13 +226,13 @@ const Information = () => {
         {/* Club Address */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={constants.address.title} description={constants.address.description} isEssential={true} />
+            <FormLabel title={AVD.address.title} description={AVD.address.description} isEssential={true} />
             <div className="address">
               <div className="url-wrapper">
-                <div className="club-url">{constants.address.url}</div>
+                <div className="club-url">{AVD.address.url}</div>
                 <div className="address-input-wrapper">
                   <TextInput
-                    placeholder={constants.address.placeholder}
+                    placeholder={AVD.address.placeholder}
                     value={tmpAddress}
                     state={addressInputState}
                     onChange={(e) => {
@@ -240,14 +240,14 @@ const Information = () => {
                       checkAddress(e);
                     }}
                     onFocus={() => {
-                      setAddressInputState(constants.inputState.focus);
+                      setAddressInputState(IVD.focus);
                     }}
                     onBlur={checkAddress}
                     maxLength={20}
                   />
                 </div>
               </div>
-              <div className="under-text">{`${tmpAddress.length}${constants.address.extraText}`}</div>
+              <div className="under-text">{`${tmpAddress.length}${AVD.address.extraText}`}</div>
             </div>
           </div>
           {addressValid.status === loadState.ERROR && (
@@ -263,11 +263,7 @@ const Information = () => {
         {/* Category */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel
-              title={constants.category.title}
-              description={constants.category.description}
-              isEssential={true}
-            />
+            <FormLabel title={AVD.category.title} description={AVD.category.description} isEssential={true} />
             <div className="category">
               <JSelect
                 selectedValue={categories.filter((item) => item.id === categoryId)[0]?.name || ''}
@@ -297,7 +293,7 @@ const Information = () => {
         {/* Profile Image */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={constants.profileImages.title} description={constants.profileImages.description} />
+            <FormLabel title={AVD.profileImages.title} description={AVD.profileImages.description} />
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <FilePicker
                 state={profileImageData.data}
@@ -324,7 +320,7 @@ const Information = () => {
               </FilePicker>
               <div
                 style={{ marginTop: '3px', fontWeight: 500, fontSize: '16px', lineHeight: '22px', color: '#808080' }}
-              >{`${fileSizeFM(profileImageData.file.size) || '0'}${constants.profileImages.extraText}`}</div>
+              >{`${fileSizeFM(profileImageData.file.size) || '0'}${AVD.profileImages.extraText}`}</div>
             </div>
           </div>
         </div>
@@ -332,7 +328,7 @@ const Information = () => {
         {/* Banner Image */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={constants.bannerImage.title} description={constants.bannerImage.description} />
+            <FormLabel title={AVD.bannerImage.title} description={AVD.bannerImage.description} />
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <FilePicker
                 state={bannerImageData}
@@ -359,7 +355,7 @@ const Information = () => {
               </FilePicker>
               <div
                 style={{ marginTop: '3px', fontWeight: 500, fontSize: '16px', lineHeight: '22px', color: '#808080' }}
-              >{`${fileSizeFM(bannerImageData.file.size) || '0'}${constants.bannerImage.extraText}`}</div>
+              >{`${fileSizeFM(bannerImageData.file.size) || '0'}${AVD.bannerImage.extraText}`}</div>
             </div>
           </div>
         </div>
@@ -367,11 +363,11 @@ const Information = () => {
         {/* Description */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={constants.description.title} description={constants.description.description} />
+            <FormLabel title={AVD.description.title} description={AVD.description.description} />
             <div className="description-wrapper">
               <textarea
                 className={`description-textarea description-textarea-${descriptionInputState}`}
-                placeholder={constants.description.placeholder}
+                placeholder={AVD.description.placeholder}
                 value={tmpDescription}
                 maxLength={300}
                 onChange={(e) => {
@@ -383,7 +379,7 @@ const Information = () => {
                   checkDescription();
                 }}
               ></textarea>
-              <div className="under-text">{`${tmpDescription.length}${constants.description.extraText}`}</div>
+              <div className="under-text">{`${tmpDescription.length}${AVD.description.extraText}`}</div>
             </div>
           </div>
         </div>
@@ -391,7 +387,7 @@ const Information = () => {
         {/* Tags */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={constants.tags.title} description={constants.tags.description} />
+            <FormLabel title={AVD.tags.title} description={AVD.tags.description} />
             <div className="tags-wrapper">
               <div className="input-tags-wrapper">
                 {tags.map((item, index) => (
@@ -411,14 +407,14 @@ const Information = () => {
                     className="input-tags-text"
                     onKeyDown={onKeyDownTagInput}
                     type={'text'}
-                    placeholder={constants.tags.placeholder}
+                    placeholder={AVD.tags.placeholder}
                     value={currentTagText}
                     onChange={onChnageCurrentTagText}
                     onBlur={addTags}
                   />
                 )}
               </div>
-              <div className="under-text">{`${tags.length}${constants.tags.extraText}`}</div>
+              <div className="under-text">{`${tags.length}${AVD.tags.extraText}`}</div>
             </div>
           </div>
         </div>
@@ -426,7 +422,7 @@ const Information = () => {
         {/* Auto Approval */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={constants.autoApproval.title} />
+            <FormLabel title={AVD.autoApproval.title} />
             <div className="auto-approval-wrapper">
               <RadioButton
                 value={autoApproval}
@@ -444,14 +440,14 @@ const Information = () => {
             outline
             color={'none'}
             onClick={() => {
-              dispatch(openCreateClubPopup({ type: 'modifyCancel', text: constants.popupText.modifyCancel }));
+              dispatch(openCreateClubPopup({ type: 'modifyCancel', text: AVD.popupText.modifyCancel }));
             }}
             tabIndex={0}
           />
           <JButton
             label={'Save'}
             onClick={() => {
-              dispatch(openCreateClubPopup({ type: 'modifySave', text: constants.popupText.modifySave, club }));
+              dispatch(openCreateClubPopup({ type: 'modifySave', text: AVD.popupText.modifySave, club }));
             }}
             tabIndex={0}
             disabled={

@@ -2,16 +2,16 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIdClubInit, postClubShareInit } from 'redux/store/clubSlice';
+import { getIdClubInit, postClubShareInit } from 'redux/idistStore/clubSlice';
 import { useParams } from 'react-router';
 import { useNavigate, Outlet } from 'react-router-dom';
-import { Header } from 'components/Header';
-import { Loader } from 'components/Loader';
+import { Header } from 'components/idist/Header';
+import { Loader } from 'components/idist/Loader';
 
 import 'assets/scss/club.scss';
 import 'assets/scss/reset.scss';
-import SharePopup from '../../components/SharePopup';
-import { Button } from 'components/Button';
+import SharePopup from 'components/idist/SharePopup';
+import { Button } from 'components/idist/Button';
 
 function Club() {
   const dispatch = useDispatch();

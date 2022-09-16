@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Tags } from '../components/Tags';
+import { Tags } from 'components/idist/Tags';
 
 export default {
   title: 'Example/Tags',

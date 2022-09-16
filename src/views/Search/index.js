@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import React, { useState, useEffect } from 'react';
-import { Header } from 'components/Header';
+import { Header } from 'components/idist/Header';
 import { useNavigate, Outlet, useSearchParams } from 'react-router-dom';
 
 import 'assets/scss/search.scss';

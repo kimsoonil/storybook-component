@@ -3,22 +3,22 @@ import 'assets/scss/admin/boards.scss';
 import { useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getClubBoardGroupsInit, postClubBoardGroupInit } from 'redux/store/clubSlice';
+import { getClubBoardGroupsInit, postClubBoardGroupInit } from 'redux/idistStore/clubSlice';
 
-import { boardConstants } from 'constants';
-import { Loader } from 'components/Loader';
+import { Loader } from 'components/idist/Loader';
 import _ from 'lodash';
 import BoardInfo from './BoardInfo';
 import BoardGroupInfo from './BoardGroupInfo';
-import { postBoardGroupBoardInit } from 'redux/store/boardGroupSlice';
+import { postBoardGroupBoardInit } from 'redux/idistStore/boardGroupSlice';
 import { BVD } from './index';
-import { setAdminBoards } from 'redux/store/adminSlice';
+import { setAdminBoards } from 'redux/idistStore/adminSlice';
+import useInput from 'hooks/useInput';
 
 // const BoardSidebar = ({ clubId, selectedContents = {}, setSelectedContents = () => {} }) => {
 const BoardSidebar = ({ clubId, selected = {} }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getClubBoardGroupsInit({ id: clubId }));
+    dispatch(getClubBoardGroupsInit(clubId));
   }, []);
 
   /**
@@ -32,9 +32,8 @@ const BoardSidebar = ({ clubId, selected = {} }) => {
    * name: String
    * order: Number
    */
-  const clubState = useSelector((state) => state.club);
+  const boardGroups = useSelector((state) => state.club.boardGroups?.data);
   // const { isLoading, baordGroups, postSu, error } = clubState;
-  const boardGroups = clubState.boardGroups?.data;
 
   const [extendState, setExtendState] = useState({});
   const changeExtendState = useCallback(({ id, open }) => {
@@ -52,19 +51,22 @@ const BoardSidebar = ({ clubId, selected = {} }) => {
   const [dropDownState, setDropDownState] = useState({ group: {}, board: {} });
   const [addState, setAddState] = useState({ group: false, board: false });
 
-  const [newGroupName, setNewGroupName] = useState('');
-  const createGroup = () => {
-    newGroupName && dispatch(postClubBoardGroupInit({ id: clubId, data: { name: newGroupName, isActive: true } }));
-    setNewGroupName('');
+  const groupName = useInput('');
+  const addGroup = () => {
+    const name = groupName.value;
+    const isActive = boardGroups?.length < 10;
+    name && dispatch(postClubBoardGroupInit({ id: clubId, data: { name, isActive } }));
+    groupName.reset();
     setAddState((prev) => ({ ...prev, group: false }));
     // setSelectedContents({ type: 0 , id:  })
   };
 
-  const [newBoardName, setNewBoardName] = useState('');
-  const createBoard = (boardGroupId) => {
-    newBoardName &&
-      dispatch(postBoardGroupBoardInit({ id: boardGroupId, clubId, data: { name: newBoardName, isActive: true } }));
-    setNewBoardName('');
+  const boardName = useInput('');
+  const addBoard = () => {
+    const name = boardName.value;
+    console.log(addState.board);
+    name && dispatch(postBoardGroupBoardInit({ id: addState.board, clubId, data: { name, isActive: true } }));
+    boardName.reset();
     setAddState((prev) => ({ ...prev, board: false }));
   };
 
@@ -86,8 +88,9 @@ const BoardSidebar = ({ clubId, selected = {} }) => {
           setAddState((prev) => ({ ...prev, group: true }));
         }}
       >
-        {boardConstants.addGroup}
+        {BVD.addGroup}
       </button>
+
       {_.sortBy(boardGroups, 'order').map((boardGroup) => {
         return (
           <div key={boardGroup.id}>
@@ -170,52 +173,54 @@ const BoardSidebar = ({ clubId, selected = {} }) => {
                   </div>
                 );
               })}
+
             {/* board 추가하는 text input */}
             {addState.board === boardGroup.id && (
-              <input
-                type={'text'}
-                className="add-text-input"
-                value={newBoardName}
-                onChange={(e) => {
-                  setNewBoardName(e.target.value);
-                }}
-                autoFocus
-                placeholder={BVD.addPlaceholder.board}
-                onBlur={() => {
-                  createBoard(addState.board);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    createBoard(addState.board);
-                  }
-                }}
-              />
+              <AddInput add={addBoard} placeholder={BVD.addPlaceholder.board} {...boardName} />
             )}
           </div>
         );
       })}
-      {!!addState.group && (
-        <div className={{ padding: '0 15px' }}>
-          <input
-            type={'text'}
-            className="add-text-input"
-            value={newGroupName}
-            onChange={(e) => {
-              setNewGroupName(e.target.value);
-            }}
-            autoFocus
-            placeholder={BVD.addPlaceholder.boardGroup}
-            onBlur={createGroup}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                createGroup();
-              }
-            }}
-          />
-        </div>
-      )}
+      {!!addState.group && <AddInput add={addGroup} placeholder={BVD.addPlaceholder.boardGroup} {...groupName} />}
     </div>
   );
 };
 
 export default BoardSidebar;
+
+const AddInput = ({ value, onChange, add = () => {}, placeholder }) => (
+  <input
+    className="add-text-input"
+    type={'text'}
+    value={value}
+    onChange={onChange}
+    autoFocus
+    maxLength={20}
+    placeholder={placeholder}
+    onBlur={add}
+    onKeyDown={(e) => {
+      if (e.key === 'Enter') {
+        add();
+      }
+    }}
+  />
+);
+// const AddGroupInput = ({onChange, add, placeholder}) =>
+// <input
+//  className="add-text-input"
+//   type={'text'}
+//   value={newGroupName}
+//   onChange={
+
+//     (e) => {
+//     setNewGroupName(e.target.value);
+//   }}
+//   autoFocus
+//   placeholder={BVD.addPlaceholder.boardGroup}
+//   onBlur={createGroup}
+//   onKeyDown={(e) => {
+//     if (e.key === 'Enter') {
+//       createGroup();
+//     }
+//   }}
+// />

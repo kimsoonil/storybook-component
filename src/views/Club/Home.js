@@ -2,12 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getClubMembersInit } from 'redux/store/clubSlice';
+import { getClubMembersInit } from 'redux/idistStore/clubSlice';
 import { useParams } from 'react-router';
 import { useOutletContext } from 'react-router-dom';
 import { postsList } from '../Home/homeDate';
-import { Loader } from 'components/Loader';
-import Profile from 'components/Profile';
+import { Loader } from 'components/idist/Loader';
+import Profile from 'components/idist/Profile';
 import 'assets/scss/club.scss';
 import 'assets/scss/reset.scss';
 

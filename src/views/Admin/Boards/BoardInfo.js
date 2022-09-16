@@ -3,18 +3,16 @@ import 'assets/scss/admin/boards.scss';
 import { useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getClubBoardGroupsInit } from 'redux/store/clubSlice';
-import { getIdBoardGroupInit, patchBoardGroupInit } from 'redux/store/boardGroupSlice';
+import { getClubBoardGroupsInit } from 'redux/idistStore/clubSlice';
+import { getIdBoardGroupInit, patchBoardGroupInit } from 'redux/idistStore/boardGroupSlice';
 
-import { boardConstants } from 'constants';
-import { Loader } from 'components/Loader';
-import { getIdBoardInit } from 'redux/store/boardSlice';
+import { Loader } from 'components/idist/Loader';
+import { getIdBoardInit } from 'redux/idistStore/boardSlice';
 import _ from 'lodash';
-import RadioButton from 'components/admin/RadioButton';
+import RadioButton from 'components/idist/admin/RadioButton';
 import { BVD } from './index';
-import { admin as AVD } from 'constants/index';
-import JButton from 'components/admin/JButton';
-import Select from 'components/admin/JSelect';
+import JButton from 'components/idist/admin/JButton';
+import Select from 'components/idist/admin/JSelect';
 
 const BoardInfo = ({ id }) => {
   const dispatch = useDispatch();

@@ -2,14 +2,14 @@
 
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserInit } from 'redux/store/userSlice';
+import { getUserInit } from 'redux/idistStore/userSlice';
 import { useNavigate } from 'react-router-dom';
 
-import { Header } from 'components/Header';
+import { Header } from 'components/idist/Header';
 import { myClubList, activityList, wholeClubList } from './homeDate.js';
 import 'assets/scss/reset.scss';
 import 'assets/scss/home.scss';
-import Profile from 'components/Profile.js';
+import Profile from 'components/idist/Profile.js';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 

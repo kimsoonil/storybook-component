@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 
 import 'assets/scss/search.scss';
-import PostsList from 'components/PostsList';
+import PostsList from 'components/idist/PostsList';
 
 function SearchPosts() {
   return <PostsList />;

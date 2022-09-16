@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import React, { useState, useEffect } from 'react';
-import ClubsList from 'components/ClubsList';
+import ClubsList from 'components/idist/ClubsList';
 
 function SearchClub(props) {
   const searchTab = window.location.pathname.split('/');

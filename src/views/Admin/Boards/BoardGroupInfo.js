@@ -1,14 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import 'assets/scss/admin/boards.scss';
 import { useDispatch, useSelector } from 'react-redux';
-
-import 'assets/scss/admin/boards.scss';
-import { getIdBoardGroupInit, patchBoardGroupInit } from 'redux/store/boardGroupSlice';
+import { getIdBoardGroupInit, patchBoardGroupInit } from 'redux/idistStore/boardGroupSlice';
 
 import _ from 'lodash';
 import { BVD } from './index';
-import { admin as AVD } from 'constants/index';
-import JButton from 'components/admin/JButton';
+import { AVD } from 'views/Admin';
+import JButton from 'components/idist/admin/JButton';
+import Name from './Name';
 
 const BoardGroupInfo = () => {
   const dispatch = useDispatch();
@@ -21,9 +20,11 @@ const BoardGroupInfo = () => {
     }
   }, [selected.id]);
 
-  const boardGroupState = useSelector((state) => state.boardGroup);
-  const { isLoading, boardGroup } = boardGroupState;
+  const isLoading = useSelector((state) => state.boardGroup.isLoading);
+  const boardGroupState = useSelector((state) => state.boardGroup.boardGroup);
+  const boardGroup = useMemo(() => boardGroupState?.data, [boardGroupState?.data]);
 
+  // console.log('BoardGroupInfo boardGroup : ', boardGroup);
   // if (boardGroup?.data) {
   //   console.log('boardGroup : ', boardGroup?.data);
   // }
@@ -40,18 +41,17 @@ const BoardGroupInfo = () => {
 
   // init
   useEffect(() => {
-    boardGroup?.data && setState(boardGroup?.data);
+    boardGroup && setState({ ...boardGroup, type: selected.type });
   }, [boardGroup]);
 
   const handleActivationChange = (e) => {
     const isActive = e.target.value === 'Activation';
-    if (confirm('전환하시겠습니까?', 'ok', 'cancel')) {
-      setState((prev) => ({ ...prev, isActive }));
-    }
+    setState((prev) => ({ ...prev, isActive }));
   };
 
   const handleNameChange = (e) => {
     setState((prev) => ({ ...prev, name: e.target.value }));
+    validateName();
   };
   const handleNameKeyDown = (e) => {
     if (e.key === 'Enter') {
@@ -62,7 +62,6 @@ const BoardGroupInfo = () => {
     validateName();
   };
   const validateName = () => {
-    console.log('dispatch vaild check name: ', state.name);
     if (state.name === '') {
       setInputState((prev) => ({ ...prev, name: AVD.inputStateEnum.ERROR }));
     } else {
@@ -74,14 +73,14 @@ const BoardGroupInfo = () => {
   };
 
   const cancel = () => {
-    confirm('취소하시겠습니까?', 'ok', 'cancel') && boardGroup?.data && setState(boardGroup?.data);
+    confirm('취소하시겠습니까?', 'ok', 'cancel') && boardGroup && setState(boardGroup);
   };
 
   const save = () => {
     confirm('저장하시겠습니까?', 'ok', 'cancel') &&
       dispatch(
         patchBoardGroupInit({
-          id: boardGroup.data.id,
+          id: boardGroup?.id,
           data: {
             name: state.name,
             isActive: state.isActive
@@ -90,8 +89,16 @@ const BoardGroupInfo = () => {
       );
   };
 
-  if (isLoading || boardGroup.message !== 'ok') {
-    return null;
+  if (isLoading || boardGroupState.message !== 'ok') {
+    return (
+      <div>
+        <div className="boards-contents " />
+        <div className="submit-button-wrapper">
+          <JButton label={'Cancel'} outline color={'none'} onClick={cancel} />
+          <JButton label={'Save'} onClick={save} disabled={true} />
+        </div>
+      </div>
+    );
   }
   return (
     <div>
@@ -115,7 +122,7 @@ const BoardGroupInfo = () => {
         </div>
 
         {/* Name */}
-        <div className="name-wrapper">
+        {/* <div className="name-wrapper">
           <div className="info-title">{BVD.name.title}</div>
           <div className="essential" />
         </div>
@@ -139,13 +146,10 @@ const BoardGroupInfo = () => {
             <div className="name-length-gray">{state.name.length}</div>/20
           </div>
         </div>
-        {inputState.name === AVD.inputStateEnum.ERROR && <div className="name-error">{BVD.name.error}</div>}
+        {inputState.name === AVD.inputStateEnum.ERROR && <div className="name-error">{BVD.name.error}</div>} */}
       </div>
 
-      {/* <div className="submit-button-wrapper">
-        <div>cancel</div>
-        <div>save</div>
-      </div> */}
+      <Name />
 
       <div className="submit-button-wrapper">
         <JButton label={'Cancel'} outline color={'none'} onClick={cancel} tabIndex={0} />
@@ -153,7 +157,7 @@ const BoardGroupInfo = () => {
           label={'Save'}
           onClick={save}
           tabIndex={0}
-          disabled={inputState.name === AVD.inputStateEnum.FOCUS || inputState.name === AVD.inputStateEnum.ERROR}
+          // disabled={inputState.name === AVD.inputStateEnum.FOCUS || inputState.name === AVD.inputStateEnum.ERROR}
         />
       </div>
     </div>

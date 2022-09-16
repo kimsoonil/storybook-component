@@ -5,6 +5,7 @@
   .layout-banner {
     position: relative;
     height: 460px;
+    background-color: $gray400;
 
     .banner {
       &-inner {
@@ -18,6 +19,12 @@
       //   no-repeat center/cover
       //     url(https://store.nintendo.co.kr/media/catalog/product/cache/8e3c84988db1fdb90470f4d01453d879/f/1/f1715bebde9ecc2e1cecc33e35166cbf87233ae35cc4dd6649645acc3a036696.jpg);
 
+      &-content-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+
       &-tags {
         display: flex;
         max-width: 840px;
@@ -27,29 +34,18 @@
       }
 
       &-profile {
-        position: absolute;
-        right: 0;
-        bottom: -80px;
+        position: relative;
         width: 160px;
         height: 160px;
         border-radius: 50%;
+        margin-bottom: -80px;
+        background-color: $gray500;
 
-        &-image {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          // position: absolute;
+        img {
           width: 160px;
           height: 160px;
           border-radius: 50%;
-          // overflow: hidden;
-
-          img {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-          }
+          object-fit: cover;
         }
       }
     }

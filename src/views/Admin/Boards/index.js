@@ -3,16 +3,15 @@ import 'assets/scss/admin/boards.scss';
 import { useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-// import { getClubBoardGroupsInit, postClubBoardGroupInit } from 'redux/store/clubSlice';
+// import { getClubBoardGroupsInit, postClubBoardGroupInit } from 'redux/idistStore/clubSlice';
 
-import { boardConstants } from 'constants';
-import { Loader } from 'components/Loader';
+import { Loader } from 'components/idist/Loader';
 import _ from 'lodash';
 import BoardInfo from './BoardInfo';
 import BoardGroupInfo from './BoardGroupInfo';
-import { postBoardGroupBoardInit } from 'redux/store/boardGroupSlice';
+import { postBoardGroupBoardInit } from 'redux/idistStore/boardGroupSlice';
 import BoardSidebar from './BoardSidebar';
-import { setAdminBoards } from 'redux/store/adminSlice';
+import { setAdminBoards } from 'redux/idistStore/adminSlice';
 
 const Boards = () => {
   const dispatch = useDispatch();
@@ -28,8 +27,8 @@ const Boards = () => {
 
   return (
     <div className="boards">
-      <div className="text-h1 boards-title">{boardConstants.title}</div>
-      <div className="text-h4 boards-subtitle">{boardConstants.subTitle}</div>
+      <div className="text-h1 boards-title">{BVD.title}</div>
+      <div className="text-h4 boards-subtitle">{BVD.subTitle}</div>
 
       <div className="boards-contents-wrapper">
         {/* <BoardSidebar clubId={clubId} selected={selected} setSelected={setSelected} /> */}
@@ -50,6 +49,10 @@ const Boards = () => {
 export default Boards;
 
 export const BVD = {
+  title: 'Boards Management',
+  subTitle: "Create and edit your club's bulletin boards for members to have fun discussing topics!",
+  addGroup: '+ ADD GROUP',
+
   initText: 'Please select a board from the left sidebar',
   addPlaceholder: {
     boardGroup: 'Please enter a board group name',
