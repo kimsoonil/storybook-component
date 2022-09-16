@@ -1,7 +1,6 @@
 import React from 'react';
 
 import history from 'utils/history';
-import './assets/scss/reset.scss';
 import loadable from '@loadable/component';
 import ScrollToTop from 'utils/scrollTop';
 import { Provider } from 'react-redux';
@@ -22,6 +21,9 @@ import Operation from 'views/Admin/Operation';
 
 const Home = loadable(() => import('views/Home'));
 const Search = loadable(() => import('views/Search'));
+const SearchAll = loadable(() => import('views/Search/SearchAll'));
+const SearchClub = loadable(() => import('views/Search/SearchClubs'));
+const SearchPosts = loadable(() => import('views/Search/SearchPosts'));
 const Club = loadable(() => import('views/Club'));
 const ClubHome = loadable(() => import('views/Club/Home'));
 const Basic = loadable(() => import('views/Club/Basic'));
@@ -38,9 +40,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/create" element={<Create />} />
             <Route path="/search" element={<Search />}>
-              <Route path="all" element={<Search />} />
-              <Route path="clubs" element={<Search />} />
-              <Route path="posts" element={<Search />} />
+              <Route path="all" element={<SearchAll />} />
+              <Route path="clubs" element={<SearchClub />} />
+              <Route path="posts" element={<SearchPosts />} />
             </Route>
             <Route path="/club/:id" element={<Club />}>
               <Route path="home" element={<ClubHome />} />

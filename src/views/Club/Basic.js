@@ -25,12 +25,6 @@ function Basic(props) {
   const { id } = useParams();
   const clubId = useOutletContext();
 
-  useEffect(() => {
-    dispatch(getClubMembersInit(id));
-  }, [dispatch]);
-
-  const { isLoading, members } = clubState;
-
   return (
     <div className="club-home container">
       <div className="item">

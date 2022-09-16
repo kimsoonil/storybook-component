@@ -3,24 +3,29 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getClubInit } from 'redux/store/clubSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Pagination from 'components/Pagination';
 
 import 'assets/scss/search.scss';
 import { Button } from 'components/Button';
 import { Loader } from 'components/Loader';
 
-function SearchClub(props) {
+function ClubsList(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const clubState = useSelector((state) => state.club);
   const [page, setPage] = useState(1);
   const limit = props.limit;
   const offset = (page - 1) * limit;
 
   useEffect(() => {
-    dispatch(getClubInit(props.search));
-  }, [dispatch, props.search]);
+    let parameter = '';
+    if (searchParams.get('search') !== null) {
+      parameter = searchParams.get('search');
+    }
+    dispatch(getClubInit(parameter));
+  }, [dispatch, searchParams]);
 
   const { isLoading, clubs } = clubState;
 
@@ -32,7 +37,14 @@ function SearchClub(props) {
     );
   return (
     <div className="search-club">
-      <div className="search-club-title"> 2,108 Clubs</div>
+      <div className="flex-between">
+        <div className="search-club-title"> {clubs.data.length} Clubs</div>
+        <div className="list-filter flex-center">
+          <div className="flex-center active">Hot</div>
+          <div className="flex-center">Popular</div>
+          <div className="flex-center">New</div>
+        </div>
+      </div>
       <div className="search-club-tab">
         <div className="item active flex-center">All</div>
         <div className="item flex-center">Game</div>
@@ -62,7 +74,7 @@ function SearchClub(props) {
                 <div className="search-club-list-item-name">{clubItem.name}</div>
                 <div className="search-club-list-item-info">Members {clubItem.memberCount} ・ sliver</div>
                 <div className="bookmark flex-center">
-                  <img src={require(`../../images/search/icon-bookmarks.png`)} alt="" />
+                  <img src={require(`images/search/icon-bookmarks.png`)} alt="" />
                 </div>
               </div>
             </div>
@@ -70,7 +82,7 @@ function SearchClub(props) {
         })}
       </div>
 
-      {props.searchTab === 'Clubs' ? (
+      {props.searchTab === 'clubs' ? (
         <div className="flex-center">
           <Pagination total={clubs.data.length} limit={limit} page={page} setPage={setPage} />
         </div>
@@ -81,7 +93,7 @@ function SearchClub(props) {
             label={'More'}
             width={116}
             onClick={() => {
-              props.setSearchTab('Clubs');
+              navigate('/search/clubs');
             }}
           />
         </div>
@@ -90,4 +102,4 @@ function SearchClub(props) {
   );
 }
 
-export default SearchClub;
+export default ClubsList;

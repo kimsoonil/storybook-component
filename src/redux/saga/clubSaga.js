@@ -110,12 +110,15 @@ function* getClubBoardGroups({ payload }) {
     console.log(error);
   }
 }
-// TODO postShare
+// TODO postClubShareInit
 
-function* postShare({ payload }) {
+function* postClubShareInit({ payload }) {
   try {
-    const response = yield call(() => axios.post(`${process.env.REACT_APP_API_URL}/api/v1/club/${payload}/share`));
+    const response = yield call(() =>
+      axios.post(`${process.env.REACT_APP_API_URL}/api/v1/club/${payload}/share`, '', config)
+    );
     if (response.status === 200) {
+      yield put(actionTypes.postClubShareSuccess({ ...response.data }));
       console.log(response.data);
     }
   } catch (error) {
@@ -131,7 +134,7 @@ function* postClubBoardGroup({ payload }) {
     );
     if (response.status === 200 || response.status === 201) {
       yield put(actionTypes.postClubBoardGroupSuccess({ ...response.data }));
-      // yield put(actionTypes.getClubBoardGroupsInit({ id: payload.id }));
+
       yield put(
         adminTypes.setAdminBoards((prev) => ({ ...prev, selected: { id: response?.data?.data?.id, type: 0 } }))
       );
@@ -187,7 +190,7 @@ function* clubSaga() {
     takeEvery(actionTypes.postClubBoardGroupInit, postClubBoardGroup),
     takeEvery(actionTypes.patchIdClubBannerImageInit, patchIdClubBannerImage),
     takeEvery(actionTypes.patchIdClubProfileImageInit, patchIdClubProfileImage),
-    takeEvery(actionTypes.postClubShareInit, postShare)
+    takeEvery(actionTypes.postClubShareInit, postClubShareInit)
   ]);
 }
 

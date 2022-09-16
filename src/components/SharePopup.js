@@ -2,6 +2,9 @@
 
 import React from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { useDispatch } from 'react-redux';
+import { postClubShareInit } from 'redux/store/clubSlice';
+import { useParams } from 'react-router';
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -16,6 +19,8 @@ import 'assets/scss/reset.scss';
 import { Button } from 'components/Button';
 
 function SharePopup(props) {
+  const dispatch = useDispatch();
+  const { id } = useParams();
   const currentUrl = 'https://super-club.netlify.app/';
 
   return (
@@ -25,13 +30,13 @@ function SharePopup(props) {
           <img src={require(`images/club/btn-close.png`)} alt="" />
         </div>
         <div className="share-btn flex-center">
-          <FacebookShareButton url={currentUrl}>
+          <FacebookShareButton url={currentUrl} onClick={() => dispatch(postClubShareInit(id))}>
             <FacebookIcon size={80} round={true} borderRadius={24}></FacebookIcon>
           </FacebookShareButton>
-          <TwitterShareButton url={currentUrl}>
+          <TwitterShareButton url={currentUrl} onClick={() => dispatch(postClubShareInit(id))}>
             <TwitterIcon size={80} round={true} borderRadius={24}></TwitterIcon>
           </TwitterShareButton>
-          <TelegramShareButton url={currentUrl}>
+          <TelegramShareButton url={currentUrl} onClick={() => dispatch(postClubShareInit(id))}>
             <TelegramIcon size={80} round={true} borderRadius={24}></TelegramIcon>
           </TelegramShareButton>
         </div>

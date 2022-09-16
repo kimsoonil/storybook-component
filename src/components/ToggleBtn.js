@@ -14,6 +14,7 @@ function ToggleBtn(props) {
         className="toggleBtn"
         hidden
         onChange={(event) => props.onChange(event.target.checked, props.id)}
+        disabled={props.disabled}
       />
       <label htmlFor={props.id} className="toggleSwitch">
         <span className="toggleButton"></span>

@@ -48,7 +48,15 @@ function Club() {
       <Header seachFunc={seachFunc} />
       <div className="club">
         <div className="club-banner relative" style={{ backgroundImage: `url(${clubId.data.bannerImageUrl})` }}>
-          <div className="club-tag"></div>
+          <div className="club-tag">
+            {clubId.data.tags.map((tag, index) => {
+              return (
+                <div className="club-tag-item" key={index}>
+                  {tag.name}
+                </div>
+              );
+            })}
+          </div>
           <div className="club-profile">
             <img src={clubId.data.profileImageUrl} alt="" />
           </div>

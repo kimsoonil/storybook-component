@@ -1,21 +1,33 @@
 /* eslint-disable */
 
-import React, { useState, useRef } from 'react';
-import JoditEditor from 'jodit-pro-react';
+import React, { useState, useEffect, useRef } from 'react';
+import JoditEditor, { Jodit } from 'jodit-pro-react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getClubBoardGroupsInit } from 'redux/store/clubSlice';
 
 import ToggleBtn from 'components/ToggleBtn';
+import { useParams } from 'react-router';
+import { Button } from 'components/Button';
+import { Loader } from 'components/Loader';
 import 'assets/scss/club.scss';
 import 'assets/scss/jodit.scss';
 import 'assets/scss/reset.scss';
-import { Button } from 'components/Button';
 
 function Board(props) {
   const editor = useRef(null);
+  const dispatch = useDispatch();
+  const clubState = useSelector((state) => state.club);
   const [content, setContent] = useState('');
   const [boardSelect, setBoardSelect] = useState('Please select a Board');
   const [openSelect, setOpenSelect] = useState(false);
   const [checkedList, setCheckedList] = useState([]);
   const [tagList, setTagList] = useState([]);
+  const { id } = useParams();
+  useEffect(() => {
+    dispatch(getClubBoardGroupsInit(id));
+  }, []);
+
+  const { isLoading, boardGroups } = clubState;
 
   const config = {
     readonly: false,
@@ -49,7 +61,22 @@ function Board(props) {
       'table'
     ]
   };
-
+  function preparePaste(jodit) {
+    jodit.e.on(
+      'emoji',
+      (e) => {
+        if (confirm('Change pasted content?')) {
+          jodit.e.stopPropagation('paste');
+          jodit.s.insertHTML(
+            Jodit.modules.Helpers.getDataTransfer(e).getData(Jodit.constants.TEXT_HTML).replace(/a/g, 'b')
+          );
+          return false;
+        }
+      },
+      { top: true }
+    );
+  }
+  Jodit.plugins.add('preparePaste', preparePaste);
   const closeSelect = (text) => {
     setBoardSelect(text);
     setOpenSelect(false);
@@ -62,6 +89,12 @@ function Board(props) {
       setCheckedList(checkedList.filter((el) => el !== id));
     }
   };
+  if (boardGroups.message !== 'ok')
+    return (
+      <div className="flex-center">
+        <Loader />
+      </div>
+    );
   return (
     <div className="club-home ">
       <div className="board ">
@@ -76,15 +109,13 @@ function Board(props) {
               <div className="board-actions-select-item" onClick={() => closeSelect('Please select a Board')}>
                 Please select a Board
               </div>
-              <div className="board-actions-select-item" onClick={() => closeSelect('Overall Board')}>
-                Overall Board
-              </div>
-              <div className="board-actions-select-item" onClick={() => closeSelect('Twice')}>
-                Twice
-              </div>
-              <div className="board-actions-select-item" onClick={() => closeSelect('TWICE schedule')}>
-                TWICE schedule
-              </div>
+              {boardGroups.data.map((boardGroups, index) => {
+                return (
+                  <div className="board-actions-select-item" key={index} onClick={() => closeSelect(boardGroups.name)}>
+                    {boardGroups.name}
+                  </div>
+                );
+              })}
             </div>
             <div className="board-actions-count flex-center">
               Save as draft <div>|</div> 0
@@ -140,11 +171,11 @@ function Board(props) {
           </div>
           <div>
             Register as a Notice
-            <ToggleBtn id="Notice" onChange={onCheckedElement} />
+            <ToggleBtn id="Notice" onChange={onCheckedElement} disabled={checkedList.indexOf('secret') > -1} />
           </div>
           <div>
             secret post
-            <ToggleBtn id="secret" onChange={onCheckedElement} />
+            <ToggleBtn id="secret" onChange={onCheckedElement} disabled={checkedList.indexOf('Notice') > -1} />
           </div>
         </div>
         {checkedList.indexOf('secret') > -1 && (
@@ -166,15 +197,13 @@ function Board(props) {
             <div className="board-actions-select-item" onClick={() => closeSelect('Please select a Board')}>
               Please select a Board
             </div>
-            <div className="board-actions-select-item" onClick={() => closeSelect('Overall Board')}>
-              Overall Board
-            </div>
-            <div className="board-actions-select-item" onClick={() => closeSelect('Twice')}>
-              Twice
-            </div>
-            <div className="board-actions-select-item" onClick={() => closeSelect('TWICE schedule')}>
-              TWICE schedule
-            </div>
+            {boardGroups.data.map((boardGroups, index) => {
+              return (
+                <div className="board-actions-select-item" key={index} onClick={() => closeSelect(boardGroups.name)}>
+                  {boardGroups.name}
+                </div>
+              );
+            })}
           </div>
           <div className="board-actions-count flex-center">
             Save as draft <div>|</div> 0

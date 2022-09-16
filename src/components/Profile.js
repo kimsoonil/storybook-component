@@ -10,6 +10,7 @@ import TokenLogin from './TokenLogin';
 function Profile(props) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+
   return (
     <>
       {props.type === 'logout' ? (
@@ -88,7 +89,7 @@ function Profile(props) {
         <div className="side-box profile relative">
           <div className="profile-img flex-center">
             <img src={props.userData.profileImage} alt="" />
-            <div className="profile-name">{props.userData.user}</div>
+            <div className="profile-name">{props.userData.username}</div>
           </div>
           <div className="m-1">
             <Button primary="primary" label="Join" size="m" width={265} />
