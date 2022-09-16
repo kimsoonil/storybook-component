@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Jodit Test Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/jodit@3.18.9/build/jodit.es2018.min.css" />
+    <script src="https://unpkg.com/jodit@3.18.9/build/jodit.es2018.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jodit/3.18.9/jodit.es2018.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jodit/3.18.9/jodit.es2018.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="build/jodit.es2018.min.css" />
+
+    <link rel="icon" href="https://xdsoft.net/jodit/pro/favicon.png" />
+  </head>
+  <body>
+    <style>
+      body {
+        margin: 0;
+      }
+      #box {
+        position: relative;
+        height: 500px;
+      }
+      .jodit-wysiwyg {
+        min-height: 450px !important;
+        padding: 20px;
+      }
+
+      @media (max-width: 480px) {
+        #box {
+          padding: 0;
+        }
+      }
+    </style>
+    <div id="box">
+      <textarea id="editor" placeholder="Please leave a comment that you want to share."> </textarea>
+    </div>
+    <script>
+      const editor = Jodit.make('#editor', {
+        uploader: {
+          url: 'https://xdsoft.net/jodit/finder/index.php?action=fileUpload'
+        },
+        filebrowser: {
+          ajax: {
+            url: ''
+          }
+        },
+        buttons: [
+          // 'emoji',
+          // 'image',
+          // 'video',
+          // 'file',
+          // '\n',
+          'undo',
+          'redo',
+          '|',
+          'brush',
+          'bold',
+          'italic',
+          '|',
+          'left',
+          'center',
+          'right',
+          '|',
+          'ol',
+          'ul',
+          '|',
+          'table'
+        ]
+      });
+    </script>
+  </body>
+</html>

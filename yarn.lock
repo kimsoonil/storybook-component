@@ -10586,6 +10586,14 @@ jodit@^3.19.3:
     core-js "^3.24.1"
     nock-puppeteer "^14.4.1"
 
+jodit@^3.20.3:
+  version "3.20.3"
+  resolved "https://registry.yarnpkg.com/jodit/-/jodit-3.20.3.tgz#1d280970c72d1045886dde72d4e0cd8029638a7f"
+  integrity sha512-jORGXoFyCANOVgLmBYFSKiQ04JQTlseQN3bufCmBvqZXJLjcIyfABo80UIypTPwGLDxV2toZfti9pSwSiiQicQ==
+  dependencies:
+    autobind-decorator "^2.4.0"
+    core-js "^3.24.1"
+
 js-base64@^2.4.3:
   version "2.6.4"
   resolved "https://registry.npmjs.org/js-base64/-/js-base64-2.6.4.tgz"

@@ -9,9 +9,28 @@ import ToggleBtn from 'components/ToggleBtn';
 import { useParams } from 'react-router';
 import { Button } from 'components/Button';
 import { Loader } from 'components/Loader';
+import { JoditEdit } from './jodit';
 import 'assets/scss/club.scss';
 import 'assets/scss/jodit.scss';
 import 'assets/scss/reset.scss';
+
+function preparePaste(jodit) {
+  jodit.e.on(
+    'paste',
+    (e) => {
+      if (confirm('Change pasted content?')) {
+        jodit.e.stopPropagation('paste');
+        jodit.s.insertHTML(
+          Jodit.modules.Helpers.getDataTransfer(e).getData(Jodit.constants.TEXT_HTML).replace(/a/g, 'b')
+        );
+        return false;
+      }
+    },
+    { top: true }
+  );
+}
+
+Jodit.plugins.add('preparePaste', preparePaste);
 
 function Board(props) {
   const editor = useRef(null);
@@ -143,14 +162,15 @@ function Board(props) {
             <img src={require('images/editor/icon-file.png')} alt="" />
           </div>
         </div>
-        <JoditEditor
+        {/* <JoditEditor
           ref={editor}
           value={content}
           config={config}
           tabIndex={1} // tabIndex of textarea
           onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
           onChange={(newContent) => {}}
-        />
+        /> */}
+        <JoditEdit />
         <div className="board-tag">
           <div className="board-tag-item flex-center">
             <input placeholder="#Tag" />
