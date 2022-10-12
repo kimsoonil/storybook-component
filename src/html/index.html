@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>CGP Markup</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: 'NanumSquareRound', sans-serif;
+        line-height: 1.6em;
+      }
+
+      .wrap.pub-body {
+        max-width: 100% !important;
+        padding: 50px;
+      }
+
+      .wrap.pub-body::after {
+        content: '';
+        display: none;
+      }
+
+      .wrap.pub-body {
+        max-width: 100%;
+        padding: 50px;
+      }
+
+      .wrap.pub-body::after {
+        content: '';
+        display: none;
+      }
+
+      .page_title,
+      .area_title {
+        padding: 10px 15px;
+        border-bottom: 1px solid #f1f1f1;
+        color: #69c;
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .area_title {
+        color: #222;
+        font-size: 15px;
+        background-color: #fefefe;
+      }
+
+      .page_list,
+      .area_list {
+        overflow: hidden;
+        list-style: none;
+        position: relative;
+      }
+
+      .page_item {
+        float: left;
+        width: 50%;
+        position: relative;
+      }
+
+      .area_link {
+        display: block;
+        overflow: hidden;
+        padding: 5px;
+        color: #333;
+        font-size: 15px;
+        font-weight: 300;
+        text-decoration: none;
+      }
+
+      .area_itm:nth-child(2n-1) .area_link:before,
+      .area_itm:nth-child(4n-2) .area_lnk:before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 1px;
+        background-color: #f1f1f1;
+        content: '';
+      }
+
+      .area_list:after,
+      .area_item .area_link:after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 1px;
+        background-color: #f1f1f1;
+        content: '';
+      }
+
+      .refer {
+        padding-left: 0.8em;
+      }
+      .refer a {
+        padding-left: 0.4em;
+        font-size: 13px;
+        color: #666;
+      }
+
+      .area_list {
+        list-style: decimal !important;
+        list-style-position: inside;
+        padding-left: 35px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .area_item {
+        list-style: decimal !important;
+        width: 100%;
+      }
+
+      @media screen and (max-width: 640px) {
+        .wrap.pub-body {
+          padding: 10px;
+        }
+        .page_item {
+          width: 100%;
+        }
+      }
+      @media screen and (min-width: 1600px) {
+        .wrap.pub-body {
+          padding: 30px;
+        }
+        .area_item {
+          width: 50%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap pub-body">
+      <h1 class="page_title">CGP HTML List</h1>
+      <ul class="page_list">
+        <li class="page_item">
+          <h2 class="area_title">Guide</h2>
+          <ol class="area_list">
+            <li class="area_item">
+              <a target="_blank" href="guide.html" class="area_link">Guide</a>
+            </li>
+          </ol>
+        </li>
+      </ul>
+      <ul class="page_list">
+        <h2 class="area_title">Popup</h2>
+        <li class="area_item">
+          <a target="_blank" href="./cgp/common/modal_example.html" class="area_link">Popups</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

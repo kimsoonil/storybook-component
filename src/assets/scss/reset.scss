@@ -143,3 +143,11 @@ input:focus-visible {
   box-sizing: border-box;
   border-radius: 5px;
 }
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+:focus-visible {
+  outline: 0;
+}

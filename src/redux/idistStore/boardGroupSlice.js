@@ -4,6 +4,7 @@ const initialState = () => ({
   isLoading: false,
   boardGroup: {},
   boards: {},
+  postBoardTrigger: {},
   error: ''
 });
 
@@ -14,10 +15,10 @@ const boardGroupSlice = createSlice({
     reset: (state) => {
       Object.assign(state, initialState());
     },
-    getIdBoardGroupInit: (state) => {
+    getBoardGroupInit: (state) => {
       state.isLoading = true;
     },
-    getIdBoardGroupSuccess: (state, { payload }) => {
+    getBoardGroupSuccess: (state, { payload }) => {
       state.isLoading = false;
       state.boardGroup = payload;
     },
@@ -25,10 +26,8 @@ const boardGroupSlice = createSlice({
     patchBoardGroupInit: (state) => {
       state.isLoading = true;
     },
-    patchBoardGroupSuccess: (state, { payload }) => {
-      const prevBoardGroup = JSON.parse(JSON.stringify(state.boardGroup.data));
+    patchBoardGroupSuccess: (state) => {
       state.isLoading = false;
-      state.boardGroup = { ...payload, data: { ...prevBoardGroup, ...payload.data } };
     },
 
     postBoardGroupBoardInit: (state) => {
@@ -36,10 +35,27 @@ const boardGroupSlice = createSlice({
     },
     postBoardGroupBoardSuccess: (state, { payload }) => {
       state.isLoading = false;
+      state.postBoardTrigger = payload.data;
       // const prevBoardGroups = JSON.parse(JSON.stringify(state.boardGroups.data));
       // state.boardGroups = { ...payload, data: [...prevBoardGroups, ...[payload.data]] };
-      // const prevBoardList = JSON.parse(JSON.stringify(state.boards));
-      // state.boards = { ...payload, data: { ...prevBoardList, ...payload.data } };
+      // const prevBoards = JSON.parse(JSON.stringify(state.boards));
+      // state.boards = { ...payload, data: { ...prevBoards, ...payload.data } };
+    },
+
+    patchBoardGroupMergeInit: (state) => {
+      state.isLoading = true;
+    },
+    patchBoardGroupMergeSuccess: (state) => {
+      state.isLoading = false;
+    },
+
+    deleteBoardGroupInit: (state, { payload }) => {
+      console.log('deleteBoardGroupInit payload', payload);
+      state.isLoading = true;
+    },
+    deleteBoardGroupSuccess: (state, { payload }) => {
+      console.log('deleteBoardGroupSuccess payload', payload);
+      state.isLoading = false;
     },
 
     boardGroupFailure: (state, error) => {
@@ -51,14 +67,20 @@ const boardGroupSlice = createSlice({
 });
 
 export const {
-  getIdBoardGroupInit,
-  getIdBoardGroupSuccess,
+  getBoardGroupInit,
+  getBoardGroupSuccess,
 
   patchBoardGroupInit,
   patchBoardGroupSuccess,
 
   postBoardGroupBoardInit,
   postBoardGroupBoardSuccess,
+
+  patchBoardGroupMergeInit,
+  patchBoardGroupMergeSuccess,
+
+  deleteBoardGroupInit,
+  deleteBoardGroupSuccess,
 
   boardGroupFailure
 } = boardGroupSlice.actions;

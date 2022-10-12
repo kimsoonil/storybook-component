@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CCR STYLE GUIDE</title>
+  <link rel="stylesheet" href="./css/common.css" />      
+  <style> 
+    body {overflow-x: hidden;}    
+    .guide_menu {width:230px; height:100%; position:fixed; left:0; background-color:#414141;}
+    .guide_menu .title {font-family:"Poppins"; font-weight:700; font-size:25px; text-align:center; color:#fff; margin-top:20px;}
+    .guide_menu > div {margin:30px auto 0; width:180px; display:flex; flex-wrap: wrap;}      
+    .guide_menu > div button {color:#FFF; height:30px; font-size:12px; width:50%; text-align:center; outline:1px solid #fff; background:transparent; cursor:pointer;}
+    .guide_menu > div button:hover {background:rgba(0,0,0,0.3);}      
+    .guide_menu > div button.line {width:100%;}
+    .common_wrap {margin:0px; padding-left:230px; width:100%;}
+    .common_wrap > h1 {padding: 0 0 0 30px; font-size:30px; line-height: 40px; height: 50px; font-weight:700; background: #e1e1e1;}        
+    .common_wrap > h1 + div {padding:30px;}
+    .common-flex {display: flex; flex-wrap: wrap;}
+    .common-flex > div {display: flex; flex-direction: column; align-items: center; padding: 20px; margin: 10px; width: calc(33% - 16px); border: 1px solid #666; border-radius: 4px;}
+    .common-flex > div pre {width:100%;}            
+    .color-set { display: flex;  width: 140px; height: 120px; background-color: #101114; align-items: flex-end; border: 1px solid #ddd; }
+    .color-set p { width: 100%; padding: 7px; margin: 7px; background-color: #fff; border: 1px solid #eee; }
+    .color-set p span { display: block; font-family: 'Poppins'; font-weight: 700; color: #666; }
+    .color-set p span + span { color: #000; padding-top: 5px; }    
+    .font_list {margin-top:40px;}
+    .font_list li {display:flex; justify-content:left; align-items: center;}
+    .font_list li + li {margin-top:36px;}
+    .font_list li span:first-child {display: inline-block; width:92px;}
+    .typography {width:100%; border-collapse: collapse;}
+    .typography thead th {height:40px; text-align:left;}
+    .typography thead th, tbody td {border:1px solid #CDCDD1;}
+  </style>
+</head>
+<body>
+    <!-- Start:LeftMenu-->
+    <div class="guide_menu">
+      <div class="title">Style Guide</div>
+      <div>
+        <button type="button" onclick="location.href='#Text'">Text</button>
+        <button type="button" onclick="location.href='#Icon'">Icon</button>
+        <button type="button" onclick="location.href='#Input'">Input</button>
+        <button type="button" onclick="location.href='#Textarea'">Textarea</button>
+        <button type="button" onclick="location.href='#Stepper'">Stepper</button>
+        <button type="button" onclick="location.href='#Datepicker'">Datepicker</button>
+        <button type="button" onclick="location.href='#Select'">Select</button>
+        <button type="button" onclick="location.href='#Dropdown'">Dropdown</button>
+        <button type="button" onclick="location.href='#Toggle'">Toggle</button>
+        <button type="button" onclick="location.href='#Checkbox'">Checkbox</button>          
+        <button type="button" onclick="location.href='#Button'">Button</button>
+        <button type="button" onclick="location.href='#Nav'">Nav</button>
+        <button type="button" onclick="location.href='#Tabs'">Tabs</button>
+        <button type="button" onclick="location.href='#Category'">Tabs:Category</button>
+        <button type="button" onclick="location.href='#Tags'">Tags</button>
+        <button type="button" onclick="location.href='#Labels'">Labels</button>
+        <button type="button" onclick="location.href='#Pagination'">Pagination</button>
+        <button type="button" onclick="location.href='#Swiper'">Swiper</button>
+        <button type="button" onclick="location.href='#Progress'">Progress</button>
+        <button type="button" onclick="location.href='#Range'">Range Slider</button>
+        <button type="button" onclick="location.href='#Loading'">Loading</button>
+        <button type="button" onclick="location.href='#Tooltip'">Tooltip</button>
+        <button type="button" onclick="location.href='#Toast'">Toast</button>
+        <button type="button" onclick="location.href='#Alert'">Alert</button>
+        <button type="button" onclick="location.href='#Flash'">Flash msg</button>
+        <button type="button" onclick="location.href='#Modal'">Modal</button>    
+        <button type="button" onclick="location.href='#Color'">Color</button>
+        <button type="button" onclick="location.href='#Font'">Font</button>      
+        <button type="button" onclick="location.href='#search'" class="line">Input:search 예외적용</button>
+        <button type="button" onclick="location.href='#Radio'" class="line">Select Button:Radio Group</button>          
+      </div>
+    </div>
+    <!-- End:LeftMenu-->
+
+    <!-- Start:Guide-->
+    <div class="common_wrap">
+
+      <!-- START : Text --> 
+      <h1 id="Text">Text</h1>    
+      <div style="margin-bottom: 30px;"></div>
+      <!-- END : Text --> 
+      
+       <!-- START : Icon -->
+       <h1 id="Icon">Icon</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Icon -->
+
+       <!-- START : Input -->
+       <h1 id="Input">Input</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Input -->
+
+       <!-- START : Textarea -->
+       <h1 id="Textarea">Textarea</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Textarea -->
+
+       <!-- START : Stepper -->
+       <h1 id="Stepper">Stepper</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Stepper -->
+
+       <!-- START : Datepicker -->
+       <h1 id="Datepicker">Datepicker</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Datepicker -->
+
+       <!-- START : Select -->
+       <h1 id="Select">Select</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Select -->
+
+       <!-- START : Dropdown -->
+       <h1 id="Dropdown">Dropdown</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Dropdown -->
+
+       <!-- START : Toggle -->
+       <h1 id="Toggle">Toggle</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Toggle -->
+
+       <!-- START : Checkbox -->
+       <h1 id="Checkbox">Checkbox</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Checkbox -->
+
+       <!-- START : Button -->
+       <h1 id="Button">Button</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Button -->
+
+       <!-- START : Nav -->
+       <h1 id="Nav">Nav</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Nav -->
+
+       <!-- START : Tabs -->
+       <h1 id="Tabs">Tabs</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Tabs -->
+
+       <!-- START : Tabs:Category -->
+       <h1 id="Category">Tabs:Category</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Tabs:Category -->
+
+       <!-- START : Tags -->
+       <h1 id="Tags">Tags</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Tags -->
+
+       <!-- START : Labels -->
+       <h1 id="Labels">Labels</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Labels -->
+
+       <!-- START : Pagination -->
+       <h1 id="Pagination">Pagination</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Pagination -->
+
+       <!-- START : Swiper -->
+       <h1 id="Swiper">Swiper</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Swiper -->
+
+       <!-- START : Progress -->
+       <h1 id="Progress">Progress</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Progress -->
+
+       <!-- START : Range Slider -->
+       <h1 id="Range">Range Slider</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Range Slider -->
+
+       <!-- START : Loading -->
+       <h1 id="Loading">Loading</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Loading -->
+
+       <!-- START : Tooltip -->
+       <h1 id="Tooltip">Tooltip</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Tooltip -->
+
+       <!-- START : Alert -->
+       <h1 id="Alert">Alert</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Alert -->
+
+       <!-- START : Flash msg -->
+       <h1 id="Flash">Flash msg</h1>    
+       <div style="margin-bottom: 30px;"></div>
+       <!-- END : Flash msg -->
+
+       <!-- START : Modal -->
+       <h1 id="Modal">Modal</h1>    
+       <div style="margin-bottom: 30px;"></div>        
+       <!-- END : Modal -->
+
+       <!-- START : Color -->
+       <h1 id="Color">Color</h1>        
+       <div style="margin-bottom: 30px;">          
+        <!-- START -->
+        <div>
+          <div style="font-size: 25px; font-weight: bold; padding-bottom: 20px; color: #000;">
+            Theme colors
+          </div>
+          <div style="display:flex; justify-content: center; width:100%;">
+            <dl style="width:calc(100% / 4);">
+              <dt>
+                <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                Main Colors
+                </div>
+              </dt>
+              <dd>
+                <div class="color-set-view">
+                  <div class="color-set" style="background-color: #6563FF;">
+                    <p>
+                      <span>#6563FF</span>
+                      <span>$main_color</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 4);">
+              <dt>
+                <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                  Main hover & active Add border
+                </div>
+              </dt>
+              <dd>
+                <div>
+                  <div class="color-set" style="background-color: #7D0EDF;">
+                    <p>
+                      <span>#7D0EDF</span>
+                      <span>$main_active</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 4);">
+              <dt>
+                <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                Point color
+                </div>
+              </dt>
+              <dd>
+                <div class="color-set-view">
+                  <div class="color-set" style="background-color: #FF45A1;">
+                    <p>
+                      <span>#FF45A1</span>
+                      <span>$point_color</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 4);">
+              <dt>
+                <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                  Point hover & active
+                </div>
+              </dt>
+              <dd>
+                <div>
+                  <div class="color-set" style="background-color: #ED348F;">
+                    <p>
+                      <span>#ED348F</span>
+                      <span>$point_active</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+          </div>
+        </div>        
+        <!-- END -->
+        <!-- START -->
+        <div style="display:flex; border-top:1px solid #CDCDD1; margin-top:50px;">
+          <div style="font-size: 25px; font-weight: bold; padding: 30px 0 20px; color: #000; width:50%;">
+            Secondary colors
+          </div>
+          <div style="font-size: 25px; font-weight: bold; padding: 30px 0 20px; color: #000; width:50%;">
+            Text colors
+          </div>
+        </div>
+        <div style="display:flex; justify-content: center; width:100%;">
+          <dl style="width:calc(100% / 4);">
+            <dt>
+              <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                Certified & Hashtag color
+              </div>
+            </dt>
+            <dd>
+              <div class="color-set-view">
+                <div class="color-set" style="background-color: #6563FF;">
+                  <p>
+                    <span>#6563FF</span>
+                    <span>$secon_color01</span>
+                  </p>
+                </div>
+              </div>
+            </dd>
+          </dl>
+          <dl style="width:calc(100% / 4);">
+            <dt>
+              <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                Certified & Hashtag Border & hover color
+              </div>
+            </dt>
+            <dd>
+              <div>
+                <div class="color-set" style="background-color: #5752D0;">
+                  <p>
+                    <span>#5752D0</span>
+                    <span>$secon_color02</span>
+                  </p>
+                </div>
+              </div>
+            </dd>
+          </dl>
+          <dl style="width:calc(100% / 4);">
+            <dt>
+              <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                Body text color
+              </div>
+            </dt>
+            <dd>
+              <div class="color-set-view">
+                <div class="color-set" style="background-color: #121212;">
+                  <p>
+                    <span>#121212</span>
+                    <span>$body_text</span>
+                  </p>
+                </div>
+              </div>
+            </dd>
+          </dl>
+          <dl style="width:calc(100% / 4);">
+            <dt>
+              <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                Title color
+              </div>
+            </dt>
+            <dd>
+              <div>
+                <div class="color-set" style="background-color: #242A3C;">
+                  <p>
+                    <span>#242A3C</span>
+                    <span>$title_text</span>
+                  </p>
+                </div>
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <!-- END -->
+        <!-- START -->
+        <div style="border-top:1px solid #CDCDD1; margin-top:50px;">
+          <div style="font-size: 25px; font-weight: bold; padding:30px 0 20px; color: #000;">
+            Button colors
+          </div>
+          <div style="display:flex; justify-content: center; width:100%;">
+            <dl style="width:calc(100% / 4);">
+              <dt>
+                <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                  Success color
+                </div>
+              </dt>
+              <dd>
+                <div class="color-set-view">
+                  <div class="color-set" style="background-color: #00B78B;">
+                    <p>
+                      <span>#00B78B</span>
+                      <span>$button_success</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 4);">
+              <dt>
+                <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                  Warning color
+                </div>
+              </dt>
+              <dd>
+                <div>
+                  <div class="color-set" style="background-color: #fcd332;">
+                    <p>
+                      <span>#fcd332</span>
+                      <span>$button_warning</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 4);">
+              <dt>
+                <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                Error & Dislike color
+                </div>
+              </dt>
+              <dd>
+                <div class="color-set-view">
+                  <div class="color-set" style="background-color: #FF2A55;">
+                    <p>
+                      <span>#FF2A55</span>
+                      <span>$button_error</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 4);"></dl>
+          </div>
+        </div>       
+        <!-- END -->
+        <!-- START -->
+        <div style="border-top:1px solid #CDCDD1; margin-top:50px;">
+          <div style="font-size: 25px; font-weight: bold; padding:30px 0 20px; color: #000;">
+            Disable colors
+          </div>          
+          <div style="display:flex; justify-content: center; width:50%;">
+            <dl style="width:calc(100% / 2);">
+              <dt>
+                <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                  Disable Text & Icon color
+                </div>
+              </dt>
+              <dd>
+                <div class="color-set-view">
+                  <div class="color-set" style="background-color: #BDBDBD;">
+                    <p>
+                      <span>#BDBDBD</span>
+                      <span>$disable_text</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 2);">
+              <dt>
+                <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                  Disable Button color
+                </div>
+              </dt>
+              <dd>
+                <div>
+                  <div class="color-set" style="background-color: #CDCDD1;">
+                    <p>
+                      <span>#CDCDD1</span>
+                      <span>$disable_button</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+          </div>
+        </div>       
+        <!-- END -->
+        <!-- START -->
+        <div style="border-top:1px solid #CDCDD1; margin-top:50px;">
+          <div style="font-size: 25px; font-weight: bold; padding:30px 0 20px; color: #000;">
+            Etc.
+          </div>          
+          <div style="display:flex; justify-content: center; width:100%;">
+            <dl style="width:calc(100% / 4);">
+              <dt>
+                <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                  Like color
+                </div>
+              </dt>
+              <dd>
+                <div class="color-set-view">
+                  <div class="color-set" style="background-color: #27A2FF;">
+                    <p>
+                      <span>#27A2FF</span>
+                      <span>$like_color</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 4);">
+              <dt>
+                <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                  New icon color 
+                </div>
+              </dt>
+              <dd>
+                <div>
+                  <div class="color-set" style="background-color: #FFD300;">
+                    <p>
+                      <span>#FFD300</span>
+                      <span>$new_color</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 4);">
+              <dt>
+                <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                  Label icon color
+                </div>
+              </dt>
+              <dd>
+                <div>
+                  <div class="color-set" style="background-color: #5752D0;">
+                    <p>
+                      <span>#5752D0</span>
+                      <span>$label_color</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 4);">
+              <dt>
+                <div style="font-size: 15px; font-weight: bold; padding-bottom: 10px; color: #777; height:30px;">
+                  Body background color
+                </div>
+              </dt>
+              <dd>
+                <div>
+                  <div class="color-set" style="background-color: #f5f5f5;">
+                    <p>
+                      <span>#f5f5f5</span>
+                      <span>$body_color</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+          </div>
+        </div>        
+        <!-- END -->
+        <!-- START -->
+        <div style="border-top:1px solid #CDCDD1; margin-top:50px;">
+          <div style="font-size: 25px; font-weight: bold; padding:30px 0 20px; color: #000;">
+            Grayscale
+          </div>          
+          <div style="display:flex; justify-content: center; width:100%;">
+            <dl style="width:calc(100% / 6);">
+              <dt></dt>
+              <dd>
+                <div class="color-set-view">
+                  <div class="color-set" style="background-color: #777777;">
+                    <p>
+                      <span>#777777</span>
+                      <span>$gray_color01</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 6);">
+              <dt></dt>
+              <dd>
+                <div>
+                  <div class="color-set" style="background-color: #A7A8AB;">
+                    <p>
+                      <span>#A7A8AB</span>
+                      <span>$gray_color02</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 6);">
+              <dt></dt>
+              <dd>
+                <div>
+                  <div class="color-set" style="background-color: #BDBDBD;">
+                    <p>
+                      <span>#BDBDBD</span>
+                      <span>$gray_color03</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 6);">
+              <dt></dt>
+              <dd>
+                <div>
+                  <div class="color-set" style="background-color: #CDCDD1;">
+                    <p>
+                      <span>#CDCDD1</span>
+                      <span>gray_color04</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 6);">
+              <dt></dt>
+              <dd>
+                <div>
+                  <div class="color-set" style="background-color: #E0E0E0;">
+                    <p>
+                      <span>#E0E0E0</span>
+                      <span>$gray_color05</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 6);">
+              <dt></dt>
+              <dd>
+                <div>
+                  <div class="color-set" style="background-color: #F8F8F8;">
+                    <p>
+                      <span>#F8F8F8</span>
+                      <span>$gray_color06</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+          </div>
+        </div>        
+        <!-- END -->      
+      </div>      
+      <!-- END : Color -->
+
+      <!-- START : Font -->
+      <h1 id="Font">Font</h1>    
+      <div style="display:flex; justify-content: center;">
+        <div style="margin-bottom: 30px; width:33.3%">
+          <div style="font-family:Poppins; font-weight:500; font-size:40px;">Poppins <span style="font-family:NanumSquareRound; font-weight:bold; font-size:20px;">영문폰트</span></div>
+          <ul class="font_list">
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Light</span>
+              <span style="font-family:Poppins; font-weight:300; font-size:24px;">Hello, World! Play in CGP!</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Regular</span>
+              <span style="font-family:Poppins; font-weight:normal; font-size:24px;">Hello, World! Play in CGP!</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Medium</span>
+              <span style="font-family:Poppins; font-weight:500; font-size:24px;">Hello, World! Play in CGP!</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Semibold</span>
+              <span style="font-family:Poppins; font-weight:600; font-size:24px;">Hello, World! Play in CGP!</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Bold</span>
+              <span style="font-family:Poppins; font-weight:700; font-size:24px;">Hello, World! Play in CGP!</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">ExtraBold</span>
+              <span style="font-family:Poppins; font-weight:800; font-size:24px;">Hello, World! Play in CGP!</span>
+            </li>
+          </ul>
+        </div>
+        <div style="margin-bottom: 30px; width:33.3%">
+          <div style="font-family:Poppins; font-weight:500; font-size:40px;">NanumSquareRound <span style="font-family:NanumSquareRound; font-weight:bold; font-size:20px;">한글 폰트</span></div>
+          <ul class="font_list">
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Light</span>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:24px;">안녕하세요. 방문해 주셔서 감사합니다.</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Regular</span>
+              <span style="font-family:NanumSquareRound; font-weight:400; font-size:24px;">안녕하세요. 방문해 주셔서 감사합니다.</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Bold</span>
+              <span style="font-family:NanumSquareRound; font-weight:700; font-size:24px;">안녕하세요. 방문해 주셔서 감사합니다.</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">ExtraBold</span>
+              <span style="font-family:NanumSquareRound; font-weight:800; font-size:24px;">안녕하세요. 방문해 주셔서 감사합니다.</span>
+            </li>
+          </ul>
+        </div>
+        <div style="margin-bottom: 30px; width:33.3%">
+          <div style="font-family:M PLUS 1p; font-weight:500; font-size:40px;">M Plus 1P <span style="font-family:NanumSquareRound; font-weight:bold; font-size:20px;">일어 폰트</span></div>
+          <ul class="font_list">
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Light</span>
+              <span style="font-family:M PLUS 1p; font-weight:300; font-size:24px;">新しい時代のこころを映すタイプフェ</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Regular</span>
+              <span style="font-family:M PLUS 1p; font-weight:normal; font-size:24px;">新しい時代のこころを映すタイプフェ</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Medium</span>
+              <span style="font-family:M PLUS 1p; font-weight:500; font-size:24px;">新しい時代のこころを映すタイプフェ</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Bold</span>
+              <span style="font-family:M PLUS 1p; font-weight:700; font-size:24px;">新しい時代のこころを映すタイプフェ</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">ExtraBold</span>
+              <span style="font-family:M PLUS 1p; font-weight:800; font-size:24px;">新しい時代のこころを映すタイプフェ</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div style="padding:30px;">
+        <div style="font-family:'Poppins'; font-size:16px; font-weight:600;">Headers</div>
+        <table class="typography">
+          <caption></caption>
+          <colgroup>
+            <col style="width:15%;" />
+            <col style="width:25%;" />
+            <col style="width:25%;" />
+            <col style="width:25%;" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th></th>
+              <th><span style="font-family:'Poppins'; font-size:24px; font-weight:normal;">Poppins</span><span style="font-family:'NanumSquareRound'; font-size:16px; font-weight:bold;">영문 폰트</span></th>
+              <th><span style="font-family:'NanumSquareRound'; font-size:24px; font-weight:bold;">나눔스퀘어라운드</span><span style="font-family:'NanumSquareRound'; font-size:16px; font-weight:bold;">한글 폰트</span></th>
+              <th><span style="font-family:'M PLUS 1p'; font-size:24px; font-weight:bold;">M Plus 1P</span><span style="font-family:'NanumSquareRound'; font-size:16px; font-weight:bold;">일어 폰트</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span style="font-family:'Poppins'; font-size:16px; font-weight:500;">H1 44px</span><span style="display:block; font-family:'Poppins'; margin-top:8px; font-size:14px; font-weight:normal;">Community Heading</span></td>
+              <td style="font-family:'Poppins'; font-size:44px; font-weight:bold;">Sign your contract</td>
+              <td style="font-family:'NanumSquareRound'; font-size:44px; font-weight:800;">Sign your contract</td>
+              <td style="font-family:'M PLUS 1p'; font-size:44px; font-weight:800;">Sign your contract</td>
+            </tr>
+          </tbody>
+        </table>       
+      </div>
+      <!-- END : Font -->
+
+      <!-- START : Input:search 예외적용 -->
+      <h1 id="search">Input:search 예외적용</h1>    
+      <div style="margin-bottom: 30px;"></div>
+      <!-- END : Input:search 예외적용 -->
+
+      <!-- START : Select Button:Radio Group -->
+      <h1 id="Radio">Select Button:Radio Group</h1>    
+      <div style="margin-bottom: 30px;"></div>
+      <!-- END : Select Button:Radio Group -->
+    </div>    
+
+    </div>
+    <!-- End:Guide-->
+  <script>
+    document.querySelectorAll('code').forEach(function (element) {
+      element.innerHTML = element.innerHTML
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    });
+  </script>
+</body>
+</html>

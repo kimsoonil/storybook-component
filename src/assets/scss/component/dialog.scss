@@ -1,0 +1,134 @@
+@import '../base';
+
+// .MuiDialog-root {
+//   background-color: red;
+// }
+
+// .MuiDialog-container {
+//   background-color: pink;
+// }
+
+// .MuiDialog-paper {
+//   background-color: blue;
+//   width: 200px;
+// }
+
+.MuiPaper-root {
+  // background-color: pink !important;
+  width: 620px;
+  max-width: 620px !important;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.MuiDialogTitle-root {
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+  font-family: 'Poppins' !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 24px !important;
+  line-height: 36px !important;
+  text-align: center !important;
+}
+
+.MuiDialogActions-root {
+  display: flex !important;
+  padding: 0 !important;
+  justify-content: center !important;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.jg-dialog {
+  &-root {
+    @include col;
+    @include flexCenter;
+    position: fixed;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  &-wrapper {
+    @include col;
+    @include flexCenter;
+    width: 620px;
+    padding: 40px 20px;
+    box-sizing: border-box;
+
+    background-color: #fff;
+    border-radius: 4px;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+    // box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 4px 16px rgba(26, 36, 49, 0.08), 0px 16px 16px rgba(26, 36, 49, 0.04);
+  }
+
+  &-title {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+
+    color: #000000;
+  }
+
+  &-button-wrapper {
+    @include row;
+    @include flexCenter;
+    gap: 40px;
+    margin-top: 40px;
+  }
+}
+
+.dialog-merge-board {
+  &-title {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 39px;
+    text-align: center;
+    color: #000000;
+  }
+  &-subtitle {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+  }
+
+  .select-wrapper {
+    display: flex;
+    margin: 0 auto;
+    width: 300px;
+    height: 60px;
+    padding: 0 20px;
+    margin-top: 35px;
+    border-radius: 4px;
+    border: 1px solid #cdcdcd;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23px;
+  }
+  select {
+    width: inherit;
+    border: none;
+    outline: none;
+  }
+}

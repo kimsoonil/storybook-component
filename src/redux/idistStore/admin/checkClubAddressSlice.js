@@ -26,7 +26,7 @@ const checkClubAddressSlice = createSlice({
     checkClubAddressFailure: (state, error) => {
       state.isLoading = false;
       state.status = loadState.ERROR;
-      state.error = error.payload?.errors?.non_field_errors?.[0];
+      state.error = error.payload?.message;
     }
   }
 });

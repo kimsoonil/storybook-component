@@ -10,8 +10,8 @@ function Search() {
   const searchTab = window.location.pathname.split('/');
   return (
     <div>
-      <ClubsList limit={12} searchTab={searchTab[2]} search={''} />
-      <PostsList />
+      <ClubsList limit={12} searchTab={searchTab[3]} />
+      <PostsList limit={10} searchTab={searchTab[3]} />
     </div>
   );
 }

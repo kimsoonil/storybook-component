@@ -6,7 +6,9 @@ import 'assets/scss/search.scss';
 import PostsList from 'components/idist/PostsList';
 
 function SearchPosts() {
-  return <PostsList />;
+  const searchTab = window.location.pathname.split('/');
+
+  return <PostsList limit={14} searchTab={searchTab[3]} />;
 }
 
 export default SearchPosts;

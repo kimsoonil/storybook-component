@@ -13,26 +13,12 @@ const boardSlice = createSlice({
   name: 'board',
   initialState: initialState(),
 
-  // GET
-  // ​/board​/{board_pk}​/posts
-  // 리스트 조회
-
-  // GET
-  // ​/board​/{id}
-  // 객체 조회
-
-  // PATCH
-  // ​/board​/{id}
-  // 수정
-
-  // POST
-  // ​/board​/{board_pk}​/post
-  // 생성
   reducers: {
-    reset: (state) => {
+    boardReset: (state) => {
       Object.assign(state, initialState());
     },
     getBoardPostsInit: (state) => {
+      Object.assign(state, initialState());
       state.isLoading = true;
     },
     getBoardPostsSuccess: (state, { payload }) => {
@@ -40,10 +26,10 @@ const boardSlice = createSlice({
       state.posts = payload;
     },
 
-    getIdBoardInit: (state) => {
+    getBoardInit: (state) => {
       state.isLoading = true;
     },
-    getIdBoardSuccess: (state, { payload }) => {
+    getBoardSuccess: (state, { payload }) => {
       state.isLoading = false;
       state.board = payload;
     },
@@ -57,11 +43,32 @@ const boardSlice = createSlice({
     },
 
     postBoardPostInit: (state) => {
+      Object.assign(state, initialState());
       state.isLoading = true;
     },
     postBoardPostSuccess: (state, { payload }) => {
       state.isLoading = false;
       state.post = payload;
+      console.log('payload', payload);
+    },
+
+    patchBoardMergeInit: (state) => {
+      state.isLoading = true;
+    },
+    patchBoardMergeSuccess: (state) => {
+      state.isLoading = false;
+    },
+
+    deleteBoardInit: (state, { payload }) => {
+      console.log('deleteBoardInit payload', payload);
+      state.isLoading = true;
+    },
+    deleteBoardSuccess: (state, { payload }) => {
+      console.log('deleteBoardSuccess payload', payload);
+      state.isLoading = false;
+    },
+    resetBoardPosts: (state) => {
+      state.posts = {};
     },
 
     boardFailure: (state, error) => {
@@ -73,17 +80,26 @@ const boardSlice = createSlice({
 });
 
 export const {
+  boardReset,
+
   getBoardPostsInit,
   getBoardPostsSuccess,
 
-  getIdBoardInit,
-  getIdBoardSuccess,
+  getBoardInit,
+  getBoardSuccess,
 
   patchBoardInit,
   patchBoardSuccess,
 
   postBoardPostInit,
   postBoardPostSuccess,
+
+  patchBoardMergeInit,
+  patchBoardMergeSuccess,
+
+  deleteBoardInit,
+  deleteBoardSuccess,
+  resetBoardPosts,
 
   boardFailure
 } = boardSlice.actions;

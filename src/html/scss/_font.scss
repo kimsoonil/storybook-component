@@ -1,0 +1,163 @@
+@charset "UTF-8";
+/*** Poppins Font ***/
+/* poppins-300 - latin */
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 300;
+  font-style: normal;
+  src: url('../scss/font/Poppins-Light.eot');
+  src: url('../scss/font/Poppins-Light.eot?#iefix') format('embedded-opentype'),
+       url('../scss/font/Poppins-Light.woff2') format('woff2'),
+       url('../scss/font//Poppins-Light.woff') format('woff');
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../scss/font/Poppins-Regular.eot');
+  src: url('../scss/font/Poppins-Regular.eot?#iefix') format('embedded-opentype'),
+       url('../scss/font/Poppins-Regular.woff2') format('woff2'),
+       url('../scss/font/Poppins-Regular.woff') format('woff');
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-style: normal;
+  src: url('../scss/font/Poppins-Medium.eot');
+  src: url('../scss/font/Poppins-Medium.eot?#iefix') format('embedded-opentype'),
+       url('../scss/font/Poppins-Medium.woff2') format('woff2'),
+       url('../scss/font/Poppins-Medium.woff') format('woff');
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-style: normal;
+  src: url('../scss/font/Poppins-SemiBold.eot');
+  src: url('../scss/font/Poppins-SemiBold.eot?#iefix') format('embedded-opentype'),
+       url('../scss/font/Poppins-SemiBold.woff2') format('woff2'),
+       url('../scss/font/Poppins-SemiBold.woff') format('woff');
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-style: normal;
+  src: url('../scss/font/Poppins-Bold.eot');
+  src: url('../scss/font/Poppins-Bold.eot?#iefix') format('embedded-opentype'),
+       url('../scss/font/Poppins-Bold.woff2') format('woff2'),
+       url('../scss/font/Poppins-Bold.woff') format('woff');
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 800;
+  font-style: normal;
+  src: url('../scss/font/Poppins-ExtraBold.eot');
+  src: url('../scss/font/Poppins-ExtraBold.eot?#iefix') format('embedded-opentype'),
+       url('../scss/font/Poppins-ExtraBold.woff2') format('woff2'),
+       url('../scss/font/Poppins-ExtraBold.woff') format('woff');
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 900;
+  font-style: normal;
+  src: url('../scss/font/Poppins-Black.eot');
+  src: url('../scss/font/Poppins-Black.eot?#iefix') format('embedded-opentype'),
+       url('../scss/font/Poppins-Black.woff2') format('woff2'),
+       url('../scss/font/Poppins-Black.woff') format('woff');
+  font-display: swap;
+} 
+
+/*** m-plus-1p Font ***/
+/* m-plus-1p-300 - latin */
+@font-face {
+  font-family: 'M PLUS 1p';
+  font-style: normal;
+  font-weight: 300;      
+  font-display: swap;
+  src: url('../scss/font/MPLUS1p-Light.woff2') format('font-woff2'), /* Super Modern Browsers */ 
+       url('../scss/font/MPLUS1p-Light.woff') format('font-woff'); /* Modern Browsers */
+}
+/* m-plus-1p-regular - latin */
+@font-face {
+  font-family: 'M PLUS 1p';
+  font-style: normal;
+  font-weight: 400;      
+  font-display: swap;
+  src: url('../scss/font/m-plus-1p-v27-latin-regular.woff2') format('font-woff2'), /* Super Modern Browsers */ 
+       url('../scss/font/m-plus-1p-v27-latin-regular.woff') format('font-woff'); /* Modern Browsers */
+}
+/* m-plus-1p-500 - latin */
+@font-face {
+  font-family: 'M PLUS 1p';
+  font-style: normal;
+  font-weight: 500;      
+  font-display: swap;
+  src: url('../scss/font/m-plus-1p-v27-latin-500.woff2') format('font-woff2'), /* Super Modern Browsers */ 
+       url('../scss/font/m-plus-1p-v27-latin-500.woff') format('font-woff'); /* Modern Browsers */
+}
+/* m-plus-1p-700 - latin */
+@font-face {
+  font-family: 'M PLUS 1p';
+  font-style: normal;
+  font-weight: 700;      
+  font-display: swap;
+  src: url('../scss/font/m-plus-1p-v27-latin-700.woff2') format('font-woff2'), /* Super Modern Browsers */ 
+       url('../scss/font/m-plus-1p-v27-latin-700.woff') format('font-woff'); /* Modern Browsers */
+}
+/* m-plus-1p-800 - latin */
+@font-face {
+  font-family: 'M PLUS 1p';
+  font-style: normal;
+  font-weight: 800;      
+  font-display: swap;
+  src: url('../scss/font/m-plus-1p-v27-latin-800.woff2') format('font-woff2'), /* Super Modern Browsers */ 
+       url('../scss/font/m-plus-1p-v27-latin-800.woff') format('font-woff'); /* Modern Browsers */
+}
+
+/* 나눔스퀘어라운드 웹폰트 v1.11 */
+@font-face {
+  font-family: 'NanumSquareRound';
+  font-weight: 300;
+  font-style: normal;
+  src: url('../scss/font/NanumSquareRound-Light.eot');
+  src: url('../scss/font/NanumSquareRound-Light.eot?#iefix') format('embedded-opentype'),
+       url('../scss/font/NanumSquareRound-Light.woff2') format('woff2'),
+       url('../scss/font/NanumSquareRound-Light.woff') format('woff');
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'NanumSquareRound';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../scss/font/NanumSquareRound-Regular.eot');
+  src: url('../scss/font/NanumSquareRound-Regular.eot?#iefix') format('embedded-opentype'),
+       url('../scss/font/NanumSquareRound-Regular.woff2') format('woff2'),
+       url('../scss/font/NanumSquareRound-Regular.woff') format('woff');
+       
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'NanumSquareRound';
+  font-weight: 700;
+  font-style: normal;
+  src: url('../scss/font/NanumSquareRound-Bold.eot');
+  src: url('../scss/font/NanumSquareRound-Bold.eot?#iefix') format('embedded-opentype'),
+       url('../scss/font/NanumSquareRound-Bold.woff2') format('woff2'),
+       url('../scss/font/NanumSquareRound-Bold.woff') format('woff');
+  font-display: swap;
+} 
+@font-face {
+  font-family: 'NanumSquareRound';
+  font-weight: 800;
+  font-style: normal;
+  src: url('../scss/font/NanumSquareRound-ExtraBold.eot');
+  src: url('../scss/font/NanumSquareRound-ExtraBold.eot?#iefix') format('embedded-opentype'),
+       url('../scss/font/NanumSquareRound-ExtraBold.woff2') format('woff2'),
+       url('../scss/font/NanumSquareRound-ExtraBold.woff') format('woff');       
+  font-display: swap;
+} 

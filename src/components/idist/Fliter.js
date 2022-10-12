@@ -8,54 +8,56 @@ import 'assets/scss/components.scss';
 import { useTranslation } from 'react-i18next';
 
 export function Fliter({ doneFuc }) {
-  const [sort, setSort] = useState('new');
-  const [date, setDate] = useState('All');
+  const [date, setDate] = useState('day');
   const { t } = useTranslation();
   const [keyword, setKeyword] = useState('');
+  const [selectedDate, handleDateChange] = useState([null, null]);
+  const [selectOption, setSelectOption] = useState('OR');
+  const [openSelectOption, setOpenSelectOption] = useState(false);
+  const [arrFilterAnd, setArrFilterAnd] = useState([]);
+  const [arrFilterOR, setArrFilterOR] = useState([]);
+  const [arrFilterExcept, setArrFilterExcept] = useState([]);
 
-  const [selectedDate, handleDateChange] = React.useState([null, null]);
-
+  const clickSelectOption = (name) => {
+    setSelectOption(name);
+    setOpenSelectOption(!selectOption);
+  };
+  const clickPlusOption = (fliter, search) => {
+    if (fliter === 'AND') {
+      setArrFilterAnd([...arrFilterAnd, search]);
+    } else if (fliter === 'OR') {
+      setArrFilterOR([...arrFilterOR, search]);
+    } else {
+      setArrFilterExcept([...arrFilterExcept, search]);
+    }
+  };
   return (
     <div className="filter relative">
       <div className="filter-conent">
-        <div className="flex-between filter-hr">
-          <div className="filter-title">{t(`정렬`)}</div>
-          <div className="flex-center sort-box">
-            <div
-              className={`box-left filter-box flex-center ${sort === 'new' && 'active'}`}
-              onClick={() => setSort('new')}
-            >
-              등록순
-            </div>
-            <div
-              className={`box-right filter-box flex-center ${sort === 'popularity' && 'active'}`}
-              onClick={() => setSort('popularity')}
-            >
-              인기순
-            </div>
-          </div>
-        </div>
         <div className="filter-hr">
           <div className="flex-between ">
             <div className="filter-title">기간</div>
             <div className="flex-center date-box">
               <div
-                className={'box-left filter-box flex-center ' + (date === 'All' && 'active')}
-                onClick={() => setDate('All')}
+                className={'box-left filter-box flex-center ' + (date === 'day' && 'active')}
+                onClick={() => setDate('day')}
               >
-                일주일
+                Day
+              </div>
+              <div className={`filter-box flex-center ${date === 'week' && 'active'}`} onClick={() => setDate('week')}>
+                Week
               </div>
               <div
-                className={`filter-box flex-center ${date === '3month' && 'active'}`}
-                onClick={() => setDate('3month')}
+                className={`filter-box flex-center ${date === 'month' && 'active'}`}
+                onClick={() => setDate('month')}
               >
-                3개월
+                Month
               </div>
               <div
                 className={`box-right filter-box flex-center ${date === 'select' && 'active'}`}
                 onClick={() => setDate('select')}
               >
-                직접선택
+                Select
               </div>
             </div>
           </div>
@@ -91,20 +93,72 @@ export function Fliter({ doneFuc }) {
         <div className="flex-between keyword">
           <div className="filter-title">검색어</div>
           <div className="flex-center relative">
+            <div className="keyword-select relative" onClick={() => setOpenSelectOption(!openSelectOption)}>
+              <div>{selectOption}</div>
+              <div>
+                <img src={require('images/club/arrow-bottom.png')} alt="" />
+              </div>
+              <div className="select-option" style={{ display: openSelectOption ? 'block' : 'none' }}>
+                <div className="select-option-item flex-center" onClick={() => clickSelectOption('AND')}>
+                  AND
+                </div>
+                <div className="select-option-item flex-center" onClick={() => clickSelectOption('OR')}>
+                  OR
+                </div>
+                <div className="select-option-item flex-center" onClick={() => clickSelectOption('Except')}>
+                  Except
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex-center relative">
             <input
+              type="text"
               className="keyword-input"
               placeholder="search..."
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
             />
-            <div className="seachIc">
-              <img src={require('images/components/ic_search_wh.svg').default} alt="" />
+            <div className="seachPlus" onClick={() => clickPlusOption(selectOption, keyword)}>
+              <img src={require('images/components/plus.png')} />
             </div>
           </div>
         </div>
       </div>
-      <div className="flex-between filter-actions">
-        <div className="filter-cancle">초기화</div>
+      <div className="filter-tag">
+        <div className="filter-tag-list">
+          <div className="filter-tag-title">And</div>
+          {arrFilterAnd.map((item, index) => {
+            return (
+              <div className="filter-tag-item" key={index}>
+                {item}
+              </div>
+            );
+          })}
+        </div>
+        <div className="filter-tag-list">
+          <div className="filter-tag-title">Or</div>
+
+          {arrFilterOR.map((item, index) => {
+            return (
+              <div className="filter-tag-item" key={index}>
+                {item}
+              </div>
+            );
+          })}
+        </div>
+        <div className="filter-tag-list">
+          <div className="filter-tag-title">Except</div>
+          {arrFilterExcept.map((item, index) => {
+            return (
+              <div className="filter-tag-item" key={index}>
+                {item}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className="filter-actions">
         <div className="filter-done flex-center" onClick={doneFuc}>
           적용
         </div>

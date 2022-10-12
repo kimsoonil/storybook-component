@@ -1,0 +1,214 @@
+/* Setting */
+$max_width: 1280px; 
+$img_root_path : '../img';
+
+/* Color */
+$main_color : #9013FE;
+$main_active : #7D0EDF;
+$point_color : #FF45A1;
+$point_active : #ED348F;
+
+$secon_color01 : #6563FF;
+$secon_color02 : #5752D0;
+
+$body_text : #121212;
+$title_text : #242A3C;
+
+$button_success : #00B78B;
+$button_warning : #fcd332;
+$button_error : #FF2A55;
+
+$disable_text : #BDBDBD;
+$disable_button : #CDCDD1;
+
+$like_color : #27A2FF;
+$new_color : #FFD300;
+$label_color : #5752D0;
+$body_color : #f5f5f5;
+
+$gray_color01 : #777777;
+$gray_color02 : #A7A8AB;
+$gray_color03 : #BDBDBD;
+$gray_color04 : #CDCDD1;
+$gray_color05 : #E0E0E0;
+$gray_color06 : #F8F8F8;
+
+/* Font */
+$font_base : 14px; // 기본 폰트 사이즈
+
+@mixin eng_font ($weight)  {
+  font-family: "Poppins", sans-serif;
+  @if($weight == 'normal') {
+    font-weight:400;
+  } @else if($weight == 'light') {
+    font-weight:300;
+  } @else if($weight == 'medium') {
+    font-weight:500;      
+  } @else if($weight == 'semibold') {
+    font-weight:600;
+  } @else if($weight == 'bold') {
+    font-weight:700;
+  } @else if($weight == 'extra') {
+    font-weight:800;
+  } 
+}
+@mixin kor_font ($weight) {
+  font-family:"NanumSquareRound", sans-serif;
+  @if($weight == 'normal') {
+    font-weight:normal;
+  } @else if($weight == 'light') {
+    font-weight:300;
+  } @else if($weight == 'bold') {
+    font-weight:bold;
+  } @else if($weight == 'extra') {
+    font-weight:800;
+  }
+}
+@mixin cha_font ($weight) {
+  font-family:"M PLUS 1p", sans-serif;
+  @if($weight == 'normal') {
+    font-weight:normal;
+  } @else if($weight == 'light') {
+    font-weight:300;
+  } @else if($weight == 'medium') {
+    font-weight:500;
+  } @else if($weight == 'bold') {
+    font-weight:700;
+  } @else if($weight == 'extra') {
+    font-weight:800;
+  }
+}
+
+/* Title */
+@mixin h2 {
+  font-size:$font_base + 30px;
+  color:$title_text;
+  letter-spacing:-0.88px;
+  line-height:48px; 
+}
+
+@mixin h3 {
+  font-size:$font_base + 26px;
+  color:$title_text;
+  letter-spacing:-0.8px;
+  line-height:48px; 
+}
+
+@mixin stitle {
+  font-size:$font_base + 12px;
+  color:$title_text;
+  letter-spacing:-0.52px;
+  line-height:32px; 
+}
+
+@mixin btitle1 {
+  font-size:$font_base + 4px;
+  color:$body_text;
+  letter-spacing:-0.36px;
+  line-height:24px; 
+}
+
+@mixin btitle2 {
+  font-size:$font_base + 2px;
+  color:$body_text;
+  letter-spacing:-0.32px;
+  line-height:20px; 
+}
+
+@mixin description {
+  font-size:$font_base - 1px;
+  color:$body_text;
+  letter-spacing:-0.26px;
+  line-height:17px; 
+}
+
+
+.h2Type {  
+  &.eng {
+    @include eng_font(bold);    
+    @include h2;
+  } 
+  &.kor {
+    @include kor_font(extra);    
+    @include h2;
+  } 
+  &.cha {
+    @include cha_font(extra);    
+    @include h2;
+  } 
+}
+
+.h3Type { 
+  &.eng {
+    @include eng_font(bold);    
+    @include h3;   
+  } 
+  &.kor {
+    @include kor_font(extra);     
+    @include h3; 
+  } 
+  &.cha {
+    @include cha_font(extra);       
+    @include h3;
+  } 
+}
+
+.subtitle {  
+  &.eng {
+    @include eng_font(semibold);    
+    @include stitle;
+  } 
+  &.kor {
+    @include kor_font(bold);    
+    @include stitle;
+  } 
+  &.cha {
+    @include cha_font(bold);    
+    @include stitle;
+  } 
+}
+
+.bodytitle.p1 {
+  &.eng {
+    @include eng_font(medium);    
+    @include btitle1;  
+  } 
+  &.kor {
+    @include kor_font(bold);    
+    @include btitle1;  
+  } 
+  &.cha {
+    @include cha_font(medium);    
+    @include btitle1;  
+  } 
+}
+
+.bodytitle.p2 {  
+  &.eng {
+    @include eng_font(semibold);    
+    @include btitle2;     
+  } 
+  &.kor {
+    @include kor_font(extra);       
+    @include btitle2;  
+  } 
+  &.cha {
+    @include cha_font(bold);       
+    @include btitle2;  
+  } 
+}
+
+.des {  
+  &.eng {
+    @include eng_font(normal);    
+    @include description;
+  } 
+  &.kor {
+    @include kor_font(normal);    
+    @include description;
+  } 
+  &.cha {
+    @include cha_font(normal);    
+    @include description;
+  } 
+}

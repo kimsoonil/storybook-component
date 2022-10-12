@@ -6,26 +6,17 @@ import {
   checkClubAddressFailure
 } from 'redux/idistStore/admin/checkClubAddressSlice';
 
-import axios from 'axios';
-import { getToken } from 'utils/Cookies/Cookies';
-
-const config = getToken();
+import idistApi from 'redux/idistApi';
 
 function* onLoadCheckClubAddressAsync({ payload }) {
   try {
-    const response = yield call(() =>
-      axios.post(
-        `${process.env.REACT_APP_API_URL}/api/v1/${payload.id ? `club/${payload.id}/` : `clubs/`}check-address`,
-        { address: payload.address },
-        config
-      )
-    );
-    if (response.status === 200) {
+    const response = yield call(idistApi.postAdminClubAddressCheck, payload);
+    if (response.status === 200 || response.data.message === 'ok') {
       yield put(checkClubAddressSuccess({ ...response.data }));
     }
   } catch (error) {
     console.log(error.response.data);
-    yield put(checkClubAddressFailure(error.response.data));
+    yield put(checkClubAddressFailure(error));
   }
 }
 

@@ -1,22 +1,22 @@
 import { takeLatest, all, put, fork, call } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actionTypes from 'redux/idistStore/boardGroupSlice';
-import * as clubActionTypes from 'redux/idistStore/clubSlice';
-import * as adminTypes from 'redux/idistStore/adminSlice';
 import { getToken } from 'utils/Cookies/Cookies';
+import { sagaCallback } from 'utils';
 
 const config = getToken();
-// const getUrl = (path) => `${process.env.REACT_APP_API_URL}/api/v1/board-group/${path}`;
+// const getUrl = (path) => `${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/board-group/${path}`;
 
-function* getIdBoardGroup({ payload }) {
+function* getBoardGroup({ payload }) {
   try {
     // const response = yield call(() => axios.get(getUrl(payload.id), '', config));
     const response = yield call(() =>
-      axios.get(`${process.env.REACT_APP_API_URL}/api/v1/board-group/${payload.id}`, config)
+      axios.get(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/board-group/${payload.id}`, config)
     );
-    // const response = yield call(() => test());
-    if (response.status === 200) {
-      yield put(actionTypes.getIdBoardGroupSuccess({ ...response.data }));
+
+    if (response.data.message === 'ok') {
+      yield put(actionTypes.getBoardGroupSuccess({ ...response.data }));
+      // console.log(response?.data);
     }
   } catch (error) {
     yield put(actionTypes.boardGroupFailure(error));
@@ -27,11 +27,18 @@ function* getIdBoardGroup({ payload }) {
 function* patchBoardGroup({ payload }) {
   try {
     const response = yield call(() =>
-      axios.patch(`${process.env.REACT_APP_API_URL}/api/v1/board-group/${payload.id}`, payload.data, config)
+      axios.patch(
+        `${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/admin/board-group/${payload.id}`,
+        payload.parameters,
+        config
+      )
     );
-    if (response.status == 200) {
+    if (response.data.message === 'ok') {
       yield put(actionTypes.patchBoardGroupSuccess({ ...response.data }));
-      console.log(response?.data?.data);
+      yield call(sagaCallback, payload, response?.data?.data);
+      // if (payload.actionList) {
+      //   yield all(payload.actionList.map((action) => put(action)));
+      // }
     }
   } catch (error) {
     yield put(actionTypes.boardGroupFailure(error));
@@ -42,15 +49,61 @@ function* patchBoardGroup({ payload }) {
 function* postBoardGroupBoard({ payload }) {
   try {
     const response = yield call(() =>
-      axios.post(`${process.env.REACT_APP_API_URL}/api/v1/board-group/${payload.id}/board`, payload.data, config)
+      axios.post(
+        `${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/admin/board-group/${payload.id}/board`,
+        payload.parameters,
+        config
+      )
     );
-    if (response.status == 200 || response.status == 201) {
+    if (response.data.message === 'ok') {
       yield put(actionTypes.postBoardGroupBoardSuccess({ ...response.data }));
-      yield put(clubActionTypes.getClubBoardGroupsInit(payload.clubId));
-      yield put(
-        adminTypes.setAdminBoards((prev) => ({ ...prev, selected: { id: response?.data?.data?.id, type: 1 } }))
-      );
-      console.log('postBoardGroupBoard data : ', response.data.data);
+      yield call(sagaCallback, payload, response?.data?.data);
+      // if (payload.actionList) {
+      //   yield all(payload.actionList.map((action) => put(action)));
+      // }
+      // console.log('postBoardGroupBoard data : ', response.data.data);
+    }
+  } catch (error) {
+    yield put(actionTypes.boardGroupFailure(error));
+    console.log(error);
+  }
+}
+
+function* patchBoardGroupMerge({ payload }) {
+  try {
+    const response = yield call(() =>
+      axios.patch(
+        `${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/admin/board-group/${payload.id}/merge`,
+        payload.parameters,
+        config
+      )
+    );
+    if (response.data.message === 'ok') {
+      yield put(actionTypes.patchBoardGroupMergeSuccess({ ...response.data }));
+      yield call(sagaCallback, payload, response?.data?.data);
+      // if (payload.actionList) {
+      //   yield all(payload.actionList.map((action) => put(action)));
+      // }
+      console.log(response?.data?.data);
+    }
+  } catch (error) {
+    yield put(actionTypes.boardGroupFailure(error));
+    console.log(error);
+  }
+}
+
+function* deleteBoardGroup({ payload }) {
+  try {
+    const response = yield call(() =>
+      axios.delete(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/admin/board-group/${payload.id}`, config)
+    );
+    if (response.data.message === 'ok') {
+      yield put(actionTypes.deleteBoardGroupSuccess({ ...response.data }));
+      yield call(sagaCallback, payload, response?.data?.data);
+      // if (payload.actionList) {
+      //   yield all(payload.actionList.map((action) => put(action)));
+      // }
+      console.log(response?.data?.data);
     }
   } catch (error) {
     yield put(actionTypes.boardGroupFailure(error));
@@ -60,9 +113,11 @@ function* postBoardGroupBoard({ payload }) {
 
 function* boardGroupSaga() {
   yield all([
-    takeLatest(actionTypes.getIdBoardGroupInit, getIdBoardGroup),
+    takeLatest(actionTypes.getBoardGroupInit, getBoardGroup),
     takeLatest(actionTypes.patchBoardGroupInit, patchBoardGroup),
-    takeLatest(actionTypes.postBoardGroupBoardInit, postBoardGroupBoard)
+    takeLatest(actionTypes.postBoardGroupBoardInit, postBoardGroupBoard),
+    takeLatest(actionTypes.patchBoardGroupMergeInit, patchBoardGroupMerge),
+    takeLatest(actionTypes.deleteBoardGroupInit, deleteBoardGroup)
   ]);
 }
 

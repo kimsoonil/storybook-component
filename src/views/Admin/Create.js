@@ -10,13 +10,14 @@ import RadioButton from 'components/idist/admin/RadioButton';
 import FilePicker from 'components/idist/admin/FilePicker';
 import Tag from 'components/idist/admin/Tag';
 import JButton from 'components/idist/admin/JButton';
-import { openCreateClubPopup } from 'redux/idistStore/popupSlice';
-import { CreateClubPopup } from 'components/idist/popup/CreateClubPopup';
+import CreateClubModal from 'components/idist/modal/CreateClubModal';
+import CreateClubCancelModal from 'components/idist/modal/CreateClubCancelModal';
 import { AVD, loadState, IVD } from 'views/Admin';
 import { numFM, fileSizeFM } from 'utils/formatter';
 import { reqCheckClubName, resetCheckClubName } from 'redux/idistStore/admin/checkClubNameSlice';
 import { reqCheckClubAddress, resetCheckClubAddress } from 'redux/idistStore/admin/checkClubAddressSlice';
 import { categoriesInit } from 'redux/idistStore/admin/categoriesSlice';
+import { showModal } from 'redux/idistStore/admin/modalSlice';
 
 const Create = () => {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ const Create = () => {
       setNameInputState(IVD.error);
       setNameValid({ status: loadState.ERROR, errorText: AVD.errorText.name.empty });
     } else {
-      dispatch(reqCheckClubName({ name: _name }));
+      dispatch(reqCheckClubName({ data: { name: _name } }));
     }
   };
 
@@ -76,7 +77,7 @@ const Create = () => {
       setAddressInputState(IVD.error);
       setAddressValid({ status: loadState.ERROR, errorText: AVD.errorText.address.empty });
     } else {
-      dispatch(reqCheckClubAddress({ address: _address }));
+      dispatch(reqCheckClubAddress({ data: { address: _address } }));
     }
   };
   useEffect(() => {
@@ -105,12 +106,12 @@ const Create = () => {
 
   const [profileImageData, setProfileImageData] = useState({
     file: {},
-    data: ''
+    base64: ''
   });
 
   const [bannerImageData, setBannerImageData] = useState({
     file: {},
-    data: ''
+    base64: ''
   });
 
   const [tmpDescription, setTmpDescription] = useState('');
@@ -149,23 +150,23 @@ const Create = () => {
       }
     }
   };
-  const onChnageCurrentTagText = useCallback((e) => {
+  const onChangeCurrentTagText = useCallback((e) => {
     setCurrentTagText(e.target.value);
   }, []);
 
   const errorImage = useMemo(() => require('images/admin/valid-error.svg').default, []);
 
-  const [autoApproval, setAutoApproval] = useState(1);
+  const [autoApproval, setAutoApproval] = useState('yes');
 
   const _club = {
     name: tmpName,
     address: tmpAddress,
     category: categoryId,
-    profileImage: profileImageData.data,
-    bannerImage: bannerImageData.data,
+    profile_image: profileImageData.base64,
+    banner_image: bannerImageData.base64,
     description: tmpDescription,
     tags: tags,
-    isAutoApproval: autoApproval === 1
+    is_auto_approval: autoApproval === 'yes'
   };
 
   return (
@@ -173,7 +174,7 @@ const Create = () => {
       <Header />
       {/* Banner */}
       <div className="admin-banner-wrapper">
-        {bannerImageData.data && <img className="banner-image" src={bannerImageData.data} />}
+        {bannerImageData.base64 && <img className="banner-image" src={bannerImageData.base64} />}
 
         <div className="banner-content-wrapper">
           <button
@@ -191,8 +192,8 @@ const Create = () => {
                 <Tag key={index} value={item} />
               ))}
             </div>
-            {profileImageData.data ? (
-              <img className="banner-profile-image" src={profileImageData.data} />
+            {profileImageData.base64 ? (
+              <img className="banner-profile-image" src={profileImageData.base64} />
             ) : (
               <div
                 style={{
@@ -337,9 +338,9 @@ const Create = () => {
                 maxSize={{ value: 10, unit: 'mb' }}
               >
                 <div className="image-picker">
-                  {profileImageData.data ? (
+                  {profileImageData.base64 ? (
                     <div className="image-picker-selected-wrapper profile-size">
-                      <img className="image-picker-selected profile-size" src={profileImageData.data} />
+                      <img className="image-picker-selected profile-size" src={profileImageData.base64} />
                       <div className="image-picker-selected-hover profile-size">
                         <img src={require('images/admin/non-selected-image.svg').default} />
                       </div>
@@ -372,9 +373,9 @@ const Create = () => {
                 maxSize={{ value: 20, unit: 'mb' }}
               >
                 <div className="image-picker ">
-                  {bannerImageData.data ? (
+                  {bannerImageData.base64 ? (
                     <div className="image-picker-selected-wrapper banner-size">
-                      <img className="image-picker-selected banner-size" src={bannerImageData.data} />
+                      <img className="image-picker-selected banner-size" src={bannerImageData.base64} />
                       <div className="image-picker-selected-hover banner-size">
                         <img src={require('images/admin/non-selected-image.svg').default} />
                       </div>
@@ -442,7 +443,7 @@ const Create = () => {
                     type={'text'}
                     placeholder={AVD.tags.placeholder}
                     value={currentTagText}
-                    onChange={onChnageCurrentTagText}
+                    onChange={onChangeCurrentTagText}
                     onBlur={addTags}
                   />
                 )}
@@ -473,14 +474,14 @@ const Create = () => {
             outline
             color={'none'}
             onClick={() => {
-              dispatch(openCreateClubPopup({ type: 'cancel', text: AVD.popupText.cancel }));
+              dispatch(showModal({ type: 'createClubCancel' }));
             }}
             tabIndex={0}
           />
           <JButton
             label={'Create'}
             onClick={() => {
-              dispatch(openCreateClubPopup({ type: 'create', text: AVD.popupText.create, club: _club }));
+              dispatch(showModal({ type: 'createClub', data: _club }));
             }}
             tabIndex={0}
             disabled={
@@ -491,7 +492,8 @@ const Create = () => {
           />
         </div>
       </div>
-      <CreateClubPopup />
+      <CreateClubModal />
+      <CreateClubCancelModal />
     </div>
   );
 };

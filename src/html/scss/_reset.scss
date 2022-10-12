@@ -1,0 +1,295 @@
+   html,
+   body,
+   div,
+   span,
+   applet,
+   object,
+   iframe,
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   h6,
+   p,
+   blockquote,
+   pre,
+   a,
+   button,
+   abbr,
+   acronym,
+   address,
+   big,
+   cite,
+   code,
+   del,
+   dfn,
+   em,
+   img,
+   ins,
+   kbd,
+   q,
+   s,
+   samp,
+   small,
+   strike,
+   strong,
+   sub,
+   sup,
+   tt,
+   var,
+   b,
+   u,
+   i,
+   center,
+   dl,
+   dt,
+   dd,
+   ol,
+   ul,
+   li,
+   fieldset,
+   form,
+   label,
+   legend,
+   table,
+   caption,
+   tbody,
+   tfoot,
+   thead,
+   tr,
+   th,
+   td,
+   article,
+   aside,
+   canvas,
+   details,
+   figcaption,
+   figure,
+   footer,
+   header,
+   hgroup,
+   menu,
+   nav,
+   section,
+   summary,
+   time,
+   mark,
+   audio,
+   video {
+     margin: 0;
+     padding: 0;
+     border: 0;
+     font-size: 100%;
+     vertical-align: baseline;
+     font-family: 'NanumSquareRound', sans-serif;
+     word-break: keep-all;
+     -ms-word-break: break-all;
+   }
+   /* HTML5 display-role reset for older browsers */
+   article,
+   aside,
+   details,
+   figcaption,
+   figure,
+   footer,
+   header,
+   hgroup,
+   main,
+   menu,
+   nav,
+   section {
+     display: block;
+     box-sizing: border-box;
+   }
+   body {
+     line-height: 1;
+     min-width: $max_width;
+     font-size: $font_base;
+     color: $body_text;
+     letter-spacing:-0.28px;
+     .eng {
+        @include eng_font(regular);    
+      } 
+      .kor {
+        @include kor_font(regular);    
+      } 
+      .cha {
+        @include cha_font(regular);    
+      } 
+   }
+   ol,
+   ul {
+     list-style: none;
+   }
+   blockquote,
+   q {
+     quotes: none;
+   }
+   blockquote:before,
+   blockquote:after,
+   q:before,
+   q:after {
+     content: "";
+     content: none;
+   }
+   
+  
+   /* remember to highlight inserts somehow! */
+   ins {
+     text-decoration: none;
+   }
+   del {
+     text-decoration: line-through;
+   }
+   
+   table {
+     border-collapse: separate;
+     border-spacing: 0;
+   }
+   
+   *,
+   *:before,
+   *:after {
+     box-sizing: border-box;
+   }
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   h6,
+   strong {
+     font-weight: normal;
+   }
+   a {
+     display: inline-block;
+     text-decoration: none;
+   }
+  //  a,
+  //  button,
+  //  label {
+  //    cursor: pointer;
+  //    color: $font_color01
+  //  }
+  //  button > * {
+  //    pointer-events: none;
+  //  }
+  //  img {
+  //    display: block;
+  //    vertical-align: top;
+  //  }
+  //  a:link,
+  //  a:visited,
+  //  a:active {
+  //    text-decoration: none;
+  //  }
+
+  //  /* URL 링크 시 언더라인 추가 */
+  //  a.link:link,
+  //  a.link:hover,
+  //  a.link:visited,
+  //  a.link:active {
+  //    text-decoration: underline !important;
+  //  }
+
+  //  /* 링크 시 색상, 언더라인 추가 */
+  //  a.link_move:link,
+  //  a.link_move:hover,
+  //  a.link_move:visited,
+  //  a.link_move:active {
+  //    text-decoration: underline !important;
+  //    color:$main_color01;
+  //    font-weight: 500;
+  //    text-underline-position: under;
+  //  }
+
+  //  caption,
+  //  legend {
+  //    width: 1px;
+  //    text-align: left;
+  //    font-size: 0;
+  //    line-height: 0;
+  //    text-indent: -999em;
+  //  }
+  //  button {
+  //    margin: 0;
+  //    padding: 0;
+  //    border: 0;
+  //    background: none;
+  //    box-sizing: inherit;
+  //    -webkit-box-sizing: inherit;
+  //  }
+  //  em {
+  //    font-style: normal;
+  //  }
+   
+  //  .a11y {
+  //    position: absolute;
+  //    overflow: hidden;
+  //    height: 1px;
+  //    width: 1px;
+  //    border: 0;
+  //    clip: rect(1px, 1px, 1px, 1px);
+  //    clip-path: inset(50%);
+  //    word-break: initial;
+  //    word-wrap: initial;
+  //  }
+  //  /* input disabled ios 기본 css reset */
+  //  input[type="checkbox"],
+  //  input[type="radio"] {
+  //   &:disabled {
+  //     & + label {
+  //       cursor: default;
+  //     }
+  //   }
+  //  }
+  //  input[type="text"],
+  //  input[type="number"],
+  //  input[type="password"],
+  //  input[type="email"],
+  //  textarea {
+  //    -webkit-appearance: none;
+  //    &:disabled {
+  //      opacity: 1;
+  //      -webkit-text-fill-color: inherit;
+  //    }
+  //    &::-ms-clear,
+  //    &::-ms-reveal {
+  //      display: none;
+  //      height: 0;
+  //      width: 0;
+  //    }
+  //  }
+   
+  //  select {
+  //   position: relative;
+  //   appearance: none;
+  //   -webkit-appearance: none; /* 사파리, 크롬 하위버전용 */
+  //   -moz-appearance: none; /* 사파리, 크롬 하위버전용 */
+  //    &::-ms-expand {
+  //      display: none;
+  //    }
+  //    background: url('#{$img_root_path}/ico/ico_arrow_select_16.png') no-repeat right top 1px / 16px 16px;
+  //  }
+   
+  //  input[type="text"]::-ms-clear {
+  //    display: none;
+  //    height: 0;
+  //    width: 0;
+  //  }
+
+  //  img {    
+  //   image-rendering:crisp-edges;
+  //   image-rendering:-moz-crisp-edges;    
+  //   image-rendering:-webkit-optimize-contrast;
+  //   -ms-interpolation-mode: nearest-neighbor;
+  //  }
+   
+  //  div, 
+  //  button,
+  //  span,
+  //  a {
+  //    image-rendering:crisp-edges;
+  //    image-rendering: -webkit-optimize-contrast;
+  //  } // 백그라운드 이미지 랜더링 css

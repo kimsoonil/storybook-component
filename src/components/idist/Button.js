@@ -23,7 +23,7 @@ export function Button({ primary, size, line, label, width, disabled, onClick, .
 }
 
 Button.propTypes = {
-  primary: PropTypes.oneOf(['primary', 'secondary', 'point']),
+  primary: PropTypes.oneOf(['primary', 'secondary', 'point', 'success', 'warming', 'error', 'cancel']),
   line: PropTypes.bool,
   size: PropTypes.oneOf(['xl', 'l', 'm', 's']),
   width: PropTypes.number,

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-const useInput = (initialValue, extraOnChange, validator) => {
+const useInput = ({ initialValue = '', onChange, validator, maxLength }) => {
   const [value, setValue] = useState(initialValue);
 
-  const onChange = (event) => {
+  const _onChange = (event) => {
     const {
       target: { value }
     } = event;
@@ -12,22 +12,26 @@ const useInput = (initialValue, extraOnChange, validator) => {
     if (typeof validator === 'function') {
       valid = validator(value);
     }
-    valid && setValue(value);
-
-    if (typeof extraOnChange === 'function') {
-      extraOnChange();
+    if (valid && maxLength && typeof maxLength === 'number') {
+      valid = value.length <= maxLength;
     }
+
+    if (typeof onChange === 'function') {
+      onChange(value);
+    }
+
+    valid && setValue(value);
   };
 
   const reset = () => {
     setValue('');
   };
 
-  const init = () => {
-    setValue(initialValue);
+  const init = (_value) => {
+    setValue(_value);
   };
 
-  return { props: { value, onChange }, reset, init };
+  return { props: { value, onChange: _onChange }, reset, init };
 };
 
 export default useInput;

@@ -1,218 +1,223 @@
 /* eslint-disable */
 
-import React, { useState, useEffect, useRef } from 'react';
-import JoditEditor, { Jodit } from 'jodit-pro-react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getClubBoardGroupsInit } from 'redux/idistStore/clubSlice';
-
-import ToggleBtn from 'components/idist/ToggleBtn';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBoardPostsInit } from 'redux/idistStore/boardSlice';
 import { useParams } from 'react-router';
-import { Button } from 'components/idist/Button';
+import { useOutletContext, useSearchParams } from 'react-router-dom';
+import { getBoardInit } from 'redux/idistStore/boardSlice';
 import { Loader } from 'components/idist/Loader';
+import Profile from 'components/idist/Profile';
+import BoardAlbum from 'components/idist/Club/BoardAlbum';
+import BoardList from 'components/idist/Club/BoardList';
+import BoardCard from 'components/idist/Club/BoardCard';
+
 import 'assets/scss/club.scss';
-import 'assets/scss/jodit.scss';
 import 'assets/scss/reset.scss';
+import { Fliter } from 'components/idist/Fliter';
+import ToggleBtn from 'components/idist/ToggleBtn';
+import SideMember from './SideMember';
 
-function Board(props) {
-  const editor = useRef(null);
+function Basic(props) {
+  const [postsState, setPostsState] = useState('LIST_TYPE');
+  const [openFilter, setOpenFilter] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
-  const clubState = useSelector((state) => state.club);
-  const [content, setContent] = useState('');
-  const [boardSelect, setBoardSelect] = useState('Please select a Board');
-  const [openSelect, setOpenSelect] = useState(false);
-  const [checkedList, setCheckedList] = useState([]);
-  const [tagList, setTagList] = useState([]);
-  const { id } = useParams();
+  const boardState = useSelector((state) => state.board);
+  const { id, boardId } = useParams();
+  const clubId = useOutletContext();
+
   useEffect(() => {
-    dispatch(getClubBoardGroupsInit(id));
-  }, []);
-
-  const { isLoading, boardGroups } = clubState;
-
-  const config = {
-    readonly: false,
-    height: 600,
-    padding: 20,
-    placeholder: 'Please leave a comment that you want to share.',
-    license: '63DFM-3/H53-ATPPJ-RGIRZ',
-    uploader: {
-      url: 'https://xdsoft.net/jodit/finder/?action=fileUpload'
-    },
-    buttons: [
-      // 'emoji',
-      // 'image',
-      // 'video',
-      // 'file',
-      // '\n',
-      'undo',
-      'redo',
-      '|',
-      'brush',
-      'bold',
-      'italic',
-      '|',
-      'left',
-      'center',
-      'right',
-      '|',
-      'ol',
-      'ul',
-      '|',
-      'table'
-    ]
-  };
-  function preparePaste(jodit) {
-    jodit.e.on(
-      'emoji',
-      (e) => {
-        if (confirm('Change pasted content?')) {
-          jodit.e.stopPropagation('paste');
-          jodit.s.insertHTML(
-            Jodit.modules.Helpers.getDataTransfer(e).getData(Jodit.constants.TEXT_HTML).replace(/a/g, 'b')
-          );
-          return false;
-        }
-      },
-      { top: true }
-    );
-  }
-  Jodit.plugins.add('preparePaste', preparePaste);
-  const closeSelect = (text) => {
-    setBoardSelect(text);
-    setOpenSelect(false);
-  };
-
-  const onCheckedElement = (checked, id) => {
-    if (checked) {
-      setCheckedList([...checkedList, id]);
-    } else if (!checked) {
-      setCheckedList(checkedList.filter((el) => el !== id));
+    let parameter = '';
+    if (searchParams.get('search') !== null) {
+      parameter = searchParams.get('search');
     }
-  };
-  if (boardGroups.message !== 'ok')
+    dispatch(getBoardPostsInit({ id: boardId, data: '' }));
+    dispatch(getBoardInit({ id: boardId }));
+  }, [boardId]);
+
+  useEffect(() => {
+    setPostsState(boardState?.board?.data?.view_mode);
+  }, [boardState]);
+
+  const { board, posts } = boardState;
+  if (board.message !== 'ok') {
     return (
       <div className="flex-center">
         <Loader />
       </div>
     );
+  }
+
   return (
-    <div className="club-home ">
-      <div className="board ">
-        <div className="flex-between">
-          <div className="board-title">Writing</div>
-          <div className="board-actions relative">
-            <div className="board-actions-select flex-center" onClick={() => setOpenSelect(!openSelect)}>
-              {boardSelect}
-              <img src={require('images/club/arrow-bottom.png')} alt="" />
+    <div className="club-home container">
+      <div className="item">
+        <div className="club-home-content ">
+          <div className="flex-between">
+            <div>
+              <div className="club-home-title">{board.data.name}</div>
+              <div className="club-home-description">{board.data?.description}</div>
             </div>
-            <div className={'board-actions-select-box ' + (openSelect ? '' : 'none')}>
-              <div className="board-actions-select-item" onClick={() => closeSelect('Please select a Board')}>
-                Please select a Board
+            <div className="flex-center  relative">
+              <input type="text" className="post-fliter" />
+              <div className="fliter-icon " onClick={() => setOpenFilter(!openFilter)}>
+                <img src={require(`images/club/icon-fliter.png`)} alt="" />
               </div>
-              {boardGroups.data.map((boardGroups, index) => {
-                return (
-                  <div className="board-actions-select-item" key={index} onClick={() => closeSelect(boardGroups.name)}>
-                    {boardGroups.name}
-                  </div>
-                );
-              })}
+              <div className="fliter-position" style={{ display: openFilter ? 'flex' : 'none' }}>
+                <Fliter doneFuc={() => setOpenFilter(!openFilter)} />
+              </div>
             </div>
-            <div className="board-actions-count flex-center">
-              Save as draft <div>|</div> 0
+          </div>
+          <div className="flex-between">
+            <div className="club-list-tag">
+              <div className="list-filter flex-center">
+                <div className="flex-center active">Hot</div>
+                <div className="flex-center">Popular</div>
+                <div className="flex-center">New</div>
+              </div>
             </div>
-            <Button label={'Registration'} size="m" />
-          </div>
-        </div>
-        <div className="board-input">
-          <input placeholder="Please enter a title" />
-        </div>
-        <div className="jodit-tobar">
-          <div className="editer-icon">
-            <img src={require('images/editor/icon-emoticon.png')} alt="" />
-          </div>
-          <div className="editer-icon">
-            <img src={require('images/editor/icon-image.png')} alt="" />
-          </div>
-          <div className="editer-icon">
-            <img src={require('images/editor/icon-gif.png')} alt="" />
-          </div>
-          <div className="editer-icon">
-            <img src={require('images/editor/icon-video.png')} alt="" />
-          </div>
-          <div className="editer-icon">
-            <img src={require('images/editor/icon-file.png')} alt="" />
-          </div>
-        </div>
-        <JoditEditor
-          ref={editor}
-          value={content}
-          config={config}
-          tabIndex={1} // tabIndex of textarea
-          onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-          onChange={(newContent) => {}}
-        />
-        <div className="board-tag">
-          <div className="board-tag-item flex-center">
-            <input placeholder="#Tag" />
-          </div>
-        </div>
-        <div className="board-allow">
-          <div>
-            Allow Comments
-            <ToggleBtn id="Comments" onChange={onCheckedElement} />
-          </div>
-          <div>
-            Allow Sharing
-            <ToggleBtn id="Sharing" onChange={onCheckedElement} />
-          </div>
-          <div>
-            Allow Search
-            <ToggleBtn id="Search" onChange={onCheckedElement} />
-          </div>
-          <div>
-            Register as a Notice
-            <ToggleBtn id="Notice" onChange={onCheckedElement} disabled={checkedList.indexOf('secret') > -1} />
-          </div>
-          <div>
-            secret post
-            <ToggleBtn id="secret" onChange={onCheckedElement} disabled={checkedList.indexOf('Notice') > -1} />
-          </div>
-        </div>
-        {checkedList.indexOf('secret') > -1 && (
-          <div className="board-password">
-            <div className="board-password-input">
-              password <input /> <Button label="Duplication" size="s" style={{ width: '100px', height: '30px' }} />
+            <div className="flex-center">
+              <div className="feed">
+                My feed
+                <ToggleBtn id={'myFeed'} />
+              </div>
+
+              <div className="board-state">
+                <div
+                  className={'album ' + (postsState === 'ALBUM_TYPE' && 'active')}
+                  onClick={() => {
+                    setPostsState('ALBUM_TYPE');
+                  }}
+                ></div>
+                <div
+                  className={'list ' + (postsState === 'LIST_TYPE' && 'active')}
+                  onClick={() => {
+                    setPostsState('LIST_TYPE');
+                  }}
+                ></div>
+                <div
+                  className={'card ' + (postsState === 'CARD_TYPE' && 'active')}
+                  onClick={() => {
+                    setPostsState('CARD_TYPE');
+                  }}
+                ></div>
+              </div>
             </div>
-            <div className="remark">*You can view posts via links or by entering passwords.</div>
           </div>
-        )}
+
+          {postsState === 'ALBUM_TYPE' && <BoardAlbum DataList={posts?.data} />}
+          {postsState === 'LIST_TYPE' && <BoardList DataList={posts?.data} />}
+          {postsState === 'CARD_TYPE' && <BoardCard DataList={posts?.data} />}
+        </div>
       </div>
-      <div className="board-bottom-actions">
-        <div className="board-actions relative">
-          <div className="board-actions-select flex-center" onClick={() => setOpenSelect(!openSelect)}>
-            {boardSelect}
-            <img src={require('images/club/arrow-bottom.png')} alt="" />
-          </div>
-          <div className={'board-actions-select-box ' + (openSelect ? '' : 'none')}>
-            <div className="board-actions-select-item" onClick={() => closeSelect('Please select a Board')}>
-              Please select a Board
+      <div className="item">
+        {clubId.data.profile ? <Profile userData={clubId.data.profile} type={'club'} /> : <Profile type={'logout'} />}
+        <div>
+          <div className="club-home-content hotPosts">
+            <div className="flex-between">
+              <div className="side-box-title">Hot Posts</div>
+              <div className="see-all">See all</div>
             </div>
-            {boardGroups.data.map((boardGroups, index) => {
-              return (
-                <div className="board-actions-select-item" key={index} onClick={() => closeSelect(boardGroups.name)}>
-                  {boardGroups.name}
+            <div className="hotPosts-content">
+              <div className="hotPosts-content-list flex-between">
+                <div className="">
+                  <div className="hotPosts-content-name">작성자</div>
+                  <div className="hotPosts-content-title">포스트 제목입니다.</div>
+                  <div className="hotPosts-content-info">
+                    <img src={require('images/main/icon-view.png')} />
+                    2.5M 53age
+                  </div>
                 </div>
-              );
-            })}
+                <div>
+                  <img src={require('images/club/BTC.png')} />
+                </div>
+              </div>
+              <div className="hotPosts-content-list flex-between">
+                <div className="">
+                  <div className="hotPosts-content-name">작성자</div>
+                  <div className="hotPosts-content-title">포스트 제목입니다.</div>
+                  <div className="hotPosts-content-info">
+                    <img src={require('images/main/icon-view.png')} />
+                    2.5M 53age
+                  </div>
+                </div>
+                <div>
+                  <img src={require('images/club/BTC.png')} />
+                </div>
+              </div>
+              <div className="hotPosts-content-list flex-between">
+                <div className="">
+                  <div className="hotPosts-content-name">작성자</div>
+                  <div className="hotPosts-content-title">포스트 제목입니다.</div>
+                  <div className="hotPosts-content-info">
+                    <img src={require('images/main/icon-view.png')} />
+                    2.5M 53age
+                  </div>
+                </div>
+                <div>
+                  <img src={require('images/club/BTC.png')} />
+                </div>
+              </div>
+              <div className="hotPosts-content-list flex-between">
+                <div className="">
+                  <div className="hotPosts-content-name">작성자</div>
+                  <div className="hotPosts-content-title">포스트 제목입니다.</div>
+                  <div className="hotPosts-content-info">
+                    <img src={require('images/main/icon-view.png')} />
+                    2.5M 53age
+                  </div>
+                </div>
+                <div>
+                  <img src={require('images/club/BTC.png')} />
+                </div>
+              </div>
+              <div className="hotPosts-content-list flex-between">
+                <div className="">
+                  <div className="hotPosts-content-name">작성자</div>
+                  <div className="hotPosts-content-title">포스트 제목입니다.</div>
+                  <div className="hotPosts-content-info">
+                    <img src={require('images/main/icon-view.png')} />
+                    2.5M 53age
+                  </div>
+                </div>
+                <div>
+                  <img src={require('images/club/BTC.png')} />
+                </div>
+              </div>
+              <div className="hotPosts-content-list flex-between">
+                <div className="">
+                  <div className="hotPosts-content-name">작성자</div>
+                  <div className="hotPosts-content-title">포스트 제목입니다.</div>
+                  <div className="hotPosts-content-info">
+                    <img src={require('images/main/icon-view.png')} />
+                    2.5M 53age
+                  </div>
+                </div>
+                <div>
+                  <img src={require('images/club/BTC.png')} />
+                </div>
+              </div>
+              <div className="hotPosts-content-list flex-between">
+                <div className="">
+                  <div className="hotPosts-content-name">작성자</div>
+                  <div className="hotPosts-content-title">포스트 제목입니다.</div>
+                  <div className="hotPosts-content-info">
+                    <img src={require('images/main/icon-view.png')} />
+                    2.5M 53age
+                  </div>
+                </div>
+                <div>
+                  <img src={require('images/club/BTC.png')} />
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="board-actions-count flex-center">
-            Save as draft <div>|</div> 0
-          </div>
-          <Button label={'Registration'} size="m" />
         </div>
+
+        <SideMember />
       </div>
     </div>
   );
 }
 
-export default Board;
+export default Basic;

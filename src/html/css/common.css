@@ -1,0 +1,464 @@
+@charset "UTF-8";
+/*** Poppins Font ***/
+/* poppins-300 - latin */
+@font-face {
+  font-family: "Poppins";
+  font-weight: 300;
+  font-style: normal;
+  src: url("../scss/font/Poppins-Light.eot");
+  src: url("../scss/font/Poppins-Light.eot?#iefix") format("embedded-opentype"), url("../scss/font/Poppins-Light.woff2") format("woff2"), url("../scss/font//Poppins-Light.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-style: normal;
+  src: url("../scss/font/Poppins-Regular.eot");
+  src: url("../scss/font/Poppins-Regular.eot?#iefix") format("embedded-opentype"), url("../scss/font/Poppins-Regular.woff2") format("woff2"), url("../scss/font/Poppins-Regular.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-style: normal;
+  src: url("../scss/font/Poppins-Medium.eot");
+  src: url("../scss/font/Poppins-Medium.eot?#iefix") format("embedded-opentype"), url("../scss/font/Poppins-Medium.woff2") format("woff2"), url("../scss/font/Poppins-Medium.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-style: normal;
+  src: url("../scss/font/Poppins-SemiBold.eot");
+  src: url("../scss/font/Poppins-SemiBold.eot?#iefix") format("embedded-opentype"), url("../scss/font/Poppins-SemiBold.woff2") format("woff2"), url("../scss/font/Poppins-SemiBold.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  font-weight: 700;
+  font-style: normal;
+  src: url("../scss/font/Poppins-Bold.eot");
+  src: url("../scss/font/Poppins-Bold.eot?#iefix") format("embedded-opentype"), url("../scss/font/Poppins-Bold.woff2") format("woff2"), url("../scss/font/Poppins-Bold.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  font-weight: 800;
+  font-style: normal;
+  src: url("../scss/font/Poppins-ExtraBold.eot");
+  src: url("../scss/font/Poppins-ExtraBold.eot?#iefix") format("embedded-opentype"), url("../scss/font/Poppins-ExtraBold.woff2") format("woff2"), url("../scss/font/Poppins-ExtraBold.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  font-weight: 900;
+  font-style: normal;
+  src: url("../scss/font/Poppins-Black.eot");
+  src: url("../scss/font/Poppins-Black.eot?#iefix") format("embedded-opentype"), url("../scss/font/Poppins-Black.woff2") format("woff2"), url("../scss/font/Poppins-Black.woff") format("woff");
+  font-display: swap;
+}
+/*** m-plus-1p Font ***/
+/* m-plus-1p-300 - latin */
+@font-face {
+  font-family: "M PLUS 1p";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../scss/font/MPLUS1p-Light.woff2") format("font-woff2"), url("../scss/font/MPLUS1p-Light.woff") format("font-woff"); /* Modern Browsers */
+}
+/* m-plus-1p-regular - latin */
+@font-face {
+  font-family: "M PLUS 1p";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../scss/font/m-plus-1p-v27-latin-regular.woff2") format("font-woff2"), url("../scss/font/m-plus-1p-v27-latin-regular.woff") format("font-woff"); /* Modern Browsers */
+}
+/* m-plus-1p-500 - latin */
+@font-face {
+  font-family: "M PLUS 1p";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../scss/font/m-plus-1p-v27-latin-500.woff2") format("font-woff2"), url("../scss/font/m-plus-1p-v27-latin-500.woff") format("font-woff"); /* Modern Browsers */
+}
+/* m-plus-1p-700 - latin */
+@font-face {
+  font-family: "M PLUS 1p";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../scss/font/m-plus-1p-v27-latin-700.woff2") format("font-woff2"), url("../scss/font/m-plus-1p-v27-latin-700.woff") format("font-woff"); /* Modern Browsers */
+}
+/* m-plus-1p-800 - latin */
+@font-face {
+  font-family: "M PLUS 1p";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../scss/font/m-plus-1p-v27-latin-800.woff2") format("font-woff2"), url("../scss/font/m-plus-1p-v27-latin-800.woff") format("font-woff"); /* Modern Browsers */
+}
+/* 나눔스퀘어라운드 웹폰트 v1.11 */
+@font-face {
+  font-family: "NanumSquareRound";
+  font-weight: 300;
+  font-style: normal;
+  src: url("../scss/font/NanumSquareRound-Light.eot");
+  src: url("../scss/font/NanumSquareRound-Light.eot?#iefix") format("embedded-opentype"), url("../scss/font/NanumSquareRound-Light.woff2") format("woff2"), url("../scss/font/NanumSquareRound-Light.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumSquareRound";
+  font-weight: 400;
+  font-style: normal;
+  src: url("../scss/font/NanumSquareRound-Regular.eot");
+  src: url("../scss/font/NanumSquareRound-Regular.eot?#iefix") format("embedded-opentype"), url("../scss/font/NanumSquareRound-Regular.woff2") format("woff2"), url("../scss/font/NanumSquareRound-Regular.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumSquareRound";
+  font-weight: 700;
+  font-style: normal;
+  src: url("../scss/font/NanumSquareRound-Bold.eot");
+  src: url("../scss/font/NanumSquareRound-Bold.eot?#iefix") format("embedded-opentype"), url("../scss/font/NanumSquareRound-Bold.woff2") format("woff2"), url("../scss/font/NanumSquareRound-Bold.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumSquareRound";
+  font-weight: 800;
+  font-style: normal;
+  src: url("../scss/font/NanumSquareRound-ExtraBold.eot");
+  src: url("../scss/font/NanumSquareRound-ExtraBold.eot?#iefix") format("embedded-opentype"), url("../scss/font/NanumSquareRound-ExtraBold.woff2") format("woff2"), url("../scss/font/NanumSquareRound-ExtraBold.woff") format("woff");
+  font-display: swap;
+}
+/* Setting */
+/* Color */
+/* Font */
+/* Title */
+.h2Type.eng {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 44px;
+  color: #242A3C;
+  letter-spacing: -0.88px;
+  line-height: 48px;
+}
+.h2Type.kor {
+  font-family: "NanumSquareRound", sans-serif;
+  font-weight: 800;
+  font-size: 44px;
+  color: #242A3C;
+  letter-spacing: -0.88px;
+  line-height: 48px;
+}
+.h2Type.cha {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: 800;
+  font-size: 44px;
+  color: #242A3C;
+  letter-spacing: -0.88px;
+  line-height: 48px;
+}
+
+.h3Type.eng {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  color: #242A3C;
+  letter-spacing: -0.8px;
+  line-height: 48px;
+}
+.h3Type.kor {
+  font-family: "NanumSquareRound", sans-serif;
+  font-weight: 800;
+  font-size: 40px;
+  color: #242A3C;
+  letter-spacing: -0.8px;
+  line-height: 48px;
+}
+.h3Type.cha {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: 800;
+  font-size: 40px;
+  color: #242A3C;
+  letter-spacing: -0.8px;
+  line-height: 48px;
+}
+
+.subtitle.eng {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  color: #242A3C;
+  letter-spacing: -0.52px;
+  line-height: 32px;
+}
+.subtitle.kor {
+  font-family: "NanumSquareRound", sans-serif;
+  font-weight: bold;
+  font-size: 26px;
+  color: #242A3C;
+  letter-spacing: -0.52px;
+  line-height: 32px;
+}
+.subtitle.cha {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  color: #242A3C;
+  letter-spacing: -0.52px;
+  line-height: 32px;
+}
+
+.bodytitle.p1.eng {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: #121212;
+  letter-spacing: -0.36px;
+  line-height: 24px;
+}
+.bodytitle.p1.kor {
+  font-family: "NanumSquareRound", sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  color: #121212;
+  letter-spacing: -0.36px;
+  line-height: 24px;
+}
+.bodytitle.p1.cha {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: #121212;
+  letter-spacing: -0.36px;
+  line-height: 24px;
+}
+
+.bodytitle.p2.eng {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #121212;
+  letter-spacing: -0.32px;
+  line-height: 20px;
+}
+.bodytitle.p2.kor {
+  font-family: "NanumSquareRound", sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: #121212;
+  letter-spacing: -0.32px;
+  line-height: 20px;
+}
+.bodytitle.p2.cha {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #121212;
+  letter-spacing: -0.32px;
+  line-height: 20px;
+}
+
+.des.eng {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: #121212;
+  letter-spacing: -0.26px;
+  line-height: 17px;
+}
+.des.kor {
+  font-family: "NanumSquareRound", sans-serif;
+  font-weight: normal;
+  font-size: 13px;
+  color: #121212;
+  letter-spacing: -0.26px;
+  line-height: 17px;
+}
+.des.cha {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: normal;
+  font-size: 13px;
+  color: #121212;
+  letter-spacing: -0.26px;
+  line-height: 17px;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+button,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  font-family: "NanumSquareRound", sans-serif;
+  word-break: keep-all;
+  -ms-word-break: break-all;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section {
+  display: block;
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1;
+  min-width: 1280px;
+  font-size: 14px;
+  color: #121212;
+  letter-spacing: -0.28px;
+}
+body .eng {
+  font-family: "Poppins", sans-serif;
+}
+body .kor {
+  font-family: "NanumSquareRound", sans-serif;
+}
+body .cha {
+  font-family: "M PLUS 1p", sans-serif;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+  text-decoration: none;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+  font-weight: normal;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* Input */

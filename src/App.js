@@ -1,70 +1,39 @@
+import './App.css';
 import React from 'react';
-
-import history from 'utils/history';
+import history from 'util/history';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import loadable from '@loadable/component';
+import { LogInRoute, NotLogInRoute } from 'components/common/AuthRoute';
 import ScrollToTop from 'utils/scrollTop';
-import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import store from 'redux/store';
-import Create from 'views/Admin/Create';
-import Admin from 'views/Admin';
-import 'assets/scss/reset.scss';
-import Dashboard from 'views/Admin/Dashboard';
-import Statistics from 'views/Admin/Statistics';
-import Boards from 'views/Admin/Boards';
-import Posts from 'views/Admin/Posts';
-import Members from 'views/Admin/Members';
-import Permissions from 'views/Admin/Permissions';
-import Information from 'views/Admin/Information';
-import Design from 'views/Admin/Design';
-import Operation from 'views/Admin/Operation';
+import AppRoutes from './AppRoutes';
 
-const Home = loadable(() => import('views/Home'));
-const Search = loadable(() => import('views/Search'));
-const SearchAll = loadable(() => import('views/Search/SearchAll'));
-const SearchClub = loadable(() => import('views/Search/SearchClubs'));
-const SearchPosts = loadable(() => import('views/Search/SearchPosts'));
-const Club = loadable(() => import('views/Club'));
-const ClubHome = loadable(() => import('views/Club/Home'));
-const Basic = loadable(() => import('views/Club/Basic'));
-const Board = loadable(() => import('views/Club/Board'));
-const Notfound = loadable(() => import('views/Error/Notfound'));
+const Home = loadable(() => import('components/Movie/Home'));
+const Movie = loadable(() => import('components/Movie/Movie'));
+const PageNotFound = loadable(() => import('components/Etc/PageNotFound'));
+const SignUp = loadable(() => import('components/SignUp'));
+const LogIn = loadable(() => import('components/LogIn/LogIn'));
+const AccountManagement = loadable(() => import('components/UserInfo/AccountManagement'));
 
 function App() {
   return (
     <div className="App">
-      <Provider store={store}>
-        <BrowserRouter history={history}>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/search" element={<Search />}>
-              <Route path="all" element={<SearchAll />} />
-              <Route path="clubs" element={<SearchClub />} />
-              <Route path="posts" element={<SearchPosts />} />
-            </Route>
-            <Route path="/club/:id" element={<Club />}>
-              <Route path="home" element={<ClubHome />} />
-              <Route path="basic" element={<Basic />} />
-              <Route path="board" element={<Board />} />
-            </Route>
-            <Route path="/manage" element={<Admin visibleMenu={true} />}>
-              <Route path="" element={<Navigate replace to={'dashboard'} />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="statistics" element={<Statistics />} />
-              <Route path="boards" element={<Boards />} />
-              <Route path="posts" element={<Posts />} />
-              <Route path="members" element={<Members />} />
-              <Route path="permissions" element={<Permissions />} />
-              <Route path="information" element={<Information />} />
-              <Route path="design" element={<Design />} />
-              <Route path="operation" element={<Operation />} />
-            </Route>
-            <Route path="*" element={<Notfound />} />
-          </Routes>
-        </BrowserRouter>
-      </Provider>
+      <BrowserRouter history={history}>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/movie/:id" element={<Movie />} />
+          <Route path="/home" element={<Home />} />
+          <Route element={<LogInRoute />}>
+            <Route path="/account" element={<AccountManagement />} />
+          </Route>
+          <Route element={<NotLogInRoute />}>
+            <Route path="/login/*" element={<LogIn />} />
+            <Route path="/signup/*" element={<SignUp />} />
+          </Route>
+          <Route path="/" element={<Home />} />
+          {/* <Route path="*" element={<PageNotFound />} /> */}
+          <Route path="*" element={<AppRoutes />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

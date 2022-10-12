@@ -12,11 +12,11 @@ export function Header({ user, country, seachFunc }) {
     <header>
       <div className="header flex-center">
         <div className="header-content flex-between">
-          <div onClick={() => navigate('/')}>
+          <div onClick={() => navigate('/clubs')}>
             <img src={require('images/components/logo_top.svg').default} alt="logo_top" />
           </div>
           <div className="flex-center">
-            <div className="menu activate" onClick={() => navigate('/')}>
+            <div className="menu activate" onClick={() => navigate('/clubs')}>
               <img src={require('images/components/menu_home.svg').default} alt="menu_home" />
               <div className="tootip flex-center relative">Home</div>
             </div>

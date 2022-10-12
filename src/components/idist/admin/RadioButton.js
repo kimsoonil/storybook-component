@@ -14,8 +14,8 @@ const RadioButton = ({ value, onChange }) => {
             className="default-input"
             type="radio"
             name="radio-button-input"
-            checked={value == 1}
-            value={1}
+            checked={value === 'yes'}
+            value={'yes'}
             onChange={onChange}
           />
           <div className="checkmark" tabIndex={0} />
@@ -30,8 +30,8 @@ const RadioButton = ({ value, onChange }) => {
             className="default-input"
             type="radio"
             name="radio-button-input"
-            checked={value == 0}
-            value={0}
+            checked={value === 'no'}
+            value={'no'}
             onChange={onChange}
           />
           <div className="checkmark" tabIndex={0} />

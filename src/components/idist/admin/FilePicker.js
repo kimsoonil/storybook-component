@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef } from 'react';
 import 'assets/scss/_base.scss';
 
 const FilePicker = ({
@@ -32,7 +32,7 @@ const FilePicker = ({
       if (_file.size > maxSize.value * Math.pow(1024, unitList.indexOf(maxSize.unit))) {
         confirm('허용 용량을 초과하였습니다!', 'ok');
       } else {
-        setState({ file: _file, data: reader.result });
+        setState({ file: _file, base64: reader.result });
       }
     };
     _file && reader.readAsDataURL(_file);

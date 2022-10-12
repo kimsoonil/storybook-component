@@ -4,18 +4,19 @@ import 'assets/scss/component/j-button.scss';
 
 const JButton = ({ label, color, children, outline, size, disabled, width, onClick, ...props }) => {
   const rootClassName = 'jg-button';
-  const typeClassName = outline ? rootClassName + '-outline' : rootClassName + '-contain';
+  // const typeClassName = outline ? rootClassName + '-outline' : rootClassName + '-contain';
+  const typeClassName = outline ? 'outline' : 'contain';
+  const disabledClassName = disabled ? typeClassName + '-disabled' : '-';
+
   return (
     <div
       disabled={disabled}
       style={{ ...(width && { width: `${width}px` }) }}
-      className={[
-        rootClassName,
-        typeClassName,
-        `${typeClassName}-${color}`,
-        `${rootClassName}-${size}`,
-        ...(disabled ? [`${typeClassName}-disabled`] : [])
-      ].join(' ')}
+      className={`${rootClassName} 
+        ${rootClassName}-${size} 
+        ${rootClassName}-${typeClassName}-${color} 
+        ${rootClassName}-${disabledClassName}
+        `}
       onClick={disabled ? () => {} : onClick}
       {...props}
     >

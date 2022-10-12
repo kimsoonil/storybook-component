@@ -24,7 +24,7 @@ const ImagePicker = ({ setImageFile, imageSize, maxSize = { value: 0, unit: 'byt
       if (_file.size > maxSize.value * Math.pow(1024, unitList.indexOf(maxSize.unit))) {
         confirm('허용 용량을 초과하였습니다!', 'ok');
       } else {
-        setImageFile({ file: _file, data: reader.result });
+        setImageFile({ file: _file, base64: reader.result });
       }
     };
     reader.readAsDataURL(_file);

@@ -12,30 +12,20 @@ import RadioButton from 'components/idist/admin/RadioButton';
 import FilePicker from 'components/idist/admin/FilePicker';
 import Tag from 'components/idist/admin/Tag';
 import JButton from 'components/idist/admin/JButton';
-import { openCreateClubPopup } from 'redux/idistStore/popupSlice';
-import { CreateClubPopup } from 'components/idist/popup/CreateClubPopup';
 import { AVD, IVD, loadState } from 'views/Admin';
-import { getIdClubInit } from 'redux/idistStore/clubSlice';
 import { numFM, fileSizeFM } from 'utils/formatter';
 import { categoriesInit } from 'redux/idistStore/admin/categoriesSlice';
 import { reqCheckClubName } from 'redux/idistStore/admin/checkClubNameSlice';
 import { reqCheckClubAddress } from 'redux/idistStore/admin/checkClubAddressSlice';
+import ModifyClubModal from 'components/idist/modal/ModifyClubModal';
+import ModifyClubCancelModal from 'components/idist/modal/ModifyClubCancelModal';
+import { showModal } from 'redux/idistStore/admin/modalSlice';
 
-const Information = () => {
+const Information = ({}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const outlet = useOutletContext();
 
-  // const _clubId = outlet.club.id || 42;
-  const clubState = useSelector((state) => state.club);
-  const { isLoading, clubId } = clubState;
-
-  useEffect(() => {
-    if (!clubId?.id) {
-      dispatch(getIdClubInit(46));
-    }
-  }, [clubId?.id]);
-  const _club = clubId?.data;
+  const { club, adminState, setAdminState } = useOutletContext();
 
   const categories = useSelector((state) => state.categories.list);
   useEffect(() => {
@@ -47,7 +37,6 @@ const Information = () => {
   }, []);
 
   const checkClubNameState = useSelector((state) => state.checkClubName);
-  const [tmpName, setTmpName] = useState(_club?.name || '');
   const [nameInputState, setNameInputState] = useState(IVD.success);
   const [nameValid, setNameValid] = useState({ status: loadState.SUCCESS, errorText: ' ' });
 
@@ -57,7 +46,7 @@ const Information = () => {
       setNameInputState(IVD.error);
       setNameValid({ status: loadState.ERROR, errorText: AVD.errorText.name.empty });
     } else {
-      dispatch(reqCheckClubName({ id: _club?.id, name: _name }));
+      dispatch(reqCheckClubName({ id: club?.id, data: { name: _name } }));
     }
   };
   useEffect(() => {
@@ -72,7 +61,7 @@ const Information = () => {
   }, [checkClubNameState]);
 
   const checkClubAddressState = useSelector((state) => state.checkClubAddress);
-  const [tmpAddress, setTmpAddress] = useState(_club?.address || '');
+  const [tmpAddress, setTmpAddress] = useState(club?.address || '');
   const [addressInputState, setAddressInputState] = useState(IVD.success);
   const [addressValid, setAddressValid] = useState({ status: loadState.SUCCESS, errorText: '' });
 
@@ -82,7 +71,7 @@ const Information = () => {
       setAddressInputState(IVD.error);
       setAddressValid({ status: loadState.ERROR, errorText: AVD.errorText.address.empty });
     } else {
-      dispatch(reqCheckClubAddress({ id: _club?.id, address: _address }));
+      dispatch(reqCheckClubAddress({ id: club?.id, data: { address: _address } }));
     }
   };
   useEffect(() => {
@@ -96,7 +85,7 @@ const Information = () => {
     }
   }, [checkClubAddressState]);
 
-  const [categoryId, setCategoryId] = useState(_club?.category || 'Game');
+  const [categoryId, setCategoryId] = useState(club?.category || 1);
   const [categoryInputState, setCategoryInputState] = useState(IVD.success);
   const [categoryValid, setCategoryValid] = useState({ status: loadState.SUCCESS, errorText: '' });
   const checkCategory = (e) => {
@@ -109,27 +98,15 @@ const Information = () => {
     }
   };
 
-  const [profileImageData, setProfileImageData] = useState({
-    file: {},
-    data: _club?.profileImageUrl || ''
-  });
-
-  const [bannerImageData, setBannerImageData] = useState({
-    file: {},
-    data: _club?.bannerImageUrl || ''
-  });
-
-  const [tmpDescription, setTmpDescription] = useState(_club?.description || '');
   const [descriptionInputState, setDescriptionInputState] = useState(IVD.blur);
   const checkDescription = () => {
-    if (tmpDescription === '') {
+    if (adminState.description === '') {
       setDescriptionInputState(IVD.blur);
     } else {
       setDescriptionInputState(IVD.success);
     }
   };
 
-  const [tags, setTags] = useState(_club?.tags || []);
   const [currentTagText, setCurrentTagText] = useState('');
   const onKeyDownTagInput = (e) => {
     if ((e.key === 'Enter') & (e.nativeEvent.isComposing === false)) {
@@ -144,48 +121,33 @@ const Information = () => {
         .join('')
         .toLowerCase();
       const ret = tmpText.charAt(0).toUpperCase() + tmpText.slice(1);
-      const tagValid = !tags.includes(ret);
+      const tagValid = !adminState.tags.includes(ret);
       if (tagValid) {
-        setTags((prev) => [...prev, ret]);
+        setAdminState((prev) => ({ ...prev, tags: [...prev.tags, { name: ret }] }));
       }
       setCurrentTagText('');
     }
   };
-  const onChnageCurrentTagText = useCallback((e) => {
+  const onChangeCurrentTagText = useCallback((e) => {
     setCurrentTagText(e.target.value);
   }, []);
 
-  const errorImage = useMemo(() => require('images/admin/valid-error.svg').default, []);
+  // const errorImage = useMemo(() => require('images/admin/valid-error.svg').default, []);
+  const [autoApproval, setAutoApproval] = useState(club?.is_auto_approval ? 'yes' : 'no');
 
-  const [autoApproval, setAutoApproval] = useState(_club?.autoApproval || 1);
-
-  useEffect(() => {
-    if (clubId?.data) {
-      setTmpName(_club?.name || '');
-      setTmpAddress(_club?.address || 'testclub');
-      setCategoryId(_club?.category || 7);
-      setProfileImageData((prev) => ({ ...prev, data: _club.profileImageUrl }));
-      setBannerImageData((prev) => ({ ...prev, data: _club.bannerImageUrl }));
-      setTmpDescription(_club?.description || '');
-      setTags(_club?.tags || []);
-      setAutoApproval(_club?.autoApproval || 1);
-    }
-  }, [clubId?.data]);
-
-  const club = {
-    name: tmpName,
+  const _club = {
+    id: club.id,
+    name: adminState.name,
     address: tmpAddress,
     category: categoryId,
-    profileImage: profileImageData.data,
-    bannerImage: bannerImageData.data,
-    description: tmpDescription,
-    tags: tags,
-    isAutoApproval: autoApproval === 1
+    ...(adminState.bannerImage.data.base64 && { banner_image: adminState.bannerImage.data.base64 }),
+    ...(adminState.profileImage.data.base64 && { profile_image: adminState.profileImage.data.base64 }),
+    description: adminState.description,
+    tags: adminState.tags.map((tag) => tag.name),
+    is_auto_approval: autoApproval === 'yes'
   };
 
-  if (isLoading) {
-    return null;
-  }
+  // console.log(_club);
 
   return (
     <div className="admin">
@@ -198,10 +160,10 @@ const Information = () => {
             <div className="name">
               <TextInput
                 placeholder={AVD.name.placeholder}
-                value={tmpName}
+                value={adminState.name}
                 state={nameInputState}
                 onChange={(e) => {
-                  setTmpName(e.target.value);
+                  setAdminState((prev) => ({ ...prev, name: e.target.value }));
                   checkName(e);
                 }}
                 onFocus={() => {
@@ -210,7 +172,7 @@ const Information = () => {
                 onBlur={checkName}
                 maxLength={60}
               />
-              <div className="under-text"> {`${tmpName.length}${AVD.name.extraText}`}</div>
+              <div className="under-text"> {`${adminState.name.length}${AVD.name.extraText}`}</div>
             </div>
           </div>
           {nameValid.status === loadState.ERROR && (
@@ -296,17 +258,21 @@ const Information = () => {
             <FormLabel title={AVD.profileImages.title} description={AVD.profileImages.description} />
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <FilePicker
-                state={profileImageData.data}
-                setState={setProfileImageData}
+                setState={(state) =>
+                  setAdminState((prev) => ({ ...prev, profileImage: { ...prev.profileImage, data: state } }))
+                }
                 tabIndex={0}
                 type={'image'}
                 multiple={true}
                 maxSize={{ value: 10, unit: 'mb' }}
               >
                 <div className="image-picker">
-                  {profileImageData.data ? (
+                  {adminState.profileImage.url ? (
                     <div className="image-picker-selected-wrapper profile-size">
-                      <img className="image-picker-selected profile-size" src={profileImageData.data} />
+                      <img
+                        className="image-picker-selected profile-size"
+                        src={adminState.profileImage.data.base64 || adminState.profileImage.url}
+                      />
                       <div className="image-picker-selected-hover profile-size">
                         <img src={require('images/admin/non-selected-image.svg').default} />
                       </div>
@@ -320,7 +286,7 @@ const Information = () => {
               </FilePicker>
               <div
                 style={{ marginTop: '3px', fontWeight: 500, fontSize: '16px', lineHeight: '22px', color: '#808080' }}
-              >{`${fileSizeFM(profileImageData.file.size) || '0'}${AVD.profileImages.extraText}`}</div>
+              >{`${fileSizeFM(adminState.profileImage.data.file.size) || '0'}${AVD.profileImages.extraText}`}</div>
             </div>
           </div>
         </div>
@@ -331,17 +297,21 @@ const Information = () => {
             <FormLabel title={AVD.bannerImage.title} description={AVD.bannerImage.description} />
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <FilePicker
-                state={bannerImageData}
-                setState={setBannerImageData}
+                setState={(state) =>
+                  setAdminState((prev) => ({ ...prev, bannerImage: { ...prev.bannerImage, data: state } }))
+                }
                 tabIndex={0}
                 type={'image'}
                 multiple={true}
                 maxSize={{ value: 20, unit: 'mb' }}
               >
                 <div className="image-picker ">
-                  {bannerImageData.data ? (
+                  {adminState.bannerImage.url ? (
                     <div className="image-picker-selected-wrapper banner-size">
-                      <img className="image-picker-selected banner-size" src={bannerImageData.data} />
+                      <img
+                        className="image-picker-selected banner-size"
+                        src={adminState.bannerImage.data.base64 || adminState.bannerImage.url}
+                      />
                       <div className="image-picker-selected-hover banner-size">
                         <img src={require('images/admin/non-selected-image.svg').default} />
                       </div>
@@ -355,7 +325,7 @@ const Information = () => {
               </FilePicker>
               <div
                 style={{ marginTop: '3px', fontWeight: 500, fontSize: '16px', lineHeight: '22px', color: '#808080' }}
-              >{`${fileSizeFM(bannerImageData.file.size) || '0'}${AVD.bannerImage.extraText}`}</div>
+              >{`${fileSizeFM(adminState.bannerImage.data.file.size) || '0'}${AVD.bannerImage.extraText}`}</div>
             </div>
           </div>
         </div>
@@ -368,18 +338,17 @@ const Information = () => {
               <textarea
                 className={`description-textarea description-textarea-${descriptionInputState}`}
                 placeholder={AVD.description.placeholder}
-                value={tmpDescription}
+                value={adminState.description}
                 maxLength={300}
                 onChange={(e) => {
-                  const val = e.target.value;
-                  setTmpDescription(val);
+                  setAdminState((prev) => ({ ...prev, description: e.target.value }));
                 }}
                 onFocus={() => {}}
                 onBlur={() => {
                   checkDescription();
                 }}
               ></textarea>
-              <div className="under-text">{`${tmpDescription.length}${AVD.description.extraText}`}</div>
+              <div className="under-text">{`${adminState.description.length}${AVD.description.extraText}`}</div>
             </div>
           </div>
         </div>
@@ -390,31 +359,34 @@ const Information = () => {
             <FormLabel title={AVD.tags.title} description={AVD.tags.description} />
             <div className="tags-wrapper">
               <div className="input-tags-wrapper">
-                {tags.map((item, index) => (
+                {adminState.tags.map((item, index) => (
                   <button
                     className="input-tags-button"
                     key={index}
                     onClick={(e) => {
-                      setTags((prev) => prev.filter((_item, _index) => index !== _index));
+                      setAdminState((prev) => ({
+                        ...prev,
+                        tags: prev.tags.filter((_item, _index) => index !== _index)
+                      }));
                     }}
                   >
                     {`# ${item.name}`}
                     <div className="input-tags-button-hover">Delete</div>
                   </button>
                 ))}
-                {tags.length < 8 && (
+                {adminState.tags.length < 8 && (
                   <input
                     className="input-tags-text"
                     onKeyDown={onKeyDownTagInput}
                     type={'text'}
                     placeholder={AVD.tags.placeholder}
                     value={currentTagText}
-                    onChange={onChnageCurrentTagText}
+                    onChange={onChangeCurrentTagText}
                     onBlur={addTags}
                   />
                 )}
               </div>
-              <div className="under-text">{`${tags.length}${AVD.tags.extraText}`}</div>
+              <div className="under-text">{`${adminState.tags.length}${AVD.tags.extraText}`}</div>
             </div>
           </div>
         </div>
@@ -440,14 +412,14 @@ const Information = () => {
             outline
             color={'none'}
             onClick={() => {
-              dispatch(openCreateClubPopup({ type: 'modifyCancel', text: AVD.popupText.modifyCancel }));
+              dispatch(showModal({ type: 'modifyClubCancel', data: club.id }));
             }}
             tabIndex={0}
           />
           <JButton
             label={'Save'}
             onClick={() => {
-              dispatch(openCreateClubPopup({ type: 'modifySave', text: AVD.popupText.modifySave, club }));
+              dispatch(showModal({ type: 'modifyClub', data: _club }));
             }}
             tabIndex={0}
             disabled={
@@ -458,7 +430,8 @@ const Information = () => {
           />
         </div>
       </div>
-      <CreateClubPopup />
+      <ModifyClubModal />
+      <ModifyClubCancelModal />
     </div>
   );
 };

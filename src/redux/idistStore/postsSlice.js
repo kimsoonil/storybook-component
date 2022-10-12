@@ -5,6 +5,11 @@ const postSlice = createSlice({
   initialState: {
     isLoading: false,
     posts: {},
+    post: {},
+    like: {},
+    comment: {},
+    eventPosts: {},
+    noticePosts: {},
     error: ''
   },
   reducers: {
@@ -15,9 +20,143 @@ const postSlice = createSlice({
     },
     getPostsSuccess: (state, { payload }) => {
       state.isLoading = false;
-      state.posts = payload;
+      console.log('payload', payload);
+      switch (payload.payload?.type) {
+        case 'event':
+          state.eventPosts = payload;
+          break;
+        case 'notion':
+          state.noticePosts = payload;
+          break;
+        default:
+          state.posts = payload;
+      }
     },
 
+    // TODO getPost
+    getPostInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    getPostSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.post = payload;
+    },
+    deletePostInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    deletePostSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.post = payload;
+    },
+    patchPostInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    patchPostSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.post = payload;
+    },
+    // TODO getPostLikes
+    getPostLikesInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    getPostLikesSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.like = payload;
+    },
+    // TODO postPostLike
+    postPostLikeInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    postPostLikeSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.post = payload;
+    },
+
+    // TODO postPostUnlike
+    postPostUnlikeInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    postPostUnlikeSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.post = payload;
+    },
+
+    // TODO postPostDislike
+    postPostDislikeInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    postPostDislikeSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.post = payload;
+    },
+
+    // TODO postPostUndislike
+    postPostUndislikeInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    postPostUndislikeSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.post = payload;
+    },
+
+    // TODO postPostShare
+    postPostShareInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    postPostShareSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.post = payload;
+    },
+
+    // TODO postPostPin
+    postPostPinInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    postPostPinSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.post = payload;
+    },
+
+    // TODO postPostUnPin
+    postPostUnPinInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    postPostUnPinSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.post = payload;
+    },
+    deletePostTemporaryInit: (state) => {
+      state.isLoading = true;
+    },
+    deletePostTemporarySuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.post = payload;
+    },
+    postPostCommentInit: (state) => {
+      state.isLoading = true;
+    },
+    postPostCommentSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.comment = payload;
+    },
+    getPostCommentsInit: (state) => {
+      state.isLoading = true;
+    },
+    getPostCommentSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.comment = payload;
+    },
     postFailure: (state, error) => {
       console.log('error : ', error.payload.message);
       state.error = error.payload.message;
@@ -26,6 +165,38 @@ const postSlice = createSlice({
   }
 });
 
-export const { getPostsInit, getPostsSuccess, postFailure } = postSlice.actions;
+export const {
+  getPostsInit,
+  getPostsSuccess,
+  getPostInit,
+  getPostSuccess,
+  deletePostInit,
+  deletePostSuccess,
+  patchPostInit,
+  patchPostSuccess,
+  getPostLikesInit,
+  getPostLikesSuccess,
+  postPostLikeInit,
+  postPostLikeSuccess,
+  postPostUnlikeInit,
+  postPostUnlikeSuccess,
+  postPostDislikeInit,
+  postPostDislikeSuccess,
+  postPostUndislikeInit,
+  postPostUndislikeSuccess,
+  postPostShareInit,
+  postPostShareSuccess,
+  postPostPinInit,
+  postPostPinSuccess,
+  postPostUnPinInit,
+  postPostUnPinSuccess,
+  deletePostTemporaryInit,
+  deletePostTemporarySuccess,
+  postPostCommentInit,
+  postPostCommentSuccess,
+  getPostCommentsInit,
+  getPostCommentSuccess,
+  postFailure
+} = postSlice.actions;
 
 export default postSlice.reducer;

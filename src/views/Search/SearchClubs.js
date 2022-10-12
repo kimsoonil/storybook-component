@@ -5,8 +5,7 @@ import ClubsList from 'components/idist/ClubsList';
 
 function SearchClub(props) {
   const searchTab = window.location.pathname.split('/');
-  console.log(searchTab);
-  return <ClubsList limit={16} searchTab={searchTab[2]} search={''} />;
+  return <ClubsList limit={20} searchTab={searchTab[3]} />;
 }
 
 export default SearchClub;

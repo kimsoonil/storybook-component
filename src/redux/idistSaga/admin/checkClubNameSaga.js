@@ -6,26 +6,17 @@ import {
   checkClubNameFailure
 } from 'redux/idistStore/admin/checkClubNameSlice';
 
-import axios from 'axios';
-import { getToken } from 'utils/Cookies/Cookies';
-
-const config = getToken();
+import idistApi from 'redux/idistApi';
 
 function* onLoadCheckClubNameAsync({ payload }) {
   try {
-    const response = yield call(() =>
-      axios.post(
-        `${process.env.REACT_APP_API_URL}/api/v1/${payload.id ? `club/${payload.id}/` : `clubs/`}check-name`,
-        { name: payload.name },
-        config
-      )
-    );
-    if (response.status === 200) {
+    const response = yield call(idistApi.postAdminClubNameCheck, payload);
+    if (response.status === 200 || response.data.message === 'ok') {
       yield put(checkClubNameSuccess({ ...response.data }));
     }
   } catch (error) {
     console.log(error.response.data);
-    yield put(checkClubNameFailure(error.response.data));
+    yield put(checkClubNameFailure(error));
   }
 }
 

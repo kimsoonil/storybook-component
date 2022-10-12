@@ -8,10 +8,9 @@ const config = getToken();
 // TODO: user me
 function* getUSer() {
   try {
-    const response = yield call(() => axios.get(`${process.env.REACT_APP_API_URL}/api/v1/user/me`, config), '');
-    if (response.status === 200) {
+    const response = yield call(() => axios.get(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/user/me`, config), '');
+    if (response.data.message === 'ok') {
       yield put(actionTypes.getUserSuccess({ ...response.data }));
-      // console.log(response.data);
     }
   } catch (error) {
     yield put(actionTypes.userFailure(error));
@@ -23,12 +22,11 @@ function* getUSer() {
 function* patchUser({ payload }) {
   try {
     const response = yield call(
-      () => axios.post(`${process.env.REACT_APP_API_URL}/api/v1/user/me`, payload, config),
+      () => axios.post(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/user/me`, payload, config),
       ''
     );
-    if (response.status === 200) {
+    if (response.data.message === 'ok') {
       yield put(actionTypes.patchUserSuccess({ ...response.data }));
-      // console.log(response.data);
     }
   } catch (error) {
     yield put(actionTypes.userFailure(error));

@@ -8,44 +8,81 @@ import Tag from 'components/idist/admin/Tag';
 import GoBack from 'components/idist/admin/GoBack';
 import ImagePicker from 'components/idist/admin/ImagePicker';
 import Menu from 'components/idist/admin/Menu';
-import { getIdClubInit, patchIdClubBannerImageInit, patchIdClubProfileImageInit } from 'redux/idistStore/clubSlice';
-import { resetCreateClub } from 'redux/idistStore/admin/createClubSlice';
+import {
+  getClubInit,
+  patchClubBannerImageInit,
+  patchClubProfileImageInit
+} from 'redux/idistStore/admin/commonAdminSlice';
 
 const Admin = ({ visibleMenu = false }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // 임시 코드
-  const clubCreated = useSelector((state) => state.createClub.club);
+  const isLoading = useSelector((state) => state.commonAdmin.getClubLoading);
+  const clubRedux = useSelector((state) => state.commonAdmin.club);
+
   useEffect(() => {
-    dispatch(getIdClubInit(clubCreated?.id || 46));
-    dispatch(resetCreateClub);
-  }, [clubCreated]);
+    // if (clubRedux?.id) {
+    //   console.log(123);
+    //   // dispatch(getClubInit({ id: clubCreated?.id || 22 }));
+    // } else {
+    dispatch(getClubInit({ id: 22 }));
+    // }
+  }, []);
 
-  const isLoading = useSelector((state) => state.club.isLoading);
-  const club = useSelector((state) => state.club?.clubId?.data);
-  // const [club, setClub] = useState({});
-  // useEffect(() => {
-  //   if (clubId?.data) {
-  //     setClub(clubId?.data);
-  //   }
-  // }, [clubId?.data]);
+  const [adminState, setAdminState] = useState({
+    name: '',
+    description: '',
+    profileImage: {
+      data: { file: '', base64: '' },
+      url: ''
+    },
+    bannerImage: {
+      data: { file: '', base64: '' },
+      url: ''
+    },
+    tags: []
+  });
 
-  const updateBanner = ({ data }) => {
-    // console.log(data);
-    dispatch(patchIdClubBannerImageInit({ id: club?.id, data: { bannerImage: data } }));
+  useEffect(() => {
+    if (clubRedux?.id) {
+      init();
+    }
+  }, [clubRedux]);
+
+  const init = () => {
+    setAdminState({
+      name: clubRedux?.name,
+      description: clubRedux?.description || '',
+
+      profileImage: {
+        data: { file: '', base64: '' },
+        url: clubRedux?.profile_image_url
+      },
+      bannerImage: {
+        data: { file: '', base64: '' },
+        url: clubRedux?.banner_image_url
+      },
+      tags: clubRedux?.tags
+    });
   };
-  const updateProfile = ({ data }) => {
-    dispatch(patchIdClubProfileImageInit({ id: club?.id, data: { profileImage: data } }));
+
+  const updateBanner = ({ base64 }) => {
+    dispatch(patchClubBannerImageInit({ id: clubRedux?.id, data: { banner_image: base64 } }));
+  };
+  const updateProfile = ({ base64 }) => {
+    dispatch(patchClubProfileImageInit({ id: clubRedux?.id, data: { profile_image: base64 } }));
   };
 
   const bannerBackgroundStyle = useMemo(
-    () => ({
-      background: club?.bannerImageUrl
-        ? `linear-gradient(to top, rgba(4, 4, 4, 0.7), transparent 160px), no-repeat center/cover url(${club?.bannerImageUrl})`
-        : '#cdcdd1'
-    }),
-    [club?.bannerImageUrl]
+    () =>
+      adminState?.bannerImage?.data?.base64
+        ? { backgroundImage: `url(${adminState?.bannerImage?.data?.base64})` }
+        : {
+            background: adminState?.bannerImage?.url
+              ? `linear-gradient(to top, rgba(4, 4, 4, 0.7), transparent 160px), no-repeat center/cover url(${adminState?.bannerImage?.url})`
+              : '#cdcdd1'
+          },
+    [adminState?.bannerImage?.url]
   );
 
   if (isLoading) {
@@ -62,13 +99,19 @@ const Admin = ({ visibleMenu = false }) => {
           <GoBack />
           <div className="banner-content-wrapper">
             <div className="banner-tags">
-              {club?.tags?.map((item, index) => (
+              {adminState?.tags?.map((item, index) => (
                 <Tag key={index} value={item.name} />
               ))}
             </div>
 
             <div className="banner-profile">
-              {club?.profileImageUrl && <img src={club?.profileImageUrl} />}
+              {adminState?.profileImage?.data?.base64 ? (
+                <img src={adminState?.profileImage?.data?.base64} />
+              ) : adminState?.profileImage?.url ? (
+                <img src={adminState?.profileImage?.url} />
+              ) : (
+                <></>
+              )}
               <ImagePicker imageSize={60} setImageFile={updateProfile} maxSize={{ value: 10, unit: 'mb' }} />
             </div>
           </div>
@@ -76,12 +119,14 @@ const Admin = ({ visibleMenu = false }) => {
       </div>
       {/* Title */}
       <div className="layout-title">
-        <div className={`text-h1 ${club?.name && `writing`}`}>{club?.name || 'Club Name'}</div>
-        <div className={`text-h6 ${club?.description && 'writing'}`}>{club?.description || 'Description'}</div>
+        <div className={`text-h1 ${adminState?.name && `writing`}`}>{adminState?.name || 'Club Name'}</div>
+        <div className={`text-h6 ${adminState?.description && 'writing'}`}>
+          {adminState?.description || 'Description'}
+        </div>
       </div>
       <hr style={{ margin: 0, height: 0, borderBottom: 'none' }} />
       {visibleMenu && <Menu menuList={AVD.menu} />}
-      {club?.id && <Outlet context={{ club }} />}
+      {clubRedux?.id && <Outlet context={{ club: clubRedux, adminState, setAdminState }} />}
     </div>
   );
 };
@@ -152,7 +197,7 @@ export const AVD = {
     yesText: 'Sign up immediately without approval',
     noText: 'Staff must approve to join'
   },
-  popupText: {
+  modalText: {
     create: 'Are you sure to create a club?',
     cancel: 'Are you sure to cancel creating a club?',
     modifySave: 'Are you sure to edit the information?',

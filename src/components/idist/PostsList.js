@@ -1,22 +1,62 @@
 /* eslint-disable */
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { dateCalculation } from 'utils/dateCalculation';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getPostsInit } from 'redux/idistStore/postsSlice';
-
-import { postsList } from 'views/Home/homeDate';
-import 'assets/scss/search.scss';
+import { getTagsInit } from 'redux/idistStore/tagSlice';
+import Pagination from 'components/idist/Pagination';
+import InputPopup from 'components/idist/popup/inputPopup';
 import { Button } from 'components/idist/Button';
 import { Loader } from 'components/idist/Loader';
+import 'assets/scss/search.scss';
 
-function PostsList() {
+function PostsList(props) {
   const dispatch = useDispatch();
-  const postState = useSelector((state) => state.post);
+  const navigate = useNavigate();
+  const [secretOpen, setSecretOpen] = useState(false);
+  const [selectTag, setSelectTag] = useState('');
+  const { tags } = useSelector((state) => state.tag);
+  const [postData, setPostData] = useState();
+  const [postPassword, setPostPassword] = useState();
+  const { posts } = useSelector((state) => state.post);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState(1);
+  const limit = props.limit;
+  const offset = (page - 1) * limit;
 
   useEffect(() => {
-    dispatch(getPostsInit());
-  }, []);
-  const { isLoading, posts } = postState;
+    dispatch(getPostsInit({ parameters: { search: searchParams.get('search'), tag_name: selectTag } }));
+    dispatch(getTagsInit());
+  }, [searchParams, selectTag]);
+
+  useEffect(() => {
+    setPostPassword('');
+  }, [secretOpen]);
+
+  const handleClickPosts = (postsItem) => {
+    if (postsItem.is_secret) {
+      setSecretOpen(!secretOpen);
+      setPostData(postsItem);
+    } else {
+      navigate(`/club/${postsItem.club}/post/${postsItem.id}`);
+    }
+  };
+  const secretPosts = () => {
+    if (postPassword == postData.password) {
+      navigate(`/club/${postData.club}/post/${postData.id}`);
+    } else {
+      alert('비밀번호가 다릅니다.');
+    }
+  };
+  const handleClickTag = (item) => {
+    if (selectTag === item) {
+      setSelectTag('');
+    } else {
+      setSelectTag(item);
+    }
+  };
 
   if (posts.message !== 'ok')
     return (
@@ -34,39 +74,95 @@ function PostsList() {
           <div className="flex-center">New</div>
         </div>
       </div>
-      <div className="search-post-hashtag">
-        <div className="item active flex-center">#Battleground</div>
-        <div className="item flex-center">#Kpop</div>
-        <div className="item flex-center">#포트리스</div>
-        <div className="item flex-center">#Twice</div>
-        <div className="item flex-center">#POPPOP</div>
-        <div className="item flex-center">#Mobile games</div>
-        <div className="item flex-center">#Clan</div>
-        <div className="item flex-center">#Dolphin</div>
-        <div className="item flex-center">Animals</div>
+      <div className="tags">
+        {tags.message !== 'ok' ? (
+          <div className="flex-center">
+            <Loader />
+          </div>
+        ) : (
+          tags.data.map((item, index) => {
+            if (index < 15) {
+              return (
+                <div
+                  className={'item flex-center ' + (selectTag === item.name ? 'active' : '')}
+                  key={index}
+                  onClick={() => handleClickTag(item.name)}
+                >
+                  # {item.name}
+                </div>
+              );
+            }
+          })
+        )}
       </div>
-      <div className="search-post-list">
-        {posts.data.map((postsItem, index) => {
+      <div className="posts-list">
+        {posts.data.slice(offset, offset + limit).map((postsItem, index) => {
           return (
-            <div className="search-post-list-item relative" key={index}>
-              <div className="search-post-list-item-container">
-                <div className="search-post-list-item-nick">{postsItem.user.user}</div>
-                <div className="search-post-list-item-title">{postsItem.title}</div>
-                <div className="search-post-list-item-content"></div>
-                <div className="search-post-list-item-info">
-                  View {postsItem.likeCount} ・ Comment {postsItem.commentCount}
+            <div
+              className="posts-list-item relative"
+              key={index}
+              style={{ borderTop: index < 2 ? '0' : '1px solid #cdcdd1' }}
+              onClick={() => handleClickPosts(postsItem)}
+            >
+              <div className="posts-list-item-container">
+                <div className="posts-list-item-title">
+                  {postsItem.title} {postsItem.is_secret && <img src={require('images/club/ic-lock.png')} alt="" />}
+                </div>
+                <div className="posts-list-item-content" dangerouslySetInnerHTML={{ __html: postsItem.content }}></div>
+                <div className="posts-list-item-profile">
+                  <div className="posts-list-item-profile-img">
+                    <img
+                      src={
+                        postsItem.profile.user.profile_image_url
+                          ? postsItem.profile.user.profile_image_url
+                          : require('images/main/temporary-profile.png')
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div className="posts-list-item-nick">{postsItem.profile.user.username}</div>
+                    <div className="posts-list-item-info">
+                      <div className="flex-center">
+                        <img src={require('images/main/icon-view.png')} /> {postsItem.view_count}
+                      </div>
+                      <div className="flex-center">
+                        <img src={require('images/main/icon-comment.png')} /> {postsItem.comment_count}
+                      </div>
+                      <div className="flex-center">{dateCalculation(postsItem.created)}</div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="search-post-img ">
-                <img src={postsItem.thumbnailImageUrl} alt="" />
+              <div className="posts-img ">
+                <img src={postsItem.thumbnail_image_url} alt="" />
               </div>
             </div>
           );
         })}
+        <InputPopup
+          open={secretOpen}
+          setOpen={setSecretOpen}
+          value={postPassword}
+          setValue={setPostPassword}
+          secretPosts={secretPosts}
+        />
       </div>
-      <div className="flex-center">
-        <Button size="l" label={'More'} width={116} />
-      </div>
+      {props.searchTab === 'posts' ? (
+        <div className="flex-center">
+          <Pagination total={posts.data.length} limit={limit} page={page} setPage={setPage} />
+        </div>
+      ) : (
+        <div className="flex-center">
+          <Button
+            size="l"
+            label={'More'}
+            width={116}
+            onClick={() => {
+              navigate('/clubs/search/posts');
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }
