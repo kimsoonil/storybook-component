@@ -6,8 +6,9 @@ const initialState = () => ({
   boardGroup: {},
   board: {},
   selected: {},
-  selected: {},
   posts: [],
+
+  contents: {},
 
   getBoardGroupsLoading: false,
 
@@ -44,6 +45,12 @@ const boardAdminSlice = createSlice({
     resetBoardAdminBoardGroups: (state) => {
       state.boardGroups = [];
     },
+    setBoardAdminBoardGroups: (state, { payload }) => {
+      state.boardGroups = payload;
+    },
+    resetBoardAdminContents: (state) => {
+      state.contents = {};
+    },
     resetBoardAdminSelected: (state) => {
       state.selected = {};
     },
@@ -72,7 +79,7 @@ const boardAdminSlice = createSlice({
     getBoardGroupSuccess: (state, { payload }) => {
       // payload = boardGroup
       state.getBoardGroupLoading = false;
-      state.selected = { ...payload, contentsType: 'group' };
+      state.contents = { ...payload, contentsType: 'group' };
     },
     getBoardGroupFailure: (state, { payload }) => {
       state.getBoardGroupLoading = false;
@@ -85,7 +92,7 @@ const boardAdminSlice = createSlice({
     postBoardGroupSuccess: (state, { payload }) => {
       // payload = boardGroup
       state.postBoardGroupLoading = false;
-      state.selected = { ...payload, contentsType: 'group' };
+      state.contents = { ...payload, contentsType: 'group' };
     },
     postBoardGroupFailure: (state, { payload }) => {
       state.postBoardGroupLoading = false;
@@ -98,7 +105,7 @@ const boardAdminSlice = createSlice({
     patchBoardGroupSuccess: (state, { payload }) => {
       // payload = boardGroup 확인필요
       state.patchBoardGroupLoading = false;
-      state.selected = { ...immerParse(state.selected), ...payload };
+      state.contents = { ...immerParse(state.contents), ...payload };
     },
     patchBoardGroupFailure: (state, { payload }) => {
       state.patchBoardGroupLoading = false;
@@ -111,7 +118,7 @@ const boardAdminSlice = createSlice({
     deleteBoardGroupSuccess: (state, { payload }) => {
       // payload = {id: [number]}
       state.deleteBoardGroupLoading = false;
-      state.selected = {};
+      state.contents = {};
     },
     deleteBoardGroupFailure: (state, { payload }) => {
       state.deleteBoardGroupLoading = false;
@@ -148,7 +155,7 @@ const boardAdminSlice = createSlice({
     mergeBoardGroupSuccess: (state, { payload }) => {
       // payload = boardGroup
       state.mergeBoardGroupLoading = false;
-      state.selected = {};
+      state.contents = {};
     },
     mergeBoardGroupFailure: (state, { payload }) => {
       state.mergeBoardGroupLoading = false;
@@ -174,7 +181,7 @@ const boardAdminSlice = createSlice({
     getBoardSuccess: (state, { payload }) => {
       // payload = board
       state.getBoardLoading = false;
-      state.selected = { ...payload, contentsType: 'board' };
+      state.contents = { ...payload, contentsType: 'board' };
     },
     getBoardFailure: (state, { payload }) => {
       state.getBoardLoading = false;
@@ -187,7 +194,7 @@ const boardAdminSlice = createSlice({
     postBoardSuccess: (state, { payload }) => {
       // payload = board
       state.postBoardLoading = false;
-      state.selected = { ...payload, contentsType: 'board' };
+      state.contents = { ...payload, contentsType: 'board' };
     },
     postBoardFailure: (state, { payload }) => {
       state.postBoardLoading = false;
@@ -200,7 +207,7 @@ const boardAdminSlice = createSlice({
     patchBoardSuccess: (state, { payload }) => {
       // payload = board 확인필요
       state.patchBoardLoading = false;
-      state.selected = { ...immerParse(state.selected), ...payload };
+      state.contents = { ...immerParse(state.contents), ...payload };
     },
     patchBoardFailure: (state, { payload }) => {
       state.patchBoardLoading = false;
@@ -213,7 +220,7 @@ const boardAdminSlice = createSlice({
     deleteBoardSuccess: (state, { payload }) => {
       // payload = {id: [number]}
       state.deleteBoardLoading = false;
-      state.selected = {};
+      state.contents = {};
     },
     deleteBoardFailure: (state, { payload }) => {
       state.deleteBoardLoading = false;
@@ -251,7 +258,7 @@ const boardAdminSlice = createSlice({
     mergeBoardSuccess: (state, { payload }) => {
       // payload = boardGroup
       state.mergeBoardLoading = false;
-      state.selected = {};
+      state.contents = {};
     },
     mergeBoardFailure: (state, { payload }) => {
       state.mergeBoardLoading = false;
@@ -289,6 +296,8 @@ const boardAdminSlice = createSlice({
 export const {
   resetBoardAdmin,
   resetBoardAdminBoardGroups,
+  setBoardAdminBoardGroups,
+  resetBoardAdminContents,
   resetBoardAdminSelected,
   resetBoardAdminPosts,
 
@@ -366,16 +375,3 @@ export const {
 } = boardAdminSlice.actions;
 
 export default boardAdminSlice.reducer;
-
-const __board = {
-  id: 128,
-  board_group: 30,
-  name: 'b1-1',
-  description: 'string',
-  read_permission: 1,
-  write_permission: 0,
-  view_mode: 'LIST_TYPE',
-  order: 1,
-  type: 'NORMAL',
-  is_active: true
-};

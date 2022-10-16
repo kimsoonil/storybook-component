@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+// import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from '@redux-saga/core';
 import rootSaga from './rootSaga';
@@ -10,7 +11,7 @@ const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['logIn']
+  whitelist: ['logIn', 'forumHistory']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer());
@@ -19,9 +20,7 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-      }
+      serializableCheck: false
     }).concat(sagaMiddleware),
   devTools: true
 });

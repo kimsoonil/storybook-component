@@ -29,11 +29,11 @@ function* patchBoardGroup({ payload }) {
     const response = yield call(() =>
       axios.patch(
         `${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/admin/board-group/${payload.id}`,
-        payload.parameters,
+        payload.data,
         config
       )
     );
-    if (response.data.message === 'ok') {
+    if (response.status == 200) {
       yield put(actionTypes.patchBoardGroupSuccess({ ...response.data }));
       yield call(sagaCallback, payload, response?.data?.data);
       // if (payload.actionList) {
@@ -51,11 +51,11 @@ function* postBoardGroupBoard({ payload }) {
     const response = yield call(() =>
       axios.post(
         `${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/admin/board-group/${payload.id}/board`,
-        payload.parameters,
+        payload.data,
         config
       )
     );
-    if (response.data.message === 'ok') {
+    if (response.status == 200 || response.status == 201) {
       yield put(actionTypes.postBoardGroupBoardSuccess({ ...response.data }));
       yield call(sagaCallback, payload, response?.data?.data);
       // if (payload.actionList) {
@@ -74,11 +74,11 @@ function* patchBoardGroupMerge({ payload }) {
     const response = yield call(() =>
       axios.patch(
         `${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/admin/board-group/${payload.id}/merge`,
-        payload.parameters,
+        payload.data,
         config
       )
     );
-    if (response.data.message === 'ok') {
+    if (response.status == 200) {
       yield put(actionTypes.patchBoardGroupMergeSuccess({ ...response.data }));
       yield call(sagaCallback, payload, response?.data?.data);
       // if (payload.actionList) {
@@ -97,7 +97,7 @@ function* deleteBoardGroup({ payload }) {
     const response = yield call(() =>
       axios.delete(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/admin/board-group/${payload.id}`, config)
     );
-    if (response.data.message === 'ok') {
+    if (response.status === 204) {
       yield put(actionTypes.deleteBoardGroupSuccess({ ...response.data }));
       yield call(sagaCallback, payload, response?.data?.data);
       // if (payload.actionList) {

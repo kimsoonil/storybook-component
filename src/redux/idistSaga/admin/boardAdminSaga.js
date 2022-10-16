@@ -6,6 +6,7 @@ function* getBoardGroups({ payload }) {
   try {
     const response = yield call(idistApi.getClubBoardGroups, payload);
     if (response.status === 200 || response.data.message === 'ok') {
+      console.log('getBoardGroups success');
       yield put(actionTypes.getBoardGroupsSuccess(response.data?.data));
     }
   } catch (error) {
@@ -93,6 +94,7 @@ function* orderBoardGroup({ payload }) {
     const response = yield call(idistApi.patchAdminBoardGroupOrder, payload);
     if (response.status === 200 || response.data.message === 'ok') {
       yield put(actionTypes.orderBoardGroupSuccess(response.data?.data));
+      yield put(actionTypes.getBoardGroupsInit({ id: payload.clubId }));
     }
   } catch (error) {
     yield put(actionTypes.orderBoardGroupFailure(error));
@@ -191,6 +193,7 @@ function* orderBoard({ payload }) {
     const response = yield call(idistApi.patchAdminBoardOrder, payload);
     if (response.status === 200 || response.data.message === 'ok') {
       yield put(actionTypes.orderBoardSuccess(response.data?.data));
+      yield put(actionTypes.getBoardGroupsInit({ id: payload.clubId }));
     }
   } catch (error) {
     yield put(actionTypes.orderBoardFailure(error));

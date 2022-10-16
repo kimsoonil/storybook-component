@@ -38,7 +38,7 @@ function HotClubs(props) {
                   key={index}
                   onClick={() => setSelectCategories(item.id)}
                 >
-                  {item.name}
+                  {item.title}
                 </div>
               );
             }
@@ -82,7 +82,7 @@ function HotClubs(props) {
                     />
                   </div>
                   <div className="list-item">
-                    <div className="list-item-name">{clubItem.name}</div>
+                    <div className="list-item-name">{clubItem.title}</div>
                     <div className="flex-between">
                       <div className="list-item-info">
                         <div>
@@ -90,14 +90,15 @@ function HotClubs(props) {
                         </div>
                         <div>{clubItem.member_count} M Sliver</div>
                       </div>
-                      <div className="list-item-pin">
-                        {clubItem.pin === null ? (
-                          <img src={require('images/club/club-bookmark-line.png')} />
-                        ) : clubItem.is_pin ? (
-                          <img src={require('images/club/club-bookmark.png')} />
-                        ) : (
-                          <img src={require('images/club/club-bookmark-line.png')} />
-                        )}
+                      <div className="list-item-pin" onClick={() => props.handleClickPin(clubItem.is_pin)}>
+                        <img
+                          src={require(clubItem.pin
+                            ? clubItem.is_pin
+                              ? `images/club/club-bookmark.png`
+                              : `images/club/club-bookmark-line.png`
+                            : `images/club/club-bookmark-line.png`)}
+                          alt=""
+                        />
                       </div>
                     </div>
                   </div>

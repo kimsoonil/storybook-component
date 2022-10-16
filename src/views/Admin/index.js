@@ -229,7 +229,27 @@ export const AVD = {
     { id: 22, type: 22, text: 'Fellowship / Gathering' },
     { id: 23, type: 23, text: 'Religion / Service' }
   ],
-  menu: ['dashboard', 'statistics', 'boards', 'posts', 'members', 'permissions', 'information', 'design', 'operation']
+  menu: [
+    { path: 'dashboard', title: 'Dashboard' },
+    { path: 'statistics', title: 'Statistics' },
+    { path: 'boards', title: 'Boards' },
+    {
+      path: 'reports',
+      title: 'Reports',
+      submenu: [
+        { path: 'reports', title: 'Reports' },
+        { path: 'reports/settings', title: 'Settings' }
+      ]
+    },
+    { path: 'members', title: 'Members' },
+    { path: 'permissions', title: 'Permissions' },
+    { path: 'information', title: 'Information' },
+    { path: 'design', title: 'Design' },
+    {
+      path: 'operation',
+      title: 'Operation'
+    }
+  ]
 };
 
 export const IVD = {

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    #modal{
+      display:block;
+    }
+    .modal_popup {
+      display:block;
+    }
+  </style>
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container">
+     
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>  
+</div>
+
+<div id="modal"></div>
+<!-- Change Nickname -->
+<div class="modal_popup modal_text" style="width:480px;">
+  <div class="modal_con member">
+    <button type="button" class="close"></button>
+    <h2 class="modal_title">Change Password</h2>
+    <div class="bg_con">
+      <div class="search_title">
+        <span class="step">STEP 01</span>
+        <span class="title_text">Account Authenticate</span>
+      </div>
+      <div class="search_text">Please select the means to receive the authentication code<br/>and proceed with the authentication.</div>
+      <div class="radio_button">
+        <div class="radio_wrap half">
+          <span class="form_cell btn_radio size_lg">
+            <input type="radio" id="radio1" checked>
+            <label for="radio1">
+              <span>E-mail</span>
+            </label>
+          </span>
+          <span class="form_cell btn_radio size_lg">
+            <input type="radio" id="radio2">
+            <label for="radio2">
+              <span>Cellphone</span>
+            </label>
+          </span>          
+        </div>  
+      </div>    
+      <span class="shadow_line popup"></span>
+      <div class="form_wrap msg btn_set success">
+        <span class="form_cell form_input input_md default between">
+          <div class="input_set">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" value="superclub@ccr.co.kr">            
+            <button class="btn_reset">
+              <span class="a11y">삭제</span>
+            </button>
+            <!-- <div class="dot error">
+              <span class="a11y">실패</span>
+            </div> -->          
+          </div>
+          <button type="button" class="btn primary button_md">
+            <span>Authenticate</span>
+          </button>
+        </span>
+        <span class="success_txt msg" id="input_alert">Authentication completed!</span>
+      </div>
+      <div class="form_wrap hidden">
+        <div class="form_wrap msg btn_set success">
+          <span class="form_cell form_input input_md between">
+            <div class="input_set">
+              <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Authentication code">            
+              <button class="btn_reset">
+                <span class="a11y">삭제</span>
+              </button>     
+            </div>
+            <button type="button" class="btn primary button_md">
+              <span>Authenticate</span>
+            </button>
+          </span>
+          <span class="success_txt msg" id="input_alert">Authentication completed!</span>        
+        </div>
+        <div class="form_wrap msg btn_set default">
+          <span class="form_cell form_input input_md between">
+            <div class="input_set">
+              <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Authentication code">            
+              <span class="guide_text time">
+                <span>2:59</span>
+              </span>
+            </div>
+            <button type="button" class="btn primary button_md" disabled>
+              <span>Confirm</span>
+            </button>
+          </span>
+          <span class="default_txt msg" id="input_alert">If you didn’t receive the code, click the Authenticate button again.</span>        
+        </div>
+      </div>
+    </div>
+    <div class="popup_btn_wrap right">
+      <button class="btn default button_lg btn_close">
+        <span>Cancel</span>
+      </button>
+      <button class="btn primary button_lg btn_close" disabled>
+        <span>Next</span>
+      </button>
+    </div>
+  </div>
+</div>
+</body>
+<script> 
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+</html>

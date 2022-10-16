@@ -4,18 +4,20 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getClubsRecommendInit } from 'redux/idistStore/clubSlice';
 import { useNavigate, Outlet } from 'react-router-dom';
-
-import { Header } from 'components/idist/Header';
+import Header from 'components/common/header/Header';
+// import { Header } from 'components/idist/Header';
 import 'assets/scss/reset.scss';
 import 'assets/scss/main.scss';
 import { useTranslation } from 'react-i18next';
 import { Loader } from 'components/idist/Loader';
-import Slider from 'react-slick';
 
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
-import 'assets/scss/slick.scss';
-import 'assets/scss/slick-theme.scss';
+import Footer from 'components/common/footer/Footer';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation } from 'swiper';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import 'assets/scss/main.scss';
 
 function Home() {
@@ -38,18 +40,6 @@ function Home() {
     dispatch(getClubsRecommendInit({ parameters: '' }));
   }, [dispatch]);
 
-  const settings = {
-    dots: true,
-    className: 'slider',
-    centerMode: true,
-    infinite: true,
-    centerPadding: '300px',
-    slidesToShow: 2,
-    slidesToSlide: 2,
-    swipeToSlide: true,
-    speed: 500
-  };
-
   if (recommend.message !== 'ok')
     return (
       <div className="flex-center">
@@ -58,14 +48,42 @@ function Home() {
     );
   return (
     <div id="root">
-      <Header seachFunc={seachFunc} user={{}} />
+      {/* <Header seachFunc={seachFunc} user={{}} /> */}
+      <Header />
 
       <div className="slideView relative">
         <div className="slideView-title">Editor’s Club Pick</div>
-        <Slider {...settings}>
+        <Swiper
+          spaceBetween={24}
+          slidesPerView={2}
+          slidesPerGroup={2}
+          observer={true}
+          observeParents={true}
+          navigation={true}
+          loop={true}
+          loopFillGroupWithBlank={true}
+          pagination={{
+            clickable: true
+          }}
+          modules={[Pagination, Navigation]}
+          breakpoints={{
+            1280: {
+              slidesPerView: 2,
+              slidesPerGroup: 2
+            },
+            720: {
+              slidesPerView: 1,
+              slidesPerGroup: 1
+            }
+          }}
+        >
           {recommend.data.map((recommendItem, index) => {
             return (
-              <div key={index} className="slider-item" onClick={() => navigate(`/club/${recommendItem.club.id}/home`)}>
+              <SwiperSlide
+                key={index}
+                className="slider-item"
+                onClick={() => navigate(`/club/${recommendItem.club.id}/home`)}
+              >
                 <div
                   className="slider-item-img"
                   style={{ backgroundImage: `url(${recommendItem.club.thumbnail_image_url})` }}
@@ -76,10 +94,10 @@ function Home() {
                 />
                 <div className="slider-item-title">{recommendItem.club.name}</div>
                 <div className="slider-item-info">Member 1 • BRONZE</div>
-              </div>
+              </SwiperSlide>
             );
           })}
-        </Slider>
+        </Swiper>
       </div>
       <div className="main">
         <div className="clubs-tap">
@@ -101,6 +119,7 @@ function Home() {
 
         <Outlet />
       </div>
+      <Footer />
     </div>
   );
 }

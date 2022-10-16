@@ -4,13 +4,7 @@ import { useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import _ from 'lodash';
-import { getClubBoardGroupsInit, postClubBoardGroupInit } from 'redux/idistStore/clubSlice';
-import {
-  deleteBoardGroupInit,
-  getBoardGroupInit,
-  patchBoardGroupInit,
-  postBoardGroupBoardInit
-} from 'redux/idistStore/boardGroupSlice';
+import { getBoardGroupInit, patchBoardGroupInit, postBoardGroupBoardInit } from 'redux/idistStore/boardGroupSlice';
 import { getBoardInit, getBoardPostsInit, patchBoardInit, resetBoardPosts } from 'redux/idistStore/boardSlice';
 import MoreOptionButton from './BoardSidebar/MoreOptionButton';
 import AddButton from './BoardSidebar/AddButton';
@@ -39,7 +33,14 @@ import {
 import MergeGroupDialog from 'components/idist/admin/dialog/MergeGroupDialog';
 import DeleteGroupDialog from 'components/idist/admin/dialog/DeleteGroupDialog';
 import DeleteBoardDialog from 'components/idist/admin/dialog/DeleteBoardDialog';
-import { getBoardGroupsInit } from 'redux/idistStore/admin/boardAdminSlice';
+import {
+  getBoardGroupsInit,
+  orderBoardGroupInit,
+  orderBoardInit,
+  postBoardGroupInit,
+  setBoardAdminBoardGroups
+} from 'redux/idistStore/admin/boardAdminSlice';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 const Boards = () => {
   const dispatch = useDispatch();
@@ -48,21 +49,17 @@ const Boards = () => {
   const clubId = outlet.club.id || 22;
 
   const boardGroups = useSelector((state) => state.boardAdmin.boardGroups);
-
-  const boardGroup = useSelector((state) => state.boardGroup.boardGroup?.data);
-
-  const board = useSelector((state) => state.board.board?.data);
-
-  const boardPosts = useSelector((state) => state.board.posts?.data);
-
-  const postBoardGroupTrigger = useSelector((state) => state.club.postBoardGroupTrigger);
-  const postBoardTrigger = useSelector((state) => state.boardGroup.postBoardTrigger);
-
   const newBoardGroup = useSelector((state) => state.boardAdmin.boardGroup);
   const newBoard = useSelector((state) => state.boardAdmin.board);
   useEffect(() => {
     dispatch(getBoardGroupsInit({ id: clubId }));
   }, [clubId, newBoardGroup, newBoard]);
+
+  const boardGroup = useSelector((state) => state.boardGroup.boardGroup?.data);
+  const board = useSelector((state) => state.board.board?.data);
+  const boardPosts = useSelector((state) => state.board.posts?.data);
+
+  const postBoardTrigger = useSelector((state) => state.boardGroup.postBoardTrigger);
 
   const initialColaState = useMemo(
     () => ({
@@ -86,21 +83,13 @@ const Boards = () => {
   const [description, setDescription] = useState('');
   const [permission, setPermission] = useState({ read: '', write: '', readGrade: '', writeGrade: '' });
   const [viewMode, setViewMode] = useState('');
+  const [type, setType] = useState('');
 
   const isBoardGroupLimited = boardGroups?.filter?.((item) => item.is_active).length > 9;
   const getBoardLimited = (id) =>
     boardGroups?.find((item) => item.id === id)?.boards?.filter?.((item) => item.is_active).length > 9;
-  const getParentBoardGroup = (groupId, boardId) =>
-    boardGroups?.find?.((item) => item.id === groupId)?.boards?.find?.((item2) => item2.id === boardId);
 
   // post data trigger
-  useEffect(() => {
-    if (postBoardGroupTrigger?.id) {
-      console.log('useEffect PostBoardGroupTrigger cola : ', cola);
-      setCola({ id: postBoardGroupTrigger.id, type: 'group', isCreating: false });
-    }
-  }, [postBoardGroupTrigger?.id]);
-
   useEffect(() => {
     if (postBoardTrigger?.id) {
       console.log('useEffect postBoardTrigger cola : ', cola);
@@ -128,6 +117,7 @@ const Boards = () => {
       writeGrade: BVD.permission.grade.BRONZE
     });
     setViewMode(BVD.viewMode.type.list);
+    setType('NORMAL');
   };
   // sidebar 컨텐츠 클릭 -> cola id 변경 -> type, id 에 맞는 컨텐츠 로드
   useEffect(() => {
@@ -149,6 +139,7 @@ const Boards = () => {
     setSidebarName(boardGroup.name);
     setName(boardGroup.name);
     setNameInputState(IVD.blur);
+    setType(boardGroup.type);
   };
   useEffect(() => {
     if (boardGroup) {
@@ -166,6 +157,7 @@ const Boards = () => {
     setDescription(board.description || '');
     setPermission(boardToPermission(board));
     setViewMode(board.view_mode);
+    setType(board.type);
   };
   useEffect(() => {
     if (board) {
@@ -382,12 +374,15 @@ const Boards = () => {
   const addGroup = () => {
     if (name) {
       dispatch(
-        postClubBoardGroupInit({
+        postBoardGroupInit({
           id: clubId,
-          data: { name, is_active: activationLabel === 'Activation' },
-          actionList: [{ type: getClubBoardGroupsInit.type, payload: { id: clubId } }]
+          data: { name, is_active: activationLabel === 'Activation' }
         })
       );
+      setTimeout(() => {
+        dispatch(getBoardGroupsInit({ id: clubId }));
+      }, 300);
+      setCola({ id: -1, type: '', isCreating: false });
       setAddState({});
     } else {
       setNameInputState(IVD.error);
@@ -400,7 +395,7 @@ const Boards = () => {
           id: boardGroup.id,
           data: { name, is_active: activationLabel === 'Activation' },
           actionList: [
-            { type: getClubBoardGroupsInit.type, payload: { id: clubId } },
+            { type: getBoardGroupsInit.type, payload: { id: clubId } },
             { type: getBoardGroupInit.type, payload: { id: boardGroup.id } }
           ]
         })
@@ -448,7 +443,7 @@ const Boards = () => {
         postBoardGroupBoardInit({
           id: addState.board?.parent,
           data: _data,
-          actionList: [{ type: getClubBoardGroupsInit.type, payload: { id: clubId } }]
+          actionList: [{ type: getBoardGroupsInit.type, payload: { id: clubId } }]
         })
       );
       setAddState({});
@@ -473,7 +468,7 @@ const Boards = () => {
               id: board.id,
               data: _data,
               actionList: [
-                { type: getClubBoardGroupsInit.type, payload: { id: clubId } },
+                { type: getBoardGroupsInit.type, payload: { id: clubId } },
                 { type: getBoardInit.type, payload: { id: board.id } }
               ]
             })
@@ -489,7 +484,7 @@ const Boards = () => {
             id: board.id,
             data: _data,
             actionList: [
-              { type: getClubBoardGroupsInit.type, payload: { id: clubId } },
+              { type: getBoardGroupsInit.type, payload: { id: clubId } },
               { type: getBoardInit.type, payload: { id: board.id } }
             ]
           })
@@ -540,18 +535,130 @@ const Boards = () => {
     };
   }, [boardPosts]);
 
-  // const updateActivationGroup = ({ clubId, boardGroupId, is_active }) => {
-  //   dispatch(
-  //     patchBoardGroupInit({
-  //       id: boardGroupId,
-  //       data: { is_active },
-  //       actionList: [
-  //         { type: getClubBoardGroupsInit.type, payload: { id: clubId } },
-  //         { type: getBoardGroupInit.type, payload: { id: boardGroupId } }
-  //       ]
-  //     })
-  //   );
-  // };
+  const onDragEnd = (props) => {
+    const { destination, draggableId, source, type } = props;
+
+    if (!destination) {
+      return;
+    }
+
+    if (destination.droppableId === source.droppableId && destination.index === source.index) {
+      return;
+    }
+
+    if (type === 'parent') {
+      const id = Number(draggableId);
+      const order = boardGroups[destination.index].order;
+
+      // fake loading
+      if (source.index < destination.index) {
+        // 위에서 밑으로 내릴 때
+        dispatch(
+          setBoardAdminBoardGroups(
+            boardGroups.map((item) =>
+              item.id === id ? { ...item, order: order * 2 + 1 } : { ...item, order: item.order * 2 }
+            )
+          )
+        );
+      } else {
+        // 밑에서 위로 올릴 때
+        dispatch(
+          setBoardAdminBoardGroups(
+            boardGroups.map((item) =>
+              item.id === id ? { ...item, order: order * 2 - 1 } : { ...item, order: item.order * 2 }
+            )
+          )
+        );
+      }
+
+      dispatch(orderBoardGroupInit({ id, data: { order }, clubId }));
+    } else {
+      const destBoardGroupId = Number(destination.droppableId);
+      const srcBoardGroupId = Number(source.droppableId);
+
+      let ret = [];
+      let order;
+      const id = Number(draggableId);
+
+      if (destBoardGroupId === srcBoardGroupId) {
+        let _boards = boardGroups.find((item) => item.id === destBoardGroupId).boards;
+
+        order = _boards[destination.index].order;
+        if (source.index < destination.index) {
+          _boards = _boards.map((item) =>
+            item.id === id ? { ...item, order: order * 2 + 1 } : { ...item, order: item.order * 2 }
+          );
+        } else {
+          _boards = _boards.map((item) =>
+            item.id === id ? { ...item, order: order * 2 - 1 } : { ...item, order: item.order * 2 }
+          );
+        }
+        ret = boardGroups.map((boardGroupItem) =>
+          boardGroupItem.id === destBoardGroupId ? { ...boardGroupItem, boards: _boards } : boardGroupItem
+        );
+      } else {
+        const srcBoardGroup = boardGroups.find((item) => item.id === srcBoardGroupId);
+        const destBoardGroup = boardGroups.find((item) => item.id === destBoardGroupId);
+
+        const srcBoard = srcBoardGroup.boards.find((item) => item.id === id);
+        order = destBoardGroup.boards[destination.index]?.order || 1;
+
+        const srcBoardGroupBoards = srcBoardGroup.boards.filter((item) => item.id !== id);
+        const destBoardGroupBoards = [
+          ...destBoardGroup.boards.map((item, index) =>
+            destination.index <= index ? { ...item, order: item.order + 1 } : item
+          ),
+          { ...srcBoard, order }
+        ];
+
+        ret = boardGroups.map((item) =>
+          item.id === destBoardGroupId
+            ? { ...destBoardGroup, boards: destBoardGroupBoards }
+            : item.id === srcBoardGroupId
+            ? { ...srcBoardGroup, boards: srcBoardGroupBoards }
+            : item
+        );
+
+        // boardGroups
+        //   .map((boardGroupItem) =>
+        //     boardGroupItem.id === srcBoardGroupId
+        //       ? {
+        //           ...boardGroupItem,
+        //           boards: boardGroupItem.boards.filter((boardItem) => {
+        //             if (boardItem.id === id) {
+        //               targetBoard = boardItem;
+        //               return false;
+        //             } else {
+        //               return true;
+        //             }
+        //           })
+        //         }
+        //       : boardGroupItem
+        //   )
+        //   .map((boardGroupItem) =>
+        //     boardGroupItem.id === destBoardGroupId
+        //       ? {
+        //           ...boardGroupItem,
+        //           boards: [
+        //             ...boardGroupItem.boards.map((boardItem, boardIndex) => {
+        //               if ((destination.index = boardIndex)) {
+        //                 order = boardItem.order;
+        //                 return { ...boardItem, order: boardItem.order + 1 };
+        //               } else if (destination.index < boardIndex) {
+        //                 return { ...boardItem, order: boardItem.order + 1 };
+        //               } else {
+        //                 return boardItem;
+        //               }
+        //             })
+        //           ].concat({ ...targetBoard, order: order })
+        //         }
+        //       : boardGroupItem
+        //   );
+      }
+      dispatch(setBoardAdminBoardGroups(ret));
+      dispatch(orderBoardInit({ id, data: { order, board_group: destBoardGroupId }, clubId }));
+    }
+  };
 
   return (
     <Suspense isLoading={false}>
@@ -565,323 +672,401 @@ const Boards = () => {
               {BVD.addGroup}
             </button>
 
-            {/* 그룹 리스트 시작 */}
-            {_.sortBy(boardGroups, 'order').map((_boardGroup) => {
-              const isDefaultGroup = _boardGroup?.type === 'DEFAULT';
-              const activeGroupClassName = _boardGroup.is_active ? 'active' : 'inactive';
+            <DragDropContext
+              onDragEnd={onDragEnd}
+              // onDragUpdate={(props) => {
+              //   console.log(props);
+              // }}
+            >
+              <Droppable droppableId={'group'} type={'parent'}>
+                {(groupDropProvided, snapshot) => (
+                  <div ref={groupDropProvided.innerRef} {...groupDropProvided.droppableProps}>
+                    {/* 그룹 리스트 시작 */}
+                    {_.sortBy(boardGroups, 'order').map((_boardGroup, bgIndex) => {
+                      const isDefaultGroup = _boardGroup?.type === 'DEFAULT';
+                      const activeGroupClassName = _boardGroup.is_active ? 'active' : 'inactive';
 
-              const isGroupSelected = cola.type === 'group' && cola.id === _boardGroup.id;
-              const isDropDownActive = dropDownState?.group === _boardGroup.id;
-              const selectedGroupClassName = isGroupSelected || isDropDownActive ? 'selected' : 'none';
+                      const isGroupSelected = cola.type === 'group' && cola.id === _boardGroup.id;
+                      const isDropDownActive = dropDownState?.group === _boardGroup.id;
+                      const selectedGroupClassName = isGroupSelected || isDropDownActive ? 'selected' : 'none';
 
-              const onClickGroup = () => {
-                // Todo 입력중인지 분기 처리
-                setAddState({});
-                setCola({ type: 'group', id: _boardGroup.id, isCreating: false });
-              };
-
-              const onClickExpandImage = (e) => {
-                stopPropagation(e);
-                changeExpandState({ id: _boardGroup.id });
-              };
-
-              const onClickGroupMore = () => {
-                setDropDownState((prev) => (prev?.group === _boardGroup.id ? {} : { group: _boardGroup.id }));
-              };
-
-              const renameGroupActive = renameState?.group === _boardGroup.id;
-              const onClickGroupRename = () => {
-                if (isGroupSelected) {
-                  setSidebarName(_boardGroup.name);
-                  setName(_boardGroup.name);
-                } else {
-                  setSidebarName(_boardGroup.name);
-                }
-                setRenameState({ group: _boardGroup.id });
-              };
-              const renameGroup = () => {
-                const _name = isGroupSelected ? name : sidebarName;
-                if (_name) {
-                  if (isGroupSelected) {
-                    dispatch(
-                      patchBoardGroupInit({
-                        id: _boardGroup.id,
-                        data: { name: _name },
-                        actionList: [
-                          { type: getClubBoardGroupsInit.type, payload: { id: clubId } },
-                          { type: getBoardGroupInit.type, payload: { id: _boardGroup.id } }
-                        ]
-                      })
-                    );
-                  } else {
-                    dispatch(
-                      patchBoardGroupInit({
-                        id: _boardGroup.id,
-                        data: { name: _name },
-                        actionList: [{ type: getClubBoardGroupsInit.type, payload: { id: clubId } }]
-                      })
-                    );
-                  }
-                } else {
-                  if (isGroupSelected) {
-                    setName(_boardGroup.name);
-                    setNameInputState(IVD.blur);
-                  }
-                }
-                setRenameState({});
-              };
-
-              const onClickGroupActivation = () => {
-                if (_boardGroup.is_active) {
-                  dispatch(
-                    showModal({
-                      type: 'deactiveGroup',
-                      data: {
-                        boardGroupId: _boardGroup.id,
-                        clubId: clubId,
-                        isGroupSelected
-                      }
-                    })
-                  );
-                } else {
-                  if (isBoardGroupLimited) {
-                    dispatch(showModal({ type: 'warnGroupCount' }));
-                  } else {
-                    dispatch(
-                      patchBoardGroupInit({
-                        id: _boardGroup.id,
-                        data: { is_active: true },
-                        actionList: isGroupSelected
-                          ? [
-                              { type: getClubBoardGroupsInit.type, payload: { id: clubId } },
-                              { type: getBoardGroupInit.type, payload: { id: _boardGroup.id } }
-                            ]
-                          : [{ type: getClubBoardGroupsInit.type, payload: { id: clubId } }]
-                      })
-                    );
-                  }
-                }
-              };
-
-              const onClickAddBoard = (e) => {
-                stopPropagation(e);
-                setNameInputState(IVD.blur);
-                // Todo - 수정||생성 중인 내용 있으면 팝업 먼저 띄우기
-                if (_boardGroup.boards.filter((item) => item.is_active).length > 9) {
-                  // Todo - popup
-                  confirm('보드 10개 이상!');
-                  // dispatch(showModal({ type: 'warnGroupCount' }));
-                }
-                setTimeout(() => {
-                  setAddState({ board: { parent: _boardGroup.id } });
-                  setCola({ type: 'board', id: -1, isCreating: true, parent: _boardGroup.id });
-                }, 0);
-                changeExpandState({ id: _boardGroup.id, alwaysOpen: true });
-              };
-
-              return (
-                <div key={_boardGroup.id}>
-                  {renameGroupActive ? (
-                    <div className="pl-15 pr-15">
-                      <NameSidebarInput
-                        rename={renameGroup}
-                        placeholder={BVD.addPlaceholder.board}
-                        value={sidebarName}
-                        onChange={(e) => onChangeName(e, !isGroupSelected)}
-                      />
-                    </div>
-                  ) : (
-                    <div
-                      className={`gp-name text-h5 gp-name-${selectedGroupClassName} gp-name-${selectedGroupClassName}`}
-                      onClick={onClickGroup}
-                    >
-                      <img className="expand-image" src={getExpandImage(_boardGroup.id)} onClick={onClickExpandImage} />
-                      <div className={`gp-name-text gp-name-text-${activeGroupClassName}`}>{_boardGroup.name}</div>
-                      {!isDefaultGroup && (
-                        <MoreOptionButton
-                          onClick={onClickGroupMore}
-                          onClickOutside={onClickOutside}
-                          menuList={[
-                            { label: BVD.dropdown.rename, onClick: onClickGroupRename },
-                            { label: BVD.dropdown.active(_boardGroup.is_active), onClick: onClickGroupActivation }
-                          ]}
-                        />
-                      )}
-                      <AddButton selected={isDropDownActive} onClick={onClickAddBoard} />
-                    </div>
-                  )}
-
-                  {/* board list */}
-                  {expandState[_boardGroup.id] &&
-                    _.sortBy(_boardGroup.boards, 'order').map((_board, boardIndex) => {
-                      const boardType =
-                        _board.type === 'ALL' || _board.type === 'NOTICE' || _board.type === 'EVENT'
-                          ? 'default'
-                          : _board.type === 'VIDEO' || _board.type === 'GALLERY'
-                          ? 'media'
-                          : 'none';
-                      const activeBoardClassName = _board.is_active ? 'active' : 'inactive';
-                      const isBoardSelected = cola.type === 'board' && cola.id === _board.id;
-                      const isBoardActive = dropDownState?.board === _board.id;
-                      const selectedBoardClassName = isBoardSelected || isBoardActive ? 'selected' : 'none';
-
-                      const onClickBoard = () => {
-                        // Todo 생성||수정 중인거 있는지 & 있으면 팝업 없으면 바로 클릭
+                      const onClickGroup = () => {
+                        // Todo 입력중인지 분기 처리
                         setAddState({});
-                        setCola({ type: 'board', id: _board.id, isCreating: false, parent: _boardGroup.id });
-                      };
-                      const onClickBoardMore = () => {
-                        setDropDownState((prev) => (prev?.board === _board.id ? {} : { board: _board.id }));
+                        setCola({ type: 'group', id: _boardGroup.id, isCreating: false });
                       };
 
-                      const renameBoardActive = renameState?.board === _board.id;
-                      const onClickBoardRename = () => {
-                        if (isBoardSelected) {
-                          setSidebarName(_board.name);
-                          setName(_board.name);
-                        } else {
-                          setSidebarName(_board.name);
-                        }
-                        setRenameState({ board: _board.id });
+                      const onClickExpandImage = (e) => {
+                        stopPropagation(e);
+                        changeExpandState({ id: _boardGroup.id });
                       };
-                      const renameBoard = () => {
-                        const _name = isBoardSelected ? name : sidebarName;
+
+                      const onClickGroupMore = () => {
+                        setDropDownState((prev) => (prev?.group === _boardGroup.id ? {} : { group: _boardGroup.id }));
+                      };
+
+                      const renameGroupActive = renameState?.group === _boardGroup.id;
+                      const onClickGroupRename = () => {
+                        if (isGroupSelected) {
+                          setSidebarName(_boardGroup.name);
+                          setName(_boardGroup.name);
+                        } else {
+                          setSidebarName(_boardGroup.name);
+                        }
+                        setRenameState({ group: _boardGroup.id });
+                      };
+                      const renameGroup = () => {
+                        const _name = isGroupSelected ? name : sidebarName;
                         if (_name) {
-                          if (isBoardSelected) {
+                          if (isGroupSelected) {
                             dispatch(
-                              patchBoardInit({
-                                id: _board.id,
+                              patchBoardGroupInit({
+                                id: _boardGroup.id,
                                 data: { name: _name },
                                 actionList: [
-                                  { type: getClubBoardGroupsInit.type, payload: { id: clubId } },
-                                  { type: getBoardInit.type, payload: { id: _board.id } }
+                                  { type: getBoardGroupsInit.type, payload: { id: clubId } },
+                                  { type: getBoardGroupInit.type, payload: { id: _boardGroup.id } }
                                 ]
                               })
                             );
                           } else {
                             dispatch(
-                              patchBoardInit({
-                                id: _board.id,
+                              patchBoardGroupInit({
+                                id: _boardGroup.id,
                                 data: { name: _name },
-                                actionList: [{ type: getClubBoardGroupsInit.type, payload: { id: clubId } }]
+                                actionList: [{ type: getBoardGroupsInit.type, payload: { id: clubId } }]
                               })
                             );
                           }
                         } else {
-                          if (isBoardSelected) {
-                            setName(_board.name);
+                          if (isGroupSelected) {
+                            setName(_boardGroup.name);
                             setNameInputState(IVD.blur);
                           }
                         }
                         setRenameState({});
                       };
-                      const onClickBoardActivation = () => {
-                        if (!_board.is_active) {
-                          if (getBoardLimited(_boardGroup.id)) {
-                            confirm('더이상 활성화가 불가능합니다');
-                          } else {
-                            // Todo - popup 10개 개수
-                            if (confirm('활성화 하시겠습니까?', 'ok', 'cancel')) {
-                              if (isBoardSelected) {
-                                dispatch(
-                                  patchBoardInit({
-                                    id: _board.id,
-                                    data: { is_active: !_board.is_active },
-                                    actionList: [
-                                      { type: getClubBoardGroupsInit.type, payload: { id: clubId } },
-                                      { type: getBoardInit.type, payload: { id: _board.id } }
-                                    ]
-                                  })
-                                );
-                              } else {
-                                dispatch(
-                                  patchBoardInit({
-                                    id: _board.id,
-                                    data: { is_active: !_board.is_active },
-                                    actionList: [{ type: getClubBoardGroupsInit.type, payload: { id: clubId } }]
-                                  })
-                                );
+
+                      const onClickGroupActivation = () => {
+                        if (_boardGroup.is_active) {
+                          dispatch(
+                            showModal({
+                              type: 'deactiveGroup',
+                              data: {
+                                boardGroupId: _boardGroup.id,
+                                clubId: clubId,
+                                isGroupSelected
                               }
-                            }
-                          }
+                            })
+                          );
                         } else {
-                          // Todo - popup 10개 개수
-                          if (confirm('비활성화 하시겠습니까?', 'ok', 'cancel')) {
-                            if (isBoardSelected) {
-                              dispatch(
-                                patchBoardInit({
-                                  id: _board.id,
-                                  data: { is_active: !_board.is_active },
-                                  actionList: [
-                                    { type: getClubBoardGroupsInit.type, payload: { id: clubId } },
-                                    { type: getBoardInit.type, payload: { id: _board.id } }
-                                  ]
-                                })
-                              );
-                            } else {
-                              dispatch(
-                                patchBoardInit({
-                                  id: _board.id,
-                                  data: { is_active: !_board.is_active },
-                                  actionList: [{ type: getClubBoardGroupsInit.type, payload: { id: clubId } }]
-                                })
-                              );
-                            }
+                          if (isBoardGroupLimited) {
+                            dispatch(showModal({ type: 'warnGroupCount' }));
+                          } else {
+                            dispatch(
+                              patchBoardGroupInit({
+                                id: _boardGroup.id,
+                                data: { is_active: true },
+                                actionList: isGroupSelected
+                                  ? [
+                                      { type: getBoardGroupsInit.type, payload: { id: clubId } },
+                                      { type: getBoardGroupInit.type, payload: { id: _boardGroup.id } }
+                                    ]
+                                  : [{ type: getBoardGroupsInit.type, payload: { id: clubId } }]
+                              })
+                            );
                           }
                         }
                       };
 
-                      const menuList =
-                        boardType === 'media'
-                          ? [{ label: BVD.dropdown.active(_board.is_active), onClick: onClickBoardActivation }]
-                          : [
-                              { label: BVD.dropdown.rename, onClick: onClickBoardRename },
-                              { label: BVD.dropdown.active(_board.is_active), onClick: onClickBoardActivation }
-                            ];
+                      const onClickAddBoard = (e) => {
+                        stopPropagation(e);
+                        setNameInputState(IVD.blur);
+                        // Todo - 수정||생성 중인 내용 있으면 팝업 먼저 띄우기
+                        if (_boardGroup.boards.filter((item) => item.is_active).length > 9) {
+                          // Todo - popup
+                          confirm('보드 10개 이상!');
+                          // dispatch(showModal({ type: 'warnGroupCount' }));
+                        }
+                        setTimeout(() => {
+                          setAddState({ board: { parent: _boardGroup.id } });
+                          setCola({ type: 'board', id: -1, isCreating: true, parent: _boardGroup.id });
+                        }, 0);
+                        changeExpandState({ id: _boardGroup.id, alwaysOpen: true });
+                      };
 
                       return (
-                        <div key={boardIndex + _board.name}>
-                          {renameBoardActive ? (
-                            <div className="pl-30 pr-15">
-                              <NameSidebarInput
-                                rename={renameBoard}
-                                placeholder={BVD.addPlaceholder.board}
-                                value={sidebarName}
-                                onChange={(e) => onChangeName(e, !isBoardSelected)}
-                              />
-                            </div>
-                          ) : (
+                        <Draggable key={_boardGroup.id} draggableId={_boardGroup.id.toString()} index={bgIndex}>
+                          {(groupDragProvided, groupDragSnapshot) => (
                             <div
-                              className={`bd-name text-h6 bd-name-${selectedBoardClassName} bd-name-${selectedBoardClassName}`}
-                              onClick={onClickBoard}
+                              ref={groupDragProvided.innerRef}
+                              {...groupDragProvided.draggableProps}
+                              {...groupDragProvided.dragHandleProps}
                             >
-                              <div className={`bd-name-text bd-name-text-${activeBoardClassName}`}>{_board.name}</div>
-                              {boardType !== 'default' && (
-                                <MoreOptionButton
-                                  onClick={onClickBoardMore}
-                                  onClickOutside={onClickOutside}
-                                  menuList={menuList}
-                                />
+                              <Droppable droppableId={_boardGroup.id.toString()}>
+                                {(boardDropProvided) => (
+                                  <div ref={boardDropProvided.innerRef} {...boardDropProvided.droppableProps}>
+                                    {renameGroupActive ? (
+                                      <div className="pl-15 pr-15">
+                                        <NameSidebarInput
+                                          rename={renameGroup}
+                                          placeholder={BVD.addPlaceholder.board}
+                                          value={sidebarName}
+                                          onChange={(e) => onChangeName(e, !isGroupSelected)}
+                                        />
+                                      </div>
+                                    ) : (
+                                      <div
+                                        className={`gp-name text-h5 gp-name-${selectedGroupClassName} gp-name-${selectedGroupClassName}`}
+                                        onClick={onClickGroup}
+                                        style={groupDragSnapshot.isDragging ? { backgroundColor: '#ededed' } : {}}
+                                      >
+                                        <img
+                                          className="expand-image"
+                                          src={getExpandImage(_boardGroup.id)}
+                                          onClick={onClickExpandImage}
+                                        />
+                                        <div className={`gp-name-text gp-name-text-${activeGroupClassName}`}>
+                                          {_boardGroup.name}
+                                        </div>
+                                        {!isDefaultGroup && (
+                                          <MoreOptionButton
+                                            onClick={onClickGroupMore}
+                                            onClickOutside={onClickOutside}
+                                            menuList={[
+                                              { label: BVD.dropdown.rename, onClick: onClickGroupRename },
+                                              {
+                                                label: BVD.dropdown.active(_boardGroup.is_active),
+                                                onClick: onClickGroupActivation
+                                              }
+                                            ]}
+                                          />
+                                        )}
+                                        <AddButton selected={isDropDownActive} onClick={onClickAddBoard} />
+                                      </div>
+                                    )}
+
+                                    {/* board list */}
+                                    {expandState[_boardGroup.id] &&
+                                      _.sortBy(_boardGroup.boards, 'order').map((_board, boardIndex) => {
+                                        const boardType =
+                                          _board.type === 'ALL' || _board.type === 'NOTICE' || _board.type === 'EVENT'
+                                            ? 'default'
+                                            : _board.type === 'VIDEO' || _board.type === 'GALLERY'
+                                            ? 'media'
+                                            : 'none';
+                                        const activeBoardClassName = _board.is_active ? 'active' : 'inactive';
+                                        const isBoardSelected = cola.type === 'board' && cola.id === _board.id;
+                                        const isBoardActive = dropDownState?.board === _board.id;
+                                        const selectedBoardClassName =
+                                          isBoardSelected || isBoardActive ? 'selected' : 'none';
+
+                                        const onClickBoard = () => {
+                                          // Todo 생성||수정 중인거 있는지 & 있으면 팝업 없으면 바로 클릭
+                                          setAddState({});
+                                          setCola({
+                                            type: 'board',
+                                            id: _board.id,
+                                            isCreating: false,
+                                            parent: _boardGroup.id
+                                          });
+                                        };
+                                        const onClickBoardMore = () => {
+                                          setDropDownState((prev) =>
+                                            prev?.board === _board.id ? {} : { board: _board.id }
+                                          );
+                                        };
+
+                                        const renameBoardActive = renameState?.board === _board.id;
+                                        const onClickBoardRename = () => {
+                                          if (isBoardSelected) {
+                                            setSidebarName(_board.name);
+                                            setName(_board.name);
+                                          } else {
+                                            setSidebarName(_board.name);
+                                          }
+                                          setRenameState({ board: _board.id });
+                                        };
+                                        const renameBoard = () => {
+                                          const _name = isBoardSelected ? name : sidebarName;
+                                          if (_name) {
+                                            if (isBoardSelected) {
+                                              dispatch(
+                                                patchBoardInit({
+                                                  id: _board.id,
+                                                  data: { name: _name },
+                                                  actionList: [
+                                                    { type: getBoardGroupsInit.type, payload: { id: clubId } },
+                                                    { type: getBoardInit.type, payload: { id: _board.id } }
+                                                  ]
+                                                })
+                                              );
+                                            } else {
+                                              dispatch(
+                                                patchBoardInit({
+                                                  id: _board.id,
+                                                  data: { name: _name },
+                                                  actionList: [
+                                                    { type: getBoardGroupsInit.type, payload: { id: clubId } }
+                                                  ]
+                                                })
+                                              );
+                                            }
+                                          } else {
+                                            if (isBoardSelected) {
+                                              setName(_board.name);
+                                              setNameInputState(IVD.blur);
+                                            }
+                                          }
+                                          setRenameState({});
+                                        };
+                                        const onClickBoardActivation = () => {
+                                          if (!_board.is_active) {
+                                            if (getBoardLimited(_boardGroup.id)) {
+                                              confirm('더이상 활성화가 불가능합니다');
+                                            } else {
+                                              // Todo - popup 10개 개수
+                                              if (confirm('활성화 하시겠습니까?', 'ok', 'cancel')) {
+                                                if (isBoardSelected) {
+                                                  dispatch(
+                                                    patchBoardInit({
+                                                      id: _board.id,
+                                                      data: { is_active: !_board.is_active },
+                                                      actionList: [
+                                                        { type: getBoardGroupsInit.type, payload: { id: clubId } },
+                                                        { type: getBoardInit.type, payload: { id: _board.id } }
+                                                      ]
+                                                    })
+                                                  );
+                                                } else {
+                                                  dispatch(
+                                                    patchBoardInit({
+                                                      id: _board.id,
+                                                      data: { is_active: !_board.is_active },
+                                                      actionList: [
+                                                        { type: getBoardGroupsInit.type, payload: { id: clubId } }
+                                                      ]
+                                                    })
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          } else {
+                                            // Todo - popup 10개 개수
+                                            if (confirm('비활성화 하시겠습니까?', 'ok', 'cancel')) {
+                                              if (isBoardSelected) {
+                                                dispatch(
+                                                  patchBoardInit({
+                                                    id: _board.id,
+                                                    data: { is_active: !_board.is_active },
+                                                    actionList: [
+                                                      { type: getBoardGroupsInit.type, payload: { id: clubId } },
+                                                      { type: getBoardInit.type, payload: { id: _board.id } }
+                                                    ]
+                                                  })
+                                                );
+                                              } else {
+                                                dispatch(
+                                                  patchBoardInit({
+                                                    id: _board.id,
+                                                    data: { is_active: !_board.is_active },
+                                                    actionList: [
+                                                      { type: getBoardGroupsInit.type, payload: { id: clubId } }
+                                                    ]
+                                                  })
+                                                );
+                                              }
+                                            }
+                                          }
+                                        };
+
+                                        const menuList =
+                                          boardType === 'media'
+                                            ? [
+                                                {
+                                                  label: BVD.dropdown.active(_board.is_active),
+                                                  onClick: onClickBoardActivation
+                                                }
+                                              ]
+                                            : [
+                                                { label: BVD.dropdown.rename, onClick: onClickBoardRename },
+                                                {
+                                                  label: BVD.dropdown.active(_board.is_active),
+                                                  onClick: onClickBoardActivation
+                                                }
+                                              ];
+                                        return (
+                                          <Draggable
+                                            key={_board.id}
+                                            draggableId={_board.id.toString()}
+                                            index={boardIndex}
+                                          >
+                                            {(boardDragProvided, boardDragSnapshot) => (
+                                              <div
+                                                ref={boardDragProvided.innerRef}
+                                                {...boardDragProvided.draggableProps}
+                                                {...boardDragProvided.dragHandleProps}
+                                              >
+                                                {renameBoardActive ? (
+                                                  <div className="pl-30 pr-15">
+                                                    <NameSidebarInput
+                                                      rename={renameBoard}
+                                                      placeholder={BVD.addPlaceholder.board}
+                                                      value={sidebarName}
+                                                      onChange={(e) => onChangeName(e, !isBoardSelected)}
+                                                    />
+                                                  </div>
+                                                ) : (
+                                                  <div
+                                                    className={`bd-name text-h6 bd-name-${selectedBoardClassName} bd-name-${selectedBoardClassName}`}
+                                                    onClick={onClickBoard}
+                                                    style={
+                                                      boardDragSnapshot.isDragging ? { backgroundColor: '#ededed' } : {}
+                                                    }
+                                                  >
+                                                    <div
+                                                      className={`bd-name-text bd-name-text-${activeBoardClassName}`}
+                                                    >
+                                                      {_board.name}
+                                                    </div>
+                                                    {boardType !== 'default' && (
+                                                      <MoreOptionButton
+                                                        onClick={onClickBoardMore}
+                                                        onClickOutside={onClickOutside}
+                                                        menuList={menuList}
+                                                      />
+                                                    )}
+                                                  </div>
+                                                )}
+                                              </div>
+                                            )}
+                                          </Draggable>
+                                        );
+                                      })}
+                                    {boardDropProvided.placeholder}
+                                  </div>
+                                )}
+                              </Droppable>
+                              {/* board 추가하는 text input */}
+                              {addState?.board?.parent === _boardGroup.id && (
+                                <div className="pl-30 pr-15">
+                                  <NameSidebarInput
+                                    placeholder={BVD.addPlaceholder.board}
+                                    value={sidebarName}
+                                    onChange={onChangeName}
+                                  />
+                                </div>
                               )}
                             </div>
                           )}
-                        </div>
+                        </Draggable>
                       );
                     })}
-
-                  {/* board 추가하는 text input */}
-                  {addState?.board?.parent === _boardGroup.id && (
-                    <div className="pl-30 pr-15">
-                      <NameSidebarInput
-                        placeholder={BVD.addPlaceholder.board}
-                        value={sidebarName}
-                        onChange={onChangeName}
-                      />
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+                    {groupDropProvided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
 
             {addState?.group && (
               <div className="pl-15 pr-15">

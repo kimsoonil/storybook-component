@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import AdminModal from 'components/idist/modal/AdminModal';
 import { AVD } from 'views/Admin';
 import { hideModal } from 'redux/idistStore/admin/modalSlice';
-import { getClubBoardGroupsInit } from 'redux/idistStore/clubSlice';
 import { getBoardGroupInit, patchBoardGroupInit } from 'redux/idistStore/boardGroupSlice';
 import { BVD } from 'views/Admin/Boards';
+import { getBoardGroupsInit } from 'redux/idistStore/admin/boardAdminSlice';
 
 const DeactiveGroupModal = () => {
   const dispatch = useDispatch();
@@ -22,10 +22,10 @@ const DeactiveGroupModal = () => {
         data: { is_active: false },
         actionList: modalData?.isGroupSelected
           ? [
-              { type: getClubBoardGroupsInit.type, payload: { id: modalData?.clubId } },
+              { type: getBoardGroupsInit.type, payload: { id: modalData?.clubId } },
               { type: getBoardGroupInit.type, payload: { id: modalData?.boardGroupId } }
             ]
-          : [{ type: getClubBoardGroupsInit.type, payload: { id: modalData?.clubId } }]
+          : [{ type: getBoardGroupsInit.type, payload: { id: modalData?.clubId } }]
       })
     );
     dispatch(hideModal({ type: 'deactiveGroup' }));

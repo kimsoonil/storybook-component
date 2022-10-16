@@ -3,9 +3,9 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { reset as authEmailReset, reqAuthEmail } from 'redux/store/authEmailSlice';
-import { reset as authPhoneReset, reqAuthPhoneNumber } from 'redux/store/authPhoneNumberSlice';
-import { reset as authCodeReset, reqAuthCode } from 'redux/store/authCodeSlice';
+import { reset as authEmailReset, reqAuthEmail } from 'redux/store/common/authEmailSlice';
+import { reset as authPhoneReset, reqAuthPhoneNumber } from 'redux/store/common/authPhoneNumberSlice';
+import { reset as authCodeReset, reqAuthCode } from 'redux/store/common/authCodeSlice';
 import CountdownCode from 'components/SignUp/SignUp/CountdownCode';
 import {
   USER_INFO_SIGNUP,
@@ -174,7 +174,7 @@ function AuthConfirm({ reqType = USER_INFO_EMAIL, editType = USER_INFO_SIGNUP })
             }}
             disabled={watchCode?.length !== AUTH_CODE_LENGTH && 'disabled'}
           >
-            {t('label.emailauth.confirm')}
+            {t('label.confirm')}
           </button>
         </div>
       </li>

@@ -41,7 +41,7 @@
   }
   .token-login {
     width: 400px;
-    height: 200px;
+
     padding: 35px 35px;
     background: #ffffff;
     border-radius: 22.6249px;
@@ -83,8 +83,9 @@
 .popup-alert {
   background-color: #fff;
   width: 500px;
-  height: 100px;
+
   padding: 50px 20px;
+  border-radius: 20px;
   &-content {
     font-family: 'Poppins-Regular';
     font-size: 20px;
@@ -111,7 +112,7 @@
     margin-bottom: 43px;
   }
   &-content {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
     input {
       width: 300px;
       height: 40px;

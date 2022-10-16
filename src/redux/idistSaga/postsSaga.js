@@ -1,4 +1,4 @@
-import { takeEvery, all, put, fork, call } from 'redux-saga/effects';
+import { takeEvery, all, put, fork, call, select } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actionTypes from 'redux/idistStore/postsSlice';
 import { getToken } from 'utils/Cookies/Cookies';
@@ -14,6 +14,23 @@ function* getPosts({ payload }) {
     );
     if (response.data.message === 'ok') {
       yield put(actionTypes.getPostsSuccess({ ...response.data, payload }));
+    }
+  } catch (error) {
+    yield put(actionTypes.postFailure(error));
+    console.log(error);
+  }
+}
+function* getMorePosts({ payload }) {
+  try {
+    const { currentPage, isEndOfCatalogue } = yield select((state) => state.post);
+    if (isEndOfCatalogue) return;
+    console.log('currentPage', currentPage);
+    payload.parameters.page = currentPage + 1;
+    const response = yield call(() =>
+      axios.get(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/posts`, { params: payload.parameters, ...config })
+    );
+    if (response.data.message === 'ok') {
+      yield put(actionTypes.getMorePostsSuccess({ ...response.data, payload }));
     }
   } catch (error) {
     yield put(actionTypes.postFailure(error));
@@ -248,6 +265,7 @@ function* getPostComments({ payload }) {
 function* postSaga() {
   yield all([
     takeEvery(actionTypes.getPostsInit, getPosts),
+    takeEvery(actionTypes.getMorePostsInit, getMorePosts),
     takeEvery(actionTypes.getPostInit, getPost),
     takeEvery(actionTypes.deletePostInit, deletePost),
     takeEvery(actionTypes.patchPostInit, patchPost),

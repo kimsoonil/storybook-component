@@ -15,9 +15,9 @@ const Club = loadable(() => import('views/Club'));
 const ClubHome = loadable(() => import('views/Club/Home'));
 const Board = loadable(() => import('views/Club/Board'));
 const Writing = loadable(() => import('views/Club/Writing'));
-const PostsId = loadable(() => import('views/Club/Posts'));
+const PostsId = loadable(() => import('views/Club/Post'));
 const Member = loadable(() => import('views/Club/Member'));
-const MemberProfile = loadable(() => import('views/Club/MemberProfile'));
+const MemberProfile = loadable(() => import('views/Club/Member/MemberProfile'));
 const Notfound = loadable(() => import('views/Error/Notfound'));
 
 const Create = loadable(() => import('views/Admin/Create'));
@@ -25,7 +25,8 @@ const Admin = loadable(() => import('views/Admin'));
 const Dashboard = loadable(() => import('views/Admin/Dashboard'));
 const Statistics = loadable(() => import('views/Admin/Statistics'));
 const Boards = loadable(() => import('views/Admin/Boards'));
-const Posts = loadable(() => import('views/Admin/Posts'));
+const Reports = loadable(() => import('views/Admin/Reports'));
+const ReportsSettings = loadable(() => import('views/Admin/ReportsSettings'));
 const Members = loadable(() => import('views/Admin/Members'));
 const Permissions = loadable(() => import('views/Admin/Permissions'));
 const Information = loadable(() => import('views/Admin/Information'));
@@ -63,7 +64,12 @@ function AppRoutes() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="statistics" element={<Statistics />} />
         <Route path="boards" element={<Boards />} />
-        <Route path="posts" element={<Posts />} />
+
+        <Route path="reports">
+          <Route path="" element={<Reports />} />
+          <Route path="settings" element={<ReportsSettings />} />
+        </Route>
+
         <Route path="members" element={<Members />} />
         <Route path="permissions" element={<Permissions />} />
         <Route path="information" element={<Information />} />

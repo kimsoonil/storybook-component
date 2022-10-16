@@ -2,7 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = () => ({
   isLoading: false,
+  isEndOfCatalogue: false,
   clubs: {},
+  clubList: [],
   myclubs: {},
   clubId: {},
   members: {},
@@ -15,6 +17,7 @@ const initialState = () => ({
     isLoading: false
   },
   profile: {},
+  currentPage: 1,
   error: ''
 });
 
@@ -31,11 +34,27 @@ const clubSlice = createSlice({
     },
     getClubsSuccess: (state, { payload }) => {
       state.isLoading = false;
-      state.clubs = payload;
+      console.log('payload', payload);
+      switch (payload.payload?.type) {
+        case 'myclub':
+          state.myclubs = payload;
+          break;
+        default:
+          state.clubs = payload;
+          state.clubList = payload.data;
+      }
     },
-    getMyClubsSuccess: (state, { payload }) => {
+    getMoreClubsInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    getMoreClubsSuccess: (state, { payload }) => {
       state.isLoading = false;
-      state.myclubs = payload;
+      if (payload.count > state.clubList.length) {
+        state.clubList.push(...payload.data);
+        state.currentPage += 1;
+        state.isEndOfCatalogue = true;
+      }
     },
     postClubInit: (state) => {
       state.isLoading = true;
@@ -161,7 +180,8 @@ export const {
   resetClub,
   getClubsInit,
   getClubsSuccess,
-  getMyClubsSuccess,
+  getMoreClubsInit,
+  getMoreClubsSuccess,
   postClubInit,
   postClubSuccess,
   getClubsRecommendInit,

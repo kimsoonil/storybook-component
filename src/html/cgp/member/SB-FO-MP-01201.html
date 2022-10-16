@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <script src="../../js/libs/jquery.min.js"></script>
+  <script src="../../js/libs/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container" class="subpage">
+      <div class="sidemenu"></div>
+      <div class="content">
+        <h3 class="h3Type eng center">MEMBERSHIP WITHRAWAL</h3>
+        <div class="layer">
+          <h4 class="h4Type eng">Delete My Account</h4>
+          <span class="delete_text">This is a guide to cancel membership.<br/>Be sure to read the guidelines before applying for membership cancellation.</span>
+          <div class="delete_box">
+            <dl>
+              <dt>Nickname cannot be reused or recovered</dt>
+              <dd>The nickname used at the time of membership withdrawal cannot be reused or restored.</dd>
+            </dl>
+            <dl>
+              <dt>Post cannot be deleted</dt>
+              <dd>After withdrawal, the member information is deleted and the identity cannot be verified, so the post cannot be deleted.
+                Please delete any unnecessary posts before withdrawal.</dd>
+            </dl>
+            <dl>
+              <dt>Delete personalized services</dt>
+              <dd>All personal service records such as CLUB, forums, and games are deleted, and deleted data cannot be recovered.
+                If you need a backup, please make a backup before leaving.</dd>
+            </dl>
+            <dl>
+              <dt>Deletion of goods and services</dt>
+              <dd>All points and goods used on the website will be deleted upon withdrawal.
+                Be sure to use all of them before withdrawal.</dd>
+            </dl>
+          </div>
+          <ul class="guide">
+            <li>Membership withdrawal is completed <span>30 days</span> after the date of application for withdrawal.</li>
+            <li>It is <span>possible to cancel</span> the membership withdrawal request <span>within 30 days</span> after the membership withdrawal request.</li>
+          </ul>
+        </div>
+        <div class="layer">
+          <h4 class="h4Type eng">Member Authentication</h4>
+          <span class="delete_text">You need to authenticate your email to withdraw from the membership.</span>
+          <div class="account">  
+            <div class="form_wrap msg error"> 
+              <label class="account_label">E-mail</label>
+               <!-- 휴대폰 인증-->
+              <span class="form_cell email form_input input_md default between">
+                <div class="input_set">
+                  <input type="text" title="input default" id="input_text" aria-invalid="false" value="superclub_1004@gmail.com" disabled>
+                  <button class="btn_reset">
+                    <span class="a11y">삭제</span>
+                  </button>       
+                </div>
+                <button type="button" class="btn primary button_md">
+                  <span>Authenticate</span>
+                </button> 
+              </span>  
+              <span class="error_txt msg" id="input_alert">Authentication completed!</span> 
+            </div>
+            <div class="form_wrap msg error hidden"> 
+              <!-- 휴대폰 인증번호 입력-->
+              <span class="form_cell email form_input input_md between">
+                <div class="input_set">
+                  <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Authentication code">            
+                  <span class="guide_text time">
+                    <span>2:59</span>
+                  </span>
+                </div>
+                <button type="button" class="btn primary button_md" disabled>
+                  <span>Confirm</span>
+                </button>
+              </span>
+              <span class="error_txt msg" id="input_alert">Authentication completed!</span> 
+            </div>
+          </div>
+          <div class="delete_warning">
+            <span class="delete_warning_text">Have you checked all the precautions for withdrawal from membership? <br/>Do you still want to apply for withdrawal?</span>
+            <div class="form_wrap delete">
+              <span class="form_cell form_check" style="margin-right:40px;">
+                <input type="checkbox" id="check30">
+                <label for="check30" class="checkbox">
+                  <span>Yes, I have checked everything and apply for withdrawal.</span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <div class="page_btn_wrap delete">
+            <button type="button" class="btn default button_xl cancel">
+              <span>Cancle</span>
+            </button>
+            <button type="button" class="btn primary button_xl member" disabled>
+              <span>Membership Withdrawal</span>
+            </button>
+          </div>
+        </div>
+      </div>                
+    </div>  
+    <div data-include-path="../include/footer.html"></div>     
+  </div>      
+</div>   
+</body>
+<script> 
+window.addEventListener('load', function() {
+    var allElements = document.getElementsByTagName('*');
+    Array.prototype.forEach.call(allElements, function(el) {
+        var includePath = el.dataset.includePath;
+        if (includePath) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    el.outerHTML = this.responseText;
+                }
+            };
+            xhttp.open('GET', includePath, true);
+            xhttp.send();
+        }
+    });
+});
+
+// Select
+const selectBoxElements = document.querySelectorAll('.select');
+function toggleSelectBox(selectBox) {
+  selectBox.classList.toggle('active');
+}
+function selectOption(optionElement) {
+  const selectBox = optionElement.closest('.select');
+  const selectedElement = selectBox.querySelector('.selected-value');
+  selectedElement.textContent = optionElement.textContent;
+}
+selectBoxElements.forEach((selectBoxElement) => {
+  selectBoxElement.addEventListener('click', (e) => {
+    const targetElement = e.target;
+    const isOptionElement = targetElement.classList.contains('option');
+    if (isOptionElement) {
+      selectOption(targetElement);
+    }
+    toggleSelectBox(selectBoxElement);
+  });
+});
+
+document.addEventListener('click', (e) => {
+  const targetElement = e.target;
+  const isSelect = targetElement.classList.contains('select') || targetElement.closest('.select');
+  if (isSelect) {
+    return;
+  }
+  const allSelectBoxElements = document.querySelectorAll('.select');
+  allSelectBoxElements.forEach((boxElement) => {
+    boxElement.classList.remove('active');
+  });
+});
+const pass1 = document.querySelector('#password1');
+const pass2 = document.querySelector('#password2');
+const btn1 = document.querySelector('#pass_view1');
+const btn2 = document.querySelector('#pass_view2');
+btn1.addEventListener('click', () => {
+  if (pass1.type === 'text') {
+    pass1.type = 'password';
+    btn1.className = 'btn_input eyes';
+  } else {
+    pass1.type = 'text';
+    btn1.className = 'btn_input eyes show';
+  }
+});
+btn2.addEventListener('click', () => {
+  if (pass2.type === 'text') {
+    pass2.type = 'password';
+    btn2.className = 'btn_input eyes';
+  } else {
+    pass2.type = 'text';
+    btn2.className = 'btn_input eyes show';
+  }
+});
+</script>
+</html>

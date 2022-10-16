@@ -22,6 +22,9 @@ const initialState = () => ({
   deleteGroup: false,
   deleteBoard: false,
 
+  contentsActivation: false,
+  reportHistory: false,
+
   test: false
 });
 
@@ -57,6 +60,13 @@ const dialogSlice = createSlice({
     },
     openDeleteBoardDialog: (state, { payload }) => {
       state.deleteBoard = payload;
+    },
+
+    openContentsActivationDialog: (state, { payload }) => {
+      state.contentsActivation = true;
+    },
+    openReportHistoryDialog: (state, { payload }) => {
+      state.reportHistory = true;
     }
   }
 });
@@ -69,7 +79,9 @@ export const {
   openMergeGroupDialog,
   openMergeBoardDialog,
   openDeleteGroupDialog,
-  openDeleteBoardDialog
+  openDeleteBoardDialog,
+  openContentsActivationDialog,
+  openReportHistoryDialog
 } = dialogSlice.actions;
 
 export default dialogSlice.reducer;

@@ -1,18 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect } from 'react';
-import { useFormContext, useWatch } from 'react-hook-form';
+import React, { useState } from 'react';
+import { useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import classNames from 'classnames';
+import PassWordInputBtn from 'components/common/InputButton/PassWordInputBtn';
+import SecurityGuide from './SecurityGuide';
 
-function PassWordInput({ isDisabled = true, setPwd, email = '', phoneNumber = '' }) {
-  const {
-    register,
-    control,
-    trigger,
-    formState: { errors }
-  } = useFormContext();
+function PassWordInput({ control, register, trigger, errors, email = '', phoneNumber = '', isDisabled = false }) {
+  const [isViewPwd, setIsViewPwd] = useState(false);
+  const [isViewCfmPwd, setIsViewCfmPwd] = useState(false);
 
   const watchPwd = useWatch({ control, name: 'password', defaultValue: '' });
-  const watchConfirmPwd = useWatch({ control, name: 'confirmPwd', defaultValue: '' });
+  const watchConfirmPwd = useWatch({ control, name: 'cfrPassword', defaultValue: '' });
 
   const { t } = useTranslation();
 
@@ -31,24 +30,32 @@ function PassWordInput({ isDisabled = true, setPwd, email = '', phoneNumber = ''
   };
 
   const pwdText = t('label.userinfo.pwd');
-  const pwdConfirmText = t('label.userinfo.pwdConfirm');
+  // const pwdConfirmText = t('label.userinfo.pwdConfirm');
   const PASSWORD_MIN_LENGTH = 8;
   const PASSWORD_MAX_LENGTH = 16;
-  useEffect(() => {
-    if (errors.password || errors.confirmPwd || watchConfirmPwd.length < 8) return;
-    setPwd(watchPwd);
-  }, [watchPwd, watchConfirmPwd]);
 
   return (
     <>
-      <div>
-        <label htmlFor="password">
-          {pwdText}
+      <div className="sign_pass">
+        <label>Password</label>
+        <SecurityGuide />
+      </div>
+      <div
+        className={classNames(
+          'form_wrap',
+          {
+            msg: errors.password || (watchPwd && !errors.password)
+          },
+          { error: errors.password },
+          { success: watchPwd && !errors.password },
+          'sign_name'
+        )}
+      >
+        <span className="form_cell form_input input_lg">
           <input
-            id="password"
-            type="text"
-            placeholder="****************"
-            // eslint-disable-next-line react/jsx-props-no-spreading
+            type={isViewPwd ? 'text' : 'password'}
+            aria-invalid="false"
+            placeholder="Password"
             {...register('password', {
               required: t('validation.require', { require: pwdText }),
               minLength: {
@@ -64,30 +71,49 @@ function PassWordInput({ isDisabled = true, setPwd, email = '', phoneNumber = ''
                 pwdVal2: (value) =>
                   [/[a-z]/, /[A-Z]/, /[0-9]/, /[@$!%*?&]/, /[^a-zA-Z0-9]/].every((pattern) => pattern.test(value)) ||
                   'must include lower, upper, number, and special chars',
-                pwdVal3: (value) => checkEmailPhoneNumberInPwd(value) || 'email or phonenumber error'
+                pwdVal3: (value) => checkEmailPhoneNumberInPwd(value) || 'email or phonenumber error',
+                pwdVal4: (value) =>
+                  value === watchConfirmPwd || t('validation.userinfo.password', { context: 'confirmPwd' })
               }
             })}
-            onBlur={() => trigger('password')}
-            disabled={!isDisabled}
+            onBlur={() => {
+              trigger('password');
+              if (watchConfirmPwd) trigger('cfrPassword');
+            }}
+            disabled={isDisabled}
           />
-        </label>
-        {errors.password && <small role="alert">{errors.password.message}</small>}
+          <PassWordInputBtn status={isViewPwd} statusFunc={() => setIsViewPwd(!isViewPwd)} />
+        </span>
+        {errors.password && <span className="error_txt msg">{errors.password?.message}</span>}
       </div>
-      <div>
-        <label htmlFor="confirmPwd">
-          {pwdConfirmText}
+      <div
+        className={classNames(
+          'form_wrap',
+          {
+            msg: errors.cfrPassword || (watchPwd && !errors.cfrPassword)
+          },
+          { error: errors.cfrPassword },
+          { success: watchPwd && !errors.cfrPassword },
+          'sign_name'
+        )}
+      >
+        <span className="form_cell form_input input_lg">
           <input
-            id="confirmPwd"
-            type="password"
-            placeholder="****************"
-            {...register('confirmPwd', {
+            type={isViewCfmPwd ? 'text' : 'password'}
+            aria-invalid="false"
+            placeholder="Confirm Password"
+            {...register('cfrPassword', {
               validate: (value) => value === watchPwd || t('validation.userinfo.password', { context: 'confirmPwd' })
             })}
-            disabled={!isDisabled}
-            onBlur={() => trigger('confirmPwd')}
+            disabled={isDisabled}
+            onBlur={() => {
+              if (watchPwd) trigger('password');
+              trigger('cfrPassword');
+            }}
           />
-        </label>
-        {errors.confirmPwd && <small role="alert">{errors.confirmPwd.message}</small>}
+          <PassWordInputBtn status={isViewCfmPwd} statusFunc={() => setIsViewCfmPwd(!isViewCfmPwd)} />
+        </span>
+        {errors.cfrPassword && <span className="error_txt msg">{errors.cfrPassword?.message}</span>}
       </div>
     </>
   );

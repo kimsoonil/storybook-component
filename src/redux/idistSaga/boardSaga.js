@@ -1,4 +1,4 @@
-import { takeLatest, all, put, fork, call } from 'redux-saga/effects';
+import { takeLatest, all, put, fork, call, select } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actionTypes from 'redux/idistStore/boardSlice';
 import { getToken } from 'utils/Cookies/Cookies';
@@ -9,9 +9,11 @@ const config = getToken();
 
 function* getBoardPosts({ payload }) {
   try {
-    // const response = yield call(() => axios.get(getUrl(payload.id), '', config));
     const response = yield call(() =>
-      axios.get(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/board/${payload.id}/posts`, config)
+      axios.get(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/board/${payload.id}/posts`, {
+        params: payload.parameters,
+        ...config
+      })
     );
     if (response.data.message === 'ok') {
       yield put(actionTypes.getBoardPostsSuccess({ ...response.data }));
@@ -23,7 +25,25 @@ function* getBoardPosts({ payload }) {
     console.log(error);
   }
 }
-
+function* getMoreBoardPosts({ payload }) {
+  try {
+    const { currentPage, isEndOfCatalogue } = yield select((state) => state.board);
+    if (isEndOfCatalogue) return;
+    payload.parameters.page = currentPage + 1;
+    const response = yield call(() =>
+      axios.get(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/board/${payload.id}/posts`, {
+        params: payload.parameters,
+        ...config
+      })
+    );
+    if (response.data.message === 'ok') {
+      yield put(actionTypes.getMoreBoardPostsSuccess({ ...response.data, payload }));
+    }
+  } catch (error) {
+    yield put(actionTypes.boardFailure(error));
+    console.log(error);
+  }
+}
 function* getBoard({ payload }) {
   try {
     const response = yield call(() =>
@@ -118,6 +138,7 @@ function* deleteBoard({ payload }) {
 function* boardSaga() {
   yield all([
     takeLatest(actionTypes.getBoardPostsInit, getBoardPosts),
+    takeLatest(actionTypes.getMoreBoardPostsInit, getMoreBoardPosts),
     takeLatest(actionTypes.getBoardInit, getBoard),
     takeLatest(actionTypes.patchBoardInit, patchBoard),
     takeLatest(actionTypes.postBoardPostInit, postBoardPost),

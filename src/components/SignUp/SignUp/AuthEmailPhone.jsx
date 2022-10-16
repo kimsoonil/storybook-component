@@ -32,7 +32,7 @@ function AuthEmailPhone({ reqType = USER_INFO_EMAIL }) {
         <AuthConfirm reqType={reqType} />
         <li>
           <div>
-            {t('label.emailauth.privacy')}
+            {t('label.privacy')}
             <input
               {...register('privacy')}
               name="privacy"
@@ -45,7 +45,7 @@ function AuthEmailPhone({ reqType = USER_INFO_EMAIL }) {
         <li>
           <div>
             <label htmlFor="email">
-              {t('label.emailauth.market')}
+              {t('label.market')}
               <input
                 {...register('market')}
                 name="market"

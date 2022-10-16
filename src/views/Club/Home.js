@@ -7,9 +7,9 @@ import { useOutletContext } from 'react-router-dom';
 import Profile from 'components/idist/Profile';
 import ClubHomePosts from 'components/idist/Club/home/ClubHomePosts';
 import ClubHomeGalleries from 'components/idist/Club/home/ClubHomeGalleries';
-import ClubHomeEvent from '../../components/idist/Club/home/ClubHomeEvent';
-import SideMember from './SideMember';
-import Notion from './Notion';
+import ClubHomeEvent from 'components/idist/Club/home/ClubHomeEvent';
+import SideMember from 'components/idist/Club/SideMember';
+import Notion from 'components/idist/Club/SideNotion';
 
 function Home() {
   const clubId = useOutletContext();

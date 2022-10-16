@@ -4,8 +4,11 @@ const initialState = () => ({
   isLoading: false,
   boards: {},
   board: {},
+  isEndOfCatalogue: false,
   posts: {},
+  postsList: [],
   post: {},
+  currentPage: 1,
   error: ''
 });
 
@@ -18,14 +21,27 @@ const boardSlice = createSlice({
       Object.assign(state, initialState());
     },
     getBoardPostsInit: (state) => {
-      Object.assign(state, initialState());
       state.isLoading = true;
     },
     getBoardPostsSuccess: (state, { payload }) => {
       state.isLoading = false;
       state.posts = payload;
+      state.postsList = payload.data;
     },
-
+    getMoreBoardPostsInit: (state) => {
+      state.isLoading = true;
+    },
+    getMoreBoardPostsSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.posts = payload;
+      console.log('posts', payload.count);
+      console.log('postsList', state.postsList.length);
+      if (payload.count > state.postsList.length) {
+        state.postsList.push(...payload.data);
+        state.currentPage += 1;
+        state.isEndOfCatalogue = true;
+      }
+    },
     getBoardInit: (state) => {
       state.isLoading = true;
     },
@@ -84,6 +100,9 @@ export const {
 
   getBoardPostsInit,
   getBoardPostsSuccess,
+
+  getMoreBoardPostsInit,
+  getMoreBoardPostsSuccess,
 
   getBoardInit,
   getBoardSuccess,

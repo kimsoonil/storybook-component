@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
-import './index.css';
+import 'html/css/style.css';
 import { axiosStore } from 'util/axios.config';
-import Popup from 'components/common/Popup';
+import Popup from 'components/common/Popup/Popup';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store';
@@ -17,14 +17,12 @@ const persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <Popup />
-        <App />
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <App />
+      <Popup />
+    </PersistGate>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

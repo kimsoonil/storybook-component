@@ -4,7 +4,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import 'assets/scss/reset.scss';
-import 'assets/scss/components.scss';
 
 export function Header({ user, country, seachFunc }) {
   const navigate = useNavigate();

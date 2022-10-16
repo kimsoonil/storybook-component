@@ -1,4 +1,4 @@
-import { takeEvery, all, put, fork, call } from 'redux-saga/effects';
+import { takeEvery, all, put, fork, call, select } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actionTypes from 'redux/idistStore/clubSlice';
 import { getToken } from 'utils/Cookies/Cookies';
@@ -16,11 +16,7 @@ function* getClubs({ payload }) {
       })
     );
     if (response.data.message === 'ok') {
-      if (payload.type === 'myclub') {
-        yield put(actionTypes.getMyClubsSuccess({ ...response.data }));
-      } else {
-        yield put(actionTypes.getClubsSuccess({ ...response.data }));
-      }
+      yield put(actionTypes.getClubsSuccess({ ...response.data, payload }));
 
       console.log(response);
     }
@@ -29,7 +25,25 @@ function* getClubs({ payload }) {
     console.log(error);
   }
 }
-
+function* getMoreClubs({ payload }) {
+  try {
+    const { currentPage, isEndOfCatalogue } = yield select((state) => state.club);
+    if (isEndOfCatalogue) return;
+    payload.parameters.page = currentPage + 1;
+    const response = yield call(() =>
+      axios.get(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/clubs`, {
+        params: payload.parameters,
+        ...config
+      })
+    );
+    if (response.data.message === 'ok') {
+      yield put(actionTypes.getMoreClubsSuccess({ ...response.data, payload }));
+    }
+  } catch (error) {
+    yield put(actionTypes.clubFailure(error));
+    console.log(error);
+  }
+}
 // TODO: club post
 function* postClub({ payload }) {
   try {
@@ -299,6 +313,7 @@ function* getclubProfiles({ payload }) {
 function* clubSaga() {
   yield all([
     takeEvery(actionTypes.getClubsInit, getClubs),
+    takeEvery(actionTypes.getMoreClubsInit, getMoreClubs),
     takeEvery(actionTypes.postClubInit, postClub),
     takeEvery(actionTypes.getClubsRecommendInit, getClubsRecommend),
     takeEvery(actionTypes.getClubInit, getClub),

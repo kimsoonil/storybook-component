@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container">
+      <div class="withdrawal_wrap">
+        <div class="bye_img"></div>
+        <div class="bye_msg">
+          <h3 class="h3Type eng">THANK YOU FOR USING<br/>THE SUPER CLUB</h3>
+          <span>The application for withdrawal of membership has been completed.<br/>Super Club will do its best to provide better service. Thank you.</span>
+        </div> 
+        <div class="bye_guide">
+          <ul class="guide">
+            <li>Membership withdrawal is completed <span>30 days after</span> the date of application for withdrawal.</li>
+            <li>It is possible to cancel the withdrawal request <span>within 30 days</span> after the membership withdrawal request. <span class="gray">Come back whenever you want.</span></li>
+          </ul>
+        </div>
+        <button type="button" class="btn primary button_xl home">
+          <span>Go to Homepage</span>
+        </button>   
+      </div>
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>  
+</div>
+</body>
+<script> 
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+</html>

@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { USER_INFO_EMAIL, USER_INFO_PASSWORD } from 'constants/type';
-import { reqAccountInfo } from 'redux/store/accountInfoSlice';
-import { reqDeleteSnsId } from 'redux/store/deleteSnsIdSlice';
+import { reqAccountInfo } from 'redux/store/common/accountInfoSlice';
+import { reqDeleteSnsId } from 'redux/store/common/deleteSnsIdSlice';
 import useToggle from 'hook/useToggle';
 import AuthAccount from 'components/UserInfo/AuthAccount';
 import PassWordChange from './PassWordChange';
@@ -36,7 +36,7 @@ function AccountManagement() {
       <div>
         <h3>Account information and connect</h3>
         <button type="button" onClick={setIsModify}>
-          {t('label.emailauth.confirm')}
+          {t('label.confirm')}
         </button>
       </div>
       <div style={{ visibility: isModify ? 'visible' : 'hidden' }}>

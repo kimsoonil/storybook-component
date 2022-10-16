@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container">
+      <div class="withdrawal_wrap">
+        <div class="sorry_img"></div>
+        <div class="bye_msg">
+          <h3 class="h3Type eng">YOUR ACCOUNT IS IN THE<br/>PROGCESS OF WITHDRAWING</h3>
+          <span>To use the service normally, please cancel your withdrawal and log in again.<br/>Cancellation is possible <span>one day before</span> the scheduled date of withdrawal.</span>
+        </div> 
+        <div class="sorry_guide">
+          <div class="title">WITHDRAWAL DATE</div>
+          Nov. 24, 2022 <span>(-23 day)</span>
+        </div>
+        <button type="button" class="btn primary button_xl home">
+          <span>Cancel the Withdrawal</span>
+        </button>   
+      </div>
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>  
+</div>
+
+<!-- Cancel the Withdrawal -->
+<div class="modal_popup modal_text" style="width:440px; height:357px;">
+  <div class="modal_con">
+    <button type="button" class="close"></button>
+    <h2 class="modal_title">Cancel the Withdrawal</h2>
+    <div class="con">
+      <span class="popup_nick_text">Are you sure cancel<br/>the membership withdrawal request?</span>
+      <div class="popup_nick">Withdrawal Day : D-23</div>
+      <ul class="guide error">
+        <li>Cancellation is possible only until the day before the withdrawal date.</li>
+      </ul>
+    </div>
+    <div class="popup_btn_wrap right">
+      <button class="btn default button_lg">
+        <span>Cancel</span>
+      </button>
+      <button class="btn primary button_lg">
+        <span>Confirm</span>
+      </button>
+    </div>
+  </div>
+</div>
+</body>
+<script> 
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+</html>

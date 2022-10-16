@@ -17,7 +17,6 @@ import ConfirmPopup from 'components/idist/popup/ConfirmPopup';
 import 'assets/scss/club.scss';
 import 'assets/scss/jodit.scss';
 
-
 function Writing(props) {
   const editor = useRef(null);
   const dispatch = useDispatch();
@@ -88,10 +87,10 @@ function Writing(props) {
         is_share: post.data.is_share,
         is_comment: post.data.is_comment
       });
-      setBoardSelect(post.data.board_name);
+      setBoardSelect(post.data.board_title);
     }
   }, [post]);
-  
+
   const config = {
     readonly: false,
     height: 600,
@@ -231,10 +230,13 @@ function Writing(props) {
   };
 
   const postsCreate = (temp) => {
-    // const tagsdata = tagList.map((item) => item.name);
-     console.log('tagsdata', tagList.map((item) => item.name));
-    setPostsData({ ...postsData, tags: [...tagList.map((item) => item.name)] });
-    
+    // const tagsdata = tagList.map((item) => item.title);
+    console.log(
+      'tagsdata',
+      tagList.map((item) => item.title)
+    );
+    setPostsData({ ...postsData, tags: [...tagList.map((item) => item.title)] });
+
     if (temp === 'temp') {
       setPostsData({ ...postsData, is_temporary: true });
     } else {
@@ -268,7 +270,6 @@ function Writing(props) {
       );
       navigate(`/club/${post.data.club}/post/${post.data.id}`);
     } else {
-      
       dispatch(
         postBoardPostInit({
           id: id,
@@ -333,15 +334,15 @@ function Writing(props) {
               {boardGroups.data.map((boardGroupsItem, index) => {
                 return (
                   <div key={index}>
-                    <div className="board-actions-select-boardGroup">{boardGroupsItem.name}</div>
+                    <div className="board-actions-select-boardGroup">{boardGroupsItem.title}</div>
                     {boardGroupsItem.boards.map((boardItem, index) => {
                       return (
                         <div
                           className="board-actions-select-item"
                           key={index}
-                          onClick={() => closeSelect(boardItem.name, boardItem.id)}
+                          onClick={() => closeSelect(boardItem.title, boardItem.id)}
                         >
-                          {boardItem.name}
+                          {boardItem.title}
                         </div>
                       );
                     })}
@@ -405,7 +406,7 @@ function Writing(props) {
                       className="board-tag-item-list flex-center"
                       onClick={() => tagEditer(item)}
                     >
-                      # {item.name}
+                      # {item.title}
                       <img
                         className="board-tag-close"
                         src={require('images/club/btn-close.png')}

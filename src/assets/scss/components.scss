@@ -6,7 +6,6 @@
     font-weight: 700;
     border: 0;
     cursor: pointer;
-    display: inline-block;
     line-height: 1;
     border-radius: 8px;
   }
@@ -806,8 +805,8 @@
     width: 100%;
     height: 185px;
     margin-top: 10px;
-    margin-bottom: 20px;
-    padding-top: 20px;
+    margin-bottom: 30px;
+    padding-top: 10px;
     gap: 10px;
     border-top: 1px solid #cdcdd1;
     cursor: pointer;
@@ -1336,7 +1335,7 @@
     &-list {
       margin-top: 20px;
       display: flex;
-      gap: 30px;
+      gap: 25px;
       flex-wrap: wrap;
       &-item {
         width: 278px;

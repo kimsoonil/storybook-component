@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AlertDialog from './AlertDialog';
 import { BVD } from 'views/Admin/Boards';
 import { deleteBoardInit } from 'redux/idistStore/boardSlice';
-import { getClubBoardGroupsInit } from 'redux/idistStore/clubSlice';
+import { getBoardGroupsInit } from 'redux/idistStore/admin/boardAdminSlice';
 
 const DeleteBoardDialog = ({ submit }) => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const DeleteBoardDialog = ({ submit }) => {
     dispatch(
       deleteBoardInit({
         id: deleteBoardData.id,
-        actionList: [{ type: getClubBoardGroupsInit.type, payload: { id: deleteBoardData.clubId } }]
+        actionList: [{ type: getBoardGroupsInit.type, payload: { id: deleteBoardData.clubId } }]
       })
     );
     submit?.();

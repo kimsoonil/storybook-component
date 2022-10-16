@@ -20,6 +20,7 @@ function LogInRoute({ redirectPath = '/login' }) {
 
 function NotLogInRoute({ redirectPath = '/home' }) {
   const isLogin = useCheckLogIn();
+  console.log('isLogin::', isLogin);
   if (!isLogin) return <Outlet />;
 
   return <Navigate to={redirectPath} replace />;

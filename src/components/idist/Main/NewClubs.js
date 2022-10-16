@@ -36,7 +36,7 @@ function NewClubs(props) {
                   key={index}
                   onClick={() => setSelectCategories(item.id)}
                 >
-                  {item.name}
+                  {item.title}
                 </div>
               );
             }
@@ -80,7 +80,7 @@ function NewClubs(props) {
                     />
                   </div>
                   <div className="list-item">
-                    <div className="list-item-name">{clubItem.name}</div>
+                    <div className="list-item-name">{clubItem.title}</div>
                     <div className="flex-between">
                       <div className="list-item-info">
                         <div>

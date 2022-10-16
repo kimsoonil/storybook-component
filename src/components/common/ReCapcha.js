@@ -19,8 +19,8 @@ function ReCapcha({ setIsCapcha }) {
       });
   };
   return (
-    <div className="form-group form-check">
-      <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY_HIGH} ref={captchaRef} onChange={onChange} />
+    <div className="login_captcha">
+      <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY_HIGH} ref={captchaRef} size="normal" onChange={onChange} />
     </div>
   );
 }

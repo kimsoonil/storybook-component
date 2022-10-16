@@ -5,10 +5,10 @@ import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router';
 import InputPopup from 'components/idist/popup/inputPopup';
+import { Loader } from 'components/idist/Loader';
 
 function BoardList(props) {
   const navigate = useNavigate();
-
   const [postPassword, setPostPassword] = useState();
   const [postData, setPostData] = useState();
   const [secretOpen, setSecretOpen] = useState(false);
@@ -70,6 +70,13 @@ function BoardList(props) {
           </div>
         );
       })}
+      {props.posts.count === props.DataList.length ? (
+        <div></div>
+      ) : (
+        <div className="flex-center">
+          <Loader />
+        </div>
+      )}
       <InputPopup
         open={secretOpen}
         setOpen={setSecretOpen}

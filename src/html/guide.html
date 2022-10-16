@@ -5,33 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CCR STYLE GUIDE</title>
-  <link rel="stylesheet" href="./css/common.css" />      
-  <style> 
-    body {overflow-x: hidden;}    
-    .guide_menu {width:230px; height:100%; position:fixed; left:0; background-color:#414141;}
-    .guide_menu .title {font-family:"Poppins"; font-weight:700; font-size:25px; text-align:center; color:#fff; margin-top:20px;}
-    .guide_menu > div {margin:30px auto 0; width:180px; display:flex; flex-wrap: wrap;}      
-    .guide_menu > div button {color:#FFF; height:30px; font-size:12px; width:50%; text-align:center; outline:1px solid #fff; background:transparent; cursor:pointer;}
-    .guide_menu > div button:hover {background:rgba(0,0,0,0.3);}      
-    .guide_menu > div button.line {width:100%;}
-    .common_wrap {margin:0px; padding-left:230px; width:100%;}
-    .common_wrap > h1 {padding: 0 0 0 30px; font-size:30px; line-height: 40px; height: 50px; font-weight:700; background: #e1e1e1;}        
-    .common_wrap > h1 + div {padding:30px;}
-    .common-flex {display: flex; flex-wrap: wrap;}
-    .common-flex > div {display: flex; flex-direction: column; align-items: center; padding: 20px; margin: 10px; width: calc(33% - 16px); border: 1px solid #666; border-radius: 4px;}
-    .common-flex > div pre {width:100%;}            
-    .color-set { display: flex;  width: 140px; height: 120px; background-color: #101114; align-items: flex-end; border: 1px solid #ddd; }
-    .color-set p { width: 100%; padding: 7px; margin: 7px; background-color: #fff; border: 1px solid #eee; }
-    .color-set p span { display: block; font-family: 'Poppins'; font-weight: 700; color: #666; }
-    .color-set p span + span { color: #000; padding-top: 5px; }    
-    .font_list {margin-top:40px;}
-    .font_list li {display:flex; justify-content:left; align-items: center;}
-    .font_list li + li {margin-top:36px;}
-    .font_list li span:first-child {display: inline-block; width:92px;}
-    .typography {width:100%; border-collapse: collapse;}
-    .typography thead th {height:40px; text-align:left;}
-    .typography thead th, tbody td {border:1px solid #CDCDD1;}
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/monokai-sublime.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>            
+  <script src="./js/libs/jquery.min.js"></script>
+  <script src="./js/libs/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="./css/common.css" />
+  <link rel="stylesheet" href="guide.css" /> 
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
 </head>
 <body>
     <!-- Start:LeftMenu-->
@@ -39,14 +21,13 @@
       <div class="title">Style Guide</div>
       <div>
         <button type="button" onclick="location.href='#Text'">Text</button>
-        <button type="button" onclick="location.href='#Icon'">Icon</button>
         <button type="button" onclick="location.href='#Input'">Input</button>
         <button type="button" onclick="location.href='#Textarea'">Textarea</button>
         <button type="button" onclick="location.href='#Stepper'">Stepper</button>
         <button type="button" onclick="location.href='#Datepicker'">Datepicker</button>
         <button type="button" onclick="location.href='#Select'">Select</button>
         <button type="button" onclick="location.href='#Dropdown'">Dropdown</button>
-        <button type="button" onclick="location.href='#Toggle'">Toggle</button>
+        <button type="button" onclick="location.href='#Switch'">Switch</button>
         <button type="button" onclick="location.href='#Checkbox'">Checkbox</button>          
         <button type="button" onclick="location.href='#Button'">Button</button>
         <button type="button" onclick="location.href='#Nav'">Nav</button>
@@ -60,149 +41,1140 @@
         <button type="button" onclick="location.href='#Range'">Range Slider</button>
         <button type="button" onclick="location.href='#Loading'">Loading</button>
         <button type="button" onclick="location.href='#Tooltip'">Tooltip</button>
-        <button type="button" onclick="location.href='#Toast'">Toast</button>
-        <button type="button" onclick="location.href='#Alert'">Alert</button>
-        <button type="button" onclick="location.href='#Flash'">Flash msg</button>
-        <button type="button" onclick="location.href='#Modal'">Modal</button>    
+        <button type="button" onclick="location.href='#Toast'">Toast</button>            
         <button type="button" onclick="location.href='#Color'">Color</button>
         <button type="button" onclick="location.href='#Font'">Font</button>      
-        <button type="button" onclick="location.href='#search'" class="line">Input:search 예외적용</button>
         <button type="button" onclick="location.href='#Radio'" class="line">Select Button:Radio Group</button>          
       </div>
+      <a href="cgp/index.html" target="_blank">Sample Page</a>
     </div>
     <!-- End:LeftMenu-->
 
     <!-- Start:Guide-->
     <div class="common_wrap">
 
-      <!-- START : Text --> 
+      <!-- START : Text -->
       <h1 id="Text">Text</h1>    
-      <div style="margin-bottom: 30px;"></div>
+      <div style="margin-bottom: 30px;">
+        <div class="security_guide">
+          <button type="button">
+            <span>Security Guide</span>
+          </button>
+        </div>
+      </div>      
       <!-- END : Text --> 
+
+      <!-- START : Input -->
+      <h1 id="Input">Input</h1>    
+      <div style="margin-bottom: 30px;">
+
+        <!-- Input Default -->
+        <div class="form_wrap">
+          <span class="form_cell form_input input_lg">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Placeholder text">
+            <button class="btn_reset">
+              <span class="a11y">삭제</span>
+            </button>
+          </span>
+        </div>
+        <!-- Input Disabled -->
+        <div class="form_wrap">
+          <span class="form_cell form_input input_lg">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Disabled" disabled>
+            <button class="btn_reset">
+              <span class="a11y">삭제</span>
+            </button>
+          </span>
+        </div>
+        <!-- Input Readonly -->
+        <div class="form_wrap">
+          <span class="form_cell form_input input_lg">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" readonly="readonly" onfocus="this.blur();" value="Readonly">
+            <button class="btn_reset">
+              <span class="a11y">삭제</span>
+            </button>
+          </span>
+        </div>
+        <!-- Input Success -->
+        <div class="form_wrap msg success">
+          <span class="form_cell form_input input_lg">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Success">
+            <!-- 
+            <button class="btn_reset">
+              <span class="a11y">삭제</span>
+            </button> -->
+            <div class="dot success">
+              <span class="a11y">성공</span>
+            </div>
+          </span>
+          <span class="success_txt msg" id="input_success">Success message</span>
+        </div>
+        <!-- Input Error -->
+        <div class="form_wrap msg error">
+          <span class="form_cell form_input input_lg">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Error">            
+            <button class="btn_reset">
+              <span class="a11y">삭제</span>
+            </button>
+            <!-- <div class="dot error">
+              <span class="a11y">실패</span>
+            </div> -->
+          </span>
+          <span class="error_txt msg" id="input_error">Error message</span>
+        </div>
+        <!-- Password View -->
+        <div class="form_wrap msg">
+          <span class="form_cell form_input input_lg">
+            <input type="password" title="input default" id="password" aria-invalid="false" value="Password">
+            <button class="btn_input eyes" id="pass_view">
+              <span class="a11y">비밀번호 표시</span>
+            </button>
+          </span>
+        </div>
+        <!-- Input Calendar -->
+        <div class="form_wrap msg">
+          <span class="form_cell form_input input_lg">
+            <input type="text" title="input default" aria-invalid="false" placeholder="Calendar">
+            <button class="btn_input calendar">
+              <span class="a11y">달력보기</span>
+            </button>
+          </span>
+        </div>
+        <!-- Input Search -->
+        <div class="form_wrap msg">
+          <span class="form_cell form_input input_lg">
+            <input type="text" title="input default" aria-invalid="false" placeholder="Search">
+            <button class="btn_input input_search">
+              <span class="a11y">검색</span>
+            </button>
+          </span>
+        </div>
+        <!-- Input Label -->
+        <div class="form_wrap">                    
+          <label>Label</label>
+          <span class="form_cell form_input input_lg">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Placeholder text">
+            <button class="btn_reset">
+              <span class="a11y">삭제</span>
+            </button>
+          </span>
+        </div>
+        <!-- Input HGroup -->
+        <div class="form_wrap">          
+          <label>Label</label>
+          <div class="HGroup">
+            <span class="form_cell form_input input_lg">
+              <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Placeholder text">
+              <button class="btn_reset">
+                <span class="a11y">삭제</span>
+              </button>
+            </span>
+            <span class="form_cell form_input input_lg">
+              <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Input">
+              <button class="btn_reset">
+                <span class="a11y">삭제</span>
+              </button>
+            </span>
+          </div>
+        </div>
+        <!-- Input VGroup -->
+        <div class="form_wrap VGroup msg default">          
+          <label>Label</label>
+          <span class="form_cell form_input input_lg">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Placeholder text">
+            <span class="guide_text num">
+              <span>0</span>/20
+            </span>
+          </span>
+          <span class="form_cell form_input input_lg guide_input">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Input">
+            <span class="guide_text time">
+              <span>2:59</span>
+            </span>
+          </span>
+          <span class="default_txt msg" id="input_help">Default text</span>
+        </div>
+        <!-- Input_MD -->
+        <div class="form_wrap">          
+          <span class="form_cell form_input input_md">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Placeholder text">
+            <button class="btn_reset">
+              <span class="a11y">삭제</span>
+            </button>
+          </span>
+        </div>        
+        <!-- Input_SM -->
+        <div class="form_wrap HGroup">          
+          <span class="form_cell form_input input_sm">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Placeholder text">
+            <button class="btn_reset">
+              <span class="a11y">삭제</span>
+            </button>
+          </span>
+          <span class="form_cell form_input input_sm">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Placeholder text">
+            <button class="btn_reset">
+              <span class="a11y">삭제</span>
+            </button>
+          </span>
+        </div>
+        <!-- Input_XS -->
+        <div class="form_wrap HGroup">      
+          <label class="inline">Label</label>              
+          <span class="form_cell form_input input_xs">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Input">
+          </span>
+          <span class="form_cell form_input input_xs">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Input">
+          </span>       
+          <label class="inline">Label</label>              
+          <span class="form_cell form_input input_xs"> 
+            <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Input">
+          </span>
+        </div>
+      </div>
+      <!-- END : Input -->      
+
+      <!-- START : Textarea -->
+      <h1 id="Textarea">Textarea</h1>    
+      <div style="margin-bottom: 30px;">
+      <textarea>Textarea</textarea></div>
+      <!-- END : Textarea -->      
       
-       <!-- START : Icon -->
-       <h1 id="Icon">Icon</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Icon -->
+      <!-- START : Stepper -->
+      <h1 id="Stepper">Stepper</h1>    
+      <div style="margin-bottom: 30px;">
+        <div class="stepper_wrap size_lg">
+          <button type="button" class="btn_minus">
+            <span class="a11y">빼기</span>
+          </button>          
+          <input type="text" value="999">          
+          <button type="button" class="btn_plus">
+            <span class="a11y">더하기</span>
+          </button>
+        </div>
+        <div class="stepper_wrap size_md">
+          <button type="button" class="btn_minus">
+            <span class="a11y">빼기</span>
+          </button>          
+          <input type="text" value="999">          
+          <button type="button" class="btn_plus">
+            <span class="a11y">더하기</span>
+          </button>
+        </div>
+        <div class="stepper_wrap size_sm">
+          <button type="button" class="btn_minus">
+            <span class="a11y">빼기</span>
+          </button>          
+          <input type="text" value="999">          
+          <button type="button" class="btn_plus">
+            <span class="a11y">더하기</span>
+          </button>
+        </div>
+      </div>
+      <!-- END : Stepper -->
 
-       <!-- START : Input -->
-       <h1 id="Input">Input</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Input -->
+      <!-- START : Datepicker -->
+      <h1 id="Datepicker">Datepicker</h1>    
+      <div style="margin-bottom: 30px;"></div>
+      <!-- END : Datepicker -->
 
-       <!-- START : Textarea -->
-       <h1 id="Textarea">Textarea</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Textarea -->
+      <!-- START : Select -->
+      <h1 id="Select">Select</h1>    
+      <div style="margin-bottom: 30px;">
+        <div class="select_wrap">
+          <div class="select">
+            <div class="selected">
+              <div class="selected-value">Select</div>
+              <button type="button" class="arrow">
+                <span class="a11y">선택</span>
+              </button>
+            </div>
+            <ul>
+              <li class="option">Option 1</li>
+              <li class="option">Selected Option</li>
+              <li class="option">Option 3</li>
+              <li class="option">option 3</li>
+              <li class="option">option 3</li>
+              <li class="option">option 3</li>
+              <li class="option">option 3</li>
+              <li class="option">loooooooooooooooooong text option</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- END : Select -->
 
-       <!-- START : Stepper -->
-       <h1 id="Stepper">Stepper</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Stepper -->
+      <!-- START : Dropdown -->
+      <h1 id="Dropdown">Dropdown</h1>    
+      <div style="margin-bottom: 30px;">
+        <div class="drop_wrap">
+          <div class="select">
+            <div class="selected">
+              <div class="selected-value">Select</div>
+              <button type="button" class="arrow">
+                <span class="a11y">선택</span>
+              </button>
+            </div>
+            <ul>
+              <li class="option">Option 1</li>
+              <li class="option">Selected Option</li>
+              <li class="option">Option 3</li>
+              <li class="option">Icon menu..</li>
+            </ul>
+          </div>
+        </div>
+        <div style="margin-top:30px;">
+          <div class="more_popup" style="display:inline-block;">
+            <button type="button" class="more" style="margin-left:200px;">
+              <span class="a11y">더보기</span>
+            </button>
+            <ul class="more_pop">
+              <li>
+                <button type="button" class="edit">
+                  <span>Edit</span>
+                </button>
+              </li>
+              <li>                
+                <button type="button" class="delete">
+                  <span>Delete</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- END : Dropdown -->
 
-       <!-- START : Datepicker -->
-       <h1 id="Datepicker">Datepicker</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Datepicker -->
+      <!-- START : Switch -->
+      <h1 id="Switch">Switch</h1>    
+      <div style="margin-bottom: 30px;">
+        <div class="form_wrap">
+          <span class="form_cell type_toggle">
+            <input type="checkbox" id="check9">
+            <label for="check9">
+              <span class="a11y">Switch</span>
+            </label>
+          </span>
+          <span class="form_cell type_toggle">
+            <input type="checkbox" id="check10" disabled>
+            <label for="check10">
+              <span class="a11y">Switch off : disabled</span>
+            </label>
+          </span>
+          <span class="form_cell type_toggle">
+            <input type="checkbox" id="check10" checked disabled>
+            <label for="check10">
+              <span class="a11y">Switch on : disabled</span>
+            </label>
+          </span>
+        </div>
+        <div>
+          <div style="font-size: 25px; font-weight: bold; padding:20px 0; color: #000;">
+            Switch List
+          </div>
+          <ul class="toggle_list">
+            <li>
+              <div class="form_wrap">
+                <span class="form_cell type_toggle">
+                  <input type="checkbox" id="check20">
+                  <label for="check20">
+                    <span class="a11y">Switch</span>
+                  </label>
+                </span>
+              </div>
+            </li>
+            <li>
+              <div class="form_wrap">
+                <span class="form_cell type_toggle">
+                  <input type="checkbox" id="check21" checked>
+                  <label for="check21">
+                    <span class="a11y">Switch</span>
+                  </label>
+                </span>
+              </div>
+            </li>
+            <li>
+              <div class="form_wrap">
+                <span class="form_cell type_toggle">
+                  <input type="checkbox" id="check22" checked>
+                  <label for="check22">
+                    <span class="a11y">Switch</span>
+                  </label>
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- END : Toggle -->
 
-       <!-- START : Select -->
-       <h1 id="Select">Select</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Select -->
+      <!-- START : Checkbox -->
+      <h1 id="Checkbox">Checkbox</h1>    
+      <div style="margin-bottom: 30px;">
+        <div class="form_wrap">
+          <span class="form_cell form_check" style="margin-right:40px;">
+            <input type="checkbox" id="check30">
+            <label for="check30" class="checkbox">
+              <span>Checkbox</span>
+            </label>
+          </span>
+          <span class="form_cell form_check" style="margin-right:40px;">
+            <input type="checkbox" id="check31" disabled>
+            <label for="check31" class="checkbox">
+              <span>Checkbox:disabled</span>
+            </label>
+          </span>
+          <span class="form_cell form_check" style="margin-right:40px;">
+            <input type="checkbox" id="indeter">
+            <label for="indeter" class="checkbox">
+              <span>Indeterminate_unchecked</span>
+            </label>
+          </span>
+          <span class="form_cell form_check">
+            <input type="checkbox" id="indeter1" disabled>
+            <label for="indeter1" class="checkbox">
+              <span>Indeterminate_unchecked:disabled</span>
+            </label>
+          </span>
+        </div>
+        <div class="form_wrap" style="margin-top:20px;">
+          <span class="form_cell form_check" style="margin-right:40px;">
+            <input type="checkbox" id="check32" checked>
+            <label for="check32" class="checkbox">
+              <span>Checked</span>
+            </label>
+          </span>
+          <span class="form_cell form_check" style="margin-right:40px;">
+            <input type="checkbox" id="check33" checked disabled>
+            <label for="check33" class="checkbox">
+              <span>Checked : disabled</span>
+            </label>
+          </span>
+          <span class="form_cell form_check" style="margin-right:40px;">
+            <input type="checkbox" id="indeter2" checked>
+            <label for="indeter2" class="checkbox">
+              <span>Indeterminate</span>
+            </label>
+          </span>
+          <span class="form_cell form_check">
+            <input type="checkbox" id="indeter3" checked disabled>
+            <label for="indeter3" class="checkbox">
+              <span>Indeterminate:disabled</span>
+            </label>
+          </span>
+        </div>
+        
+      <div>
+        <div style="font-size: 25px; font-weight: bold; padding:20px 0; color: #000;">
+          Checkbox List
+        </div>
+        <ul class="check_list depth1">
+          <li>
+            <div class="form_wrap" style="margin-top:20px;">
+              <span class="form_cell form_check" style="margin-right:40px;">
+                <input type="checkbox" id="check32" checked>
+                <label for="check32" class="checkbox">
+                  <span>Checked</span>
+                </label>
+              </span>
+            </div>
+            <ul class="check_list depth2">
+              <li>
+                <div class="form_wrap" style="margin-top:20px;">
+                  <span class="form_cell form_check" style="margin-right:40px;">
+                    <input type="checkbox" id="check32" checked>
+                    <label for="check32" class="checkbox">
+                      <span>Checked</span>
+                    </label>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="form_wrap" style="margin-top:20px;">
+                  <span class="form_cell form_check" style="margin-right:40px;">
+                    <input type="checkbox" id="check32" checked>
+                    <label for="check32" class="checkbox">
+                      <span>Checked</span>
+                    </label>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="form_wrap" style="margin-top:20px;">
+                  <span class="form_cell form_check" style="margin-right:40px;">
+                    <input type="checkbox" id="check32" checked>
+                    <label for="check32" class="checkbox">
+                      <span>Checked</span>
+                    </label>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <div class="form_wrap" style="margin-top:20px;">
+              <span class="form_cell form_check" style="margin-right:40px;">
+                <input type="checkbox" id="check32" checked>
+                <label for="check32" class="checkbox">
+                  <span>Checked</span>
+                </label>
+              </span>
+            </div>
+            <ul class="check_list depth2">
+              <li>
+                <div class="form_wrap" style="margin-top:20px;">
+                  <span class="form_cell form_check" style="margin-right:40px;">
+                    <input type="checkbox" id="check32" checked>
+                    <label for="check32" class="checkbox">
+                      <span>Checked</span>
+                    </label>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="form_wrap" style="margin-top:20px;">
+                  <span class="form_cell form_check" style="margin-right:40px;">
+                    <input type="checkbox" id="check32" checked>
+                    <label for="check32" class="checkbox">
+                      <span>Checked</span>
+                    </label>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="form_wrap" style="margin-top:20px;">
+                  <span class="form_cell form_check" style="margin-right:40px;">
+                    <input type="checkbox" id="check32" checked>
+                    <label for="check32" class="checkbox">
+                      <span>Checked</span>
+                    </label>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      </div>
+      <!-- END : Checkbox -->
 
-       <!-- START : Dropdown -->
-       <h1 id="Dropdown">Dropdown</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Dropdown -->
+      <!-- START : Button -->
+      <h1 id="Button">Button</h1>    
+      <div style="margin-bottom: 30px;">
+        <div style="margin-bottom: 10px;">
+          <button type="button" class="btn primary button_xl">
+            <span>Primary Button</span>
+          </button>
+          <button type="button" class="btn primary button_xl" disabled>
+            <span>Primary Button Disabled</span>
+          </button>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <button type="button" class="btn secondary button_md">
+            <span>Secondary Button</span>
+          </button>
+          <button type="button" class="btn secondary button_md" disabled>
+            <span>Secondary Button Desabled</span>
+          </button>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <button type="button" class="btn point button_md">
+            <span>Point Button</span>
+          </button>
+          <button type="button" class="btn point button_md" disabled>
+            <span>Point Button Disabled</span>
+          </button>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <button type="button" class="btn primary_line button_md">
+            <span>Primary line Button</span>
+          </button>
+          <button type="button" class="btn primary_line button_md" disabled>
+            <span>Primary line Button Disabled</span>
+          </button>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <button type="button" class="btn secondary_line button_md">
+            <span>Secondary line Button</span>
+          </button>
+          <button type="button" class="btn secondary_line button_md" disabled>
+            <span>Secondary line Button Disabled</span>
+          </button>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <button type="button" class="btn point_line button_md">
+            <span>Point line Button</span>
+          </button>
+          <button type="button" class="btn point_line button_md" disabled>
+            <span>Point line Button Disabled</span>
+          </button>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <button type="button" class="btn default button_md">
+            <span>Button</span>
+          </button>
+          <button type="button" class="btn default button_md" disabled>
+            <span>Button Disabled</span>
+          </button>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <button type="button" class="btn success button_md">
+            <span>Success Button</span>
+          </button>
+          <button type="button" class="btn warning button_md">
+            <span>Warning Button</span>
+          </button>
+          <button type="button" class="btn error button_md">
+            <span>Error Button</span>
+          </button>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <button type="button" class="btn default button_xl">
+            <span>Size XL</span>
+          </button>
+          <button type="button" class="btn default button_lg">
+            <span>Size L</span>
+          </button>
+          <button type="button" class="btn default button_md">
+            <span>Size M</span>
+          </button>
+          <button type="button" class="btn default button_sm">
+            <span>Size S</span>
+          </button>
+          <button type="button" class="btn default button_xs">
+            <span>Size xs</span>
+          </button>
+        </div>
+        <div style="background:#9013fe; height:60px; text-align:center; padding-top:12px;margin-bottom: 10px;">
+          <button type="button" class="btn_round btn_white">
+            <span>Login</span>
+          </button>
+          <button type="button" class="btn_round btn_white" disabled>
+            <span>Disabled</span>
+          </button>
+        </div>    
+        <div style="margin-bottom: 10px;">    
+          <button type="button" class="btn_round btn_red">
+            <span>Try again</span>
+          </button>
+          <button type="button" class="btn_count">
+            <span>Save as draft</span>
+            <span class="count">0</span>
+          </button>
+        </div>   
+        <div style="margin-bottom: 10px;">    
+          <button type="button" class="btn btn_small_xs">
+            <span>check</span>
+          </button>
+          <button type="button" class="btn btn_small_xs" disabled>
+            <span>check</span>
+          </button>
+          <button type="button" class="btn btn_small_sm">
+            <span>Done</span>
+          </button>
+          <button type="button" class="btn btn_small_sm" disabled>
+            <span>Done</span>
+          </button>
+          <button type="button" class="btn_like">
+            <span>21</span>
+          </button>
+          <button type="button" class="btn_like dis">
+            <span>0</span>
+          </button>
+        </div>
+        <div style="margin-bottom: 10px;">    
+          <button type="button" class="sns btn_google">
+            <span class="a11y">구글</span>
+          </button>
+          <button type="button" class="sns btn_apple">
+            <span class="a11y">애플</span>
+          </button>
+          <button type="button" class="sns btn_facebook">
+            <span class="a11y">페이스북</span>
+          </button>
+          <button type="button" class="sns btn_twitter">
+            <span class="a11y">트위터</span>
+          </button>          
+          <button type="button" class="follow btn_follow">
+            <span class="a11y">팔로우</span>
+          </button>
+          <button type="button" class="follow btn_following">
+            <span class="a11y">팔로윙</span>
+          </button>
+        </div>
+      </div>
+      <!-- END : Button -->
 
-       <!-- START : Toggle -->
-       <h1 id="Toggle">Toggle</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Toggle -->
+      <!-- START : Nav -->
+      <h1 id="Nav">Nav</h1>    
+      <div style="margin-bottom: 30px;">
+        <div class="nav default">
+          <button type="button" class="nav_menu">ACTIVE</button>
+          <button type="button" class="nav_menu">MENU</button>
+          <button type="button" class="nav_menu">MENU</button>
+          <button type="button" class="nav_menu">MENU</button>
+          <button type="button" class="nav_menu">HOVER</button>
+          <button type="button" class="nav_menu" disabled>DISABLED</button>
+        </div>
+        <div class="nav scroll">
+          <button type="button" class="btn_nav left">
+            <span class="a11y">왼쪽으로 이동</span>
+          </button>
+          <div class="scroll_menu">
+            <button type="button" class="nav_menu">ACTIVE</button>
+            <button type="button" class="nav_menu">MENU</button>
+            <button type="button" class="nav_menu">MENU</button>
+            <button type="button" class="nav_menu">MENU</button>
+            <button type="button" class="nav_menu">MENU</button>
+            <button type="button" class="nav_menu">MENU</button>
+            <button type="button" class="nav_menu">MENU</button>
+            <button type="button" class="nav_menu">HOVER</button>
+            <button type="button" class="nav_menu" disabled>DISABLED</button>
+          </div>
+          <button type="button" class="btn_nav right">            
+            <span class="a11y">오른쪽으로 이동</span>
+          </button>
+        </div>
+      </div>
+      <!-- END : Nav -->
 
-       <!-- START : Checkbox -->
-       <h1 id="Checkbox">Checkbox</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Checkbox -->
+      <!-- START : Tabs -->
+      <h1 id="Tabs">Tabs</h1>    
+      <div style="margin-bottom: 30px;">
+        <div class="tabs">
+          <div class="tabs_title">Title</div>
+          <div class="tabs_menu size_sm">
+            <button type="button">
+              <span>Active</span>
+            </button>
+            <button type="button">
+              <span>Tab2</span>
+            </button>
+            <button type="button">
+              <span>Hover</span>
+            </button>
+            <button type="button">
+              <span>Tabs4</span>
+            </button>
+            <button type="button" disabled>
+              <span>Disabled</span>
+            </button>
+          </div>          
+        </div>
+        <div class="tabs">
+          <div class="tabs_menu size_lg scroll">
+            <button type="button" class="btn_tab left">
+              <span class="a11y">왼쪽으로 이동</span>
+            </button>
+            <div class="scroll_menu">
+              <button type="button">
+                <span>Active</span>
+              </button>
+              <button type="button">
+                <span>Tab2</span>
+              </button>
+              <button type="button">
+                <span>Hover</span>
+              </button>
+              <button type="button">
+                <span>Tabs4</span>
+              </button>
+              <button type="button" disabled>
+                <span>Disabled</span>
+              </button>
+              <button type="button">
+                <span>Hover</span>
+              </button>
+              <button type="button">
+                <span>Tabs4</span>
+              </button>
+            </div>
+            <button type="button" class="btn_tab right">
+              <span class="a11y">오른쪽으로 이동</span>
+            </button>
+          </div>
+        </div>
+        <div class="tabs">
+          <div class="tabs_menu size_md scroll">
+            <button type="button" class="btn_tab left">
+              <span class="a11y">왼쪽으로 이동</span>
+            </button>
+            <div class="scroll_menu">
+              <button type="button">
+                <span>Active</span>
+              </button>
+              <button type="button">
+                <span>Tab2</span>
+              </button>
+              <button type="button">
+                <span>Hover</span>
+              </button>
+              <button type="button">
+                <span>Tabs4</span>
+              </button>
+              <button type="button" disabled>
+                <span>Disabled</span>
+              </button>
+              <button type="button">
+                <span>Hover</span>
+              </button>
+              <button type="button">
+                <span>Tabs4</span>
+              </button>
+            </div>
+            <button type="button" class="btn_tab right">
+              <span class="a11y">오른쪽으로 이동</span>
+            </button>
+          </div>
+        </div>
+        <div class="tabs">
+          <div class="tabs_menu size_sm scroll">
+            <button type="button" class="btn_tab left">
+              <span class="a11y">왼쪽으로 이동</span>
+            </button>
+            <div class="scroll_menu">
+              <button type="button">
+                <span>Active</span>
+              </button>
+              <button type="button">
+                <span>Tab2</span>
+              </button>
+              <button type="button">
+                <span>Hover</span>
+              </button>
+              <button type="button">
+                <span>Tabs4</span>
+              </button>
+              <button type="button" disabled>
+                <span>Disabled</span>
+              </button>
+              <button type="button">
+                <span>Hover</span>
+              </button>
+              <button type="button">
+                <span>Tabs4</span>
+              </button>
+            </div>
+            <button type="button" class="btn_tab right">
+              <span class="a11y">오른쪽으로 이동</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- END : Tabs -->
 
-       <!-- START : Button -->
-       <h1 id="Button">Button</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Button -->
+      <!-- START : Tabs:Category -->
+      <h1 id="Category">Tabs:Category</h1>    
+      <div style="margin-bottom: 30px;">
+        <a href="" class="tab_box">Tabs</a>
+        <a href="" class="tab_box">Tabs</a>
+        <a href="" class="tab_box">Tabs</a>
+        <a href="" class="tab_box">Tabs</a>
+       </div>
+      <!-- END : Tabs:Category -->
 
-       <!-- START : Nav -->
-       <h1 id="Nav">Nav</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Nav -->
+      <!-- START : Tags -->
+      <h1 id="Tags">Tags</h1>    
+      <div style="margin-bottom: 30px;">
+        <div style="font-size: 25px; font-weight: bold; color: #000;">
+          Tag
+        </div>
+        <div class="tag_box">
+          <a href="" class="tag">Tag</a>
+          <a href="" class="tag">Tag</a>
+          <a href="" class="tag">Tag</a>
+          <a href="" class="tag">Tag</a>
+          <a href="" class="tag">Tag</a>
+        </div>
+        <div style="font-size: 25px; font-weight: bold; padding:30px 0 20px; color: #000;">
+          HashTag          
+        </div>   
+        <div class="hashtag_box">
+          <button type="button">
+            <span>#Tag Input (# delimited, up to 10)</span>
+          </button>
+          <div class="hashtag_input">
+            <input type="text" value="Focus">
+          </div>
+          <a href="" class="hashtag">HashTag<span class="delete"></span></a>
+          <a href="" class="hashtag">HashTag<span class="delete"></span></a>
+          <a href="" class="hashtag">HashTag<span class="delete"></span></a>
+          <a href="" class="hashtag">HashTag<span class="delete"></span></a>
+        </div>     
+      </div>
+      <!-- END : Tags -->
 
-       <!-- START : Tabs -->
-       <h1 id="Tabs">Tabs</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Tabs -->
+      <!-- START : Labels -->
+      <h1 id="Labels">Labels</h1>    
+      <div style="margin-bottom: 30px;">       
+        <div style="font-size: 25px; font-weight: bold; padding-bottom:20px; color: #000;">
+          Club Labels        
+        </div>   
+        <div>
+          <div class="club_level">Lv 80</div>
+        </div>
+        <div style="font-size: 25px; font-weight: bold; padding:30px 0 20px; color: #000;">
+          Members Labels        
+        </div>   
+        <div>
+          <div class="members_level">Lv 7</div>
+        </div>
+        <div style="font-size: 25px; font-weight: bold; padding:30px 0 20px; color: #000;">
+          New Message
+        </div>   
+        <div>
+          <div class="new_message">1</div>
+          <div class="new_message">99+</div>
+        </div>
+      </div>
+      <!-- END : Labels -->
 
-       <!-- START : Tabs:Category -->
-       <h1 id="Category">Tabs:Category</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Tabs:Category -->
+      <!-- START : Pagination -->
+      <h1 id="Pagination">Pagination</h1>    
+      <div style="margin-bottom: 30px;">
+        <div class="pagination_wrap">
+          <button type="button" class="btn_prev">
+            <span class="a11y">이전</span>
+          </button>
+          <a href="" class="page_num">1</a>
+          <a href="" class="page_num">2</a>
+          <a href="" class="page_num">3</a>
+          <a href="" class="page_num">4</a>
+          <a href="" class="dot">...</a>
+          <a href="" class="page_num">233</a>
+          <button type="button" class="btn_next">
+            <span class="a11y">다음</span>
+          </button>
+        </div>
+      </div>
+      <!-- END : Pagination -->
 
-       <!-- START : Tags -->
-       <h1 id="Tags">Tags</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Tags -->
+      <!-- START : Swiper -->
+      <h1 id="Swiper">Swiper</h1>    
+      <div style="margin-bottom: 30px;"></div>
+      <!-- END : Swiper -->
 
-       <!-- START : Labels -->
-       <h1 id="Labels">Labels</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Labels -->
+      <!-- START : Progress -->
+      <h1 id="Progress">Progress</h1>    
+      <div style="margin-bottom: 30px;">
+        <div class="progress_text">
+          <progress id="progress" value="50" min="0" max="100" style="width:400px;"></progress>
+          <span class="pro_per">0%</span>
+        </div>
+        <div class="progress_text">
+          <progress id="progress" value="50" min="0" max="100" style="width:400px;"></progress>
+          <span class="pro_per">10%</span>
+        </div>
+        <div class="progress_text">
+          <progress id="progress" value="50" min="0" max="100" style="width:400px;"></progress>
+          <span class="pro_per">50%</span>
+        </div>
+        <div class="progress_text">
+          <progress id="progress" value="50" min="0" max="100" style="width:400px;"></progress>
+          <span class="pro_per">80%</span>
+        </div>
+        <div class="progress_text">
+          <progress id="progress" value="50" min="0" max="100" style="width:400px;"></progress>
+          <span class="pro_100per"></span>
+        </div>
+        <div style="margin-top:10px;">
 
-       <!-- START : Pagination -->
-       <h1 id="Pagination">Pagination</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Pagination -->
+          <!-- 이미지 업로드 중 -->
+          <div class="progress_box">
+            <div class="thum"></div>
+            <div class="progress_ing">
+              <label>Video Uploading … <span>(0/1)</span></label>
+              <progress id="progress" value="50" min="0" max="100" style="width:400px;"></progress>
+            </div>
+            <div class="progress_btn_wrap">
+              <button type="button" class="open_tip">
+                <span class="a11y">취소</span>
+              </button>
+              <div class="tooltip bottom">
+                <span>Cancel</span>
+              </div>
+            </div>
+          </div>
 
-       <!-- START : Swiper -->
-       <h1 id="Swiper">Swiper</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Swiper -->
+          <!-- 이미지 업로드 완료 -->
+          <div class="progress_box">
+            <div class="thum"></div>
+            <div class="progress_ing">
+              <label>Complete! <span>(3/3)</span></label>
+              <progress id="progress" value="100" min="0" max="100" style="width:400px;"></progress>
+            </div>            
+            <span class="progress_success">
+              <span class="a11y">완료</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END : Progress -->
 
-       <!-- START : Progress -->
-       <h1 id="Progress">Progress</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Progress -->
+      <!-- START : Range Slider -->
+      <h1 id="Range">Range Slider</h1>    
+      <div style="margin-bottom: 30px;">
+        <div class="range_slider">
+          <label>Label</label>
+          <input type="range" id="input-left" min="1" max="100" value="1" />
+          <input type="range" id="input-right" min="1" max="100" value="100" />
+          <div class="track">
+            <div class="range"></div>
+            <div class="thumb left">
+              <button type="button">
+                <span>0</span>
+              </button>
+            </div>    
+            <div class="thumb right">
+              <button type="button" disabled>
+                <span>100</span>
+              </button>
+            </div>          
+          </div>
+        </div>
+      </div>
+      <!-- END : Range Slider -->
 
-       <!-- START : Range Slider -->
-       <h1 id="Range">Range Slider</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Range Slider -->
+      <!-- START : Loading -->
+      <h1 id="Loading">Loading</h1>    
+      <div style="margin-bottom: 30px; display:inline-flex; justify-items: center;">
+        <div class="loader purple">
+          <div class="loading">
+            <span class="dot1"></span>
+            <span class="dot2"></span>
+            <span class="dot3"></span>
+            <span class="dot4"></span>
+            <span class="dot5"></span>
+          </div>
+          <div class="text">Loding...</div>
+        </div>
+        <div class="loader pink">
+          <div class="loading">
+            <span class="dot1"></span>
+            <span class="dot2"></span>
+            <span class="dot3"></span>
+            <span class="dot4"></span>
+            <span class="dot5"></span>
+          </div>
+          <div class="text">Loding...</div>
+        </div>        
+      </div>
+      <!-- END : Loading -->
 
-       <!-- START : Loading -->
-       <h1 id="Loading">Loading</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Loading -->
+      <!-- START : Tooltip -->
+      <h1 id="Tooltip">Tooltip</h1>    
+      <div style="margin-bottom: 30px; display:flex; align-items: center; justify-content: center;">
+        <!-- 사용할때는 inline style은 지우세요 -->
+        <div class="tooltip top" style="display:inline-block; position:static;">
+          <span>Tooltip on Top</span>
+        </div>
+        <div class="tooltip right" style="display:inline-block; position:static;">
+          <span>Tooltip on Right</span>
+        </div>
+        <div class="tooltip bottom" style="display:inline-block; position:static;">
+          <span>Tooltip on Bottom</span>
+        </div>
+        <div class="tooltip left" style="display:inline-block; position:static;">
+          <span>Tooltip on Left</span>
+        </div>
+      </div>
+      <!-- END : Tooltip -->
 
-       <!-- START : Tooltip -->
-       <h1 id="Tooltip">Tooltip</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Tooltip -->
-
-       <!-- START : Alert -->
-       <h1 id="Alert">Alert</h1>    
-       <div style="margin-bottom: 30px;"></div>
+       <!-- START : Toast -->
+       <h1 id="Toast">Toast</h1>    
+       <div style="margin-bottom: 30px;">
+         <div class="toast title default">
+          <div class="title">Toasts</div>
+          <span>Anyone with access can view your invited visitors.</span>
+         </div>
+         <div class="toast title success">
+          <div class="title">Toasts</div>
+          <span>You successfully read this important message.</span>
+         </div>
+         <div class="toast title warning">
+          <div class="title">Toasts</div>
+          <span>Better check yourself, you’re not looking too good.</span>
+         </div>
+         <div class="toast title error">
+          <span>Invalid method approached.</span>
+         </div>
+         <div class="toast default">
+          <span>Anyone with access can view your invited visitors.</span>
+          <button type="button" class="close">
+            <span class="a11y">닫기</span>
+          </button>
+         </div>
+         <div class="toast success">
+          <span>You successfully read this important message.</span>
+          <button type="button" class="close">
+            <span class="a11y">닫기</span>
+          </button>
+         </div>
+         <div class="toast warning">
+          <span>Better check yourself, you’re not looking too good.</span>
+          <button type="button" class="close">
+            <span class="a11y">닫기</span>
+          </button>
+         </div>
+         <div class="toast error">
+          <span>Invalid method approached.</span>
+          <button type="button" class="close">
+            <span class="a11y">닫기</span>
+          </button>
+         </div>
+       </div>
        <!-- END : Alert -->
 
-       <!-- START : Flash msg -->
-       <h1 id="Flash">Flash msg</h1>    
-       <div style="margin-bottom: 30px;"></div>
-       <!-- END : Flash msg -->
+      <!-- START : Alert -->
+      <h1 id="Alert">Alert</h1>    
+      <div style="margin-bottom: 30px;">
+        <button onclick="openModal('modal1');" class="btn default button_md">
+          <span>Alert</span>
+        </button>
+        <button onclick="openModal('modal2');" class="btn default button_md">
+          <span>Submit</span>
+        </button> 
+      </div>
+      <!-- END : Alert -->
 
-       <!-- START : Modal -->
-       <h1 id="Modal">Modal</h1>    
-       <div style="margin-bottom: 30px;"></div>        
-       <!-- END : Modal -->
+      <!-- START : Flash msg -->
+      <h1 id="Flash">Flash msg</h1>    
+      <div style="margin-bottom: 30px;">
+        <button onclick="openModal('modal6');" class="btn default button_md">
+          <span>Success Small</span>
+        </button> 
+        <button onclick="openModal('modal7');" class="btn default button_md">
+          <span>Success Big</span>
+        </button> 
+        <button onclick="openModal('modal8');" class="btn default button_md">
+          <span>Ooops Small</span>
+        </button> 
+        <button onclick="openModal('modal9');" class="btn default button_md">
+          <span>Ooops Big</span>
+        </button> 
+      </div>
+      <!-- END : Flash msg -->
 
-       <!-- START : Color -->
-       <h1 id="Color">Color</h1>        
-       <div style="margin-bottom: 30px;">          
+      <!-- START : Modal -->
+      <h1 id="Modal">Modal</h1>    
+      <div style="margin-bottom: 30px;">      
+        <button onclick="openModal('modal3');" class="btn default button_md">
+          <span>Modal Confirm</span>
+        </button> 
+        <button onclick="openModal('modal4');" class="btn default button_md">
+          <span>Modal Next</span>
+        </button> 
+        <button onclick="openModal('modal5');" class="btn default button_md">
+          <span>Modal Right Button</span>
+        </button> 
+      </div>        
+      <!-- END : Modal -->
+
+      <!-- START : Color -->
+      <h1 id="Color">Color</h1>        
+      <div style="margin-bottom: 30px;">          
         <!-- START -->
         <div>
           <div style="font-size: 25px; font-weight: bold; padding-bottom: 20px; color: #000;">
@@ -547,7 +1519,7 @@
             Grayscale
           </div>          
           <div style="display:flex; justify-content: center; width:100%;">
-            <dl style="width:calc(100% / 6);">
+            <dl style="width:calc(100% / 7);">
               <dt></dt>
               <dd>
                 <div class="color-set-view">
@@ -560,7 +1532,7 @@
                 </div>
               </dd>
             </dl>
-            <dl style="width:calc(100% / 6);">
+            <dl style="width:calc(100% / 7);">
               <dt></dt>
               <dd>
                 <div>
@@ -573,7 +1545,7 @@
                 </div>
               </dd>
             </dl>
-            <dl style="width:calc(100% / 6);">
+            <dl style="width:calc(100% / 7);">
               <dt></dt>
               <dd>
                 <div>
@@ -586,7 +1558,7 @@
                 </div>
               </dd>
             </dl>
-            <dl style="width:calc(100% / 6);">
+            <dl style="width:calc(100% / 7);">
               <dt></dt>
               <dd>
                 <div>
@@ -599,7 +1571,7 @@
                 </div>
               </dd>
             </dl>
-            <dl style="width:calc(100% / 6);">
+            <dl style="width:calc(100% / 7);">
               <dt></dt>
               <dd>
                 <div>
@@ -612,7 +1584,7 @@
                 </div>
               </dd>
             </dl>
-            <dl style="width:calc(100% / 6);">
+            <dl style="width:calc(100% / 7);">
               <dt></dt>
               <dd>
                 <div>
@@ -620,6 +1592,19 @@
                     <p>
                       <span>#F8F8F8</span>
                       <span>$gray_color06</span>
+                    </p>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+            <dl style="width:calc(100% / 7);">
+              <dt></dt>
+              <dd>
+                <div>
+                  <div class="color-set" style="background-color: #eee;">
+                    <p>
+                      <span>#EEEEEE</span>
+                      <span>$gray_color07</span>
                     </p>
                   </div>
                 </div>
@@ -638,28 +1623,49 @@
           <div style="font-family:Poppins; font-weight:500; font-size:40px;">Poppins <span style="font-family:NanumSquareRound; font-weight:bold; font-size:20px;">영문폰트</span></div>
           <ul class="font_list">
             <li>
-              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Light</span>
-              <span style="font-family:Poppins; font-weight:300; font-size:24px;">Hello, World! Play in CGP!</span>
-            </li>
-            <li>
-              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Regular</span>
-              <span style="font-family:Poppins; font-weight:normal; font-size:24px;">Hello, World! Play in CGP!</span>
-            </li>
-            <li>
-              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Medium</span>
-              <span style="font-family:Poppins; font-weight:500; font-size:24px;">Hello, World! Play in CGP!</span>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Bold</span>
+              <span style="font-family:Poppins; font-weight:bold; font-size:24px;">Welcome to SuperClub!</span>
             </li>
             <li>
               <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Semibold</span>
-              <span style="font-family:Poppins; font-weight:600; font-size:24px;">Hello, World! Play in CGP!</span>
+              <span style="font-family:Poppins; font-weight:600; font-size:24px;">Welcome to SuperClub!</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Medium</span>
+              <span style="font-family:Poppins; font-weight:500; font-size:24px;">Welcome to SuperClub!</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Regular</span>
+              <span style="font-family:Poppins; font-weight:normal; font-size:24px;">Welcome to SuperClub!</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Light</span>
+              <span style="font-family:Poppins; font-weight:300; font-size:24px;">Welcome to SuperClub!</span>
+            </li>
+          </ul>
+        </div>
+        <div style="margin-bottom: 30px; width:33.3%">          
+          <div style="font-family:M_PLUS_1p; font-weight:500; font-size:40px;">M_PLUS_1p <span style="font-family:NanumSquareRound; font-weight:bold; font-size:20px;">일어 폰트</span></div>
+          <ul class="font_list">
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">ExtraBold</span>
+              <span style="font-family:M_PLUS_1p; font-weight:800; font-size:24px;">Welcome to スーパークラブ!</span>
             </li>
             <li>
               <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Bold</span>
-              <span style="font-family:Poppins; font-weight:700; font-size:24px;">Hello, World! Play in CGP!</span>
+              <span style="font-family:M_PLUS_1p; font-weight:bold; font-size:24px;">Welcome to スーパークラブ!</span>
             </li>
             <li>
-              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">ExtraBold</span>
-              <span style="font-family:Poppins; font-weight:800; font-size:24px;">Hello, World! Play in CGP!</span>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Medium</span>
+              <span style="font-family:M_PLUS_1p; font-weight:500; font-size:24px;">Welcome to スーパークラブ!</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Regular</span>
+              <span style="font-family:M_PLUS_1p; font-weight:normal; font-size:24px;">Welcome to スーパークラブ!</span>
+            </li>
+            <li>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Light</span>
+              <span style="font-family:M_PLUS_1p; font-weight:300; font-size:24px;">Welcome to スーパークラブ!</span>
             </li>
           </ul>
         </div>
@@ -667,92 +1673,232 @@
           <div style="font-family:Poppins; font-weight:500; font-size:40px;">NanumSquareRound <span style="font-family:NanumSquareRound; font-weight:bold; font-size:20px;">한글 폰트</span></div>
           <ul class="font_list">
             <li>
-              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Light</span>
-              <span style="font-family:NanumSquareRound; font-weight:300; font-size:24px;">안녕하세요. 방문해 주셔서 감사합니다.</span>
-            </li>
-            <li>
-              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Regular</span>
-              <span style="font-family:NanumSquareRound; font-weight:400; font-size:24px;">안녕하세요. 방문해 주셔서 감사합니다.</span>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">ExtraBold</span>
+              <span style="font-family:NanumSquareRound; font-weight:800; font-size:24px;">Welcome to 슈퍼클럽!</span>
             </li>
             <li>
               <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Bold</span>
-              <span style="font-family:NanumSquareRound; font-weight:700; font-size:24px;">안녕하세요. 방문해 주셔서 감사합니다.</span>
-            </li>
-            <li>
-              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">ExtraBold</span>
-              <span style="font-family:NanumSquareRound; font-weight:800; font-size:24px;">안녕하세요. 방문해 주셔서 감사합니다.</span>
-            </li>
-          </ul>
-        </div>
-        <div style="margin-bottom: 30px; width:33.3%">
-          <div style="font-family:M PLUS 1p; font-weight:500; font-size:40px;">M Plus 1P <span style="font-family:NanumSquareRound; font-weight:bold; font-size:20px;">일어 폰트</span></div>
-          <ul class="font_list">
-            <li>
-              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Light</span>
-              <span style="font-family:M PLUS 1p; font-weight:300; font-size:24px;">新しい時代のこころを映すタイプフェ</span>
+              <span style="font-family:NanumSquareRound; font-weight:bold; font-size:24px;">Welcome to 슈퍼클럽!</span>
             </li>
             <li>
               <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Regular</span>
-              <span style="font-family:M PLUS 1p; font-weight:normal; font-size:24px;">新しい時代のこころを映すタイプフェ</span>
+              <span style="font-family:NanumSquareRound; font-weight:normal; font-size:24px;">Welcome to 슈퍼클럽!</span>
             </li>
             <li>
-              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Medium</span>
-              <span style="font-family:M PLUS 1p; font-weight:500; font-size:24px;">新しい時代のこころを映すタイプフェ</span>
-            </li>
-            <li>
-              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Bold</span>
-              <span style="font-family:M PLUS 1p; font-weight:700; font-size:24px;">新しい時代のこころを映すタイプフェ</span>
-            </li>
-            <li>
-              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">ExtraBold</span>
-              <span style="font-family:M PLUS 1p; font-weight:800; font-size:24px;">新しい時代のこころを映すタイプフェ</span>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:16px;">Light</span>
+              <span style="font-family:NanumSquareRound; font-weight:300; font-size:24px;">Welcome to 슈퍼클럽!</span>
             </li>
           </ul>
         </div>
       </div>
       <div style="padding:30px;">
-        <div style="font-family:'Poppins'; font-size:16px; font-weight:600;">Headers</div>
-        <table class="typography">
-          <caption></caption>
-          <colgroup>
-            <col style="width:15%;" />
-            <col style="width:25%;" />
-            <col style="width:25%;" />
-            <col style="width:25%;" />
-          </colgroup>
-          <thead>
-            <tr>
-              <th></th>
-              <th><span style="font-family:'Poppins'; font-size:24px; font-weight:normal;">Poppins</span><span style="font-family:'NanumSquareRound'; font-size:16px; font-weight:bold;">영문 폰트</span></th>
-              <th><span style="font-family:'NanumSquareRound'; font-size:24px; font-weight:bold;">나눔스퀘어라운드</span><span style="font-family:'NanumSquareRound'; font-size:16px; font-weight:bold;">한글 폰트</span></th>
-              <th><span style="font-family:'M PLUS 1p'; font-size:24px; font-weight:bold;">M Plus 1P</span><span style="font-family:'NanumSquareRound'; font-size:16px; font-weight:bold;">일어 폰트</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span style="font-family:'Poppins'; font-size:16px; font-weight:500;">H1 44px</span><span style="display:block; font-family:'Poppins'; margin-top:8px; font-size:14px; font-weight:normal;">Community Heading</span></td>
-              <td style="font-family:'Poppins'; font-size:44px; font-weight:bold;">Sign your contract</td>
-              <td style="font-family:'NanumSquareRound'; font-size:44px; font-weight:800;">Sign your contract</td>
-              <td style="font-family:'M PLUS 1p'; font-size:44px; font-weight:800;">Sign your contract</td>
-            </tr>
-          </tbody>
-        </table>       
+        <div style="font-family:'Poppins'; font-size:34px; font-weight:600; margin-bottom:10px;">Headers</div>
+        <div data-role-code>
+          <div data-code-target>
+            <table class="typography">
+              <caption></caption>
+              <colgroup>
+                <col style="width:15%;" />
+                <col style="width:25%;" />
+                <col style="width:25%;" />
+                <col style="width:25%;" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th><span style="font-family:'Poppins'; font-size:24px; font-weight:normal;">Poppins</span><span style="font-family:'NanumSquareRound'; font-size:16px; font-weight:bold;">영문 폰트</span></th>              
+                  <th><span style="font-family:'M_PLUS_1p'; font-size:24px; font-weight:bold;">M_PLUS_1p</span><span style="font-family:'NanumSquareRound'; font-size:16px; font-weight:bold;">일어 폰트</span></th>
+                  <th><span style="font-family:'NanumSquareRound'; font-size:24px; font-weight:bold;">나눔스퀘어라운드</span><span style="font-family:'NanumSquareRound'; font-size:16px; font-weight:bold;">한글 폰트</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th><span style="font-family:'Poppins'; font-size:16px; font-weight:500;">H1 44px</span><span style="display:block; font-family:'Poppins'; margin-top:8px; font-size:14px; font-weight:normal;">Community Heading</span></th>
+                  <td class="h2Type eng">Sign your contract</td>
+                  <td class="h2Type cha">Sign your contract</td>
+                  <td class="h2Type kor">Sign your contract</td>
+                </tr>
+                <tr>
+                  <th><span style="font-family:'Poppins'; font-size:16px; font-weight:500;">H3 40px</span><span style="display:block; font-family:'Poppins'; margin-top:8px; font-size:14px; font-weight:normal;">Sign up Heading</span></th>
+                  <td class="h3Type eng">Sign your contract</td>
+                  <td class="h3Type cha">Sign your contract</td>
+                  <td class="h3Type kor">Sign your contract</td>
+                </tr>
+                <tr>
+                  <th><span style="font-family:'Poppins'; font-size:16px; font-weight:500;">H4 26px</span><span style="display:block; font-family:'Poppins'; margin-top:8px; font-size:14px; font-weight:normal;">Subtitle</span></th>
+                  <td class="h4Type eng">Sign your contract</td>
+                  <td class="h4Type cha">Sign your contract</td>
+                  <td class="h4Type kor">Sign your contract</td>
+                </tr>
+              </tbody>
+            </table>  
+          </div>
+        </div> 
+        <div style="font-family:'Poppins'; font-size:34px; font-weight:600; margin-bottom:10px; margin-top:30px;">Body</div>          
+        <div data-role-code>
+          <div data-code-target>
+            <table class="typography">
+              <caption></caption>
+              <colgroup>
+                <col style="width:15%;" />
+                <col style="width:25%;" />
+                <col style="width:25%;" />
+                <col style="width:25%;" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th><span style="font-family:'Poppins'; font-size:24px; font-weight:normal;">Poppins</span><span style="font-family:'NanumSquareRound'; font-size:16px; font-weight:bold;">영문 폰트</span></th>              
+                  <th><span style="font-family:'M_PLUS_1p'; font-size:24px; font-weight:bold;">M_PLUS_1p</span><span style="font-family:'NanumSquareRound'; font-size:16px; font-weight:bold;">일어 폰트</span></th>
+                  <th><span style="font-family:'NanumSquareRound'; font-size:24px; font-weight:bold;">나눔스퀘어라운드</span><span style="font-family:'NanumSquareRound'; font-size:16px; font-weight:bold;">한글 폰트</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th><span style="font-family:'Poppins'; font-size:16px; font-weight:500;">P.1 18px</span><span style="display:block; font-family:'Poppins'; margin-top:8px; font-size:14px; font-weight:normal;">Body title</span></th>
+                  <td class="bodytitle p1 eng">Popular Club Lounge<br/>World Class</td>
+                  <td class="bodytitle p1 cha">Popular Club Lounge<br/>World Class</td>
+                  <td class="bodytitle p1 kor">Popular Club Lounge<br/>World Class</td>
+                </tr>
+                <tr>
+                  <th><span style="font-family:'Poppins'; font-size:16px; font-weight:500;">P.2 16px</span><span style="display:block; font-family:'Poppins'; margin-top:8px; font-size:14px; font-weight:normal;">Body title</span></th>
+                  <td class="bodytitle p2 eng">Popular Club Lounge<br/>World Class</td>
+                  <td class="bodytitle p2 cha">Popular Club Lounge<br/>World Class</td>
+                  <td class="bodytitle p2 kor">Popular Club Lounge<br/>World Class</td>
+                </tr>
+                <tr>
+                  <th><span style="font-family:'Poppins'; font-size:16px; font-weight:500;">P.4 14px</span><span style="display:block; font-family:'Poppins'; margin-top:8px; font-size:14px; font-weight:normal;">Body</span></th>
+                  <td class="bodytitle p4 eng">Popular Club Lounge<br/>World Class</td>
+                  <td class="bodytitle p4 cha">Popular Club Lounge<br/>World Class</td>
+                  <td class="bodytitle p4 kor">Popular Club Lounge<br/>World Class</td>
+                </tr>
+                <tr>
+                  <th><span style="font-family:'Poppins'; font-size:16px; font-weight:500;">Span 13px</span><span style="display:block; font-family:'Poppins'; margin-top:8px; font-size:14px; font-weight:normal;">Description</span></th>
+                  <td class="des eng">Popular Club Lounge<br/>World Class</td>
+                  <td class="des cha">Popular Club Lounge<br/>World Class</td>
+                  <td class="des kor">Popular Club Lounge<br/>World Class</td>
+                </tr>
+              </tbody>
+            </table>  
+          </div>            
+        </div>
       </div>
       <!-- END : Font -->
 
-      <!-- START : Input:search 예외적용 -->
-      <h1 id="search">Input:search 예외적용</h1>    
-      <div style="margin-bottom: 30px;"></div>
-      <!-- END : Input:search 예외적용 -->
-
       <!-- START : Select Button:Radio Group -->
       <h1 id="Radio">Select Button:Radio Group</h1>    
-      <div style="margin-bottom: 30px;"></div>
+      <div style="margin-bottom: 30px;">
+        <div class="radio_button">
+          <label>Size Large</label>
+          <div class="radio_wrap half">
+            <span class="form_cell btn_radio size_lg">
+              <input type="radio" id="radio1">
+              <label for="radio1">
+                <span>Radio</span>
+              </label>
+            </span>
+            <span class="form_cell btn_radio size_lg">
+              <input type="radio" id="radio2" checked>
+              <label for="radio2">
+                <span>Selected</span>
+              </label>
+            </span>          
+          </div>
+          <label>Label</label>
+          <div class="radio_wrap third">
+            <span class="form_cell btn_radio size_lg">
+              <input type="radio" id="radio3">
+              <label for="radio3">
+                <span>Radio</span>
+              </label>
+            </span>
+            <span class="form_cell btn_radio size_lg">
+              <input type="radio" id="radio4">
+              <label for="radio4">
+                <span>Selected</span>
+              </label>
+            </span> 
+            <span class="form_cell btn_radio size_lg">
+              <input type="radio" id="radio5" checked>
+              <label for="radio5">
+                <span>Radio</span>
+              </label>
+            </span>          
+          </div>
+          <label>Label</label>
+          <div class="radio_wrap fourth">
+            <span class="form_cell btn_radio size_lg">
+              <input type="radio" id="radio6">
+              <label for="radio6">
+                <span>Radio</span>
+              </label>
+            </span>
+            <span class="form_cell btn_radio size_lg">
+              <input type="radio" id="radio7">
+              <label for="radio7">
+                <span>Selected</span>
+              </label>
+            </span> 
+            <span class="form_cell btn_radio size_lg">
+              <input type="radio" id="radio8">
+              <label for="radio8">
+                <span>Radio</span>
+              </label>
+            </span> 
+            <span class="form_cell btn_radio size_lg">
+              <input type="radio" id="radio9" checked>
+              <label for="radio9">
+                <span>Radio</span>
+              </label>
+            </span>          
+          </div>
+          <label>Size Medium</label>
+          <div class="radio_wrap third">
+            <span class="form_cell btn_radio size_md">
+              <input type="radio" id="radio10">
+              <label for="radio10">
+                <span>Radio</span>
+              </label>
+            </span>
+            <span class="form_cell btn_radio size_md">
+              <input type="radio" id="radio12" checked>
+              <label for="radio12">
+                <span>Selected</span>
+              </label>
+            </span>          
+            <span class="form_cell btn_radio size_md">
+              <input type="radio" id="radio13">
+              <label for="radio13">
+                <span>Radio</span>
+              </label>
+            </span>          
+          </div>
+          <label>Size Small</label>
+          <div class="radio_wrap third">
+            <span class="form_cell btn_radio size_sm">
+              <input type="radio" id="radio14">
+              <label for="radio14">
+                <span>Radio</span>
+              </label>
+            </span>
+            <span class="form_cell btn_radio size_sm">
+              <input type="radio" id="radio15" checked>
+              <label for="radio15">
+                <span>Selected</span>
+              </label>
+            </span>          
+            <span class="form_cell btn_radio size_sm">
+              <input type="radio" id="radio16">
+              <label for="radio16">
+                <span>Radio</span>
+              </label>
+            </span>          
+          </div>
+        </div>
+      </div>
       <!-- END : Select Button:Radio Group -->
-    </div>    
-
-    </div>
-    <!-- End:Guide-->
+    </div>  
+  <!-- End:Guide-->
   <script>
     document.querySelectorAll('code').forEach(function (element) {
       element.innerHTML = element.innerHTML
@@ -762,6 +1908,24 @@
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
     });
-  </script>
+  const codeAll = document.querySelectorAll('[data-role-code]');
+  const codeBtnAll = document.querySelectorAll('.code-active');
+
+  codeAll.forEach((code) => {
+    let createElement = document.createElement("pre");
+    let element = code.querySelector('[data-code-target]').innerHTML;
+    let elementCopy = element;
+    element = element.replace(/</g,"&lt;");
+    element = element.replace(/>/g,"&gt;");
+    // element = element.replace(/^\s+|\s+$/gm,'');
+    createElement.innerHTML = '<code class="language-html">' + element + '</code>';
+    code.appendChild(createElement);
+  });
+  
+  const hz = document.getElementById('indeter');
+  hz.indeterminate = true;
+
+</script> 
+<script src="./js/app.js"></script>  
 </body>
 </html>

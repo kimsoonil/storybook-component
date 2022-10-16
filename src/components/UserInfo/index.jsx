@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import AccountManagement from 'components/UserInfo/AccountManagement';
+import AccountManagement from 'components/UserInfo/AccountManagement2';
 
 function index() {
   return (

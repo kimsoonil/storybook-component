@@ -8,6 +8,15 @@
   ],
   "liveSassCompile.settings.generateMap": false, //map파일 생성을 막음
   "liveSassCompile.settings.includeItems": [ //프로젝트 내 지정된 폴더에서만 컴파일 진행
-    "/scss/*.scss",
+    "/scss/common.scss",
+    "/scss/member.scss",
+    "/scss/popup.scss",
+    "/scss/system.scss",
+  ],
+  "sass.andStared": [  
+    "active",
+    "focus",
+    "hover",
+    "nth-child"
   ]
 }

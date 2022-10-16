@@ -9,16 +9,22 @@ import 'assets/scss/components.scss';
 export function Button({ primary, size, line, label, width, disabled, onClick, ...props }) {
   const variant = line ? 'line' : 'contained';
   return (
-    <button
+    <div
       type="button"
       disabled={disabled}
       style={{ width: `${width}px` }}
-      className={['button-component', `button-size-${size}`, `button-${primary}`, `button-${variant}`].join(' ')}
+      className={[
+        'button-component',
+        `button-size-${size}`,
+        `button-${primary}`,
+        `button-${variant}`,
+        'flex-center'
+      ].join(' ')}
       {...props}
       onClick={() => onClick()}
     >
       {label}
-    </button>
+    </div>
   );
 }
 
@@ -27,7 +33,7 @@ Button.propTypes = {
   line: PropTypes.bool,
   size: PropTypes.oneOf(['xl', 'l', 'm', 's']),
   width: PropTypes.number,
-  label: PropTypes.string,
+  label: PropTypes.any,
   disabled: PropTypes.bool
 };
 

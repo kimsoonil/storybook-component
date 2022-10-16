@@ -3,9 +3,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserInit } from 'redux/idistStore/userSlice';
-import { getClubsInit } from 'redux/idistStore/clubSlice';
+import { getClubsInit, postClubPinInit, postClubUnpinInit } from 'redux/idistStore/clubSlice';
 import { categoriesInit } from 'redux/idistStore/admin/categoriesSlice';
-
 import NewClubs from 'components/idist/Main/NewClubs';
 import PopularPosts from 'components/idist/Main/PopularPosts';
 import HotVideos from 'components/idist/Main/HotVideos';
@@ -33,12 +32,19 @@ function Home() {
   const { user, error } = userState;
   const { clubs } = clubState;
   const { isLoading, list } = categories;
+  const handleClickPin = (pin, id) => {
+    if (pin) {
+      dispatch(postClubUnpinInit({ id: id, actionList: [{ type: getClubInit.type, payload: { id: id } }] }));
+    } else {
+      dispatch(postClubPinInit({ id: id, actionList: [{ type: getClubInit.type, payload: { id: id } }] }));
+    }
+  };
   return (
     <div className="container">
       <div className="item">
         <div style={{ marginBottom: '23px' }}>
           {clubs.message === 'ok' ? (
-            <HotClubs clubsData={clubs.data} categoriesData={list} />
+            <HotClubs clubsData={clubs.data} categoriesData={list} handleClickPin={() => handleClickPin()} />
           ) : (
             <div className="flex-center">
               <Loader />
@@ -47,7 +53,7 @@ function Home() {
         </div>
         <div style={{ marginBottom: '43px' }}>
           {clubs.message === 'ok' ? (
-            <NewClubs clubsData={clubs.data} categoriesData={list} />
+            <NewClubs clubsData={clubs.data} categoriesData={list} handleClickPin={() => handleClickPin()} />
           ) : (
             <div className="flex-center">
               <Loader />
@@ -74,15 +80,19 @@ function Home() {
         <div className="chatting">
           <img src={require(`images/main/chatting.png`)} alt="" />
         </div>
-        <div>
-          <MyClubs />
-        </div>
-        <div>
-          <MyFeeds />
-        </div>
-        <div>
-          <Activity />
-        </div>
+        {user.data && user.data.id !== null && (
+          <>
+            <div>
+              <MyClubs />
+            </div>
+            <div>
+              <MyFeeds />
+            </div>
+            <div>
+              <Activity />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

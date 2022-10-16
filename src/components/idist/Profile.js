@@ -90,13 +90,13 @@ function Profile(props) {
             />
             <div className="profile-name">{props.userData.user.username}</div>
             <div className="flex-center">
-              {props?.userData?.staff_name === null ? (
+              {props?.userData?.staff_title === null ? (
                 <>
-                  <div className="profile-rating flex-center">{props?.userData?.grade_name}</div>
+                  <div className="profile-rating flex-center">{props?.userData?.grade_title}</div>
                   <div className="profile-level">LV {props?.userData?.level}</div>
                 </>
               ) : (
-                <div className="profile-staff flex-center">{props?.userData?.staff_name}</div>
+                <div className="profile-staff flex-center">{props?.userData?.staff_title}</div>
               )}
             </div>
           </div>

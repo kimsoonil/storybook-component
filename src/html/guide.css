@@ -1,0 +1,36 @@
+@charset "UTF-8";
+body {overflow-x: hidden;}    
+.guide_menu {width:230px; height:100%; position:fixed; left:0; background-color:#414141;}
+.guide_menu .title {font-family:"Poppins"; font-weight:700; font-size:25px; text-align:center; color:#fff; margin-top:20px;}
+.guide_menu > div {margin:30px auto 0; width:180px; display:flex; flex-wrap: wrap;}      
+.guide_menu > div button {color:#FFF; height:30px; font-size:12px; width:50%; text-align:center; outline:1px solid #fff; background:transparent; cursor:pointer;}
+.guide_menu > div button:hover {background:rgba(0,0,0,0.3);}      
+.guide_menu > div button.line {width:100%;}
+.guide_menu > a {display:block; margin:30px auto 0; height:30px; text-align: center;}
+.guide_menu > a:link {color:#FFF; font-size:16px; text-decoration: none;}
+.guide_menu > a:visited {color:#FFF; font-size:16px; text-decoration: none;}
+.guide_menu > a:active {color:#FFF; font-size:16px; text-decoration: none;}
+.guide_menu > a:hover {color:#FFF; font-size:16px; text-decoration: underline;}
+.common_wrap {margin:0px; padding-left:230px; width:100%;}
+.common_wrap > h1 {padding: 0 0 0 30px; font-size:30px; line-height: 40px; height: 50px; font-weight:700; background: #e1e1e1;}        
+.common_wrap > h1 + div {padding:30px;}
+.common-flex {display: flex; flex-wrap: wrap;}
+.common-flex > div {display: flex; flex-direction: column; align-items: center; padding: 20px; margin: 10px; width: calc(33% - 16px); border: 1px solid #666; border-radius: 4px;}
+.common-flex > div pre {width:100%;}            
+.color-set { display: flex;  width: 160px; height: 120px; background-color: #101114; align-items: flex-end; border: 1px solid #ddd; }
+.color-set p { width: 100%; padding: 7px; margin: 7px; background-color: #fff; border: 1px solid #eee; }
+.color-set p span {display: block; font-family: 'Poppins'; font-weight: 700; color: #666; font-size:14px;}
+.color-set p span + span { color: #000; padding-top: 5px; }    
+.font_list {margin-top:40px;}
+.font_list li {display:flex; justify-content:left; align-items: center;}
+.font_list li + li {margin-top:36px;}
+.font_list li span:first-child {display: inline-block; width:92px;}
+.typography {width:100%; border-collapse: collapse;}
+.typography thead th {height:60px; background:#F8F8F8; padding-top:15px;}
+.typography thead th, tbody td, tbody th {border:1px solid #CDCDD1;}
+.typography tbody td {text-align:center; padding:10px;}
+.typography tbody th {vertical-align: middle;}
+.pre_code {background:#141414; margin-top:10px; color:#fff;}
+div[data-role-code] + div[data-role-code] { border-top: 0; }
+pre {position: relative; margin-top:30px !important;}
+code {width:100%; line-height: 20px;}

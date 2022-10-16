@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import AuthConfirm from 'components/SignUp/SignUp/AuthConfirm';
 import PassWordInput from 'components/SignUp/PassWordInput';
-import { reqChangePassword } from 'redux/store/changePasswordSlice';
+import { reqChangePassword } from 'redux/store/common/changePasswordSlice';
 
 import { USER_INFO_EDIT, USER_INFO_EMAIL, USER_INFO_PHONE } from 'constants/type';
 

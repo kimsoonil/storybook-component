@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import LogIn from 'components/LogIn/LogIn';
+
+import LogIn from 'components/LogIn/LogIn2';
 
 function index() {
   return (
     <Routes>
-      <Route path="login" element={<LogIn />} />
+      <Route path="/*" element={<LogIn />} />
     </Routes>
   );
 }

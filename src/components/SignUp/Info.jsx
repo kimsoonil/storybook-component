@@ -1,104 +1,161 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-dupe-keys */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useRef } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { reqSignUp } from 'redux/store/signUpSlice';
-import ReCapcha from 'components/common/ReCapcha';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import classNames from 'classnames';
+import { useForm, FormProvider, useWatch } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { reqSignUp } from 'redux/store/common/signUpSlice';
+import Header from 'components/common/header/Header';
+import Footer from 'components/common/footer/Footer';
+import InputStatusBtn from 'components/common/InputButton/InputStatusBtn';
+import ReCapcha from 'components/common/ReCapcha';
 import PassWordInput from './PassWordInput';
 
 function Info() {
   const [isCapcha, setIsCapcha] = useState(false);
+  const [isFocusFN, setIsFocusFN] = useState(false);
+  const [isFocusLN, setIsFocusLN] = useState(false);
   const dispatch = useDispatch();
-  const captchaRef = useRef(null);
   const navigate = useNavigate();
 
   const methods = useForm();
   const {
     register,
-    handleSubmit,
+    control,
+    trigger,
+    setValue,
     formState: { isValid, errors }
   } = useForm({ mode: 'onChange' });
 
+  const watchFirstName = useWatch({ control, name: 'firstName', defaultValue: '' });
+  const watchLastName = useWatch({ control, name: 'lastName', defaultValue: '' });
+  const watchPassword = useWatch({ control, name: 'password', defaultValue: '' });
+
   const { t } = useTranslation();
 
-  const onFormSubmit = async (userInfo) => {
-    if (isCapcha && isValid) {
-      dispatch(reqSignUp({ userInfo, navigate }));
-    }
+  const onSignUp = () => {
+    const userInfo = { firstName: watchFirstName, lastName: watchLastName, password: watchPassword };
+    dispatch(reqSignUp({ userInfo, navigate }));
   };
 
-  const onChange = async (value) => {
-    if (value) setIsCapcha(true);
-
-    const token = captchaRef.current.getValue();
-
-    await axios
-      .post(`${process.env.REACT_APP_API_URL}/post`, { token })
-      .then((res) => {
-        console.log(res.data);
-        if (res.data) setIsCapcha(true);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const onErrors = () => console.error(errors);
-
-  const nameText = t('label.userinfo.name');
-  const joinText = t('label.userinfo.join');
-
+  const NAME_MAX_LENGTH = 10;
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onFormSubmit, onErrors)}>
-        <div>
-          <label htmlFor="firstName">
-            {nameText}
-            <input
-              id="firstName"
-              type="text"
-              placeholder="First Name"
-              {...register('firstName', {
-                required: t('validation.require', { require: nameText })
-              })}
-            />
-          </label>
-          {errors.firstName && <small role="alert">{errors.firstName.message}</small>}
-          <label htmlFor="lastName">
-            <input
-              id="lastName"
-              type="text"
-              placeholder="Last Name"
-              {...register('lastName', {
-                required: t('validation.require', { require: 'lastName' })
-              })}
-            />
-          </label>
-          {errors.lastName && <small role="alert">{errors.lastName.message}</small>}
+      <form>
+        <div id="wrap">
+          <Header />
+          <div id="main">
+            <div id="container">
+              <div className="login_wrap">
+                <div className="signup">
+                  <h3 className="h3Type eng">SIGN UP</h3>
+                  <span>
+                    Create your SUPER CLUB member profile and get first
+                    <br />
+                    access to the inspiration and community.
+                  </span>
+                </div>
+                {/* msg error/success/default */}
+                <div
+                  className={classNames(
+                    'form_wrap',
+                    {
+                      msg:
+                        errors.firstName ||
+                        errors.lastName ||
+                        (!errors.firstName &&
+                          !errors.lastName &&
+                          watchFirstName &&
+                          watchLastName &&
+                          !isFocusFN &&
+                          !isFocusLN)
+                    },
+                    { error: errors.firstName || errors.lastName },
+                    { success: watchFirstName && watchLastName && !isFocusFN && !isFocusLN },
+                    'sign_name'
+                  )}
+                >
+                  <label htmlFor="firstName">Name</label>
+                  <div className="HGroup">
+                    <span className="form_cell form_input input_lg">
+                      <input
+                        type="text"
+                        id="firstName"
+                        aria-invalid="false"
+                        placeholder="First Name"
+                        {...register('firstName', {
+                          required: t('validation.require', { require: 'firstName' }),
+                          maxLength: {
+                            value: NAME_MAX_LENGTH,
+                            message: t('validation.userinfo.name', { context: 'maxLength' })
+                          }
+                        })}
+                        onFocus={() => setIsFocusFN(true)}
+                        onBlur={() => setIsFocusFN(false)}
+                      />
+                      <InputStatusBtn
+                        errors={errors.firstName}
+                        isFocus={isFocusFN}
+                        isInputVal={watchFirstName}
+                        resetFunc={() => setValue('firstName', '')}
+                      />
+                    </span>
+                    <span className="form_cell form_input input_lg">
+                      <input
+                        type="text"
+                        id="lastName"
+                        aria-invalid="false"
+                        placeholder="Last Name"
+                        {...register('lastName', {
+                          required: t('validation.require', { require: 'lastName' }),
+                          maxLength: {
+                            value: NAME_MAX_LENGTH,
+                            message: t('validation.userinfo.name', { context: 'maxLength' })
+                          }
+                        })}
+                        onFocus={() => setIsFocusLN(true)}
+                        onBlur={() => setIsFocusLN(false)}
+                      />
+                      <InputStatusBtn
+                        errors={errors.lastName}
+                        isFocus={isFocusLN}
+                        isInputVal={watchLastName}
+                        resetFunc={() => setValue('lastName', '')}
+                      />
+                    </span>
+                  </div>
+                  {/* name error_msg/success_msg/default_msg  */}
+                  {(errors.firstName || errors.lastName) && (
+                    <span className="error_msg msg">{errors.firstName?.message || errors.lastName?.message}</span>
+                  )}
+                </div>
+                <PassWordInput control={control} register={register} trigger={trigger} errors={errors} />
+                <ReCapcha setIsCapcha={setIsCapcha} />
+                {errors.verifyCapcha && <span className="error_msg">Please verify security.</span>}
+                <button
+                  type="submit"
+                  className="btn primary button_xl join_next"
+                  onClick={onSignUp}
+                  disabled={
+                    !isCapcha || !isValid || !watchFirstName || !watchLastName || !watchPassword || errors.password
+                  }
+                >
+                  <span>Join Membership</span>
+                </button>
+                <div className="join_link">
+                  <span>Already a membership?</span>
+                  <button type="button" className="color">
+                    <span>Login</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <Footer />
+          </div>
         </div>
-        <PassWordInput />
-        {/* <div>
-        {natText}
-        <select
-          {...register('nation', {
-            required: t('signup.auth.require', { require: natText })
-          })}
-        >
-          <option value="">--Select Nation--</option>
-          <option value="us">US</option>
-          <option value="kor">South Korea</option>
-        </select>
-        <div className="invalid-feedback">{errors.acceptTerms?.message}</div>
-      </div> */}
-        <ReCapcha setIsCapcha={setIsCapcha} />
-        <button type="submit" onClick={onFormSubmit}>
-          {joinText}
-        </button>
       </form>
     </FormProvider>
   );

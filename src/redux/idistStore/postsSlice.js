@@ -4,12 +4,15 @@ const postSlice = createSlice({
   name: 'post',
   initialState: {
     isLoading: false,
+    isEndOfCatalogue: false,
     posts: {},
     post: {},
+    postsList: [],
     like: {},
     comment: {},
     eventPosts: {},
     noticePosts: {},
+    currentPage: 1,
     error: ''
   },
   reducers: {
@@ -20,7 +23,6 @@ const postSlice = createSlice({
     },
     getPostsSuccess: (state, { payload }) => {
       state.isLoading = false;
-      console.log('payload', payload);
       switch (payload.payload?.type) {
         case 'event':
           state.eventPosts = payload;
@@ -30,6 +32,21 @@ const postSlice = createSlice({
           break;
         default:
           state.posts = payload;
+          state.postsList = payload.data;
+      }
+    },
+    getMorePostsInit: ({ payload }, state) => {
+      state.isLoading = true;
+      return payload;
+    },
+    getMorePostsSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      console.log('payload.count', payload.count);
+      console.log('state.postsList.length', state.postsList.length);
+      if (payload.count > state.postsList.length) {
+        state.postsList.push(...payload.data);
+        state.currentPage += 1;
+        state.isEndOfCatalogue = true;
       }
     },
 
@@ -168,6 +185,8 @@ const postSlice = createSlice({
 export const {
   getPostsInit,
   getPostsSuccess,
+  getMorePostsInit,
+  getMorePostsSuccess,
   getPostInit,
   getPostSuccess,
   deletePostInit,

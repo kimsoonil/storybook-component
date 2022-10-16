@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import JButton from '../JButton';
 import { BVD } from 'views/Admin/Boards';
 import { patchBoardMergeInit } from 'redux/idistStore/boardSlice';
-import { getClubBoardGroupsInit } from 'redux/idistStore/clubSlice';
+import { getBoardGroupsInit } from 'redux/idistStore/admin/boardAdminSlice';
 
 const MergeBoardDialog = ({ submit }) => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const MergeBoardDialog = ({ submit }) => {
         patchBoardMergeInit({
           id: mergeBoardData.id,
           data: { id: targetBoard },
-          actionList: [{ type: getClubBoardGroupsInit.type, payload: { id: mergeBoardData.clubId } }]
+          actionList: [{ type: getBoardGroupsInit.type, payload: { id: mergeBoardData.clubId } }]
         })
       );
     submit?.();

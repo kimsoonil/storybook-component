@@ -6,8 +6,8 @@ import 'assets/scss/component/dialog.scss';
 import PropTypes from 'prop-types';
 import JButton from '../JButton';
 import { BVD } from 'views/Admin/Boards';
-import { getClubBoardGroupsInit } from 'redux/idistStore/clubSlice';
 import { patchBoardGroupMergeInit } from 'redux/idistStore/boardGroupSlice';
+import { getBoardGroupsInit } from 'redux/idistStore/admin/boardAdminSlice';
 
 const MergeGroupDialog = ({ submit }) => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const MergeGroupDialog = ({ submit }) => {
         patchBoardGroupMergeInit({
           id: mergeGroupData.id,
           data: { id: targetBoardGroup },
-          actionList: [{ type: getClubBoardGroupsInit.type, payload: { id: mergeGroupData.clubId } }]
+          actionList: [{ type: getBoardGroupsInit.type, payload: { id: mergeGroupData.clubId } }]
         })
       );
     submit?.();

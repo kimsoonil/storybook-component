@@ -49,7 +49,7 @@ function Club() {
   useEffect(() => {
     if (board_group !== null && board_group !== '' && clubId.data !== undefined) {
       clubId.data.board_groups.map((item, index) => {
-        if (item.name === board_group) {
+        if (item.title === board_group) {
           console.log('item', item);
           setArrBorad([...item.boards]);
         }
@@ -97,13 +97,14 @@ function Club() {
   const handleClickShare = (link) => {
     dispatch(postClubShareInit({ id: id, parameters: { link: link } }));
   };
+  console.log('clubId', clubId);
+
   if (clubId.message !== 'ok')
     return (
       <div className="root-center">
         <Loader />
       </div>
     );
-
   return (
     <div id="root">
       <Header seachFunc={seachFunc} />
@@ -114,7 +115,7 @@ function Club() {
             {clubId.data.tags.map((tag, index) => {
               return (
                 <div className="club-tag-item" key={index}>
-                  {tag.name}
+                  {tag.title}
                 </div>
               );
             })}
@@ -125,10 +126,10 @@ function Club() {
             <div className="club-content flex-between">
               <div className="club-info">
                 <div className="club-content-title">
-                  {clubId.data.name}
+                  {clubId.data.title}
                   <div className="manager">
                     <div className="manager-tag flex-center">manager</div>
-                    {clubId.data.master.username}
+                    {clubId.data.profile.user.username}
                   </div>
                 </div>
                 <div className="club-content-description">{clubId.data.description}</div>
@@ -188,13 +189,13 @@ function Club() {
             {clubId.data.board_groups.map((item, index) => {
               return (
                 <div
-                  className={'club-boardGroup-item ' + ((board_group === item.name) & openBorad ? 'active' : '')}
-                  // onClick={() => clickboardGroup(item.boards, item.name)}
-                  // onMouseLeave={() => clickboardGroup(item.boards, item.name)}
-                  onMouseOver={() => clickboardGroup(item.boards, item.name)}
+                  className={'club-boardGroup-item ' + ((board_group === item.title) & openBorad ? 'active' : '')}
+                  // onClick={() => clickboardGroup(item.boards, item.title)}
+                  // onMouseLeave={() => clickboardGroup(item.boards, item.title)}
+                  onMouseOver={() => clickboardGroup(item.boards, item.title)}
                   key={index}
                 >
-                  {item.name}
+                  {item.title}
                 </div>
               );
             })}
@@ -205,11 +206,11 @@ function Club() {
               {ArrBorad.map((boards, index) => {
                 return (
                   <div
-                    className={'club-board-list-item ' + (board == boards.name ? 'active' : '')}
+                    className={'club-board-list-item ' + (board == boards.title ? 'active' : '')}
                     key={index}
-                    onClick={() => clickboard(boards.id, boards.name)}
+                    onClick={() => clickboard(boards.id, boards.title)}
                   >
-                    {boards.name}
+                    {boards.title}
                   </div>
                 );
               })}

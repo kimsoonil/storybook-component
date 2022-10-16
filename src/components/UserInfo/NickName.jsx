@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { reqEditNickName } from 'redux/store/nickNameSlice';
-import { reqCheckNickName } from 'redux/store/checkNickNameSlice';
+import { reqEditNickName } from 'redux/store/common/nickNameSlice';
+import { reqCheckNickName } from 'redux/store/common/checkNickNameSlice';
 import { useTranslation } from 'react-i18next';
 
 function NickName({ nickStatus, nick }) {
@@ -89,7 +89,7 @@ function NickName({ nickStatus, nick }) {
             if (result) onEditNickName();
           }}
         >
-          {t('label.emailauth.confirm')}
+          {t('label.confirm')}
         </button>
       </div>
     </>

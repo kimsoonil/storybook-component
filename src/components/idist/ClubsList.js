@@ -1,12 +1,11 @@
 /* eslint-disable */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getClubsInit } from 'redux/idistStore/clubSlice';
+import { getClubsInit, getMoreClubsInit } from 'redux/idistStore/clubSlice';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { categoriesInit } from 'redux/idistStore/admin/categoriesSlice';
-import Pagination from 'components/idist/Pagination';
-import { useInfinteScroll } from 'hooks/useInfinteScroll';
+
 import 'assets/scss/search.scss';
 import { Button } from 'components/idist/Button';
 import { Loader } from 'components/idist/Loader';
@@ -15,41 +14,49 @@ function ClubsList(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { clubs } = useSelector((state) => state.club);
+  const { clubs, clubList } = useSelector((state) => state.club);
   const { isLoading, list } = useSelector((state) => state.categories);
   const [selectCategories, setSelectCategories] = useState('');
-  const [page, setPage] = useState(1);
+  const [scrollEvent, setScrollEvent] = useState(true);
+  const [isBottom, setIsBottom] = useState(false);
   const limit = props.limit;
-  const offset = (page - 1) * limit;
-  const [target, setTarget] = useState(null);
+  const search = searchParams.get('search');
+  const parameters = {
+    search: search,
+    category: selectCategories,
+    page_size: limit
+  };
 
   useEffect(() => {
-    let search = searchParams.get('search');
-    const parameters = {
-      search: search,
-      category: selectCategories,
-      page: page,
-      page_size: limit
-    };
-
     dispatch(getClubsInit({ parameters: parameters }));
     dispatch(categoriesInit());
   }, [dispatch, searchParams, selectCategories]);
 
-  useInfinteScroll({
-    target,
-    onIntersect: ([{ isIntersecting }]) => {
-      if (isIntersecting) {
-        const parameters = {
-          search: search,
-          category: selectCategories,
-          page: page + 1,
-          page_size: limit
-        };
-        dispatch(getClubsInit({ parameters: parameters }));
-      }
+  useEffect(() => {
+    setScrollEvent(clubs.count !== clubList.length);
+  }, [clubs.count, clubList]);
+
+  useEffect(() => {
+    if (isBottom) {
+      dispatch(getMoreClubsInit({ parameters: parameters }));
+
+      setIsBottom(false);
     }
-  });
+  }, [isBottom, clubList, dispatch, setIsBottom]);
+
+  function handleUserScroll() {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+
+    if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
+      setIsBottom(true);
+    }
+  }
+  useEffect(() => {
+    if (props.searchTab !== 'clubs') return;
+    window.addEventListener('scroll', handleUserScroll);
+    return () => window.removeEventListener('scroll', handleUserScroll);
+  }, []);
 
   if (clubs.message !== 'ok')
     return (
@@ -60,7 +67,7 @@ function ClubsList(props) {
   return (
     <div className="search-club">
       <div className="flex-between">
-        <div className="search-club-title flex-center"> {clubs.data.length} Clubs</div>
+        <div className="search-club-title flex-center"> {clubs.count} Clubs</div>
         <div className="list-filter flex-center">
           <div className="flex-center active">Hot</div>
           <div className="flex-center">Popular</div>
@@ -83,7 +90,7 @@ function ClubsList(props) {
                   key={index}
                   onClick={() => setSelectCategories(item.id)}
                 >
-                  {item.name}
+                  {item.title}
                 </div>
               );
             }
@@ -95,7 +102,7 @@ function ClubsList(props) {
         )}
       </div>
       <div className="content">
-        {clubs.data.map((clubItem, index) => {
+        {clubList.map((clubItem, index) => {
           return (
             <div className="club-list relative" key={index} onClick={() => navigate(`/club/${clubItem.id}/home`)}>
               <div className="list-img">
@@ -116,7 +123,7 @@ function ClubsList(props) {
                 />
               </div>
               <div className="list-item">
-                <div className="list-item-name">{clubItem.name}</div>
+                <div className="list-item-name">{clubItem.title}</div>
                 <div className="flex-between">
                   <div className="list-item-info">
                     <div>
@@ -141,12 +148,13 @@ function ClubsList(props) {
       </div>
 
       {props.searchTab === 'clubs' ? (
-        // <div className="flex-center">
-        //   <Pagination total={clubs.data.length} limit={limit} page={page} setPage={setPage} />
-        // </div>
-        <div ref={setTarget} className="last-item">
-          <Loader />
-        </div>
+        clubs.count === clubList.length ? (
+          <div></div>
+        ) : (
+          <div className="flex-center">
+            <Loader />
+          </div>
+        )
       ) : (
         <div className="flex-center">
           <Button

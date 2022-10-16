@@ -71,11 +71,11 @@ function PopularPosts() {
             if (index < 15) {
               return (
                 <div
-                  className={'item flex-center ' + (selectTag === item.name ? 'active' : '')}
+                  className={'item flex-center ' + (selectTag === item.title ? 'active' : '')}
                   key={index}
-                  onClick={() => handleClickTag(item.name)}
+                  onClick={() => handleClickTag(item.title)}
                 >
-                  # {item.name}
+                  # {item.title}
                 </div>
               );
             }

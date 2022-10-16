@@ -1,0 +1,380 @@
+@charset "UTF-8";
+@import "variables";
+
+/* Popup Setting */
+#modal {
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color: $body_text;
+  opacity:0.3;
+}
+
+/* Alert, Popup */
+.modal_popup {  
+  position:fixed;  
+  border-radius:20px;
+  box-shadow: 0 4px 10px 0 rgba(0,0,0,0.15);
+  border:1px solid $gray_color01;
+  background:$white_color;
+  z-index:999;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%,);
+  &.alert {
+    @include eng_font(normal);
+    padding:36px 20px 20px 20px;
+    font-size:$font_base + 2px;
+    line-height:24px;
+    letter-spacing:-0.32px;    
+    text-align:center;
+  }
+  .popup_con {
+    padding:0 4px;
+  }
+  .close {
+    display:block;
+    position:absolute;
+    width:32px; 
+    height:32px;
+    right:16px; 
+    top:16px;  
+    z-index:999;
+    background:url('#{$img_root_path}/ico/ic_close_bk.png') no-repeat center top / 32px 32px;
+  }
+}
+.modal_text {  
+  &.size_lg {    
+    width:480px;
+    height:488px;
+  }
+  &.size_sm {
+    width:480px;
+    height:228px;
+  }
+  .modal_con {
+    padding:16px 24px 20px 24px;
+    height:100%;
+    position:relative;
+    .modal_title {    
+      height:56px;    
+      @include eng_font(semibold);
+      font-size:$font_base + 8px;
+      line-height:30px;
+      letter-spacing:-0.44px;
+      color:$title_text;
+    }
+    .con {
+      font-size:$font_base + 4px;
+      line-height:24px;
+      letter-spacing:-0.36px;
+      @include eng_font(normal);
+      &.scroll {        
+        height:324px;
+        overflow-y: auto;
+        overflow-x: hidden;    
+        @include text_scroll;
+      }
+    }
+    .flash_con {
+      @include eng_font(normal);
+      font-size:$font_base + 1px;
+      line-height:22px;
+      letter-spacing:-0.3px;
+      color:$gray_color01;
+      padding-bottom:8px;
+      text-align:center;
+    }
+    .flash_simg { 
+      text-align:center;
+      padding-top:28px;
+      margin-right:32px;
+      margin-bottom:17px;
+      span {
+        @include eng_font(bold);
+        display:inline-block;
+        font-size:$font_base + 20px;
+        line-height:24px;
+        letter-spacing:-0.68px;
+        color:$title_text;
+        position:relative;
+        &.success:after {
+          @include content;
+          display:block;
+          width:40px;
+          height:40px;
+          position:absolute;
+          right:-48px;
+          top:-10px;
+          background:url('#{$img_root_path}/com/img_smile_sm.png') no-repeat center center / 40px 40px;
+        }
+        &.ooops:after {
+          @include content;
+          display:block;
+          width:40px;
+          height:40px;
+          position:absolute;
+          right:-48px;
+          top:-10px;
+          background:url('#{$img_root_path}/com/img_unsmile_sm.png') no-repeat center center / 40px 40px;
+        } 
+        &.lock:after {
+          @include content;
+          display:block;
+          width:40px;
+          height:40px;
+          position:absolute;
+          right:-48px;
+          top:-10px;
+          background:url('#{$img_root_path}/ico/ic_lock.png') no-repeat center center / 40px 40px;
+        }
+        &.resting {   
+          height:120px;
+          &:after {
+            @include content;
+            display:block;
+            width:160px;
+            height:120px;
+            position:absolute;
+            right:0px;
+            top:0px;
+            transform: translateX(60%);
+            background:url('#{$img_root_path}/com/img_asleep.png') no-repeat center center / 160px 120px;
+          }
+        }
+      }
+    }
+    .flash_bimg { 
+      position: relative;
+      width:160px;
+      height:120px;
+      display:block;
+      margin:12px auto;
+      &.success:after {
+        @include content;
+        width:160px;
+        height:120px;
+        position:absolute;
+        top:0;
+        background:url('#{$img_root_path}/com/img_smile.png') no-repeat center center / 160px 120px;
+      }
+      &.ooops:after {
+        @include content;
+        width:160px;
+        height:120px;
+        position:absolute;
+        top:0;
+        background:url('#{$img_root_path}/com/img_unsmile.png') no-repeat center center / 160px 120px;
+      }
+    }
+  }
+}
+
+
+/* 회원가입, 계정관리 관련 팝업 */
+.modal_popup {  
+  &.id_search {
+    width:480px;
+  }
+  .modal_con {
+    &.member {
+      padding:0;
+      .modal_title {
+        height:72px;
+        padding-left:24px;
+        padding-top:22px;
+      }
+      .bg_con {
+        background:$gray_color07;
+        border-top:1px solid $gray_color05;
+        border-bottom:1px solid $gray_color05;
+        padding:29px 24px 32px;
+        .search_title {
+          .step {
+            display:inline-block;
+            background:$white_color;            
+            text-align:center;      
+            padding:1px 8px 0;
+            height:26px;
+            border-radius:13px;
+            @include eng_font(semibold);
+            font-size:$font_base + 1px;
+            line-height:24px;
+            letter-spacing:-0.3px;
+            color:$point_color;
+            margin-right:8px;
+          }
+          .title_text {
+            @include eng_font(medium);
+            font-size:$font_base + 6px;
+            line-height:30px;
+            letter-spacing:-0.4px;
+            color:$body_text;
+          }
+        }
+        .search_text {
+          @include eng_font(normal);
+          font-size:$font_base + 1px;
+          line-height:22px;
+          letter-spacing:-0.3px;
+          color:$gray_color01;
+          padding-top:13px;
+          padding-bottom:24px;
+          &.nopadding {
+            padding-bottom:0;
+          }
+        }
+        .security_guide {
+          text-align:right;
+          margin-bottom:8px;
+        }
+        .btn_set {
+          .form_cell {
+            .input_set {
+              position:relative;
+              width:302px;
+              input {
+                width:302px;
+              }  
+            }        
+            .btn.primary {
+              width:124px; 
+            }       
+            & + .form_cell {
+              margin-top:8px;
+            }   
+          }
+          .tel {
+            .input_set {
+              position:relative;
+              width:216px;
+              margin-right:4px;
+              input {
+                width:216px;
+              }  
+            }
+          }
+        }
+        .account_text {
+          @include eng_font(normal);
+          font-size:$font_base + 1px;
+          line-height:22px;
+          letter-spacing:-0.3px;
+          color:#545557;
+        }
+        .account_stext {
+          color:$gray_color02;
+          display:inline-block;
+          margin-top:8px;
+          margin-left:38px;
+        }
+        &.account {          
+          padding:20px 24px;
+          .popup_btn_wrap {
+            padding-right:20px;
+            padding-bottom:20px;
+          }
+        }        
+        .reason_title {
+          @include eng_font(medium);
+          font-size:$font_base - 1px;
+          line-height:22px;  
+          letter-spacing:-0.3px;
+          color:#545557;
+          margin-top:24px;
+          span {
+            @include eng_font(medium);
+            font-size:$font_base - 1px;
+            line-height:24px;
+            letter-spacing:-0.26px;
+          } 
+        }        
+        .reason_textarea  {
+          width:100%;
+          margin-top:8px;
+          @include placeholder($gray_color03);
+        }
+      }
+    }
+    .date_select {
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom:12px;
+      border-bottom:1px solid $gray_color05;
+      .date {
+        @include eng_font(medium);
+        font-size:$font_base + 3px;
+        line-height:22px;
+        letter-spacing:-0.34px;
+        color:$secon_color01;
+        position:relative;
+        margin-left:30px;
+        &:before {
+          @include content;
+          width:24px;
+          height:24px;
+          position:absolute;
+          left:-30px;
+          top:0;
+          background:url('#{$img_root_path}/ico/ic_calendar_check_bl.png') no-repeat center center / 24px 24px;
+        }
+      }
+    }
+    .con {
+      @include eng_font(normal);
+      font-size:$font_base;
+      line-height:22px;
+      letter-spacing:-0.28px;
+      color:$body_text;       
+      p + p {
+        margin-top:20px;
+      }
+      p {
+        span {
+          @include eng_font(semibold);
+        }
+      }
+      &.scroll {        
+        overflow-y: auto;
+        overflow-x: hidden;    
+        @include text_scroll;
+      }
+      .popup_nick {
+        background:$gray_color06;
+        height:52px;
+        width:100%;
+        text-align:center;
+        border-radius:8px;
+        @include eng_font(semibold);
+        font-size:$font_base + 4px;
+        line-height:24px;
+        color:$main_color;
+        padding-top:13px;
+        margin-bottom:12px;
+      }
+      .popup_nick_text {
+        display:block;
+        text-align:center;
+        @include eng_font(normal);
+        font-size:$font_base + 2px;
+        line-height:24px;
+        letter-spacing:-0.32px;
+        color:$title_text;
+        margin-bottom:20px;
+      }
+    }  
+  }
+  &.privacy {
+    .con {      
+      height:570px;
+    }
+  }
+  &.marketing {     
+    .con {
+      height:332px;
+    }
+  }
+}

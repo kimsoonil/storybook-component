@@ -6,6 +6,8 @@ import AdminModal from 'components/idist/modal/AdminModal';
 import { AVD } from 'views/Admin';
 import { hideModal } from 'redux/idistStore/admin/modalSlice';
 import { BVD } from 'views/Admin/Boards';
+import { getBoardGroupsInit } from 'redux/idistStore/admin/boardAdminSlice';
+import { getBoardGroupInit } from 'redux/idistStore/boardGroupSlice';
 
 const ActiveGroupModal = () => {
   const dispatch = useDispatch();
@@ -20,10 +22,10 @@ const ActiveGroupModal = () => {
         data: { isActive: true },
         actionList: modalData?.isGroupSelected
           ? [
-              { type: getClubBoardGroupsInit.type, payload: { id: modalData?.clubId } },
+              { type: getBoardGroupsInit.type, payload: { id: modalData?.clubId } },
               { type: getBoardGroupInit.type, payload: { id: modalData?.boardGroupId } }
             ]
-          : [{ type: getClubBoardGroupsInit.type, payload: { id: modalData?.clubId } }]
+          : [{ type: getBoardGroupsInit.type, payload: { id: modalData?.clubId } }]
       })
     );
     dispatch(hideModal({ type: 'activeGroup' }));

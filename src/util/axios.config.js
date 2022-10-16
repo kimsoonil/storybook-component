@@ -1,8 +1,14 @@
 import axios from 'axios';
-import { showPopup } from 'redux/store/popupSlice';
-import { reqLogOut } from 'redux/store/logInSlice';
-import { setCookie, getCookie } from 'util/Cookie';
-import { UNAUTHORIZED, REFRESH_TOKEN, REFRESH_TOKEN_MAX_AGE, API_TIMEOUT_INTERVAL } from 'constants/type';
+import { showPopup } from 'redux/store/common/popupSlice';
+import { reqLogOut } from 'redux/store/common/logInSlice';
+import { setCookie, getCookie } from 'util/cookie';
+import {
+  UNAUTHORIZED,
+  REFRESH_TOKEN,
+  REFRESH_TOKEN_MAX_AGE,
+  API_TIMEOUT_INTERVAL,
+  POPUP_TYPE_ALERT
+} from 'constants/type';
 import { getStorage } from './storage';
 
 let store;
@@ -17,8 +23,8 @@ const instance = axios.create({
   headers: {
     'Content-Type': 'application/json; charset=utf-8',
     Accept: 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+    'Access-Control-Allow-Origin': '*'
+    // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
   }
 });
 
@@ -31,7 +37,6 @@ instance.interceptors.request.use(
     // add auth header with jwt if account is logged in and request is to the api url
     const isApiUrl = config.url.startsWith(process.env.REACT_APP_API_URL);
     const { accessToken } = store.getState().logIn;
-
     if (accessToken && isApiUrl) config.headers.Authorization = `Bearer ${accessToken}`;
     console.log(config);
     return config;
@@ -92,7 +97,7 @@ instance.interceptors.response.use(
     }
 
     // error popup
-    store.dispatch(showPopup({ title: error.name, contents: error.message }));
+    store.dispatch(showPopup({ type: POPUP_TYPE_ALERT, title: error.name, contents: error.message }));
 
     return Promise.reject(error);
   }
