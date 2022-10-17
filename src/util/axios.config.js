@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { showPopup } from 'redux/store/common/popupSlice';
 import { reqLogOut } from 'redux/store/common/logInSlice';
-import { setCookie, getCookie } from 'util/cookie';
+import { setCookie, getCookie } from 'util/Cookie';
 import {
   UNAUTHORIZED,
   REFRESH_TOKEN,

@@ -20,7 +20,7 @@ import {
   REFRESH_TOKEN_MAX_AGE
 } from 'constants/type';
 import { showPopup } from 'redux/store/common/popupSlice';
-import { setCookie } from 'util/cookie';
+import { setCookie } from 'util/Cookie';
 import { getStorage, setStorage } from 'util/storage';
 import { fetchAuthSns, fetchLogIn } from '../../api';
 
