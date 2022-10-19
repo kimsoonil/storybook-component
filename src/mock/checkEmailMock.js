@@ -1,5 +1,5 @@
 export const result = {
-  status: true
+  status: false
 };
 
 export default {

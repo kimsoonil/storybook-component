@@ -1,11 +1,7 @@
 export const getToken = () => {
-  const token = localStorage.getItem('token');
-  let config = '';
-  if (token !== null) {
-    config = {
-      headers: { Authorization: `Token ${token}` }
-    };
-  }
-
+  const token = '3806fb390ec81cec361ff8efda9d21a7a793965f';
+  const config = {
+    headers: { Authorization: `Token ${token}` }
+  };
   return config;
 };

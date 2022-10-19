@@ -114,15 +114,8 @@
 
       .form-side-wrapper {
         @include row;
-
         align-items: flex-start;
         flex-shrink: 1;
-
-        .form-side-inner {
-          @include row;
-          @include flexCenter;
-          min-width: 60px;
-        }
 
         .error-text {
           color: $color-error100;
@@ -239,7 +232,6 @@
           @include col;
           @include flexCenter;
           background-color: $gray900;
-          box-sizing: border-box;
           cursor: pointer;
           &:hover {
             background: $gray1000;

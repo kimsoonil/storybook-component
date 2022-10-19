@@ -1,17 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = () => ({
-  moviesList: [],
-  isLoading: false,
-  error: ''
-});
-
 const movieListSlice = createSlice({
   name: 'movieList',
-  initialState: initialState(),
+  initialState: {
+    moviesList: [],
+    isLoading: false,
+    error: ''
+  },
   reducers: {
     getMovieList: (state) => {
-      Object.assign(state, initialState());
+      console.log('getMovieList request');
       state.isLoading = true;
     },
     getMovieListSuccess: (state, { payload }) => {
@@ -27,6 +25,6 @@ const movieListSlice = createSlice({
   }
 });
 
-export const { reset, getMovieList, getMovieListSuccess, getMovieListFailure } = movieListSlice.actions;
+export const { getMovieList, getMovieListSuccess, getMovieListFailure } = movieListSlice.actions;
 
 export default movieListSlice.reducer;

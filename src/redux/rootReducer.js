@@ -1,13 +1,30 @@
 import { combineReducers } from 'redux';
 
-import commonReducer from './store/commonReducer';
-import clubReducer from './store/clubReducer';
-import boardReducer from './store/boardReducer';
-import snsReducer from './store/snsReducer';
-import forumReducer from './store/forumReducer';
-import idistReducer from './idistStore';
+// import MovieReducer from 'redux/store/movieListSlice';
+// import SignUpReducer from 'redux/store/signUpSlice';
+// import MovieInfoReducer from 'redux/store/movieSlice';
+// import CheckEmailReducer from 'redux/store/checkEmailSlice';
+import ClubAdnimReducer from 'redux/store/club/clubSlice';
+import PopupReducer from 'redux/store/popupSlice';
+import userReducer from 'redux/store/userSlice';
+import clubReducer from 'redux/store/clubSlice';
+import postReducer from 'redux/store/postsSlice';
+import ClubEditingReducer from './store/club/clubEditingSlice';
+// import history from 'utils/history';
 
 const rootReducer = () =>
-  combineReducers(Object.assign(commonReducer, clubReducer, boardReducer, snsReducer, forumReducer, idistReducer));
+  combineReducers({
+    // router: connectRouter(history),
+    // movie: MovieReducer,
+    // movieInfo: MovieInfoReducer,
+    // signUp: SignUpReducer,
+    // checkEmail: CheckEmailReducer
+    clubAdnim: ClubAdnimReducer,
+    clubEditing: ClubEditingReducer,
+    popup: PopupReducer,
+    user: userReducer,
+    club: clubReducer,
+    post: postReducer
+  });
 
 export default rootReducer;

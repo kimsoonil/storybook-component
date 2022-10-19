@@ -1,40 +1,109 @@
 /* eslint-disable */
 
 import React, { useState, useEffect } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getClubMembersInit } from 'redux/store/clubSlice';
+import { useParams } from 'react-router';
 import { useOutletContext } from 'react-router-dom';
-
-import Profile from 'components/idist/Profile';
-import ClubHomePosts from 'components/idist/Club/home/ClubHomePosts';
-import ClubHomeGalleries from 'components/idist/Club/home/ClubHomeGalleries';
-import ClubHomeEvent from 'components/idist/Club/home/ClubHomeEvent';
-import SideMember from 'components/idist/Club/SideMember';
-import Notion from 'components/idist/Club/SideNotion';
+import { postsList } from '../Home/homeDate';
+import { Loader } from 'components/Loader';
+import Profile from 'components/Profile';
+import 'assets/scss/club.scss';
+import 'assets/scss/reset.scss';
 
 function Home() {
+  const dispatch = useDispatch();
+  const clubState = useSelector((state) => state.club);
+  const { id } = useParams();
   const clubId = useOutletContext();
+  useEffect(() => {
+    dispatch(getClubMembersInit(id));
+  }, [dispatch]);
+
+  const { isLoading, members } = clubState;
 
   return (
     <div className="club-home container">
       <div className="item">
         <div>
-          <ClubHomeEvent />
+          <div className="club-home-title">Post</div>
+          <div className="club-list-tag">
+            <div className="item active flex-center">Popular</div>
+            <div className="item flex-center">NEW</div>
+          </div>
+          <div className="club-post-list">
+            {postsList.map((postsItem, index) => {
+              return (
+                <div className="club-post-list-item relative" key={index}>
+                  <div className="club-post-list-item-container">
+                    <div className="club-post-list-item-nick">{postsItem.nickname}</div>
+                    <div className="club-post-list-item-title">{postsItem.title}</div>
+                    <div className="club-post-list-item-content">{postsItem.content}</div>
+                    <div className="club-post-list-item-info">
+                      View {postsItem.view} ・ Comment {postsItem.comment} {postsItem.data}
+                    </div>
+                  </div>
+                  <div className="club-post-img ">
+                    <img src={require(`../../images/home/${postsItem.img}`)} alt="" />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
         <div>
-          <ClubHomePosts />
-        </div>
-        <div>
-          <ClubHomeGalleries />
+          <div className="club-home-title">Gallery</div>
+          <div className="club-gallery-list">
+            <div className="item">
+              <img src={require(`images/club/gallery1.png`)} alt="" />
+            </div>
+            <div className="item">
+              <img src={require(`images/club/gallery2.png`)} alt="" />
+            </div>
+            <div className="item">
+              <img src={require(`images/club/gallery3.png`)} alt="" />
+            </div>
+            <div className="item">
+              <img src={require(`images/club/gallery4.png`)} alt="" />
+            </div>
+            <div className="item">
+              <img src={require(`images/club/gallery1.png`)} alt="" />
+            </div>
+            <div className="item">
+              <img src={require(`images/club/gallery2.png`)} alt="" />
+            </div>
+          </div>
         </div>
       </div>
       <div className="item">
-        {clubId.data.profile ? <Profile userData={clubId.data.profile} type={'club'} /> : <Profile type={'logout'} />}
+        <Profile userData={clubId.data.profile} type="club" />
         <div className="chatting">
-          <img src={require(`../../images/main/chatting.png`)} alt="" />
+          <img src={require(`../../images/home/chatting.png`)} alt="" />
         </div>
-        <Notion />
-
-        <SideMember />
+        {/* <div className="member">
+          <div className="flex-between">
+            <div className="member-title">Member</div>
+            <div className="member-see">See All</div>
+          </div>
+          {members.message !== 'ok' ? (
+            <div className="root-center">
+              <Loader />
+            </div>
+          ) : (
+            <div className="member-list">
+              {members.data.map((members, index) => {
+                return (
+                  <div key={index} className="member-list-item flex-center">
+                    <div className="member-list-img">
+                      <img src={members.user.profileImageUrl} alt="" />
+                    </div>
+                    <div className="member-list-name">{members.user.user}</div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div> */}
       </div>
     </div>
   );

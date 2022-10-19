@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 
-import { Header } from 'components/idist/Header';
+import { Header } from 'components/Header';
 
 import 'assets/scss/error.scss';
 import 'assets/scss/reset.scss';

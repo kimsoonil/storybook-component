@@ -1,33 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = () => ({
-  movie: {},
-  isLoading: false,
-  error: ''
-});
-
 const movieSlice = createSlice({
   name: 'movieInfo',
-  initialState: initialState(),
+  initialState: {
+    movie: {},
+    isLoading: false,
+    error: ''
+  },
   reducers: {
-    resetMovie: (state) => {
-      Object.assign(state, initialState());
-    },
-    getMovie: (state) => {
-      Object.assign(state, initialState());
+    // getMovie(id) {
+    //     return id;
+    // },
+    getMovie: ({ payload }, state) => {
       state.isLoading = true;
+      return payload;
     },
     getMovieSuccess: (state, { payload }) => {
       state.movie = payload;
       state.isLoading = false;
     },
-    getMovieFailure: (state, { payload }) => {
-      state.error = payload;
+    getMovieFailure: (state, error) => {
+      console.log('reducer error');
+      console.log(error.payload.message);
+      state.error = error.payload.message;
       state.isLoading = false;
     }
   }
 });
 
-export const { resetMovie, getMovie, getMovieSuccess, getMovieFailure } = movieSlice.actions;
+export const { getMovie, getMovieSuccess, getMovieFailure } = movieSlice.actions;
 
 export default movieSlice.reducer;

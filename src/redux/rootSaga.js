@@ -1,11 +1,10 @@
 import { all } from 'redux-saga/effects';
-import boardSaga from './saga/boardSaga';
-import clubSaga from './saga/clubSaga';
-import commonSaga from './saga/commonSaga';
-import snsSaga from './saga/snsSaga';
-import forumSaga from './saga/forumSaga';
-import idistSaga from './idistSaga';
+
+import { ClubAdnimSaga } from 'redux/saga/club/clubSaga';
+import { UserSaga } from './saga/userSaga';
+import { ClubSaga } from './saga/clubSaga';
+import { PostSaga } from './saga/postsSaga';
 
 export default function* rootSaga() {
-  yield all([...boardSaga, ...clubSaga, ...commonSaga, ...snsSaga, ...forumSaga, ...idistSaga]);
+  yield all([...UserSaga, ...ClubSaga, ...ClubAdnimSaga, ...PostSaga]);
 }

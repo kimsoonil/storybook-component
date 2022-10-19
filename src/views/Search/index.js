@@ -1,98 +1,65 @@
 /* eslint-disable */
 
-import React, { useState, useEffect } from 'react';
-import { Header } from 'components/idist/Header';
-import { useNavigate, Outlet, useSearchParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Header } from 'components/Header';
 
 import 'assets/scss/search.scss';
-import { Button } from 'components/idist/Button';
-import { Fliter } from 'components/idist/Fliter';
+import SearchClub from './SearchClub';
+import SearchPosts from './SearchPosts';
 
 function Search() {
-  const pathname = window.location.pathname.split('/');
-  const navigate = useNavigate();
+  const [searchTab, setSearchTab] = useState('All');
   const [searchText, setSearchText] = useState('');
-  const searchTabArr = ['All', 'clubs', 'posts'];
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [openFilter, setOpenFilter] = useState(false);
-  const searchFuc = () => {
-    let params = { search: searchText };
-    setSearchParams(params);
-  };
-
-  useEffect(() => {
-    if (searchParams.get('search') !== null) {
-      setSearchText(searchParams.get('search'));
-    }
-  }, [searchParams]);
-
   return (
     <div id="root">
       <Header />
-      <div className="main">
-        <div className="search">
-          <div className="flex-between">
-            <div className="search-title">SUPER CLUB</div>
-            <div className="search-tabs">
-              {searchTabArr.map((item, index) => {
-                return (
-                  <div
-                    className={'search-tabs-item ' + (pathname[3] === item.toLocaleLowerCase() && 'active')}
-                    key={index}
-                    onClick={() => navigate(`${item.toLocaleLowerCase()}`)}
-                  >
-                    {item}
-                  </div>
-                );
-              })}
-            </div>
+      <div className="search ">
+        <div className="search-tabs">
+          <div
+            className={'search-tabs-item ' + (searchTab === 'All' && 'active')}
+            onClick={() => {
+              setSearchTab('All');
+            }}
+          >
+            All
           </div>
-          <div className="search-input relative">
-            <div className="search-flex">
-              <input
-                className="search-input-box"
-                type="text"
-                placeholder="Please enter a search term"
-                maxLength={300}
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value.replace(/[^ㄱ-ㅎ가-힣a-zA-Z0-9]/g, ''))}
-              />
-              <Button
-                label={
-                  <div className="flex-center">
-                    <img src={require('images/search/ic-search.png')} /> Search
-                  </div>
-                }
-                size={'xl'}
-                width={120}
-                onClick={() => searchFuc()}
-              />
-              <Button
-                label={<img src={require('images/club/icon-filter.png')} />}
-                size={'xl'}
-                width={60}
-                onClick={() => setOpenFilter(!openFilter)}
-              />
-              <div className="fliter-position" style={{ display: openFilter ? 'flex' : 'none' }}>
-                <Fliter doneFuc={() => setOpenFilter(!openFilter)} />
-              </div>
-            </div>
-            {/* <div className="search-input-btn flex-center" onClick={() => searchFuc()}>
-              <img src={require('images/components/ic_search.png')} alt="" />
-            </div> */}
-            {/* <div className="flex-between ">
-              <div className="flex-center search-keyword">
-                <div className="search-keyword-item">club</div>
-                <div className="search-keyword-fixItem">And</div>
-                <div className="search-keyword-fixItem">Or</div>
-                <div className="search-keyword-fixItem">Except</div>
-              </div>
-            </div> */}
+          <div
+            className={'search-tabs-item ' + (searchTab === 'Clubs' && 'active')}
+            onClick={() => {
+              setSearchTab('Clubs');
+            }}
+          >
+            Clubs
           </div>
-          <div>
-            <Outlet />
+          <div
+            className={'search-tabs-item ' + (searchTab === 'Posts' && 'active')}
+            onClick={() => {
+              setSearchTab('Posts');
+            }}
+          >
+            Posts
           </div>
         </div>
+        <div className="search-input relative">
+          <input
+            type="test"
+            placeholder="Please enter a search term"
+            maxLength={300}
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+          <div className="search-input-btn flex-center">
+            <img src={require('../../images/components/ic_search_wh.svg').default} alt="" />
+          </div>
+        </div>
+        {searchTab === 'All' && (
+          <>
+            <SearchClub limit={12} searchTab={searchTab} setSearchTab={setSearchTab} search={searchText} />
+            <SearchPosts />
+          </>
+        )}
+        {searchTab === 'Clubs' && <SearchClub limit={16} searchTab={searchTab} search={searchText} />}
+        {searchTab === 'Posts' && <SearchPosts />}
       </div>
     </div>
   );

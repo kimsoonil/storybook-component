@@ -1,126 +1,92 @@
-import { Header } from 'components/idist/Header';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { Header } from 'components/Header';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import 'assets/scss/create.scss';
 import { Link, useNavigate } from 'react-router-dom';
+import { getClub } from 'redux/store/club/clubSlice';
 
-import { TextInput } from 'components/idist/admin/TextInput';
-import JSelect from 'components/idist/admin/JSelect';
-import RadioButton from 'components/idist/admin/RadioButton';
-import FilePicker from 'components/idist/admin/FilePicker';
-import Tag from 'components/idist/admin/Tag';
-import JButton from 'components/idist/admin/JButton';
-import CreateClubModal from 'components/idist/modal/CreateClubModal';
-import CreateClubCancelModal from 'components/idist/modal/CreateClubCancelModal';
-import { AVD, loadState, IVD } from 'views/Admin';
-import { numFM, fileSizeFM } from 'utils/formatter';
-import { reqCheckClubName, resetCheckClubName } from 'redux/idistStore/admin/checkClubNameSlice';
-import { reqCheckClubAddress, resetCheckClubAddress } from 'redux/idistStore/admin/checkClubAddressSlice';
-import { categoriesInit } from 'redux/idistStore/admin/categoriesSlice';
-import { showModal } from 'redux/idistStore/admin/modalSlice';
+import { TextInput } from 'components/admin/TextInput';
+import Select from 'components/admin/Select';
+import RadioButton from 'components/admin/RadioButton';
+import FilePicker from 'components/admin/FilePicker';
+import Tag from 'components/admin/Tag';
+import JButton from 'components/admin/JButton';
+import { openCreateClubPopup } from 'redux/store/popupSlice';
+import { CreateClubPopup } from 'components/popup/CreateClubPopup';
+import { admin as constants, loadState } from 'constants';
 
 const Create = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const categories = useSelector((state) => state.categories.list);
-
-  useEffect(() => {
-    console.log('Create index useEffect');
-    if (!categories?.[0]) {
-      dispatch(categoriesInit());
-    }
-    init();
-    return () => {
-      init();
-    };
-  }, []);
-  const init = () => {
-    dispatch(resetCheckClubName());
-    dispatch(resetCheckClubAddress());
-  };
-
-  const checkClubNameState = useSelector((state) => state.checkClubName);
   const [tmpName, setTmpName] = useState('');
-  const [nameInputState, setNameInputState] = useState(IVD.blur);
-  const [nameValid, setNameValid] = useState({ status: loadState.NONE, errorText: ' ' });
-
+  const [nameInputState, setNameInputState] = useState(constants.inputState.blur);
+  const [nameValid, setNameValid] = useState({ status: loadState.LOADING, type: '' });
   const checkName = (e) => {
-    const _name = e.target.value;
-    if (_name === '') {
-      setNameInputState(IVD.error);
-      setNameValid({ status: loadState.ERROR, errorText: AVD.errorText.name.empty });
+    const txt = e.target.value;
+    // 대충 이름 체크 로직
+    if (txt === '') {
+      setNameInputState(constants.inputState.error);
+      setNameValid({ status: loadState.ERROR, type: 'empty' });
+    } else if (txt === 'admin') {
+      setNameInputState(constants.inputState.error);
+      setNameValid({ status: loadState.ERROR, type: 'duplicate' });
     } else {
-      dispatch(reqCheckClubName({ data: { name: _name } }));
+      setNameInputState(constants.inputState.success);
+      setNameValid({ status: loadState.SUCCESS, type: '' });
     }
   };
 
-  useEffect(() => {
-    if (checkClubNameState.status === loadState.SUCCESS) {
-      setNameValid({ status: checkClubNameState.status, errorText: ' ' });
-      setNameInputState(IVD.success);
-    }
-    if (checkClubNameState.status === loadState.ERROR) {
-      setNameValid({ status: checkClubNameState.status, errorText: checkClubNameState.error });
-      setNameInputState(IVD.error);
-    }
-  }, [checkClubNameState]);
-
-  const checkClubAddressState = useSelector((state) => state.checkClubAddress);
   const [tmpAddress, setTmpAddress] = useState('');
-  const [addressInputState, setAddressInputState] = useState(IVD.blur);
-  const [addressValid, setAddressValid] = useState({ status: loadState.NONE, errorText: ' ' });
+  const [addressInputState, setAddressInputState] = useState(constants.inputState.blur);
+  const [addressValid, setAddressValid] = useState({ status: loadState.LOADING, type: '' });
   const checkAddress = (e) => {
-    const _address = e.target.value;
+    const txt = e.target.value;
     // valid 로직
-    if (_address === '') {
-      setAddressInputState(IVD.error);
-      setAddressValid({ status: loadState.ERROR, errorText: AVD.errorText.address.empty });
+    if (txt === '') {
+      setAddressInputState(constants.inputState.error);
+      setAddressValid({ status: loadState.ERROR, type: 'empty' });
+    } else if (txt === 'address') {
+      setAddressInputState(constants.inputState.error);
+      setAddressValid({ status: loadState.ERROR, type: 'duplicate' });
     } else {
-      dispatch(reqCheckClubAddress({ data: { address: _address } }));
+      setAddressInputState(constants.inputState.success);
+      setAddressValid({ status: loadState.SUCCESS, type: '' });
     }
   };
-  useEffect(() => {
-    if (checkClubAddressState.status === loadState.SUCCESS) {
-      setAddressValid({ status: checkClubAddressState.status, errorText: ' ' });
-      setAddressInputState(IVD.success);
-    }
-    if (checkClubAddressState.status === loadState.ERROR) {
-      setAddressValid({ status: checkClubAddressState.status, errorText: checkClubAddressState.error });
-      setAddressInputState(IVD.error);
-    }
-  }, [checkClubAddressState]);
 
-  const [categoryId, setCategoryId] = useState(-1);
-  const [categoryInputState, setCategoryInputState] = useState(IVD.blur);
-  const [categoryValid, setCategoryValid] = useState({ status: loadState.NONE, errorText: '' });
+  const [currentCategory, setCurrentCategory] = useState('');
+  const [categoryInputState, setCategoryInputState] = useState(constants.inputState.blur);
+  const [categoryValid, setCategoryValid] = useState({ status: loadState.LOADING, type: '' });
   const checkCategory = (e) => {
-    if (categoryId < 0) {
-      setCategoryInputState(IVD.error);
-      setCategoryValid({ status: loadState.ERROR, errorText: AVD.errorText.category.empty });
+    if (!currentCategory) {
+      setCategoryInputState(constants.inputState.error);
+      setCategoryValid({ status: loadState.ERROR, type: 'empty' });
     } else {
-      setCategoryInputState(IVD.success);
-      setCategoryValid({ status: loadState.SUCCESS, errorText: '' });
+      setCategoryInputState(constants.inputState.success);
+      setCategoryValid({ status: loadState.SUCCESS, type: '' });
     }
   };
 
   const [profileImageData, setProfileImageData] = useState({
-    file: {},
-    base64: ''
+    file: '',
+    data: ''
   });
 
   const [bannerImageData, setBannerImageData] = useState({
-    file: {},
-    base64: ''
+    file: '',
+    data: ''
   });
 
   const [tmpDescription, setTmpDescription] = useState('');
-  const [descriptionInputState, setDescriptionInputState] = useState(IVD.blur);
+  const [descriptionInputState, setDescriptionInputState] = useState(constants.inputState.blur);
   const checkDescription = () => {
     if (tmpDescription === '') {
-      setDescriptionInputState(IVD.blur);
+      setDescriptionInputState(constants.inputState.blur);
+    } else if (tmpDescription === 'asdf') {
+      setDescriptionInputState(constants.inputState.error);
     } else {
-      setDescriptionInputState(IVD.success);
+      setDescriptionInputState(constants.inputState.success);
     }
   };
 
@@ -134,39 +100,31 @@ const Create = () => {
   const addTags = () => {
     // Todo : 태그 추가 유효성 검사 추가하기
     if (currentTagText) {
-      const tmpText = currentTagText
-        .match(/[a-zA-Z0-9가-힇ㄱ-ㅎㅏ-ㅣぁ-ゔァ-ヴー々〆〤一-龥]/g)
-        ?.join('')
-        ?.toLowerCase();
-      if (tmpText) {
-        const ret = tmpText.charAt(0).toUpperCase() + tmpText.slice(1);
-        const tagValid = !tags.includes(ret);
-        if (tagValid) {
-          setTags((prev) => [...prev, ret]);
-        }
-        setCurrentTagText('');
-      } else {
-        setCurrentTagText('');
+      const tagValid = !tags.includes(currentTagText);
+      if (tagValid) {
+        setTags((prev) => [...prev, currentTagText]);
       }
+      setCurrentTagText('');
+      // else {
+      //   setValidState((prev) => ({ ...prev, tags: loadState.ERROR }));
+      // }
     }
   };
-  const onChangeCurrentTagText = useCallback((e) => {
+  const onChnageCurrentTagText = useCallback((e) => {
     setCurrentTagText(e.target.value);
   }, []);
 
-  const errorImage = useMemo(() => require('images/admin/valid-error.svg').default, []);
+  const [autoApproval, setAutoApproval] = useState(1);
 
-  const [autoApproval, setAutoApproval] = useState('yes');
-
-  const _club = {
+  const club = {
     name: tmpName,
     address: tmpAddress,
-    category: categoryId,
-    profile_image: profileImageData.base64,
-    banner_image: bannerImageData.base64,
+    category: currentCategory,
+    profileImage: profileImageData,
+    bannderImage: bannerImageData,
     description: tmpDescription,
     tags: tags,
-    is_auto_approval: autoApproval === 'yes'
+    autoApproval: autoApproval === 1
   };
 
   return (
@@ -174,7 +132,7 @@ const Create = () => {
       <Header />
       {/* Banner */}
       <div className="admin-banner-wrapper">
-        {bannerImageData.base64 && <img className="banner-image" src={bannerImageData.base64} />}
+        {bannerImageData.data && <img className="banner-image" src={bannerImageData.data} />}
 
         <div className="banner-content-wrapper">
           <button
@@ -192,8 +150,8 @@ const Create = () => {
                 <Tag key={index} value={item} />
               ))}
             </div>
-            {profileImageData.base64 ? (
-              <img className="banner-profile-image" src={profileImageData.base64} />
+            {profileImageData.data ? (
+              <img className="banner-profile-image" src={profileImageData.data} />
             ) : (
               <div
                 style={{
@@ -219,36 +177,35 @@ const Create = () => {
       <hr style={{ margin: 0 }} />
 
       <div className="admin-content-wrapper">
-        <div className="headline-title">{AVD.headline.title}</div>
-        <div className="headline-description">{AVD.headline.description}</div>
+        <div className="headline-title">{constants.headline.title}</div>
+        <div className="headline-description">{constants.headline.description}</div>
 
         {/* Club Name */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={AVD.name.title} description={AVD.name.description} isEssential={true} />
+            <FormLabel title={constants.name.title} description={constants.name.description} isEssential={true} />
             <div className="name">
               <TextInput
-                placeholder={AVD.name.placeholder}
+                placeholder={constants.name.placeholder}
                 value={tmpName}
                 state={nameInputState}
                 onChange={(e) => {
                   setTmpName(e.target.value);
-                  checkName(e);
                 }}
                 onFocus={() => {
-                  setNameInputState(IVD.focus);
+                  setNameInputState(constants.inputState.focus);
                 }}
                 onBlur={checkName}
                 maxLength={60}
               />
-              <div className="under-text"> {`${tmpName.length}${AVD.name.extraText}`}</div>
+              <div className="under-text"> {`${tmpName.length}${constants.name.extraText}`}</div>
             </div>
           </div>
           {nameValid.status === loadState.ERROR && (
             <div className="form-side-wrapper">
-              <div className="form-side-inner">
-                <img src={errorImage} />
-                <div className="error-text">{nameValid.errorText || ' '}</div>
+              <div className="flex-row flex-center">
+                <img src={require('images/admin/valid-error.svg').default} />
+                <div className="error-text">{constants.errorText.name[nameValid.type]}</div>
               </div>
             </div>
           )}
@@ -257,38 +214,34 @@ const Create = () => {
         {/* Club Address */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={AVD.address.title} description={AVD.address.description} isEssential={true} />
+            <FormLabel title={constants.address.title} description={constants.address.description} isEssential={true} />
             <div className="address">
               <div className="url-wrapper">
-                <div className="club-url">{AVD.address.url}</div>
+                <div className="club-url">{constants.address.url}</div>
                 <div className="address-input-wrapper">
                   <TextInput
-                    placeholder={AVD.address.placeholder}
+                    placeholder={constants.address.placeholder}
                     value={tmpAddress}
                     state={addressInputState}
                     onChange={(e) => {
-                      if (e.target.value.match(/^[a-z0-9]*$/) != null) {
-                        checkAddress(e);
-                        setTmpAddress(e.target.value);
-                      }
+                      setTmpAddress(e.target.value);
                     }}
                     onFocus={() => {
-                      setAddressInputState(IVD.focus);
+                      setAddressInputState(constants.inputState.focus);
                     }}
                     onBlur={checkAddress}
                     maxLength={20}
-                    lowerCase
                   />
                 </div>
               </div>
-              <div className="under-text">{`${tmpAddress.length}${AVD.address.extraText}`}</div>
+              <div className="under-text">{`${tmpAddress.length}${constants.address.extraText}`}</div>
             </div>
           </div>
           {addressValid.status === loadState.ERROR && (
             <div className="form-side-wrapper">
-              <div className="form-side-inner">
-                <img src={errorImage} />
-                <div className="error-text">{addressValid.errorText}</div>
+              <div className="flex-row flex-center">
+                <img src={require('images/admin/valid-error.svg').default} />
+                <div className="error-text">{constants.errorText.address[addressValid.type]}</div>
               </div>
             </div>
           )}
@@ -297,28 +250,27 @@ const Create = () => {
         {/* Category */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={AVD.category.title} description={AVD.category.description} isEssential={true} />
+            <FormLabel
+              title={constants.category.title}
+              description={constants.category.description}
+              isEssential={true}
+            />
             <div className="category">
-              <JSelect
-                selectedValue={categories.filter((item) => item.id === categoryId)[0]?.name || ''}
-                setSelectedValue={(value) => {
-                  setCategoryId(categories.filter((item) => item.name === value)[0]?.id || -1);
-                }}
+              <Select
+                selectedValue={currentCategory}
+                setSelectedValue={setCurrentCategory}
                 state={categoryInputState}
-                options={categories.map((item) => item.name)}
+                options={constants.categories.map((item) => item.text)}
                 placeholder={'Select category'}
                 onBlur={checkCategory}
-                onFocus={() => {
-                  setCategoryValid({ status: loadState.NONE, errorText: '' });
-                }}
               />
             </div>
           </div>
           {categoryValid.status === loadState.ERROR && (
             <div className="form-side-wrapper">
-              <div className="form-side-inner">
-                <img src={errorImage} />
-                <div className="error-text">{categoryValid.errorText}</div>
+              <div className="flex-row flex-center">
+                <img src={require('images/admin/valid-error.svg').default} />
+                <div className="error-text">{constants.errorText.category[categoryValid.type]}</div>
               </div>
             </div>
           )}
@@ -327,7 +279,7 @@ const Create = () => {
         {/* Profile Image */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={AVD.profileImages.title} description={AVD.profileImages.description} />
+            <FormLabel title={constants.profileImages.title} description={constants.profileImages.description} />
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <FilePicker
                 state={profileImageData}
@@ -335,12 +287,11 @@ const Create = () => {
                 tabIndex={0}
                 type={'image'}
                 multiple={true}
-                maxSize={{ value: 10, unit: 'mb' }}
               >
                 <div className="image-picker">
-                  {profileImageData.base64 ? (
+                  {profileImageData.data ? (
                     <div className="image-picker-selected-wrapper profile-size">
-                      <img className="image-picker-selected profile-size" src={profileImageData.base64} />
+                      <img className="image-picker-selected profile-size" src={profileImageData.data} />
                       <div className="image-picker-selected-hover profile-size">
                         <img src={require('images/admin/non-selected-image.svg').default} />
                       </div>
@@ -354,7 +305,7 @@ const Create = () => {
               </FilePicker>
               <div
                 style={{ marginTop: '3px', fontWeight: 500, fontSize: '16px', lineHeight: '22px', color: '#808080' }}
-              >{`${fileSizeFM(profileImageData.file.size) || '0'}${AVD.profileImages.extraText}`}</div>
+              >{`${profileImageData.file.size || '0'}${constants.profileImages.extraText}`}</div>
             </div>
           </div>
         </div>
@@ -362,7 +313,7 @@ const Create = () => {
         {/* Banner Image */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={AVD.bannerImage.title} description={AVD.bannerImage.description} />
+            <FormLabel title={constants.bannerImage.title} description={constants.bannerImage.description} />
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <FilePicker
                 state={bannerImageData}
@@ -370,12 +321,11 @@ const Create = () => {
                 tabIndex={0}
                 type={'image'}
                 multiple={true}
-                maxSize={{ value: 20, unit: 'mb' }}
               >
                 <div className="image-picker ">
-                  {bannerImageData.base64 ? (
+                  {bannerImageData.data ? (
                     <div className="image-picker-selected-wrapper banner-size">
-                      <img className="image-picker-selected banner-size" src={bannerImageData.base64} />
+                      <img className="image-picker-selected banner-size" src={bannerImageData.data} />
                       <div className="image-picker-selected-hover banner-size">
                         <img src={require('images/admin/non-selected-image.svg').default} />
                       </div>
@@ -389,7 +339,7 @@ const Create = () => {
               </FilePicker>
               <div
                 style={{ marginTop: '3px', fontWeight: 500, fontSize: '16px', lineHeight: '22px', color: '#808080' }}
-              >{`${fileSizeFM(bannerImageData.file.size) || '0'}${AVD.bannerImage.extraText}`}</div>
+              >{`${bannerImageData.file.size || '0'}${constants.bannerImage.extraText}`}</div>
             </div>
           </div>
         </div>
@@ -397,11 +347,11 @@ const Create = () => {
         {/* Description */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={AVD.description.title} description={AVD.description.description} />
+            <FormLabel title={constants.description.title} description={constants.description.description} />
             <div className="description-wrapper">
               <textarea
                 className={`description-textarea description-textarea-${descriptionInputState}`}
-                placeholder={AVD.description.placeholder}
+                placeholder={constants.description.placeholder}
                 value={tmpDescription}
                 maxLength={300}
                 onChange={(e) => {
@@ -413,7 +363,7 @@ const Create = () => {
                   checkDescription();
                 }}
               ></textarea>
-              <div className="under-text">{`${tmpDescription.length}${AVD.description.extraText}`}</div>
+              <div className="under-text">{`${tmpDescription.length}${constants.description.extraText}`}</div>
             </div>
           </div>
         </div>
@@ -421,7 +371,7 @@ const Create = () => {
         {/* Tags */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={AVD.tags.title} description={AVD.tags.description} />
+            <FormLabel title={constants.tags.title} description={constants.tags.description} />
             <div className="tags-wrapper">
               <div className="input-tags-wrapper">
                 {tags.map((item, index) => (
@@ -441,14 +391,14 @@ const Create = () => {
                     className="input-tags-text"
                     onKeyDown={onKeyDownTagInput}
                     type={'text'}
-                    placeholder={AVD.tags.placeholder}
+                    placeholder={constants.tags.placeholder}
                     value={currentTagText}
-                    onChange={onChangeCurrentTagText}
+                    onChange={onChnageCurrentTagText}
                     onBlur={addTags}
                   />
                 )}
               </div>
-              <div className="under-text">{`${tags.length}${AVD.tags.extraText}`}</div>
+              <div className="under-text">{`${tags.length}${constants.tags.extraText}`}</div>
             </div>
           </div>
         </div>
@@ -456,7 +406,7 @@ const Create = () => {
         {/* Auto Approval */}
         <div className="form-wrapper">
           <div className="form-body">
-            <FormLabel title={AVD.autoApproval.title} />
+            <FormLabel title={constants.autoApproval.title} />
             <div className="auto-approval-wrapper">
               <RadioButton
                 value={autoApproval}
@@ -474,14 +424,14 @@ const Create = () => {
             outline
             color={'none'}
             onClick={() => {
-              dispatch(showModal({ type: 'createClubCancel' }));
+              dispatch(openCreateClubPopup({ type: 'cancel', text: constants.popupText.cancel }));
             }}
             tabIndex={0}
           />
           <JButton
             label={'Create'}
             onClick={() => {
-              dispatch(showModal({ type: 'createClub', data: _club }));
+              dispatch(openCreateClubPopup({ type: 'create', text: constants.popupText.create, club }));
             }}
             tabIndex={0}
             disabled={
@@ -492,8 +442,7 @@ const Create = () => {
           />
         </div>
       </div>
-      <CreateClubModal />
-      <CreateClubCancelModal />
+      <CreateClubPopup />
     </div>
   );
 };

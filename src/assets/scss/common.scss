@@ -24,12 +24,6 @@ $black: #000;
   }
   color: $color;
 }
-.fliter-position {
-  position: absolute;
-  top: 50px;
-  right: 10px;
-  z-index: 1000;
-}
 .root-center {
   width: 100vw;
   height: 100vh;
@@ -80,12 +74,7 @@ $black: #000;
 .m-4 {
   margin: 32px;
 }
-.mr-6 {
-  margin-right: 48px;
-}
-.mr-3 {
-  margin-right: 24px;
-}
+
 .p-1 {
   padding: 8px;
 }

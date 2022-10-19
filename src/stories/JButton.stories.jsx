@@ -1,6 +1,6 @@
 import React from 'react';
 
-import JButton from 'components/idist/admin/JButton';
+import JButton from 'components/admin/JButton';
 
 export default {
   title: 'Example/JButton',
