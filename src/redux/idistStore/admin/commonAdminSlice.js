@@ -31,6 +31,18 @@ const commonAdminSlice = createSlice({
       state.error = payload.message;
     },
 
+    getClubByAddressInit: (state) => {
+      state.getClubLoading = true;
+    },
+    getClubByAddressSuccess: (state, { payload }) => {
+      state.getClubLoading = false;
+      state.club = payload;
+    },
+    getClubByAddressFailure: (state, { payload }) => {
+      state.getClubLoading = false;
+      state.error = payload.message;
+    },
+
     postClubInit: (state) => {
       state.postClubLoading = true;
     },
@@ -87,6 +99,10 @@ export const {
   getClubInit,
   getClubSuccess,
   getClubFailure,
+
+  getClubByAddressInit,
+  getClubByAddressSuccess,
+  getClubByAddressFailure,
 
   postClubInit,
   postClubSuccess,

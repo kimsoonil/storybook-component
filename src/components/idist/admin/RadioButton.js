@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import 'assets/scss/component/radio-button.scss';
 

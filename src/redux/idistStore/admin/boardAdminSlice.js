@@ -3,12 +3,8 @@ import { immerParse } from 'utils';
 
 const initialState = () => ({
   boardGroups: [],
-  boardGroup: {},
-  board: {},
-  selected: {},
+  info: {},
   posts: [],
-
-  contents: {},
 
   getBoardGroupsLoading: false,
 
@@ -48,14 +44,18 @@ const boardAdminSlice = createSlice({
     setBoardAdminBoardGroups: (state, { payload }) => {
       state.boardGroups = payload;
     },
-    resetBoardAdminContents: (state) => {
-      state.contents = {};
-    },
-    resetBoardAdminSelected: (state) => {
-      state.selected = {};
+    setBoardGroups: (state, { payload }) => {
+      state.boardGroups = payload;
     },
     resetBoardAdminPosts: (state) => {
       state.posts = [];
+    },
+
+    setInfo: (state, { payload }) => {
+      state.info = payload;
+    },
+    updateInfo: (state, { payload }) => {
+      state.info = { ...immerParse(info), ...payload };
     },
 
     // boardGroups
@@ -79,7 +79,7 @@ const boardAdminSlice = createSlice({
     getBoardGroupSuccess: (state, { payload }) => {
       // payload = boardGroup
       state.getBoardGroupLoading = false;
-      state.contents = { ...payload, contentsType: 'group' };
+      state.info = { ...payload };
     },
     getBoardGroupFailure: (state, { payload }) => {
       state.getBoardGroupLoading = false;
@@ -92,7 +92,8 @@ const boardAdminSlice = createSlice({
     postBoardGroupSuccess: (state, { payload }) => {
       // payload = boardGroup
       state.postBoardGroupLoading = false;
-      state.contents = { ...payload, contentsType: 'group' };
+      state.info = payload;
+      state.boardGroups = [...immerParse(state.boardGroups), payload];
     },
     postBoardGroupFailure: (state, { payload }) => {
       state.postBoardGroupLoading = false;
@@ -105,7 +106,11 @@ const boardAdminSlice = createSlice({
     patchBoardGroupSuccess: (state, { payload }) => {
       // payload = boardGroup 확인필요
       state.patchBoardGroupLoading = false;
-      state.contents = { ...immerParse(state.contents), ...payload };
+      // console.log(payload);
+      state.info = { ...immerParse(state.info), ...payload };
+      state.boardGroups = immerParse(state.boardGroups).map((item) =>
+        item.id === payload.id ? { ...item, ...payload } : item
+      );
     },
     patchBoardGroupFailure: (state, { payload }) => {
       state.patchBoardGroupLoading = false;
@@ -118,7 +123,8 @@ const boardAdminSlice = createSlice({
     deleteBoardGroupSuccess: (state, { payload }) => {
       // payload = {id: [number]}
       state.deleteBoardGroupLoading = false;
-      state.contents = {};
+      state.info = {};
+      state.boardGroups = immerParse(state.boardGroups).filter((boardGroupItem) => boardGroupItem.id !== payload.id);
     },
     deleteBoardGroupFailure: (state, { payload }) => {
       state.deleteBoardGroupLoading = false;
@@ -129,8 +135,10 @@ const boardAdminSlice = createSlice({
       state.renameBoardGroupLoading = true;
     },
     renameBoardGroupSuccess: (state, { payload }) => {
-      // payload = boardGroup
       state.renameBoardGroupLoading = false;
+      state.boardGroups = immerParse(state.boardGroups).map((item) =>
+        item.id === payload.id ? { ...item, title: payload.title } : item
+      );
     },
     renameBoardGroupFailure: (state, { payload }) => {
       state.renameBoardGroupLoading = false;
@@ -141,8 +149,10 @@ const boardAdminSlice = createSlice({
       state.switchActivateBoardGroupLoading = true;
     },
     switchActivateBoardGroupSuccess: (state, { payload }) => {
-      // payload = boardGroup
       state.switchActivateBoardGroupLoading = false;
+      state.boardGroups = immerParse(state.boardGroups).map((item) =>
+        item.id === payload.id ? { ...item, isActive: payload.isActive } : item
+      );
     },
     switchActivateBoardGroupFailure: (state, { payload }) => {
       state.switchActivateBoardGroupLoading = false;
@@ -155,7 +165,7 @@ const boardAdminSlice = createSlice({
     mergeBoardGroupSuccess: (state, { payload }) => {
       // payload = boardGroup
       state.mergeBoardGroupLoading = false;
-      state.contents = {};
+      state.info = {};
     },
     mergeBoardGroupFailure: (state, { payload }) => {
       state.mergeBoardGroupLoading = false;
@@ -181,7 +191,7 @@ const boardAdminSlice = createSlice({
     getBoardSuccess: (state, { payload }) => {
       // payload = board
       state.getBoardLoading = false;
-      state.contents = { ...payload, contentsType: 'board' };
+      state.info = { ...payload };
     },
     getBoardFailure: (state, { payload }) => {
       state.getBoardLoading = false;
@@ -194,7 +204,12 @@ const boardAdminSlice = createSlice({
     postBoardSuccess: (state, { payload }) => {
       // payload = board
       state.postBoardLoading = false;
-      state.contents = { ...payload, contentsType: 'board' };
+      state.info = payload;
+      state.boardGroups = immerParse(state.boardGroups).map((boardGroupItem) =>
+        payload.boardGroupId === boardGroupItem.id
+          ? { ...boardGroupItem, boards: [...boardGroupItem.boards, payload] }
+          : boardGroupItem
+      );
     },
     postBoardFailure: (state, { payload }) => {
       state.postBoardLoading = false;
@@ -207,7 +222,13 @@ const boardAdminSlice = createSlice({
     patchBoardSuccess: (state, { payload }) => {
       // payload = board 확인필요
       state.patchBoardLoading = false;
-      state.contents = { ...immerParse(state.contents), ...payload };
+      state.info = { ...immerParse(state.info), ...payload };
+      state.boardGroups = immerParse(state.boardGroups).map((boardGroupItem) => ({
+        ...boardGroupItem,
+        boards: boardGroupItem.boards.map((boardItem) =>
+          boardItem.id === payload.id ? { ...boardItem, ...payload } : boardItem
+        )
+      }));
     },
     patchBoardFailure: (state, { payload }) => {
       state.patchBoardLoading = false;
@@ -220,7 +241,11 @@ const boardAdminSlice = createSlice({
     deleteBoardSuccess: (state, { payload }) => {
       // payload = {id: [number]}
       state.deleteBoardLoading = false;
-      state.contents = {};
+      state.info = {};
+      state.boardGroups = immerParse(state.boardGroups).map((boardGroupItem) => ({
+        ...boardGroupItem,
+        boards: boardGroupItem.boards.filter((boardItem) => boardItem.id !== payload.id)
+      }));
     },
     deleteBoardFailure: (state, { payload }) => {
       state.deleteBoardLoading = false;
@@ -233,6 +258,12 @@ const boardAdminSlice = createSlice({
     renameBoardSuccess: (state, { payload }) => {
       // payload = board
       state.renameBoardLoading = false;
+      state.boardGroups = immerParse(state.boardGroups).map((boardGroupItem) => ({
+        ...boardGroupItem,
+        boards: boardGroupItem.boards.map((boardItem) =>
+          boardItem.id === payload.id ? { ...boardItem, title: payload.title } : boardItem
+        )
+      }));
     },
     renameBoardFailure: (state, { payload }) => {
       state.renameBoardLoading = false;
@@ -245,6 +276,12 @@ const boardAdminSlice = createSlice({
     switchActivateBoardSuccess: (state, { payload }) => {
       // payload = board
       state.switchActivateBoardLoading = false;
+      state.boardGroups = immerParse(state.boardGroups).map((boardGroupItem) => ({
+        ...boardGroupItem,
+        boards: boardGroupItem.boards.map((boardItem) =>
+          boardItem.id === payload.id ? { ...boardItem, isActive: payload.isActive } : boardItem
+        )
+      }));
     },
     switchActivateBoardFailure: (state, { payload }) => {
       state.switchActivateBoardLoading = false;
@@ -258,7 +295,7 @@ const boardAdminSlice = createSlice({
     mergeBoardSuccess: (state, { payload }) => {
       // payload = boardGroup
       state.mergeBoardLoading = false;
-      state.contents = {};
+      state.info = {};
     },
     mergeBoardFailure: (state, { payload }) => {
       state.mergeBoardLoading = false;
@@ -297,9 +334,11 @@ export const {
   resetBoardAdmin,
   resetBoardAdminBoardGroups,
   setBoardAdminBoardGroups,
-  resetBoardAdminContents,
-  resetBoardAdminSelected,
+  setBoardGroups,
   resetBoardAdminPosts,
+
+  setInfo,
+  updateInfo,
 
   getBoardGroupsInit,
   getBoardGroupsSuccess,

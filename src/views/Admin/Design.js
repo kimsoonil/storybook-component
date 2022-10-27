@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Design = () => {
+function Design() {
   console.log('Render Design');
   return <div>Design</div>;
-};
+}
 
 export default Design;

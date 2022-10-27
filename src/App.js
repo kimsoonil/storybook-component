@@ -5,7 +5,6 @@ import loadable from '@loadable/component';
 import { LogInRoute, NotLogInRoute } from 'components/common/AuthRoute';
 import ScrollToTop from 'utils/scrollTop';
 import AppRoutes from './AppRoutes';
-import Test from 'views/Admin/Test';
 
 const Home = loadable(() => import('components/Main'));
 const Forum = loadable(() => import('components/Forum'));
@@ -43,7 +42,6 @@ function App() {
           <Route path="/" element={<Home />} />
           {/* <Route path="*" element={<PageNotFound />} /> */}
           <Route path="*" element={<AppRoutes />} />
-          <Route path="/test" element={<Test />} />
         </Routes>
       </BrowserRouter>
     </div>

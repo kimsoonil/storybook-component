@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import JCheckbox from 'components/idist/admin/JCheckbox';
 

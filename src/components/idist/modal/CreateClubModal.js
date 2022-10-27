@@ -17,7 +17,8 @@ const CreateClubModal = () => {
   const onClickSubmit = useCallback(() => {
     dispatch(postClubInit({ data: modalData }));
     dispatch(hideModal({ type: 'createClub' }));
-    navigate('/manage/dashboard');
+    // navigate('/manage/dashboard');
+    // console.log(modalData);
   }, [modalData]);
 
   return <AdminModal title={AVD.modalText.create} visible={visible} onClickSubmit={onClickSubmit} />;

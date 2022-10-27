@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Popover } from '@mui/material';
+/* eslint-disable */
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { openReportHistoryDialog } from 'redux/idistStore/admin/dialogSlice';
 
-const ReportCount = ({ reportCount }) => {
+function ReportCount({ reportCount }) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -17,7 +17,7 @@ const ReportCount = ({ reportCount }) => {
       </div>
     </div>
   );
-};
+}
 
 export default ReportCount;
 

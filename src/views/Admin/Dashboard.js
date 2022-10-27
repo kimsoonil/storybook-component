@@ -1,17 +1,22 @@
-import React, { useEffect, useLayoutEffect, useMemo } from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useLayoutEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import 'assets/scss/admin/dashboard.scss';
-import { useNavigate, useOutletContext } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { numFM } from 'utils/formatter';
-import idistApi from 'redux/idistApi';
-import { getClubDashboardInit } from 'redux/idistStore/admin/dashboardAdminSlice';
+import { getClubDashboardInit, resetDashboardAdmin } from 'redux/idistStore/admin/dashboardAdminSlice';
 
-const Dashboard = () => {
+const rootClassName = 'admin-dashboard';
+
+function Dashboard() {
   const dispatch = useDispatch();
 
-  const outlet = useOutletContext();
-  const clubId = outlet.club.id || 22;
+  // const outlet = useOutletContext();
+  // const clubId = outlet.club.id || 22;
+
+  const { id: clubId = -1 } = useSelector((state) => state.commonAdmin.club);
 
   const dashboard = useSelector((state) => state.dashboardAdmin.dashboard);
   const isLoading = useSelector((state) => state.dashboardAdmin.dashboardLoading);
@@ -29,7 +34,11 @@ const Dashboard = () => {
     if (clubId) {
       dispatch(getClubDashboardInit({ id: clubId }));
     }
-  }, []);
+
+    return () => {
+      dispatch(resetDashboardAdmin());
+    };
+  }, [clubId]);
 
   const statisticsList = useMemo(
     () => [
@@ -43,14 +52,14 @@ const Dashboard = () => {
 
   const menuList = useMemo(
     () => [
-      { title: 'Statistics', desc: `Plan your club's future with statistics`, path: '/manage/statistics' },
-      { title: 'Boards', desc: `Manage bulletin boards and bulletin board groups in the menu`, path: '/manage/boards' },
-      { title: 'Posts', desc: `Manage posts for a clean bulletin board`, path: '/manage/posts' },
-      { title: 'Member', desc: `Manage your staff and members`, path: '/manage/member' },
-      { title: 'Permissions', desc: `Manage staff privileges for convenient operation`, path: '/manage/permissions' },
-      { title: 'Information', desc: `Manage your club's information`, path: '/manage/information' },
-      { title: 'Design', desc: `Design your club to attract attention`, path: '/manage/design' },
-      { title: 'Operation', desc: `Make important decisions for your club`, path: '/manage/operation' }
+      { title: 'Statistics', desc: `Plan your club's future with statistics`, path: 'statistics' },
+      { title: 'Boards', desc: `Manage bulletin boards and bulletin board groups in the menu`, path: 'boards' },
+      { title: 'Reports', desc: `신고 설명 필요`, path: 'reports' },
+      { title: 'Member', desc: `Manage your staff and members`, path: 'member' },
+      { title: 'Permissions', desc: `Manage staff privileges for convenient operation`, path: 'permissions' },
+      { title: 'Information', desc: `Manage your club's information`, path: 'information' },
+      { title: 'Design', desc: `Design your club to attract attention`, path: 'design' },
+      { title: 'Operation', desc: `Make important decisions for your club`, path: 'operation' }
     ],
     []
   );
@@ -60,57 +69,64 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="dashboard">
-      <div className="dashboard-section">
-        <div className="text-h3">Statistics</div>
+    <div className={`${rootClassName}`}>
+      <div className={`${rootClassName}-section`}>
+        <div className={`${rootClassName}-title`}>Statistics</div>
 
-        <div className="dashboard-item-wrapper">
-          {statisticsList.map((item, index) => (
-            <StatisticsItem key={index} data={item} />
+        <div className={`${rootClassName}-item-wrapper`}>
+          {statisticsList.map((item) => (
+            <StatisticsItem key={item.title} data={item} />
           ))}
         </div>
       </div>
 
-      <div className="dashboard-section">
-        <div className="text-h3">Menu</div>
+      <div className={`${rootClassName}-section`}>
+        <div className={`${rootClassName}-title`}>Menu</div>
 
-        <div className="dashboard-item-wrapper">
-          {menuList.map((item, index) => (
-            <MenuItem key={index} data={item} />
+        <div className={`${rootClassName}-item-wrapper`}>
+          {menuList.map((item) => (
+            <MenuItem key={item.path} data={item} />
           ))}
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Dashboard;
 
-const StatisticsItem = ({ data }) => {
+function StatisticsItem({ data }) {
   return (
-    <div className="dashboard-item">
-      <div className="text-h4 statistic-item-title">{data.title}</div>
-      <div className="statistic-item-value-wrapper">
-        <div className="statistic-item-value">
-          <div className="text-h2">{data.total}</div>
-          <div className="text-h4">Total</div>
+    <div className={`${rootClassName}-item`}>
+      <div className={`${rootClassName}-item-title`}>{data.title}</div>
+
+      <div className={`${rootClassName}-statistic-value-container`}>
+        <div>
+          <div className={`${rootClassName}-statistic-value`}>{data.total}</div>
+          <div className={`${rootClassName}-statistic-value-label`}>Total</div>
         </div>
-        <div className="statistic-item-value">
-          <div className="text-h2">{data.today}</div>
-          <div className="text-h4">Today</div>
+
+        <div>
+          <div className={`${rootClassName}-statistic-value`}>{data.today}</div>
+          <div className={`${rootClassName}-statistic-value-label`}>Today</div>
         </div>
       </div>
     </div>
   );
-};
+}
 
-const MenuItem = ({ data }) => {
+function MenuItem({ data }) {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const onClick = () => {
+    navigate(`${location.pathname.split('/').slice(0, -1).join('/')}/${data.path}`);
+  };
 
   return (
-    <div className="dashboard-menu-item" onClick={() => navigate(data.path)}>
-      <div className="text-h4 menu-item-title">{data.title}</div>
-      <div className="text-h5 menu-item-desc">{data.desc}</div>
+    <div className={`${rootClassName}-menu-item`} onClick={onClick}>
+      <div className={`${rootClassName}-menu-item-title`}>{data.title}</div>
+      <div className={`${rootClassName}-menu-item-desc`}>{data.desc}</div>
     </div>
   );
-};
+}

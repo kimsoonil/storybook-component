@@ -1,9 +1,9 @@
+/* eslint-disable */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import 'assets/scss/admin/reports.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
-import { useOutletContext } from 'react-router';
 import AdminTable from 'components/idist/admin/datatable/AdminTable';
 import { getBoardGroupsInit } from 'redux/idistStore/admin/boardAdminSlice';
 import JButton from 'components/idist/admin/JButton';
@@ -11,16 +11,14 @@ import BoardName from 'components/idist/admin/reports/BoardName';
 import Profile from 'components/idist/admin/reports/Profile';
 import ContentTitle from 'components/idist/admin/reports/ContentTitle';
 import ReportCount from 'components/idist/admin/reports/ReportCount';
-import Activation from 'components/idist/admin/reports/ActivationSwitch';
 import ActivationSwitch from 'components/idist/admin/reports/ActivationSwitch';
 import { openContentsActivationDialog } from 'redux/idistStore/admin/dialogSlice';
 import ContentsActivationDialog from 'components/idist/admin/reports/ContentsActivationDialog';
 import ReportHistoryDialog from 'components/idist/admin/reports/ReportHistoryDialog';
 
-const Reports = () => {
+function Reports() {
   const dispatch = useDispatch();
-  const outlet = useOutletContext();
-  const clubId = outlet.club.id || 22;
+  const { id: clubId = -1 } = useSelector((state) => state.commonAdmin.club);
 
   const [searchWord, setSearchWord] = useState('');
 
@@ -43,7 +41,7 @@ const Reports = () => {
 
   const [sortState, setSortState] = useState({ field: '', step: 0 });
 
-  const _rows = [
+  const tmpRowData = [
     {
       id: 237,
       reporter: {
@@ -92,7 +90,7 @@ const Reports = () => {
     }
   ];
 
-  const [rows, setRows] = useState(_rows.concat(_rows).concat(_rows));
+  const [rows, setRows] = useState(tmpRowData.concat(tmpRowData).concat(tmpRowData));
 
   useEffect(() => {
     dispatch(getBoardGroupsInit({ id: clubId }));
@@ -182,19 +180,19 @@ const Reports = () => {
         <div className="admin-reports-table-header">
           <input
             className="search-input"
-            type={'text'}
+            type="text"
             value={searchWord}
             onChange={(e) => setSearchWord(e.target.value)}
-            placeholder={'Please search the content'}
+            placeholder="Please search the content"
           />
 
           <select
             onChange={(e) => setBoardGroupId(Number(e.target.value))}
             defaultValue={-1}
-            className={'asdf'}
+            className="asdf"
             style={boardGroupId === -1 ? { color: 'gray' } : {}}
           >
-            <option disabled={true} value={-1}>
+            <option disabled value={-1}>
               Board Group
             </option>
             {boardGroups.map(({ id, title }) => (
@@ -220,8 +218,8 @@ const Reports = () => {
             ))}
           </select>
 
-          <select onChange={(e) => setType(e.target.value)} defaultValue={''} style={type ? {} : { color: 'gray' }}>
-            <option disabled value={''}>
+          <select onChange={(e) => setType(e.target.value)} defaultValue="" style={type ? {} : { color: 'gray' }}>
+            <option disabled value="">
               Type
             </option>
             {['All', 'Post', 'Comment'].map((item) => (
@@ -233,10 +231,10 @@ const Reports = () => {
 
           <select
             onChange={(e) => setActivation(e.target.value)}
-            defaultValue={''}
+            defaultValue=""
             style={activation ? {} : { color: 'gray' }}
           >
-            <option disabled value={''}>
+            <option disabled value="">
               Status
             </option>
             {['All', 'Active', 'Inactive'].map((item) => (
@@ -246,7 +244,7 @@ const Reports = () => {
             ))}
           </select>
 
-          <JButton label={'Search'} width={85} disabled={searchButtonDisabled} onClick={() => setRows([])} />
+          <JButton label="Search" width={85} disabled={searchButtonDisabled} onClick={() => setRows([])} />
           <AdvancedSearchButton
             onClick={() => {
               confirm('고급 검색');
@@ -268,21 +266,25 @@ const Reports = () => {
       <ReportHistoryDialog />
     </div>
   );
-};
+}
 
 export default Reports;
 
-const ReportsEmpty = () => (
-  <div className="admin-reports-empty">
-    <div>Umm...</div>
-    <div>🧐</div>
-    <div>NO CONTENT YET</div>
-    <div>There are no reports yet</div>
-  </div>
-);
+function ReportsEmpty() {
+  return (
+    <div className="admin-reports-empty">
+      <div>Umm...</div>
+      <div>🧐</div>
+      <div>NO CONTENT YET</div>
+      <div>There are no reports yet</div>
+    </div>
+  );
+}
 
-const AdvancedSearchButton = ({ onClick }) => (
-  <div onClick={onClick}>
-    <img src={require('images/admin/advanced-search.svg').default}></img>
-  </div>
-);
+function AdvancedSearchButton({ onClick }) {
+  return (
+    <div onClick={onClick}>
+      <img src={require('images/admin/advanced-search.svg').default} />
+    </div>
+  );
+}

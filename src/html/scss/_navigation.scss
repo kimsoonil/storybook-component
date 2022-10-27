@@ -5,7 +5,6 @@
   position:relative;
   overflow-x: hidden;
   vertical-align: top;
-  background:$gray_color06;
 }
 
 /* Layout */
@@ -511,7 +510,6 @@
 #footer_wrap {
   height:80px;
   width:100%;
-  background:$body_color;
   border-top:1px solid #C9C9C9;
   .footer {
     width:$max_width;

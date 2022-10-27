@@ -1,0 +1,37 @@
+@import '../base';
+@import '../resource';
+
+.MuiPopover-paper {
+  min-width: auto !important;
+  min-height: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.jdropdown {
+  @include col;
+  min-width: 96px;
+  margin: 6px;
+  margin-top: 4px;
+  padding: 8px 0;
+  background-color: white;
+  border: 1px solid $gray300;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+
+  &-item {
+    @include row;
+    align-items: center;
+    font-size: 14px;
+    height: 32px;
+    padding-left: 12px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $gray100;
+    }
+  }
+}

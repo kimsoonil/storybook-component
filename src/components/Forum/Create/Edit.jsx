@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Header from 'components/common/header/Header';
 import Footer from 'components/common/footer/Footer';
 import ForumTop from 'components/Forum/ForumTop';
+import AddedList from 'components/Forum/Create/AddedList';
 // import Search from 'components/Forum/Create/Search';
 import SideImgBanner from 'components/Forum/SideBanner/SideImgBanner';
 import HistoryBanner from 'components/Forum/SideBanner/HistoryBanner';
@@ -19,7 +20,7 @@ import {
 } from 'constants/type';
 import { reqForumEdit } from 'redux/store/forum/forumEditSlice';
 import { reqCategoryList } from 'redux/store/common/categoryListSlice';
-import { reqsearchUser } from 'redux/store/common/searchUserSlice';
+import { reset, reqsearchUser } from 'redux/store/common/searchUserSlice';
 import { reqForumList } from 'redux/store/forum/forumListSlice';
 import userThumb from 'html/img/com/user thumb.png';
 import classNames from 'classnames';
@@ -33,10 +34,13 @@ const USER_LIST_BAN = 'bans';
 function Edit() {
   const [reqOption, setReqOption] = useState({ category: [], sort: 'week', forumId: '' });
   const [fobiddenList, setFobiddenList] = useState([]);
+  const [searchType, setSearchType] = useState(USER_LIST_STAFF);
   const [banKeyWord, setBanKeyWord] = useState('');
   const [staffKeyword, setStaffKeyword] = useState('');
   // const [searchBanList, setSearchBanList] = useState([]);
   const [searchUserList, setSearchUserList] = useState([]);
+  const [savedStaffList, setSavedStaffList] = useState([]);
+  const [savedBanList, setSavedBanList] = useState([]);
   // const [hasNextPage, setHasNextPage] = useState(true);
   // const { hasNextPage, list } = useSelector((state) => ({ ...state.forumList }));
 
@@ -89,22 +93,22 @@ function Edit() {
     const formData = new FormData();
     formData.append('id', forumInfo.id);
     formData.append('title', forumInfo.title);
-    formData.append('forum_category', forumInfo.forum_category);
+    formData.append('forum_category', forumInfo.forum_category.id);
     formData.append('description', forumInfo.description);
     formData.append('master_nickname', forumInfo.master_nickname);
     forumInfo.forum_staffs.map((item) => formData.append('forum_staffs', item));
     forumInfo.forbidden_words.map((item) => formData.append('forbidden_words', item));
     forumInfo.bans.map((item) => formData.append('bans', item));
 
-    if (typeof forumInfo.banner_image === 'string') formData.append(IMAGE_TYPE_BANNER, forumInfo.banner_image);
+    // if (typeof forumInfo.banner_image === 'string') formData.append(IMAGE_TYPE_BANNER, forumInfo.banner_image);
     if (forumInfo.banner_image.constructor.name === 'Blob')
       formData.append(IMAGE_TYPE_BANNER, forumInfo.banner_image, forumInfo.banner_image_filename);
-    if (typeof forumInfo.thumbnail_image === 'string') formData.append(IMAGE_TYPE_BANNER, forumInfo.thumbnail_image);
+    // if (typeof forumInfo.thumbnail_image === 'string') formData.append(IMAGE_TYPE_BANNER, forumInfo.thumbnail_image);
     if (forumInfo.thumbnail_image.constructor.name === 'Blob')
       formData.append(IMAGE_TYPE_BANNER, forumInfo.thumbnail_image, forumInfo.thumbnail_image_filename);
 
-    console.log('formData:', formData);
-    dispatch(reqForumEdit(formData));
+    console.log('formData::', formData);
+    dispatch(reqForumEdit({ navigate, formData }));
   };
 
   const onSetWordsList = () => {
@@ -122,6 +126,7 @@ function Edit() {
   };
 
   const onSearchUserList = (userType) => {
+    setSearchType(userType);
     if (userType === USER_LIST_BAN) {
       dispatch(reqsearchUser({ id: banKeyWord }));
       setStaffKeyword('');
@@ -133,15 +138,37 @@ function Edit() {
   };
 
   const onSetList = (userId, userType) => {
-    if (userType === USER_LIST_BAN) setSearchUserList([]);
+    // if (userType === USER_LIST_BAN) setSearchUserList([]);
+    if (userType === USER_LIST_STAFF) {
+      if (savedStaffList.findIndex((item) => item === userId) === -1) setSavedStaffList([...savedStaffList, userId]);
+    }
+    if (userType === USER_LIST_BAN) {
+      if (savedBanList.findIndex((item) => item === userId) === -1) setSavedBanList([...savedBanList, userId]);
+    }
     if (forumInfo[userType]?.findIndex((item) => item.id === userId) === -1) {
       setForumInfo({ ...forumInfo, [userType]: [...forumInfo[userType], userId] });
     }
+    dispatch(reset());
+    setSearchUserList([]);
   };
   // const onSearch = () => {
   //   console.log('search', action);
   //   dispatch(action(staffKeyword));
   // };
+
+  const onDeleteList = (userId, userType) => {
+    let arr = [];
+    console.log(userId);
+    console.log(userType);
+    if (userType === USER_LIST_STAFF) {
+      arr = savedStaffList.filter((item) => item !== userId);
+      setSavedStaffList(arr);
+    }
+    if (userType === USER_LIST_BAN) {
+      arr = savedBanList.filter((item) => item !== userId);
+      setSavedBanList(arr);
+    }
+  };
 
   useEffect(() => {
     console.log('forumInfo::::', forumInfo);
@@ -227,11 +254,11 @@ function Edit() {
                         </div>
                       </div>
                       <ul>
-                        {staffKeyword &&
+                        {searchType === USER_LIST_STAFF &&
                           searchUserList?.map((item) => (
                             <li
                               className="option"
-                              onClick={() => onSetList(item.id, USER_LIST_BAN)}
+                              onClick={() => onSetList(item.id, USER_LIST_STAFF)}
                               aria-hidden
                               key={item.id}
                             >
@@ -246,6 +273,7 @@ function Edit() {
                             </li>
                           ))}
                       </ul>
+                      <AddedList userList={savedStaffList} onDeleteList={onDeleteList} userType={USER_LIST_STAFF} />
                       <ul className="guide">
                         <li>
                           Staff are authorized to edit images and information in the forum and process posts and
@@ -318,7 +346,7 @@ function Edit() {
                             </span>
                           </div>
                           <ul>
-                            {banKeyWord &&
+                            {searchType === USER_LIST_BAN &&
                               searchUserList?.map((item) => (
                                 <li className="option" onClick={() => onSetList(item.id, USER_LIST_BAN)} aria-hidden>
                                   <dl className="search_list">
@@ -334,6 +362,7 @@ function Edit() {
                           </ul>
                           <UserList2 forumInfo={forumInfo} setForumInfo={setForumInfo} userType={USER_LIST_BAN} />
                         </div>
+                        <AddedList userList={savedBanList} onDeleteList={onDeleteList} userType={USER_LIST_BAN} />
                       </div>
                     </div>
                     {/* <Search action={(val) => reqsearchUser({ id: val })} />

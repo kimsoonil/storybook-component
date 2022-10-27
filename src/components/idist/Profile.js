@@ -71,7 +71,7 @@ function Profile(props) {
             </div>
           </div>
           <div style={{ marginTop: '20px' }}>
-            <Button primary="point" label="Create Club" size="m" width={265} onClick={() => navigate('/create')} />
+            <Button primary="point" label="Create Club" size="m" width={265} onClick={() => navigate('/club/new')} />
           </div>
         </div>
       ) : props.userData.club ? (

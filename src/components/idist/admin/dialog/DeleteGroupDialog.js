@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import 'assets/scss/component/dialog.scss';
 import { useDispatch, useSelector } from 'react-redux';

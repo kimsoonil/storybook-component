@@ -5,6 +5,7 @@ import { fetchCreateForum } from '../../api';
 
 function* onLoadCreateForumAsync({ payload }) {
   const { navigate, formData } = payload;
+  console.log(payload);
   try {
     const response = yield call(fetchCreateForum, formData);
     if (response.status === CREATED) {

@@ -1616,7 +1616,7 @@
 .top_div .forum_master > div .forum_staff_info.text .staff_others {
   position: relative;
 }
-.top_div .forum_master > div .forum_staff_info.text .staff_others:hover {
+.top_div .forum_master > div .forum_staff_info.text .staff_others .staff_others_num:hover {
   cursor: pointer;
   text-decoration: underline;
 }
@@ -2424,6 +2424,11 @@
   top: 0;
   left: 0;
   background: url("../img/ico/ic_write_wh.png") no-repeat center center/28px 28px;
+}
+.main_div .right_div .writing:hover {
+  background: #7D0EDF;
+  border: 1px solid #7D0EDF;
+  box-shadow: 0 4px 0 0 #640eb1;
 }
 .main_div .right_div .history {
   background: #FFF;
@@ -3239,13 +3244,16 @@
   color: #121212;
 }
 .board_comment .board_comment_list {
-  margin-top: 28px;
+  padding-top: 12px;
 }
 .board_comment .board_comment_list .board_comment_div {
+  padding: 16px 0;
   border-bottom: 1px solid #EEEEEE;
-  padding-bottom: 16px;
   display: flex;
   align-items: flex-start;
+}
+.board_comment .board_comment_list .board_comment_div.reply {
+  margin-left: 64px;
 }
 .board_comment .board_comment_list .board_comment_div .board_comment_profile {
   width: 48px;
@@ -3290,6 +3298,14 @@
   line-height: 22px;
   letter-spacing: -0.3px;
   color: #242A3C;
+}
+.board_comment .board_comment_list .board_comment_div .board_comment_con .board_comment_text .appoint {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 22px;
+  letter-spacing: -0.3px;
+  color: #6563FF;
 }
 .board_comment .board_comment_list .board_comment_div .board_comment_con .board_comment_info {
   margin-top: 12px;

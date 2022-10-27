@@ -5,7 +5,7 @@ import idistApi from 'redux/idistApi';
 
 function* onLoadCategoriesAsync({ payload }) {
   try {
-    const response = yield call(idistApi.getCategories, payload);
+    const response = yield call(idistApi.getClubsCategories, payload);
     if (response.status === 200 || response.data.message === 'ok') {
       yield put(categoriesSuccess({ ...response?.data }));
     }

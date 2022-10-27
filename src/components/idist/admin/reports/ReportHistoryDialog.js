@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeDialog } from 'redux/idistStore/admin/dialogSlice';

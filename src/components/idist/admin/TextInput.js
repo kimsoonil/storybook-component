@@ -1,9 +1,22 @@
-import React, { useState } from 'react';
+/* eslint-disable */
+
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import 'assets/scss/component/text-input.scss';
 
-export function TextInput({ value, onChange, disabled, readOnly, onFocus, onBlur, state, lowerCase, ...props }) {
+export function TextInput({
+  value,
+  onChange,
+  disabled,
+  readOnly,
+  onFocus,
+  onBlur,
+  state,
+  lowerCase,
+  containerProps,
+  ...props
+}) {
   // const className = `jg-input ${disabled ? 'disabled' : ''} ${readOnly ? 'read-only' : ''}`;
   // console.log(className);
 
@@ -11,7 +24,7 @@ export function TextInput({ value, onChange, disabled, readOnly, onFocus, onBlur
   const rootName = 'jg-text-input-wrapper';
 
   return (
-    <div className={`${rootName} ${rootName}-${state}`}>
+    <div className={`${rootName} ${rootName}-${state}`} {...containerProps}>
       <input
         className={`jg-text-input`}
         value={value}

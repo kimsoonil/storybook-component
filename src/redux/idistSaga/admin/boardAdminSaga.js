@@ -1,13 +1,17 @@
 import { takeEvery, all, put, fork, call } from 'redux-saga/effects';
 import * as actionTypes from 'redux/idistStore/admin/boardAdminSlice';
 import idistApi from 'redux/idistApi';
+import { boardGroupModel, boardModel } from 'redux/idistApi/model';
 
 function* getBoardGroups({ payload }) {
   try {
     const response = yield call(idistApi.getClubBoardGroups, payload);
     if (response.status === 200 || response.data.message === 'ok') {
-      console.log('getBoardGroups success');
-      yield put(actionTypes.getBoardGroupsSuccess(response.data?.data));
+      yield put(
+        actionTypes.getBoardGroupsSuccess(
+          response.data?.data.map((boardGroup) => boardGroupModel({ ...boardGroup, clubId: payload.id }))
+        )
+      );
     }
   } catch (error) {
     yield put(actionTypes.getBoardGroupsFailure(error));
@@ -19,7 +23,7 @@ function* getBoardGroup({ payload }) {
   try {
     const response = yield call(idistApi.getBoardGroup, payload);
     if (response.status === 200 || response.data.message === 'ok') {
-      yield put(actionTypes.getBoardGroupSuccess(response.data?.data));
+      yield put(actionTypes.getBoardGroupSuccess(boardGroupModel(response.data?.data)));
     }
   } catch (error) {
     yield put(actionTypes.getBoardGroupFailure(error));
@@ -31,7 +35,7 @@ function* postBoardGroup({ payload }) {
   try {
     const response = yield call(idistApi.postAdminClubBoardGroup, payload);
     if (response.status === 201 || response.data.message === 'ok') {
-      yield put(actionTypes.postBoardGroupSuccess(response.data?.data));
+      yield put(actionTypes.postBoardGroupSuccess(boardGroupModel({ ...response.data?.data, clubId: payload.id })));
     }
   } catch (error) {
     yield put(actionTypes.postBoardGroupFailure(error));
@@ -43,7 +47,7 @@ function* patchBoardGroup({ payload }) {
   try {
     const response = yield call(idistApi.patchAdminBoardGroup, payload);
     if (response.status === 200 || response.data.message === 'ok') {
-      yield put(actionTypes.patchBoardGroupSuccess(response.data?.data));
+      yield put(actionTypes.patchBoardGroupSuccess(boardGroupModel({ ...response.data?.data, id: payload.id })));
     }
   } catch (error) {
     yield put(actionTypes.patchBoardGroupFailure(error));
@@ -55,8 +59,7 @@ function* renameBoardGroup({ payload }) {
   try {
     const response = yield call(idistApi.patchAdminBoardGroup, payload);
     if (response.status === 200 || response.data.message === 'ok') {
-      yield put(actionTypes.renameBoardGroupSuccess(response.data?.data));
-      yield put(actionTypes.getBoardGroupsInit({ id: payload.clubId }));
+      yield put(actionTypes.renameBoardGroupSuccess(boardGroupModel({ ...response.data?.data, id: payload.id })));
     }
   } catch (error) {
     yield put(actionTypes.renameBoardGroupFailure(error));
@@ -68,8 +71,9 @@ function* switchActivateBoardGroup({ payload }) {
   try {
     const response = yield call(idistApi.patchAdminBoardGroup, payload);
     if (response.status === 200 || response.data.message === 'ok') {
-      yield put(actionTypes.switchActivateBoardGroupSuccess(response.data?.data));
-      yield put(actionTypes.getBoardGroupsInit({ id: payload.clubId }));
+      yield put(
+        actionTypes.switchActivateBoardGroupSuccess(boardGroupModel({ ...response.data?.data, id: payload.id }))
+      );
     }
   } catch (error) {
     yield put(actionTypes.switchActivateBoardGroupFailure(error));
@@ -118,7 +122,7 @@ function* getBoard({ payload }) {
   try {
     const response = yield call(idistApi.getBoard, payload);
     if (response.status === 200 || response.data.message === 'ok') {
-      yield put(actionTypes.getBoardSuccess(response.data?.data));
+      yield put(actionTypes.getBoardSuccess(boardModel(response.data?.data)));
     }
   } catch (error) {
     yield put(actionTypes.getBoardFailure(error));
@@ -130,7 +134,7 @@ function* postBoard({ payload }) {
   try {
     const response = yield call(idistApi.postAdminBoardGroupBoard, payload);
     if (response.status === 201 || response.data.message === 'ok') {
-      yield put(actionTypes.postBoardSuccess(response.data?.data));
+      yield put(actionTypes.postBoardSuccess(boardModel({ ...response.data?.data, boardGroupId: payload.id })));
     }
   } catch (error) {
     yield put(actionTypes.postBoardFailure(error));
@@ -142,7 +146,7 @@ function* patchBoard({ payload }) {
   try {
     const response = yield call(idistApi.patchAdminBoard, payload);
     if (response.status === 200 || response.data.message === 'ok') {
-      yield put(actionTypes.patchBoardSuccess(response.data?.data));
+      yield put(actionTypes.patchBoardSuccess(boardModel({ ...response.data?.data, id: payload.id })));
     }
   } catch (error) {
     yield put(actionTypes.patchBoardFailure(error));
@@ -154,8 +158,7 @@ function* renameBoard({ payload }) {
   try {
     const response = yield call(idistApi.patchAdminBoard, payload);
     if (response.status === 200 || response.data.message === 'ok') {
-      yield put(actionTypes.renameBoardSuccess(response.data?.data));
-      yield put(actionTypes.getBoardGroupsInit({ id: payload.clubId }));
+      yield put(actionTypes.renameBoardSuccess(boardModel({ ...response.data?.data, id: payload.id })));
     }
   } catch (error) {
     yield put(actionTypes.renameBoardFailure(error));
@@ -167,8 +170,7 @@ function* switchActivateBoard({ payload }) {
   try {
     const response = yield call(idistApi.patchAdminBoard, payload);
     if (response.status === 200 || response.data.message === 'ok') {
-      yield put(actionTypes.switchActivateBoardSuccess(response.data?.data));
-      yield put(actionTypes.getBoardGroupsInit({ id: payload.clubId }));
+      yield put(actionTypes.switchActivateBoardSuccess(boardModel({ ...response.data?.data, id: payload.id })));
     }
   } catch (error) {
     yield put(actionTypes.switchActivateBoardFailure(error));

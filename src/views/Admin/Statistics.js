@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Statics = () => {
+function Statics() {
   console.log('Render Statics');
   return <div>Statics</div>;
-};
+}
 
 export default Statics;

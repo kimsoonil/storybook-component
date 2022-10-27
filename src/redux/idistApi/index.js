@@ -14,10 +14,9 @@ const _axios = axios.create({
 });
 
 _axios.interceptors.request.use(
-  (config) => {
+  (config) =>
     // console.log(config.url);
-    return config;
-  },
+    config,
   (error) => {
     console.log(error);
     return Promise.reject(error);
@@ -28,7 +27,7 @@ _axios.interceptors.request.use(
 const getUserMe = (props) => _axios.get(`/user/me`, { params: props?.params });
 
 // category - guest
-const getCategories = (props) => _axios.get(`/clubs/categories`, { params: props?.params });
+const getClubsCategories = (props) => _axios.get(`clubs/categories`, { params: props?.params });
 
 // club - admin
 const getAdminClubDashboard = (props) => _axios.get(`/admin/club/${props.id}/dashboard`, { params: props?.params });
@@ -40,15 +39,17 @@ const patchAdminClubTags = (props) => _axios.patch(`/admin/club/${props.id}/tags
 
 const postAdminClub = (props) => _axios.post(`/admin/club`, props?.data);
 const postAdminClubBoardGroup = (props) => _axios.post(`/admin/club/${props.id}/board-group`, props?.data);
-const postAdminClubAddressCheck = (props) =>
-  _axios.post(`/admin${props.id ? `/club/${props.id}` : `/clubs`}/address/check`, props?.data);
-const postAdminClubNameCheck = (props) =>
-  _axios.post(`/admin${props.id ? `/club/${props.id}` : `/clubs`}/title/check`, props?.data);
+
+const postAdminClubsTitleCheck = (props) => _axios.post(`/admin/clubs/title/check`, props?.data);
+const postAdminClubTitleCheck = (props) => _axios.post(`/admin/club/${props.id}/title/check`, props?.data);
+const postAdminClubsAddressCheck = (props) => _axios.post(`/admin/clubs/address/check`, props?.data);
+const postAdminClubAddressCheck = (props) => _axios.post(`/admin/club/${props.id}/address/check`, props?.data);
 
 // club - guest
 const getClubBoardGroups = (props) => _axios.get(`/club/${props.id}/board-groups`, { params: props?.params });
 const getClubPosts = (props) => _axios.get(`/club/${props.id}/posts`, { params: props?.params });
 const getClub = (props) => _axios.get(`/club/${props.id}`, { params: props?.params });
+const getClubByParams = (props) => _axios.get(`/club`, { params: props?.params });
 const getClubs = (props) => _axios.get(`/clubs`, { params: props?.params });
 
 const postClubJoin = (props) => _axios.post(`/club/${props.id}/join`, props?.data);
@@ -74,7 +75,7 @@ const patchAdminBoardGroupOrder = (props) => _axios.patch(`/admin/board-group/${
 
 const postAdminBoardGroupBoard = (props) => _axios.post(`/admin/board-group/${props.id}/board`, props?.data);
 
-//boardGroup - guest
+// boardGroup - guest
 const getBoardGroup = (props) => _axios.get(`/board-group/${props.id}`, { params: props?.params });
 
 // board - admin
@@ -106,7 +107,7 @@ const postAdminPostsDeactivate = (props) => _axios.post(`/admin/posts/deactivate
 // post - guest
 const getPost = (props) => _axios.get(`/post/${props.id}`, { params: props?.params });
 const getPostComments = (props) => _axios.get(`/post/${props.id}/comments`, { params: props?.params });
-const getPosts = (props) => _axios.get(`/posts`, { params: props?.params });
+const getClubsPosts = (props) => _axios.get(`clubs/posts`, { params: props?.params });
 
 const postPostPin = (props) => _axios.post(`/post/${props.id}/pin`, props?.data);
 const postPostShare = (props) => _axios.post(`/post/${props.id}/share`, props?.data);
@@ -173,12 +174,36 @@ const postProfileSubscribe = (props) => _axios.post(`/profile/${props.id}/subscr
 const postProfileUnsubscribe = (props) => _axios.post(`/profile/${props.id}/unsubscribe`, props?.data);
 const getTags = (props) => _axios.get(`/tags`, { params: props?.params });
 
+const getActivities = (props) => _axios.get(`/activities`, { params: props?.params });
+const getAdminClubProfiles = (props) => _axios.get(`/admin/club/${props.id}/profiles`, { params: props?.params });
+const getAdminClub = (props) => _axios.get(`/admin/club/${props.id}`, { params: props?.params });
+const patchAdminClubPermission = (props) => _axios.patch(`/admin/club/${props.id}/permission`, props?.data);
+const postAdminClubPermissionReset = (props) => _axios.post(`/admin/club/${props.id}/permission/reset`, props?.data);
+const getClubCategories = (props) => _axios.get(`/club/categories`, { params: props?.params });
+const postForum = (props) => _axios.post(`/forum`, props?.data);
+const getForumCategories = (props) => _axios.get(`/forum/categories`, { params: props?.params });
+const getForumPosts = (props) => _axios.get(`/forum/${props.id}/posts`, { params: props?.params });
+const getForum = (props) => _axios.get(`/forum/${props.id}`, { params: props?.params });
+const patchForum = (props) => _axios.patch(`/forum/${props.id}`, props?.data);
+const patchForumBannerImage = (props) => _axios.patch(`/forum/${props.id}/banner-image`, props?.data);
+const postForumPin = (props) => _axios.post(`/forum/${props.id}/pin`, props?.data);
+const postForumPost = (props) => _axios.post(`/forum/${props.id}/post`, props?.data);
+const patchForumThumbnailImage = (props) => _axios.patch(`/forum/${props.id}/thumbnail-image`, props?.data);
+const postForumTitleCheck = (props) => _axios.post(`/forum/${props.id}/title/check`, props?.data);
+const postForumUnpin = (props) => _axios.post(`/forum/${props.id}/unpin`, props?.data);
+const getForums = (props) => _axios.get(`/forums`, { params: props?.params });
+const getForumsBest = (props) => _axios.get(`/forums/best`, { params: props?.params });
+const getPostsFeed = (props) => _axios.get(`/posts/feed`, { params: props?.params });
+const postToken = (props) => _axios.post(`/token/`, props?.data);
+const postTokenRefresh = (props) => _axios.post(`/token/refresh/`, props?.data);
+const postTokenVerify = (props) => _axios.post(`/token/verify/`, props?.data);
+
 export default {
   // user - guest
   getUserMe,
 
   // category - guest
-  getCategories,
+  getClubsCategories,
 
   // club - admin
   getAdminClubDashboard,
@@ -188,13 +213,16 @@ export default {
   patchAdminClubTags,
   postAdminClub,
   postAdminClubBoardGroup,
+  postAdminClubsTitleCheck,
+  postAdminClubTitleCheck,
+  postAdminClubsAddressCheck,
   postAdminClubAddressCheck,
-  postAdminClubNameCheck,
 
   // club - guest
   getClubBoardGroups,
   getClubPosts,
   getClub,
+  getClubByParams,
   getClubs,
   postClubJoin,
   postClubLeave,
@@ -237,7 +265,7 @@ export default {
   // post - guest
   getPost,
   getPostComments,
-  getPosts,
+  getClubsPosts,
   postPostPin,
   postPostShare,
   postPostUnpin,

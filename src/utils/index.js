@@ -69,6 +69,7 @@ export const getApiFunction = () => {
     console.log(functionList.join('\n'));
   });
 };
+// getApiFunction();
 
 export const postTestData = async (props) => {
   switch (props.type) {
@@ -93,6 +94,8 @@ export const postTestData = async (props) => {
 // postTestData({ type: 'postAdmin', club: 22, board: 131, count: 10, initNumber: 2000 });
 
 export const toCamelCase = (data) => {
+  if (data == null || data == undefined) return data;
+
   if (typeof data === 'string') {
     return _.camelCase(data);
   } else if (typeof data === 'object') {
@@ -114,6 +117,8 @@ export const toCamelCase = (data) => {
 };
 
 export const toSnakeCase = (data) => {
+  if (data == null || data == undefined) return data;
+
   if (typeof data === 'string') {
     return _.snakeCase(data);
   } else if (typeof data === 'object') {

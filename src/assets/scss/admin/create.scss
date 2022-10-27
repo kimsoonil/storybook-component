@@ -1,0 +1,218 @@
+@import '../base';
+@import '../resource';
+
+.admin-create {
+  color: $black100;
+  &-title {
+    align-items: center;
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 60px;
+    margin-top: 80px;
+    margin-bottom: 20px;
+  }
+  &-subtitle {
+    align-items: center;
+    margin-bottom: 70px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  &-form {
+    border-radius: 20px;
+    background-color: white;
+    padding: 50px 110px 120px 110px;
+    margin-bottom: 420px;
+    box-sizing: border-box;
+  }
+
+  &-input {
+    &-container {
+      border-bottom: 1px solid $gray300;
+    }
+
+    &-label {
+      font-weight: 700;
+      font-size: 26px;
+      line-height: 30px;
+      margin-top: 30px;
+    }
+
+    &-description {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      margin-top: 6px;
+      color: $gray600;
+    }
+
+    &-contents {
+      position: relative;
+      margin-top: 20px;
+      width: 620px;
+    }
+
+    &-address {
+      @include row;
+      align-items: center;
+      gap: 14px;
+
+      & > :first-child {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 26px;
+      }
+
+      & > :last-child {
+        flex: 1;
+      }
+    }
+
+    @mixin createImagePicker {
+      cursor: pointer;
+      background-color: $gray300;
+      overflow: hidden;
+      &-covered {
+        @include flexCenter;
+        display: none;
+        width: 100%;
+        height: 100%;
+        img {
+          width: 48px;
+          height: 48px;
+        }
+      }
+      &:hover &-covered {
+        display: flex;
+        background-color: rgba($color: #000000, $alpha: 0.5);
+      }
+    }
+
+    &-profile {
+      &-wrapper {
+        width: 130px;
+        height: 130px;
+      }
+      width: 130px;
+      height: 130px;
+      border-radius: 28px 4px;
+      @include createImagePicker();
+    }
+    &-banner {
+      border-radius: 8px;
+      width: 620px;
+      height: 220px;
+      @include createImagePicker();
+    }
+
+    &-valid-text {
+      position: absolute;
+      font-size: 14px;
+      line-height: 20px;
+      top: 58px;
+      color: $color-error100;
+    }
+
+    &-size-text {
+      align-items: flex-end;
+      margin: 6px 0 10px 0;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: $gray600;
+    }
+  }
+
+  .submit-button-wrapper {
+    @include row;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 50px;
+  }
+
+  .description-textarea {
+    height: 200px;
+    padding: 14px 16px;
+    border: 1px solid $gray300;
+    border-radius: 8px;
+    resize: none;
+    font-size: 14px;
+    font-family: Poppins;
+    &::placeholder {
+      color: $gray500;
+      font-size: 14px;
+    }
+    &:focus {
+      border-color: $black;
+      color: $black;
+      // border: none;
+      outline: none;
+    }
+
+    &-success {
+      border-color: $color-success100;
+    }
+    &-error {
+      border-color: $color-error100;
+    }
+  }
+
+  .tags-wrapper {
+    @include col;
+    .input-tags-wrapper {
+      @include row;
+      flex-flow: wrap;
+      gap: 15px;
+      box-sizing: border-box;
+      .input-tags-text {
+        width: 100px;
+        height: 60px;
+        border: 1px solid $gray300;
+        border-radius: 8px;
+        outline: none;
+        font-size: 14px;
+        padding: 0 12px;
+        box-sizing: border-box;
+
+        &::placeholder {
+          color: $gray500;
+        }
+      }
+
+      .input-tags-button {
+        justify-content: center;
+        min-width: 70px;
+        height: 60px;
+        padding: 0 12px;
+        outline: none;
+        border: 1px solid $color-success100;
+        border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+        box-sizing: border-box;
+
+        &-hover {
+          box-sizing: border-box;
+          @include row;
+          @include flexCenter;
+          background-color: $color-success100;
+          opacity: 0;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          color: white;
+          font-size: 14px;
+          font-family: Poppins;
+          line-height: 24px;
+
+          &:hover {
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+  }
+}

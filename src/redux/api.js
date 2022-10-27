@@ -32,7 +32,7 @@ export const fetchCreateForum = (data) =>
       'Content-Type': 'multipart/form-data'
     }
   });
-export const fetchEditForum = (data) => axios.post(`${process.env.REACT_APP_API_URL}forum/${data.id}`, data);
+export const fetchEditForum = (data) => axios.patch(`${process.env.REACT_APP_API_URL}forum/5`, data);
 
 // get
 export const fetchForumInfo = (data) => axios.get(`${process.env.REACT_APP_API_URL}forum/${data}`);

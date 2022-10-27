@@ -1,0 +1,138 @@
+@import '../base';
+@import '../resource';
+
+.admin-header {
+  &-wrapper {
+    margin-top: 30px;
+  }
+  &-root {
+    background-color: white;
+    height: 410px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  @mixin adminHeaderImagePicker {
+    background-color: $gray300;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:hover &-covered {
+      display: flex;
+    }
+
+    &-covered {
+      display: none;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($color: #000000, $alpha: 0.5);
+
+      img {
+        width: 48px;
+        height: 48px;
+      }
+    }
+  }
+
+  &-banner-image {
+    @include adminHeaderImagePicker();
+    height: 268px;
+    &-covered {
+      align-items: center;
+      padding-top: 60px;
+      // opacity: 0;
+    }
+  }
+
+  &-profile-image {
+    &-wrapper {
+      @include flexCenter;
+      width: 148px;
+      height: 148px;
+      position: absolute;
+      background-color: white;
+      top: 150px;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      border-radius: 36px 8px;
+    }
+
+    @include adminHeaderImagePicker();
+    width: 130px;
+    height: 130px;
+    border-radius: 28px 4px;
+
+    &-covered {
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &-contents {
+    position: relative;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 36px 48px;
+
+    &-left {
+      @include row;
+      gap: 10px;
+      align-items: flex-end;
+      & > div {
+        width: 80px;
+        align-items: center;
+        :first-child {
+          color: $black100;
+          font-weight: 700;
+          font-size: 28px;
+          line-height: 38px;
+        }
+        :last-child {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 20px;
+          color: $gray700;
+        }
+      }
+    }
+    &-middle {
+      position: absolute;
+      top: 38px;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      align-items: center;
+      :first-child {
+        font-weight: 700;
+        font-size: 44px;
+        line-height: 48px;
+        color: $gray300;
+      }
+      :last-child {
+        font-size: 16px;
+        line-height: 24px;
+        color: $gray300;
+      }
+      &-on {
+        color: $black100;
+      }
+    }
+    &-right {
+      @include row;
+      gap: 16px;
+      align-items: flex-end;
+      & > div {
+        width: 48px;
+        height: 48px;
+        @include flexCenter;
+        border: 1px solid $gray300;
+        border-radius: 4px;
+        img {
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
+  }
+}

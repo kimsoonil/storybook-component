@@ -916,7 +916,7 @@
   }
 }
 .mini_profile_popup {
-  display:none;
+  // display:none;
   position:absolute;
   top:48px;
   left:-135px;
@@ -1291,8 +1291,8 @@
 
 .staff_popup {
   position:absolute;
-  top:48px;
-  left:-135px;
+  top:32px;
+  left:-130px;
   width:300px;
   background:$white_color;
   border:1px solid $gray_color05;
@@ -1330,14 +1330,20 @@
     display:flex;
     flex-wrap: wrap;
     li {
-      width:calc(100% / 3);
+      width:calc((100% - 34px) / 3);
       text-align:center;
       padding-top:8px;
+      cursor: pointer;
+      & + li {
+        margin-left:17px;
+      }
+      &:nth-child(4n) {
+        margin-left:0;
+      }
       .staff_popup_info {
-        width:100%;
-        display:inline-block;
+        display:block;
         dt {
-          width:68px;
+          text-align:center;
           height:68px;
           img {
             width:68px;
@@ -1351,6 +1357,7 @@
           font-size:$font_base - 1px;
           line-height:16px;
           color:$title_text;
+          word-break: break-all;
         }
       }
     }

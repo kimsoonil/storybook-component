@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useMemo, useRef } from 'react';
 import Select from 'react-select';
 import 'assets/scss/component/jselect.scss';
@@ -36,6 +37,9 @@ const JSelect = ({
   styles,
   onFocus,
   onBlur,
+  isDisabled,
+  defaultValue,
+  components,
   ...props
 }) => {
   const _ref = useRef();
@@ -52,16 +56,18 @@ const JSelect = ({
           ...(!menuIsOpen && selectProps?.inputState === 'success' && { border: '1px solid #00b78b !important' })
         };
       }),
-    menu: styles?.menu || ((provided, state) => ({ ...provided, ...(width && { width: `${width}px` }) }))
+    menu: styles?.menu || ((provided, state) => ({ ...provided, ...(width && { width: `${width}px` }) })),
+    ...styles
   };
 
   return (
     <div className="react-select-container">
       <Select
+        isDisabled={isDisabled}
         ref={selectRef}
         classNamePrefix={'react-select'}
         options={options}
-        defaultValue={selectedOption}
+        defaultValue={defaultValue || selectedOption}
         value={selectedOption}
         onChange={setSelectedOption}
         width={width}
@@ -74,7 +80,14 @@ const JSelect = ({
           });
         }}
         styles={_styles}
-        components={{ DropdownIndicator }}
+        // styles={{
+        //   control: (provided, { isDisabled,  }) => {
+        //     console.log(isDisabled);
+        //     return { ...provided };
+        //   },
+        //   singleValue
+        // }}
+        components={{ DropdownIndicator, ...components }}
         // maxMenuHeight={40}
 
         onFocus={onFocus}

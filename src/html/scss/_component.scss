@@ -1238,12 +1238,29 @@ textarea {
           @include content;
           position: absolute;
           right: 12px;
-          top: 12px;
+          top: 16px;
           width: 24px;
           height: 24px;
           background: url('#{$img_root_path}/ico/ic_select_arrow_open.png') no-repeat center center / 24px 24px;
           transition: 0.3s ease-in-out;
         }
+      }
+    }
+    .selected_input {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      min-height: 52px;
+      border: 1px solid $gray_color05;
+      background: $white_color;
+      border-radius: 8px;
+      box-sizing: border-box;
+      .form_wrap .form_cell {
+        width:99% !important;
+      }
+      .form_wrap .form_cell.input_lg input {
+        border:none;
+        outline:none;
       }
     }
     ul li,

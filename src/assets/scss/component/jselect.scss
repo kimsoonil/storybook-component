@@ -4,9 +4,10 @@
 .react-select-container {
   .react-select {
     &-container {
+      flex-direction: row !important;
     }
     &__control {
-      border-radius: 8px;
+      flex-direction: row;
       box-shadow: none;
       padding: 14px 12px 14px 16px;
       box-sizing: border-box;

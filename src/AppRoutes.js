@@ -44,7 +44,6 @@ function AppRoutes() {
         <Route path="activity" element={<Activity />} />
         <Route path="chat" element={<Home />} />
       </Route>
-      <Route path="/create" element={<Create />} />
       <Route path="/clubs/search" element={<Search />}>
         <Route path="all" element={<SearchAll />} />
         <Route path="clubs" element={<SearchClub />} />
@@ -60,8 +59,9 @@ function AppRoutes() {
         <Route path="memberProfile/:memberId" element={<MemberProfile />} />
       </Route>
 
-      <Route path="/manage" element={<Admin visibleMenu={true} />}>
-        <Route path="" element={<Navigate replace to={'dashboard'} />} />
+      <Route path="club/new" element={<Create />} />
+      <Route path="club/:clubAddress/admin" element={<Admin visibleMenu />}>
+        <Route path="" element={<Navigate replace to="dashboard" />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="statistics" element={<Statistics />} />
         <Route path="boards" element={<Boards />} />
@@ -77,6 +77,7 @@ function AppRoutes() {
         <Route path="design" element={<Design />} />
         <Route path="operation" element={<Operation />} />
       </Route>
+
       <Route path="*" element={<Notfound />} />
     </Routes>
   );

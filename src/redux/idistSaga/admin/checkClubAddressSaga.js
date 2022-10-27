@@ -10,7 +10,12 @@ import idistApi from 'redux/idistApi';
 
 function* onLoadCheckClubAddressAsync({ payload }) {
   try {
-    const response = yield call(idistApi.postAdminClubAddressCheck, payload);
+    let response;
+    if (payload.id) {
+      response = yield call(idistApi.postAdminClubAddressCheck, payload);
+    } else {
+      response = yield call(idistApi.postAdminClubsAddressCheck, payload);
+    }
     if (response.status === 200 || response.data.message === 'ok') {
       yield put(checkClubAddressSuccess({ ...response.data }));
     }

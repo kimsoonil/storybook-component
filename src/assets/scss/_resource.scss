@@ -1,7 +1,7 @@
-$black100: #000000;
-$black200: #121212;
+$black: #000000;
+$black100: #121212;
+$black200: #242a3c;
 $black300: #242a3c;
-$black: #242a3c;
 
 $white: #ffffff;
 $gray100: #f8f8f8; // default
@@ -9,8 +9,9 @@ $gray200: #eeeeee; // hover
 $gray300: #e0e0e0; // press
 $gray400: #cdcdd1; // thick
 $gray500: #bdbdbd; // border
-$gray600: #aaa;
-$gray700: #999;
+$gray600: #a7a8ab;
+$gray700: #777777;
+
 $gray800: #888;
 $gray900: #777777;
 $gray1000: #666;
@@ -44,454 +45,459 @@ $color-error100: #ff2a55;
 $color-error100: #ed0f3c;
 $color-error100: #d30c34;
 
-$res-mp: (
-    name: m,
-    property: margin
-  ),
-  (
-    name: p,
-    property: padding
-  );
+$color-like: #27a2ff;
+$color-new: #ffd300;
+$color-label: #5752d0;
+$color-body: #f5f5f5;
 
-$res-tblr: (
-    name: t,
-    property: top
-  ),
-  (
-    name: b,
-    property: bottom
-  ),
-  (
-    name: l,
-    property: left
-  ),
-  (
-    name: r,
-    property: right
-  );
-
-$res-justify: (
-    key: jfs,
-    value: flex-start
-  ),
-  (
-    key: jfe,
-    value: flex-end
-  ),
-  (
-    key: jc,
-    value: center
-  ),
-  (
-    key: jsb,
-    value: space-between
-  ),
-  (
-    key: jsa,
-    value: space-around
-  );
-
-$res-align: (
-    key: as,
-    value: stretch
-  ),
-  (
-    key: afs,
-    value: flex-start
-  ),
-  (
-    key: afe,
-    value: flex-end
-  ),
-  (
-    key: ac,
-    value: center
-  ),
-  (
-    key: ab,
-    value: baseline
-  );
-
-$res-wh: (
-    name: w,
-    property: width
-  ),
-  (
-    name: h,
-    property: height
-  );
-
-$res-px: (
-    name: w,
-    property: width
-  ),
-  (
-    name: mw,
-    property: max-width
-  ),
-  (
-    name: h,
-    property: height
-  ),
-  (
-    name: mh,
-    property: max-height
-  ),
-  (
-    name: fs,
-    property: font-size
-  ),
-  (
-    name: lh,
-    property: line-height
-  ),
-  (
-    name: gap,
-    property: gap
-  ),
-  (
-    name: br,
-    property: border-radius
-  ),
-  (
-    name: bw,
-    property: border-width
-  ),
-  (
-    name: t,
-    property: top
-  ),
-  (
-    name: b,
-    property: bottom
-  ),
-  (
-    name: l,
-    property: left
-  ),
-  (
-    name: r,
-    property: right
-  );
-
-$res-color: (
-    name: c,
-    property: color
-  ),
-  (
-    name: bg,
-    property: background-color
-  ),
-  (
-    name: bc,
-    property: border-color
-  );
-/*
-(name: 00, value: #000000 ),
-(name: 12, value: #121212 ),
-(name: f8, value: #f8f8f8 ),
-(name: ee, value: #eeeeee ),
-(name: e0, value: #e0e0e0 ),
-(name: cd, value: #cdcdd1 ),
-(name: bd, value: #bdbdbd ),
-(name: 77, value: #777777 ),
-(name: ff, value: #ffffff ),
-(name: black, value: $black ),
-(name: bt100, value: #f8f8f8 ),
-(name: bt200, value: #eeeeee ),
-(name: bt300, value: #e0e0e0 ),
-(name: bt400, value: #cdcdd1 ),
-(name: bt500, value: #bdbdbd ),
-(name: gray, value: #777777 ),
-(name: pr100, value: #9013fe ),
-(name: pr200, value: #7d0edf ),
-(name: pr300, value: #6b09c3 ),
-(name: se100, value: #6563ff ),
-(name: se200, value: #5752d0 ),
-(name: se300, value: #423dbe ),
-(name: po00, value: #ff45a1 ),
-(name: po00, value: #ed348f ),
-(name: po00, value: #d31773 ),
-(name: su100, value: #00b78b ),
-(name: su200, value: #01a37c ),
-(name: su300, value: #039572 ),
-(name: er100, value: #ff2a55 ),
-(name: er200, value: #ed0f3c ),
-(name: er300, value: #d30c34 ),
-(name: red, value: red ),
-(name: green, value: green ),
-(name: pink, value: pink ),
-(name: black, value: black ),
-(name: yellow, value: yellow ),
-(name: blue, value: blue ),
-(name: cyan, value: cyan ),
-(name: white, value: white ),
-(name: gray, value: gray ),
-(name: violet, value: violet ),;
-*/
-$val-color: (
-    name: f8,
-    value: #f8f8f8
-  ),
-  (
-    name: ee,
-    value: #eeeeee
-  ),
-  (
-    name: e0,
-    value: #e0e0e0
-  ),
-  (
-    name: cd,
-    value: #cdcdd1
-  ),
-  (
-    name: bd,
-    value: #bdbdbd
-  ),
-  (
-    name: ff,
-    value: #ffffff
-  ),
-  (
-    name: black,
-    value: $black
-  ),
-  (
-    name: bt100,
-    value: #f8f8f8
-  ),
-  (
-    name: bt200,
-    value: #eeeeee
-  ),
-  (
-    name: bt300,
-    value: #e0e0e0
-  ),
-  (
-    name: bt400,
-    value: #cdcdd1
-  ),
-  (
-    name: bt500,
-    value: #bdbdbd
-  ),
-  (
-    name: bt600,
-    value: #777777
-  ),
-  (
-    name: pr100,
-    value: #9013fe
-  ),
-  (
-    name: pr200,
-    value: #7d0edf
-  ),
-  (
-    name: pr300,
-    value: #6b09c3
-  ),
-  (
-    name: se100,
-    value: #6563ff
-  ),
-  (
-    name: se200,
-    value: #5752d0
-  ),
-  (
-    name: se300,
-    value: #423dbe
-  ),
-  (
-    name: po100,
-    value: #ff45a1
-  ),
-  (
-    name: po200,
-    value: #ed348f
-  ),
-  (
-    name: po300,
-    value: #d31773
-  ),
-  (
-    name: su100,
-    value: #00b78b
-  ),
-  (
-    name: su200,
-    value: #01a37c
-  ),
-  (
-    name: su300,
-    value: #039572
-  ),
-  (
-    name: wa100,
-    value: #fcd332
-  ),
-  (
-    name: wa200,
-    value: #f2cd30
-  ),
-  (
-    name: wa300,
-    value: #ebc702
-  ),
-  (
-    name: er100,
-    value: #ff2a55
-  ),
-  (
-    name: er200,
-    value: #ed0f3c
-  ),
-  (
-    name: er300,
-    value: #d30c34
-  ),
-  (
-    name: red,
-    value: red
-  ),
-  (
-    name: green,
-    value: green
-  ),
-  (
-    name: pink,
-    value: pink
-  ),
-  (
-    name: black,
-    value: black
-  ),
-  (
-    name: yellow,
-    value: yellow
-  ),
-  (
-    name: blue,
-    value: blue
-  ),
-  (
-    name: cyan,
-    value: cyan
-  ),
-  (
-    name: white,
-    value: white
-  ),
-  (
-    name: gray,
-    value: gray
-  ),
-  (
-    name: violet,
-    value: violet
-  );
-
-// $aabb: (
-//     aa: pr,
-//     bb: (
-//       name: default,
-//       value: $color-primary100
-//     ),
-//     (
-//       name: hover,
-//       value: $color-primary200
-//     ),
-//     (
-//       name: press,
-//       value: $color-primary300
-//     )
+// $res-mp: (
+//     name: m,
+//     property: margin
 //   ),
 //   (
-//     aa: se,
-//     bb: (
-//       name: default,
-//       value: $color-secondary100
-//     ),
-//     (
-//       name: hover,
-//       value: $color-secondary200
-//     ),
-//     (
-//       name: press,
-//       value: $color-secondary300
-//     )
-//   ),
-//   (
-//     aa: po,
-//     bb: (
-//       name: default,
-//       value: $color-point100
-//     ),
-//     (
-//       name: hover,
-//       value: $color-point200
-//     ),
-//     (
-//       name: press,
-//       value: $color-point300
-//     )
-//   ),
-//   (
-//     aa: su,
-//     bb: (
-//       name: default,
-//       value: $color-success100
-//     ),
-//     (
-//       name: hover,
-//       value: $color-success200
-//     ),
-//     (
-//       name: press,
-//       value: $color-success300
-//     )
-//   ),
-//   (
-//     aa: wa,
-//     bb: (
-//       name: default,
-//       value: $color-warning100
-//     ),
-//     (
-//       name: hover,
-//       value: $color-warning200
-//     ),
-//     (
-//       name: press,
-//       value: $color-warning300
-//     )
-//   ),
-//   (
-//     aa: er,
-//     bb: (
-//       name: default,
-//       value: $color-error100
-//     ),
-//     (
-//       name: hover,
-//       value: $color-error200
-//     ),
-//     (
-//       name: press,
-//       value: $color-error300
-//     )
-//   ),
-//   (
-//     aa: disabled,
-//     bb: (
-//       name: contain,
-//       value: $gray400
-//     ),
-//     (
-//       name: outline,
-//       value: $gray500
-//     )
+//     name: p,
+//     property: padding
 //   );
+
+// $res-tblr: (
+//     name: t,
+//     property: top
+//   ),
+//   (
+//     name: b,
+//     property: bottom
+//   ),
+//   (
+//     name: l,
+//     property: left
+//   ),
+//   (
+//     name: r,
+//     property: right
+//   );
+
+// $res-justify: (
+//     key: jfs,
+//     value: flex-start
+//   ),
+//   (
+//     key: jfe,
+//     value: flex-end
+//   ),
+//   (
+//     key: jc,
+//     value: center
+//   ),
+//   (
+//     key: jsb,
+//     value: space-between
+//   ),
+//   (
+//     key: jsa,
+//     value: space-around
+//   );
+
+// $res-align: (
+//     key: as,
+//     value: stretch
+//   ),
+//   (
+//     key: afs,
+//     value: flex-start
+//   ),
+//   (
+//     key: afe,
+//     value: flex-end
+//   ),
+//   (
+//     key: ac,
+//     value: center
+//   ),
+//   (
+//     key: ab,
+//     value: baseline
+//   );
+
+// $res-wh: (
+//     name: w,
+//     property: width
+//   ),
+//   (
+//     name: h,
+//     property: height
+//   );
+
+// $res-px: (
+//     name: w,
+//     property: width
+//   ),
+//   (
+//     name: mw,
+//     property: max-width
+//   ),
+//   (
+//     name: h,
+//     property: height
+//   ),
+//   (
+//     name: mh,
+//     property: max-height
+//   ),
+//   (
+//     name: fs,
+//     property: font-size
+//   ),
+//   (
+//     name: lh,
+//     property: line-height
+//   ),
+//   (
+//     name: gap,
+//     property: gap
+//   ),
+//   (
+//     name: br,
+//     property: border-radius
+//   ),
+//   (
+//     name: bw,
+//     property: border-width
+//   ),
+//   (
+//     name: t,
+//     property: top
+//   ),
+//   (
+//     name: b,
+//     property: bottom
+//   ),
+//   (
+//     name: l,
+//     property: left
+//   ),
+//   (
+//     name: r,
+//     property: right
+//   );
+
+// $res-color: (
+//     name: c,
+//     property: color
+//   ),
+//   (
+//     name: bg,
+//     property: background-color
+//   ),
+//   (
+//     name: bc,
+//     property: border-color
+//   );
+// /*
+// (name: 00, value: #000000 ),
+// (name: 12, value: #121212 ),
+// (name: f8, value: #f8f8f8 ),
+// (name: ee, value: #eeeeee ),
+// (name: e0, value: #e0e0e0 ),
+// (name: cd, value: #cdcdd1 ),
+// (name: bd, value: #bdbdbd ),
+// (name: 77, value: #777777 ),
+// (name: ff, value: #ffffff ),
+// (name: black, value: $black ),
+// (name: bt100, value: #f8f8f8 ),
+// (name: bt200, value: #eeeeee ),
+// (name: bt300, value: #e0e0e0 ),
+// (name: bt400, value: #cdcdd1 ),
+// (name: bt500, value: #bdbdbd ),
+// (name: gray, value: #777777 ),
+// (name: pr100, value: #9013fe ),
+// (name: pr200, value: #7d0edf ),
+// (name: pr300, value: #6b09c3 ),
+// (name: se100, value: #6563ff ),
+// (name: se200, value: #5752d0 ),
+// (name: se300, value: #423dbe ),
+// (name: po00, value: #ff45a1 ),
+// (name: po00, value: #ed348f ),
+// (name: po00, value: #d31773 ),
+// (name: su100, value: #00b78b ),
+// (name: su200, value: #01a37c ),
+// (name: su300, value: #039572 ),
+// (name: er100, value: #ff2a55 ),
+// (name: er200, value: #ed0f3c ),
+// (name: er300, value: #d30c34 ),
+// (name: red, value: red ),
+// (name: green, value: green ),
+// (name: pink, value: pink ),
+// (name: black, value: black ),
+// (name: yellow, value: yellow ),
+// (name: blue, value: blue ),
+// (name: cyan, value: cyan ),
+// (name: white, value: white ),
+// (name: gray, value: gray ),
+// (name: violet, value: violet ),;
+// */
+// $val-color: (
+//     name: f8,
+//     value: #f8f8f8
+//   ),
+//   (
+//     name: ee,
+//     value: #eeeeee
+//   ),
+//   (
+//     name: e0,
+//     value: #e0e0e0
+//   ),
+//   (
+//     name: cd,
+//     value: #cdcdd1
+//   ),
+//   (
+//     name: bd,
+//     value: #bdbdbd
+//   ),
+//   (
+//     name: ff,
+//     value: #ffffff
+//   ),
+//   (
+//     name: black,
+//     value: $black
+//   ),
+//   (
+//     name: bt100,
+//     value: #f8f8f8
+//   ),
+//   (
+//     name: bt200,
+//     value: #eeeeee
+//   ),
+//   (
+//     name: bt300,
+//     value: #e0e0e0
+//   ),
+//   (
+//     name: bt400,
+//     value: #cdcdd1
+//   ),
+//   (
+//     name: bt500,
+//     value: #bdbdbd
+//   ),
+//   (
+//     name: bt600,
+//     value: #777777
+//   ),
+//   (
+//     name: pr100,
+//     value: #9013fe
+//   ),
+//   (
+//     name: pr200,
+//     value: #7d0edf
+//   ),
+//   (
+//     name: pr300,
+//     value: #6b09c3
+//   ),
+//   (
+//     name: se100,
+//     value: #6563ff
+//   ),
+//   (
+//     name: se200,
+//     value: #5752d0
+//   ),
+//   (
+//     name: se300,
+//     value: #423dbe
+//   ),
+//   (
+//     name: po100,
+//     value: #ff45a1
+//   ),
+//   (
+//     name: po200,
+//     value: #ed348f
+//   ),
+//   (
+//     name: po300,
+//     value: #d31773
+//   ),
+//   (
+//     name: su100,
+//     value: #00b78b
+//   ),
+//   (
+//     name: su200,
+//     value: #01a37c
+//   ),
+//   (
+//     name: su300,
+//     value: #039572
+//   ),
+//   (
+//     name: wa100,
+//     value: #fcd332
+//   ),
+//   (
+//     name: wa200,
+//     value: #f2cd30
+//   ),
+//   (
+//     name: wa300,
+//     value: #ebc702
+//   ),
+//   (
+//     name: er100,
+//     value: #ff2a55
+//   ),
+//   (
+//     name: er200,
+//     value: #ed0f3c
+//   ),
+//   (
+//     name: er300,
+//     value: #d30c34
+//   ),
+//   (
+//     name: red,
+//     value: red
+//   ),
+//   (
+//     name: green,
+//     value: green
+//   ),
+//   (
+//     name: pink,
+//     value: pink
+//   ),
+//   (
+//     name: black,
+//     value: black
+//   ),
+//   (
+//     name: yellow,
+//     value: yellow
+//   ),
+//   (
+//     name: blue,
+//     value: blue
+//   ),
+//   (
+//     name: cyan,
+//     value: cyan
+//   ),
+//   (
+//     name: white,
+//     value: white
+//   ),
+//   (
+//     name: gray,
+//     value: gray
+//   ),
+//   (
+//     name: violet,
+//     value: violet
+//   );
+
+// // $aabb: (
+// //     aa: pr,
+// //     bb: (
+// //       name: default,
+// //       value: $color-primary100
+// //     ),
+// //     (
+// //       name: hover,
+// //       value: $color-primary200
+// //     ),
+// //     (
+// //       name: press,
+// //       value: $color-primary300
+// //     )
+// //   ),
+// //   (
+// //     aa: se,
+// //     bb: (
+// //       name: default,
+// //       value: $color-secondary100
+// //     ),
+// //     (
+// //       name: hover,
+// //       value: $color-secondary200
+// //     ),
+// //     (
+// //       name: press,
+// //       value: $color-secondary300
+// //     )
+// //   ),
+// //   (
+// //     aa: po,
+// //     bb: (
+// //       name: default,
+// //       value: $color-point100
+// //     ),
+// //     (
+// //       name: hover,
+// //       value: $color-point200
+// //     ),
+// //     (
+// //       name: press,
+// //       value: $color-point300
+// //     )
+// //   ),
+// //   (
+// //     aa: su,
+// //     bb: (
+// //       name: default,
+// //       value: $color-success100
+// //     ),
+// //     (
+// //       name: hover,
+// //       value: $color-success200
+// //     ),
+// //     (
+// //       name: press,
+// //       value: $color-success300
+// //     )
+// //   ),
+// //   (
+// //     aa: wa,
+// //     bb: (
+// //       name: default,
+// //       value: $color-warning100
+// //     ),
+// //     (
+// //       name: hover,
+// //       value: $color-warning200
+// //     ),
+// //     (
+// //       name: press,
+// //       value: $color-warning300
+// //     )
+// //   ),
+// //   (
+// //     aa: er,
+// //     bb: (
+// //       name: default,
+// //       value: $color-error100
+// //     ),
+// //     (
+// //       name: hover,
+// //       value: $color-error200
+// //     ),
+// //     (
+// //       name: press,
+// //       value: $color-error300
+// //     )
+// //   ),
+// //   (
+// //     aa: disabled,
+// //     bb: (
+// //       name: contain,
+// //       value: $gray400
+// //     ),
+// //     (
+// //       name: outline,
+// //       value: $gray500
+// //     )
+// //   );

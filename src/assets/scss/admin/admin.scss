@@ -2,6 +2,19 @@
 @import '../resource';
 
 .admin {
+  &-root {
+    background-color: $color-body;
+    &,
+    * {
+      @include col;
+      transition-duration: 300ms;
+      transition-property: all;
+    }
+  }
+  &-inner {
+    @include limitWidth(1280);
+  }
+
   .layout-banner {
     position: relative;
     height: 460px;

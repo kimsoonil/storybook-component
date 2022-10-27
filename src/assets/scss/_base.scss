@@ -1,37 +1,5 @@
 @import 'resource';
 
-button {
-  background: inherit;
-  border: none;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0;
-  overflow: visible;
-  cursor: pointer;
-}
-
-// .text-ssx {
-//   font-size: 12px;
-// }
-// .text-sx {
-//   font-size: 16px;
-// }
-// .text-s {
-//   font-size: 20px;
-// }
-// .text-m {
-//   font-size: 24px;
-// }
-// .text-l {
-//   font-size: 30px;
-// }
-// .text-xl {
-//   font-size: 36px;
-// }
-// .text-xxl {
-//   font-size: 44px;
-// }
-
 @mixin row {
   display: flex;
   flex-direction: row;
@@ -57,6 +25,13 @@ button {
   margin: 0 auto;
 }
 
+@mixin textEllipsis {
+  overflow: hidden;
+  white-space: pre;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
 // @mixin showHover {
 //   display: none;
 //   &:hover {
@@ -64,301 +39,301 @@ button {
 //   }
 // }
 
-.jg {
-  &-row {
-    display: flex;
-    flex-direction: row;
-  }
-  &-col {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &-center {
-    @include flexCenter();
-  }
-
-  &-focus-border {
-    border: 1px solid $color-point100;
-  }
-
-  &-hidden {
-    display: none;
-  }
-}
-
-// limit width
-.lw1280 {
-  @include limitWidth(1280);
-}
-
-.flex {
-  display: flex;
-  &-row {
-    display: flex;
-    flex-direction: row;
-  }
-  &-col {
-    display: flex;
-    flex-direction: column;
-  }
-  &-center {
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.grow {
-  flex-grow: 1;
-}
-
-.justify {
-  &-start {
-    justify-content: flex-start;
-  }
-  &-end {
-    justify-content: flex-end;
-  }
-  &-center {
-    justify-content: center;
-  }
-  &-between {
-    justify-content: space-between;
-  }
-  &-around {
-    justify-content: space-around;
-  }
-  &-evenly {
-    justify-content: space-evenly;
-  }
-}
-
-.align {
-  &-stretch {
-    align-items: stretch;
-  }
-  &-start {
-    align-items: flex-start;
-  }
-  &-end {
-    align-items: flex-end;
-  }
-  &-center {
-    align-items: center;
-  }
-  &-baseline {
-    align-items: baseline;
-  }
-}
-
-.pos {
-  &-relative {
-    position: relative;
-  }
-  &-relative {
-    position: absolute;
-  }
-  &-fixed {
-    position: fixed;
-  }
-  &-static {
-    position: static;
-  }
-  &-sticky {
-    position: sticky;
-  }
-}
-
-.cursor {
-  &-auto {
-    cursor: auto;
-  }
-  &-default {
-    cursor: default;
-  }
-  &-pointer {
-    cursor: pointer;
-  }
-  &-wait {
-    cursor: wait;
-  }
-  &-text {
-    cursor: text;
-  }
-  &-move {
-    cursor: move;
-  }
-  &-help {
-    cursor: help;
-  }
-  &-not-allowed {
-    cursor: not-allowed;
-  }
-}
-
-.box {
-  &-border {
-    box-sizing: border-box;
-  }
-  &-content {
-    box-sizing: content-box;
-  }
-}
-
-// .w .h
-@each $data in $res-wh {
-  $name: map-get($data, name);
-  $property: map-get($data, property);
-  .#{$name} {
-    &-ih {
-      #{$property}: inherit;
-    }
-  }
-  .#{$name} {
-    &-full {
-      #{$property}: 100%;
-    }
-  }
-}
-
-// margin, padding, margin-top, ... , padding-right
-@each $mp in $res-mp {
-  .#{map-get($mp, name)} {
-    $preFix: map-get($mp, property);
-    @for $value from 0 to 101 {
-      &-#{$value} {
-        #{$preFix}: #{$value}px;
-      }
-    }
-    @each $tblr in $res-tblr {
-      $suffFix: map-get($tblr, property);
-      &#{map-get($tblr, name)} {
-        @for $value from 0 to 101 {
-          &-#{$value} {
-            #{$preFix}-#{$suffFix}: #{$value}px;
-          }
-        }
-      }
-    }
-  }
-}
-/**
-.w    width
-.mx   max-width
-.h    height
-.mh   max-height
-.fs   font-size
-.lh   line-height
-.gap  gap
-.br   border-radius
-.bw   border-width
-.t    top
-.b    bottom
-.r    right
-.l    left  
-*/
-@each $propsMap in $res-px {
-  $name: map-get($propsMap, name);
-  $property: map-get($propsMap, property);
-  @for $value from 0 to 100 {
-    .#{$name} {
-      &-#{$value} {
-        #{$property}: #{$value}px;
-      }
-    }
-  }
-}
-
-/*
-res-color : (name, property)
-  -   color
-  .c  color
-  .bg background-color
-  .bc border-color
-val-color : (name, value)
-  f8, ee, e0, cd, bd, ff, black
-  bt100, bt200, bt300, bt400, bt500, bt600
-  pr100, pr200, pr300
-  se100, se200, se300
-  po100, po200, po300
-  su100, su200, su300
-  er100, er200, er300
-  red, green, pink, black, yellow, blue, cyan, white, gray, violet
-*/
-@each $propsMap in $res-color {
-  $preFix: map-get($propsMap, name);
-  $propery: map-get($propsMap, property);
-  @each $valueMap in $val-color {
-    .#{$preFix}-#{map-get($valueMap, name)} {
-      #{$propery}: map-get($valueMap, value);
-    }
-    // .#{map-get($valueMap, name)} {
-    //   #{$propery}: map-get($valueMap, value);
-    // }
-  }
-
-  // .#{$preFix} {
-  //   &-pr-boder {
-  //   }
-  //   &-pr-hover {
-  //   }
-  //   &-pr-press {
-  //   }
-
-  //   &-pr-boder {
-  //   }
-  //   &-pr-hover {
-  //   }
-  //   &-pr-press {
-  //   }
-  // }
-}
-
-// .text {
-//   &-h1 {
-//     font-family: 'Poppins';
-//     font-style: normal;
-//     font-weight: 700;
-//     font-size: 40px;
-//     line-height: 52px;
-//     color: $black;
+// .jg {
+//   &-row {
+//     display: flex;
+//     flex-direction: row;
 //   }
-//   &-h2 {
-//     font-family: 'Poppins';
-//     font-style: normal;
-//     font-weight: 700;
-//     font-size: 30px;
-//     line-height: 60px;
-//     color: $black;
+//   &-col {
+//     display: flex;
+//     flex-direction: column;
 //   }
-//   &-h3 {
-//     font-family: 'Poppins';
-//     font-style: normal;
-//     font-weight: 700;
-//     font-size: 22px;
-//     line-height: 60px;
+
+//   &-center {
+//     @include flexCenter();
 //   }
-//   &-h4 {
-//     font-family: 'Poppins';
-//     font-style: normal;
-//     font-weight: 700;
-//     font-size: 40px;
-//     line-height: 52px;
-//     color: $black;
+
+//   &-focus-border {
+//     border: 1px solid $color-point100;
 //   }
-//   &-h5 {
-//     font-family: 'Poppins';
-//     font-style: normal;
-//     font-weight: 500;
-//     font-size: 16px;
-//     line-height: 22px;
-//     color: $black;
-//   }
-//   &-h6 {
-//     font-family: 'Poppins';
-//     font-style: normal;
-//     font-weight: 400;
-//     font-size: 14px;
-//     line-height: 23px;
+
+//   &-hidden {
+//     display: none;
 //   }
 // }
+
+// limit width
+// .lw1280 {
+//   @include limitWidth(1280);
+// }
+
+// .flex {
+//   display: flex;
+//   &-row {
+//     display: flex;
+//     flex-direction: row;
+//   }
+//   &-col {
+//     display: flex;
+//     flex-direction: column;
+//   }
+//   &-center {
+//     align-items: center;
+//     justify-content: center;
+//   }
+// }
+
+// .grow {
+//   flex-grow: 1;
+// }
+
+// .justify {
+//   &-start {
+//     justify-content: flex-start;
+//   }
+//   &-end {
+//     justify-content: flex-end;
+//   }
+//   &-center {
+//     justify-content: center;
+//   }
+//   &-between {
+//     justify-content: space-between;
+//   }
+//   &-around {
+//     justify-content: space-around;
+//   }
+//   &-evenly {
+//     justify-content: space-evenly;
+//   }
+// }
+
+// .align {
+//   &-stretch {
+//     align-items: stretch;
+//   }
+//   &-start {
+//     align-items: flex-start;
+//   }
+//   &-end {
+//     align-items: flex-end;
+//   }
+//   &-center {
+//     align-items: center;
+//   }
+//   &-baseline {
+//     align-items: baseline;
+//   }
+// }
+
+// .pos {
+//   &-relative {
+//     position: relative;
+//   }
+//   &-relative {
+//     position: absolute;
+//   }
+//   &-fixed {
+//     position: fixed;
+//   }
+//   &-static {
+//     position: static;
+//   }
+//   &-sticky {
+//     position: sticky;
+//   }
+// }
+
+// .cursor {
+//   &-auto {
+//     cursor: auto;
+//   }
+//   &-default {
+//     cursor: default;
+//   }
+//   &-pointer {
+//     cursor: pointer;
+//   }
+//   &-wait {
+//     cursor: wait;
+//   }
+//   &-text {
+//     cursor: text;
+//   }
+//   &-move {
+//     cursor: move;
+//   }
+//   &-help {
+//     cursor: help;
+//   }
+//   &-not-allowed {
+//     cursor: not-allowed;
+//   }
+// }
+
+// .box {
+//   &-border {
+//     box-sizing: border-box;
+//   }
+//   &-content {
+//     box-sizing: content-box;
+//   }
+// }
+
+// // .w .h
+// @each $data in $res-wh {
+//   $name: map-get($data, name);
+//   $property: map-get($data, property);
+//   .#{$name} {
+//     &-ih {
+//       #{$property}: inherit;
+//     }
+//   }
+//   .#{$name} {
+//     &-full {
+//       #{$property}: 100%;
+//     }
+//   }
+// }
+
+// // margin, padding, margin-top, ... , padding-right
+// @each $mp in $res-mp {
+//   .#{map-get($mp, name)} {
+//     $preFix: map-get($mp, property);
+//     @for $value from 0 to 101 {
+//       &-#{$value} {
+//         #{$preFix}: #{$value}px;
+//       }
+//     }
+//     @each $tblr in $res-tblr {
+//       $suffFix: map-get($tblr, property);
+//       &#{map-get($tblr, name)} {
+//         @for $value from 0 to 101 {
+//           &-#{$value} {
+//             #{$preFix}-#{$suffFix}: #{$value}px;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+// /**
+// .w    width
+// .mx   max-width
+// .h    height
+// .mh   max-height
+// .fs   font-size
+// .lh   line-height
+// .gap  gap
+// .br   border-radius
+// .bw   border-width
+// .t    top
+// .b    bottom
+// .r    right
+// .l    left
+// */
+// @each $propsMap in $res-px {
+//   $name: map-get($propsMap, name);
+//   $property: map-get($propsMap, property);
+//   @for $value from 0 to 100 {
+//     .#{$name} {
+//       &-#{$value} {
+//         #{$property}: #{$value}px;
+//       }
+//     }
+//   }
+// }
+
+// /*
+// res-color : (name, property)
+//   -   color
+//   .c  color
+//   .bg background-color
+//   .bc border-color
+// val-color : (name, value)
+//   f8, ee, e0, cd, bd, ff, black
+//   bt100, bt200, bt300, bt400, bt500, bt600
+//   pr100, pr200, pr300
+//   se100, se200, se300
+//   po100, po200, po300
+//   su100, su200, su300
+//   er100, er200, er300
+//   red, green, pink, black, yellow, blue, cyan, white, gray, violet
+// */
+// @each $propsMap in $res-color {
+//   $preFix: map-get($propsMap, name);
+//   $propery: map-get($propsMap, property);
+//   @each $valueMap in $val-color {
+//     .#{$preFix}-#{map-get($valueMap, name)} {
+//       #{$propery}: map-get($valueMap, value);
+//     }
+//     // .#{map-get($valueMap, name)} {
+//     //   #{$propery}: map-get($valueMap, value);
+//     // }
+//   }
+
+//   // .#{$preFix} {
+//   //   &-pr-boder {
+//   //   }
+//   //   &-pr-hover {
+//   //   }
+//   //   &-pr-press {
+//   //   }
+
+//   //   &-pr-boder {
+//   //   }
+//   //   &-pr-hover {
+//   //   }
+//   //   &-pr-press {
+//   //   }
+//   // }
+// }
+
+// // .text {
+// //   &-h1 {
+// //     font-family: 'Poppins';
+// //     font-style: normal;
+// //     font-weight: 700;
+// //     font-size: 40px;
+// //     line-height: 52px;
+// //     color: $black;
+// //   }
+// //   &-h2 {
+// //     font-family: 'Poppins';
+// //     font-style: normal;
+// //     font-weight: 700;
+// //     font-size: 30px;
+// //     line-height: 60px;
+// //     color: $black;
+// //   }
+// //   &-h3 {
+// //     font-family: 'Poppins';
+// //     font-style: normal;
+// //     font-weight: 700;
+// //     font-size: 22px;
+// //     line-height: 60px;
+// //   }
+// //   &-h4 {
+// //     font-family: 'Poppins';
+// //     font-style: normal;
+// //     font-weight: 700;
+// //     font-size: 40px;
+// //     line-height: 52px;
+// //     color: $black;
+// //   }
+// //   &-h5 {
+// //     font-family: 'Poppins';
+// //     font-style: normal;
+// //     font-weight: 500;
+// //     font-size: 16px;
+// //     line-height: 22px;
+// //     color: $black;
+// //   }
+// //   &-h6 {
+// //     font-family: 'Poppins';
+// //     font-style: normal;
+// //     font-weight: 400;
+// //     font-size: 14px;
+// //     line-height: 23px;
+// //   }
+// // }

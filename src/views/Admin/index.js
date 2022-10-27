@@ -1,137 +1,16 @@
-import { Header } from 'components/idist/Header';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import 'assets/scss/admin/admin.scss';
-import { Link, useNavigate, Routes, Route, Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 
-import Tag from 'components/idist/admin/Tag';
-import GoBack from 'components/idist/admin/GoBack';
-import ImagePicker from 'components/idist/admin/ImagePicker';
 import Menu from 'components/idist/admin/Menu';
 import {
-  getClubInit,
+  getClubByAddressInit,
   patchClubBannerImageInit,
-  patchClubProfileImageInit
+  patchClubProfileImageInit,
+  resetCommonAdmin
 } from 'redux/idistStore/admin/commonAdminSlice';
-
-const Admin = ({ visibleMenu = false }) => {
-  const dispatch = useDispatch();
-
-  const isLoading = useSelector((state) => state.commonAdmin.getClubLoading);
-  const clubRedux = useSelector((state) => state.commonAdmin.club);
-
-  useEffect(() => {
-    // if (clubRedux?.id) {
-    //   console.log(123);
-    //   // dispatch(getClubInit({ id: clubCreated?.id || 22 }));
-    // } else {
-    dispatch(getClubInit({ id: 22 }));
-    // }
-  }, []);
-
-  const [adminState, setAdminState] = useState({
-    title: '',
-    description: '',
-    profileImage: {
-      data: { file: '', base64: '' },
-      url: ''
-    },
-    bannerImage: {
-      data: { file: '', base64: '' },
-      url: ''
-    },
-    tags: []
-  });
-
-  useEffect(() => {
-    if (clubRedux?.id) {
-      init();
-    }
-  }, [clubRedux]);
-
-  const init = () => {
-    setAdminState({
-      title: clubRedux?.title,
-      description: clubRedux?.description || '',
-
-      profileImage: {
-        data: { file: '', base64: '' },
-        url: clubRedux?.profile_image_url
-      },
-      bannerImage: {
-        data: { file: '', base64: '' },
-        url: clubRedux?.banner_image_url
-      },
-      tags: clubRedux?.tags
-    });
-  };
-
-  const updateBanner = ({ base64 }) => {
-    dispatch(patchClubBannerImageInit({ id: clubRedux?.id, data: { banner_image: base64 } }));
-  };
-  const updateProfile = ({ base64 }) => {
-    dispatch(patchClubProfileImageInit({ id: clubRedux?.id, data: { profile_image: base64 } }));
-  };
-
-  const bannerBackgroundStyle = useMemo(
-    () =>
-      adminState?.bannerImage?.data?.base64
-        ? { backgroundImage: `url(${adminState?.bannerImage?.data?.base64})` }
-        : {
-            background: adminState?.bannerImage?.url
-              ? `linear-gradient(to top, rgba(4, 4, 4, 0.7), transparent 160px), no-repeat center/cover url(${adminState?.bannerImage?.url})`
-              : '#cdcdd1'
-          },
-    [adminState?.bannerImage?.url]
-  );
-
-  if (isLoading) {
-    return null;
-  }
-
-  return (
-    <div className="admin">
-      <Header />
-      {/* Banner */}
-      <div className="layout-banner" style={bannerBackgroundStyle}>
-        <ImagePicker imageSize={90} setImageFile={updateBanner} maxSize={{ value: 20, unit: 'mb' }} />
-        <div className="banner-inner">
-          <GoBack />
-          <div className="banner-content-wrapper">
-            <div className="banner-tags">
-              {adminState?.tags?.map((item, index) => (
-                <Tag key={index} value={item.title} />
-              ))}
-            </div>
-
-            <div className="banner-profile">
-              {adminState?.profileImage?.data?.base64 ? (
-                <img src={adminState?.profileImage?.data?.base64} />
-              ) : adminState?.profileImage?.url ? (
-                <img src={adminState?.profileImage?.url} />
-              ) : (
-                <></>
-              )}
-              <ImagePicker imageSize={60} setImageFile={updateProfile} maxSize={{ value: 10, unit: 'mb' }} />
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Title */}
-      <div className="layout-title">
-        <div className={`text-h1 ${adminState?.title && `writing`}`}>{adminState?.title || 'Club Name'}</div>
-        <div className={`text-h6 ${adminState?.description && 'writing'}`}>
-          {adminState?.description || 'Description'}
-        </div>
-      </div>
-      <hr style={{ margin: 0, height: 0, borderBottom: 'none' }} />
-      {visibleMenu && <Menu menuList={AVD.menu} />}
-      {clubRedux?.id && <Outlet context={{ club: clubRedux, adminState, setAdminState }} />}
-    </div>
-  );
-};
-
-export default Admin;
+import AdminHeader from './AdminHeader';
 
 export const AVD = {
   errorText: {
@@ -156,7 +35,7 @@ export const AVD = {
     title: 'Club Name',
     description: 'The club name can be modified 3 months after the last change date.',
     placeholder: 'Please name your club',
-    extraText: '/60 characters'
+    extraText: '/30 characters'
   },
   address: {
     title: 'Club Address',
@@ -265,3 +144,91 @@ export const loadState = {
   SUCCESS: 1,
   ERROR: 2
 };
+
+function Admin({ visibleMenu = false }) {
+  const dispatch = useDispatch();
+  const { clubAddress } = useParams();
+
+  const isLoading = useSelector((state) => state.commonAdmin.getClubLoading);
+  const clubRedux = useSelector((state) => state.commonAdmin.club);
+
+  useEffect(() => {
+    dispatch(getClubByAddressInit({ address: clubAddress }));
+    return () => {
+      dispatch(resetCommonAdmin());
+    };
+  }, []);
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [profileImage, setProfileImage] = useState({ file: {}, base64: '' });
+  const [bannerImage, setBannerImage] = useState({ file: {}, base64: '' });
+  const adminHeaderProps = useMemo(
+    () => ({
+      title,
+      setTitle,
+      description,
+      setDescription,
+      profileImage,
+      setProfileImage,
+      bannerImage,
+      setBannerImage
+    }),
+    [title, setTitle, description, setDescription, profileImage, setProfileImage, bannerImage, setBannerImage]
+  );
+
+  const init = (club) => {
+    setTitle(club.title);
+    setDescription(club.description);
+    setProfileImage({ file: {}, base64: club.profileImageUrl });
+    setBannerImage({ file: {}, base64: club.bannerImageUrl });
+  };
+
+  useEffect(() => {
+    init(clubRedux);
+  }, [clubRedux]);
+
+  const updateBannerImage = ({ base64 }) => {
+    // setBannerImage({ file, base64 });
+    dispatch(patchClubBannerImageInit({ id: clubRedux?.id, data: { banner_image: base64 } }));
+  };
+  const updateProfileImage = ({ base64 }) => {
+    // setProfileImage({ file, base64 });
+    dispatch(patchClubProfileImageInit({ id: clubRedux?.id, data: { profile_image: base64 } }));
+  };
+
+  if (isLoading) {
+    return null;
+  }
+
+  return (
+    <>
+      <div>
+        {/* <Header /> */}
+        <div className="admin-root">
+          <div className="admin-inner">
+            <div className="admin-header-wrapper">
+              <AdminHeader
+                club={clubRedux}
+                editable
+                profileImage={profileImage}
+                setProfileImage={updateProfileImage}
+                bannerImage={bannerImage}
+                setBannerImage={updateBannerImage}
+                title={title}
+                description={description}
+              />
+            </div>
+
+            {visibleMenu && <Menu menuList={AVD.menu} />}
+            {clubRedux?.id && <Outlet context={{ adminHeaderProps }} />}
+          </div>
+        </div>
+      </div>
+
+      <div className="admin" />
+    </>
+  );
+}
+
+export default Admin;

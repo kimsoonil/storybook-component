@@ -106,12 +106,16 @@
     display: block;
     box-sizing: border-box;
   }
+  html {
+    background:$body_color;
+  }
   body {
     line-height: 1;
     min-width: $max_width;
     font-size: $font_base;
     color: $body_text;
     letter-spacing:-0.28px;
+    background:$body_color;
     .eng {
       @include eng_font(regular);
     }

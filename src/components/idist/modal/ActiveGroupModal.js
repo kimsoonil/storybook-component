@@ -7,7 +7,7 @@ import { AVD } from 'views/Admin';
 import { hideModal } from 'redux/idistStore/admin/modalSlice';
 import { BVD } from 'views/Admin/Boards';
 import { getBoardGroupsInit } from 'redux/idistStore/admin/boardAdminSlice';
-import { getBoardGroupInit } from 'redux/idistStore/boardGroupSlice';
+import { getBoardGroupInit, patchBoardGroupInit } from 'redux/idistStore/boardGroupSlice';
 
 const ActiveGroupModal = () => {
   const dispatch = useDispatch();

@@ -1437,9 +1437,11 @@
           }
           .staff_others {
             position:relative;
-            &:hover {
-              cursor: pointer;
-              text-decoration: underline;
+            .staff_others_num {
+              &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+              }
             }
           }
         }
@@ -2229,6 +2231,11 @@
           left:0;
           background:url('#{$img_root_path}/ico/ic_write_wh.png') no-repeat center center / 28px 28px;
         }
+      }
+      &:hover {
+        background:$main_active;
+        border:1px solid $main_active;
+        box-shadow: 0 4px 0 0 #640eb1;
       }
     }
     .history {
@@ -3031,12 +3038,15 @@
     }
   }
   .board_comment_list {
-    margin-top:28px;
+    padding-top:12px;
     .board_comment_div {
+      padding:16px 0;
       border-bottom:1px solid $gray_color07;
-      padding-bottom:16px;
       display:flex;
       align-items: flex-start;
+      &.reply {
+        margin-left:64px;
+      }
       .board_comment_profile {
         width:48px;
         height:48px;
@@ -3078,6 +3088,13 @@
           line-height:22px;
           letter-spacing:-0.3px;
           color:$title_text;
+          .appoint {
+            @include eng_font(medium);
+            font-size:$font_base +1px;
+            line-height:22px;
+            letter-spacing:-0.3px;
+            color:$secon_color01;
+          }
         }
         .board_comment_info {
           margin-top:12px;

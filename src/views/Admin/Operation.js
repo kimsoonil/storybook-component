@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Operation = () => {
+function Operation() {
   console.log('Render Operation');
   return <div>Operation</div>;
-};
+}
 
 export default Operation;

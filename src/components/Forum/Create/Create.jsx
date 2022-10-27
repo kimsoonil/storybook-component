@@ -52,6 +52,7 @@ function Create() {
       formData.append(IMAGE_TYPE_BANNER, forumInfo.banner_image, forumInfo.banner_image_filename);
     if (forumInfo.thumbnail_image)
       formData.append(IMAGE_TYPE_THUMBNAIL, forumInfo.thumbnail_image, forumInfo.thumbnail_image_filename);
+    console.log('formData::', formData);
     dispatch(reqForumCreate({ navigate, formData }));
   };
 

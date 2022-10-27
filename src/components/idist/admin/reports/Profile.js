@@ -1,6 +1,7 @@
+/* eslint-disable */
 import React from 'react';
 
-const Profile = ({ user }) => {
+function Profile({ user }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <div
@@ -23,6 +24,6 @@ const Profile = ({ user }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Profile;
