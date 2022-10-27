@@ -81,7 +81,7 @@
   },
   "scripts": {
     "start": "set PORT=3000 && react-scripts start",
-    "build": "CI= react-scripts build --exclude=./src/views/Admin",
+    "build": "CI= env-cmd -f .env.production react-scripts build --exclude=./src/views/Admin",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev:html": "webpack-dev-server --config html.webpack.config.js --hot",
