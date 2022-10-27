@@ -1,0 +1,106 @@
+@import '../base';
+@import '../resource';
+
+.react-select-container {
+  .react-select {
+    &-container {
+    }
+    &__control {
+      border-radius: 8px;
+      box-shadow: none;
+      padding: 14px 12px 14px 16px;
+      box-sizing: border-box;
+      border-radius: 8px;
+      border: solid 1px $gray300;
+
+      font-family: 'Poppins' !important;
+      font-size: 16px;
+      line-height: 1.5;
+
+      &--is-focused {
+        border-color: $black200;
+      }
+
+      &--menu-is-open {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: none;
+        border-color: $black100;
+      }
+
+      &:hover {
+        border-color: $black100;
+      }
+    }
+
+    &__value-container {
+      padding: 0;
+      margin: 0;
+    }
+
+    &__input {
+      &-container {
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    &__single-value {
+      color: $black200;
+    }
+
+    &__indicators {
+      @include row;
+      @include flexCenter;
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    &__indicator-separator {
+      display: none;
+    }
+
+    &__menu {
+      box-shadow: none;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border: 1px solid $black200;
+      border-top: none;
+      border-radius: 8px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      overflow: hidden;
+    }
+
+    &__menu-list {
+    }
+
+    &__menu-notice {
+      padding: 12px 12px 12px 16px;
+      text-align: start;
+    }
+
+    &__option {
+      padding: 12px 12px 12px 16px;
+
+      font-size: 16px;
+      line-height: 1.5;
+
+      &:active {
+        background-color: $gray100;
+      }
+
+      &--is-focused {
+        background-color: $gray100;
+      }
+      &--is-selected {
+        background-color: $gray100;
+        font-weight: 500;
+        color: $black200;
+      }
+    }
+  }
+}

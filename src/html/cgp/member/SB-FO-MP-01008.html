@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <script src="../../js/libs/jquery.min.js"></script>
+  <script src="../../js/libs/jquery-ui.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container" class="subpage">
+      <div class="sidemenu"></div>
+      <div class="content">
+        <h3 class="h3Type eng center">ACCOUNT SETTING</h3>
+
+        <!-- Nickname -->
+        <div class="layer">
+          <!-- 계정정보 변경 및 등록시에는 상하의 다른 레이어들을 block처리하여 다른버튼이 눌리지 않게 구현.
+            (UI상 화면에 노출되지만 위에 막이 씌어져서 클릭이 되지 않는 형태로 구현해주세요)
+          -->
+          <div class="layer_block"></div>
+          <h4 class="h4Type eng">Nickname</h4>
+          <div class="nickname">
+            <!-- 닉네임 변경 전 -->
+            <div class="form_wrap">
+              <span class="form_cell form_input input_lg between">
+                <span class="nickname_set">
+                  <input type="text" title="input default" id="input_text" aria-invalid="false" value="Superclub=1004#FGS2G" readonly="readonly">
+                </span>
+                <button type="button" class="btn primary button_lg" disabled>
+                  <span>Change Nickname</span>
+                </button>
+              </span>
+            </div>
+            <ul class="guide">
+              <li>Try changing the temporary nickname automatically specified when you sign up.</li>
+              <li>You can change your nickname <span>only once</span>, so please think carefully before deciding.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Account Infomation Registration -->
+        <div class="layer">
+          <div class="account_title">
+            <h4 class="h4Type eng">Account Infomation</h4>
+            <!-- 정보변경화면에서는 [Modify] 버튼대신 [Cancel]버튼 위치함-->
+            <!-- <button type="button" class="btn_modify">
+              <span>Registration</span>
+            </button> -->
+            <button type="button" class="btn_modify none">
+              <span>Cancel</span>
+            </button>
+          </div>
+          <div class="account">
+            <div class="form_wrap msg error sign_name">
+              <label class="account_label">Name</label>
+              <div class="HGroup">
+                <span class="form_cell form_input input_lg">
+                  <input type="text" aria-invalid="false" placeholder="First Name">
+                  <button class="btn_reset">
+                    <span class="a11y">삭제</span>
+                  </button>
+                </span>
+                <span class="form_cell form_input input_lg">
+                  <input type="text" aria-invalid="false" placeholder="Last Name">
+                  <button class="btn_reset">
+                    <span class="a11y">삭제</span>
+                  </button>
+                </span>
+              </div>
+              <span class="error_txt msg">Please enter your first name.</span>
+            </div>
+            <div class="sign_pass">
+              <label class="account_label">Password</label>
+              <div class="security_guide">
+                <button type="button" class="open_tip">
+                  <span>Security Guide</span>
+                </button>
+                <div class="tooltip password">
+                  <h4>Strong Password</h4>
+                  <span>Enter a password that contains 8 - 16 characters from at least three of the following categories: uppercase/lowercase letters, numbers, and special characters.</span>
+                  <span>Repeated or sequence characters and letters, birthday, contact number, and other passwords that are easy to predict or are related to personal information are vulnerable due to weak security strength.</span>
+                  <span>Using a password that you use in other websites can also endanger the account security.</span>
+                </div>
+              </div>
+            </div>
+            <div class="form_wrap msg error">
+              <span class="form_cell form_input input_lg">
+                <input type="password" id="password1" aria-invalid="false" placeholder="Password">
+                <button class="btn_input eyes" id="pass_view1">
+                  <span class="a11y">비밀번호 표시</span>
+                </button>
+              </span>
+              <span class="error_txt msg">Please enter a password</span>
+            </div>
+            <div class="form_wrap msg error">
+              <span class="form_cell form_input input_lg">
+                <input type="password" id="password2" aria-invalid="false" placeholder="Confirm Password">
+                <button class="btn_input eyes" id="pass_view2">
+                  <span class="a11y">비밀번호 표시</span>
+                </button>
+              </span>
+              <span class="error_txt msg">Please enter a Confirm password</span>
+            </div>
+            <div class="login_captcha">
+              I’m not a robot
+            </div>
+            <div class="page_btn_wrap full">
+              <button type="button" class="btn primary button_xl" disabled>
+                <span>Join Membership</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SNS Interworking -->
+        <div class="layer">
+          <!-- 계정정보 변경 및 등록시에는 상하의 다른 레이어들을 block처리하여 다른버튼이 눌리지 않게 구현.
+            (UI상 화면에 노출되지만 위에 막이 씌어져서 클릭이 되지 않는 형태로 구현해주세요)
+          -->
+          <div class="layer_block"></div>
+          <h4 class="h4Type eng">SNS Interworking</h4>
+          <div class="interworking">
+            <span class="inter_text">Log in easily by connecting to your SNS account.</span>
+            <ul class="sns_list">
+              <li class="google">
+                <dl>
+                  <dt class="logo"></dt>
+                  <dd class="join_date des eng">Google</dd>
+                  <dd>
+                    <button type="button" class="btn primary button_xs">
+                      <span>Connecting</span>
+                    </button>
+                  </dd>
+                </dl>
+              </li>
+              <li class="twitter">
+                <dl>
+                  <dt class="logo"></dt>
+                  <dd class="join_date des eng">Twitter</dd>
+                  <dd>
+                    <button type="button" class="btn primary button_xs">
+                      <span>Connecting</span>
+                    </button>
+                  </dd>
+                </dl>
+              </li>
+              <li class="facebook">
+                <dl>
+                  <dt class="logo"></dt>
+                  <dd class="join_date des eng">Facebook</dd>
+                  <dd>
+                    <button type="button" class="btn primary button_xs">
+                      <span>Connecting</span>
+                    </button>
+                  </dd>
+                </dl>
+              </li>
+              <li class="apple">
+                <dl>
+                  <dt class="logo"></dt>
+                  <dd class="join_date des eng">Apple ID</dd>
+                  <dd>
+                    <button type="button" class="btn primary button_xs">
+                      <span>Connecting</span>
+                    </button>
+                  </dd>
+                </dl>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn_topmove">
+        <span class="a11y">최상위로 이동</span>
+      </button>
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+</body>
+<script>
+window.addEventListener('load', function() {
+    var allElements = document.getElementsByTagName('*');
+    Array.prototype.forEach.call(allElements, function(el) {
+        var includePath = el.dataset.includePath;
+        if (includePath) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    el.outerHTML = this.responseText;
+                }
+            };
+            xhttp.open('GET', includePath, true);
+            xhttp.send();
+        }
+    });
+});
+
+// Select
+const selectBoxElements = document.querySelectorAll('.select');
+function toggleSelectBox(selectBox) {
+  selectBox.classList.toggle('active');
+}
+function selectOption(optionElement) {
+  const selectBox = optionElement.closest('.select');
+  const selectedElement = selectBox.querySelector('.selected-value');
+  selectedElement.textContent = optionElement.textContent;
+}
+selectBoxElements.forEach((selectBoxElement) => {
+  selectBoxElement.addEventListener('click', (e) => {
+    const targetElement = e.target;
+    const isOptionElement = targetElement.classList.contains('option');
+    if (isOptionElement) {
+      selectOption(targetElement);
+    }
+    toggleSelectBox(selectBoxElement);
+  });
+});
+
+document.addEventListener('click', (e) => {
+  const targetElement = e.target;
+  const isSelect = targetElement.classList.contains('select') || targetElement.closest('.select');
+  if (isSelect) {
+    return;
+  }
+  const allSelectBoxElements = document.querySelectorAll('.select');
+  allSelectBoxElements.forEach((boxElement) => {
+    boxElement.classList.remove('active');
+  });
+});
+const pass1 = document.querySelector('#password1');
+const pass2 = document.querySelector('#password2');
+const btn1 = document.querySelector('#pass_view1');
+const btn2 = document.querySelector('#pass_view2');
+btn1.addEventListener('click', () => {
+  if (pass1.type === 'text') {
+    pass1.type = 'password';
+    btn1.className = 'btn_input eyes';
+  } else {
+    pass1.type = 'text';
+    btn1.className = 'btn_input eyes show';
+  }
+});
+btn2.addEventListener('click', () => {
+  if (pass2.type === 'text') {
+    pass2.type = 'password';
+    btn2.className = 'btn_input eyes';
+  } else {
+    pass2.type = 'text';
+    btn2.className = 'btn_input eyes show';
+  }
+});
+</script>
+</html>

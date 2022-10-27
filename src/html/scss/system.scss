@@ -1,0 +1,229 @@
+@charset "UTF-8";
+@import "variables";
+
+.common_wrap {
+  margin:0 auto;
+  padding-top:88px;
+  width:626px;
+  .system_img {
+    width:100%;
+    height:220px;
+    position:relative;
+    margin-bottom:20px;
+    &:before {
+      @include content;
+      width:320px;
+      height:220px;
+      position:absolute;
+      top:0;
+      left:50%;
+      transform: translateX(-50%);
+      background:url('#{$img_root_path}/com/img_system_check.png') no-repeat center center / 320px 220px;
+    }
+  }
+  .ooops_img {
+    width:100%;
+    height:240px;
+    position:relative;
+    margin-bottom:20px;
+    &:before {
+      @include content;
+      width:400px;
+      height:240px;
+      position:absolute;
+      top:0;
+      left:50%;
+      transform: translateX(-50%);
+      background:url('#{$img_root_path}/com/img_error_page.png') no-repeat center center / 400px 240px;
+    }
+  }
+  .server_img {
+    width:100%;
+    height:240px;
+    position:relative;
+    margin-bottom:20px;
+    &:before {
+      @include content;
+      width:400px;
+      height:240px;
+      position:absolute;
+      top:0;
+      left:50%;
+      transform: translateX(-50%);
+      background:url('#{$img_root_path}/com/img_error_server.png') no-repeat center center / 400px 240px;
+    }
+  }
+  .system_msg {
+    text-align:center;
+    span {
+      @include eng_font(light);
+      display:inline-block;
+      font-size:$font_base + 2px;
+      line-height:24px;
+      letter-spacing:-0.32px;
+      color:$body_text;
+      text-align:center;
+      margin-top:20px;
+      span {
+        @include eng_font(medium);
+        color:$main_color;
+        margin-top:0;
+      }
+    }
+  }
+  .system_box {
+    width:100%;
+    border-radius:20px;
+    padding:40px;
+    background:$white_color;
+    margin:20px 0 48px;
+    dl {
+      display:flex;
+      align-items: flex-start;
+      dt span {
+        display:inline-block;
+        width:80px;
+        height:32px;
+        border-radius:16px;
+        background:$main_color;
+        text-align:center;
+        @include eng_font(medium);
+        font-size:$font_base;
+        line-height:32px;
+        letter-spacing:-0.442px;
+        color:$white_color;
+        margin-right:12px;
+      }
+      & + dl {
+        margin-top:20px;
+      }
+    }
+    .system01 dd {
+      @include eng_font(semibold);
+      font-size:$font_base + 8px;
+      line-height:36px;
+      letter-spacing:-0.44px;
+      color:$body_text;
+      vertical-align: top;
+      span {
+        display:inline-block;
+        margin-top:4px;
+        @include eng_font(light);
+        font-size:$font_base;
+        line-height:20px;
+        letter-spacing:-0.28px;
+        color:$gray_color01;
+      }
+    }
+    .system02 dd {
+      @include eng_font(normal);
+      font-size:$font_base + 6px;
+      line-height:36px;
+      letter-spacing:-0.4px;
+      color:$body_text;
+      vertical-align: top;
+    }
+  }
+  .back {
+    width:200px;
+    margin:0 auto;
+    display:block;
+    span {
+      &:before {
+        @include content;
+        width:32px;
+        height:32px;
+      }
+    }
+  }
+}
+
+.mail_wrap01 {
+  margin:0 auto;
+  padding-top:182px;
+  width:560px;
+  .mail_img {
+    &:before {
+      @include content;
+      width:260px;
+      height:220px;
+      top:0;
+      left:50%;
+      transform: translateX(50%);
+      background:url('#{$img_root_path}/com/img_emoji_unsubscription.png') no-repeat center center / 260px 220px;
+    }
+  }
+  .mail_msg {
+    text-align:center;
+    margin-top:20px;
+    span {
+      display:inline-block;
+      margin-top:20px;
+      @include eng_font(medium);
+      font-size:$font_base + 6px;
+      line-height:24px;
+      letter-spacing:-0.4px;
+      color:$body_text;
+    }
+  }
+  .mail_box {
+    margin:20px 0;
+    width:560px;
+    height:84px;
+    border-radius:12px;
+    background:$white_color;
+    text-align:center;
+    span {
+      display:inline-block;
+      margin-top:20px;
+      @include eng_font(semibold);
+      font-size:$font_base + 12px;
+      line-height:36px;
+      letter-spacing:-0.52px;
+      color:$main_color;
+    }
+  }
+  .guide {
+    margin-bottom:48px;
+  }
+  .page_btn_wrap {
+    .btn {
+      width:200px;
+    }
+  }
+}
+
+.mail_wrap02 {
+  margin:0 auto;
+  padding-top:182px;
+  width:520px;
+  text-align:center;
+  .mail_img {
+    &:before {
+      @include content;
+      width:260px;
+      height:220px;
+      top:0;
+      left:50%;
+      background:url('#{$img_root_path}/com/img_unsubscription_complete.png') no-repeat center center / 260px 220px;
+    }
+  }
+  .mail_text {
+    margin-top:20px;
+    margin-bottom:48px;
+    @include eng_font(light);
+    font-size:$font_base + 2px;
+    line-height:24px;
+    letter-spacing:-0.6px;
+    color:$body_text;
+    span {
+      @include eng_font(medium);
+      color:$main_color;
+    }
+  }
+  .page_btn_wrap {
+    .btn {
+      width:200px;
+    }
+  }
+}

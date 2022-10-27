@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container">
+      <div class="page_header">
+        <h2 class="h2Type eng">SUPER FORUM</h2>
+        <button type="button" class="btn primary_line button_md view">
+          <span>View All Forum</span>
+        </button>
+      </div>
+      <div class="main_div">
+        <div class="con_div">
+
+          <!-- S : 최근 방문한 포럼 리스트 -->
+          <div class="recent">
+            <div class="tabs">
+              <div class="tabs_menu size_md">
+                <button type="button" class="active">
+                  <span>Recent Visit</span>
+                </button>
+                <button type="button">
+                  <span>Bookmarked Forum</span>
+                </button>
+              </div>
+              <!-- 최근 본 포럼이 있을 경우 expand로 alldelete 버튼을 보여줍니다. -->
+              <!-- 최근 본 포럼 리스트가 없는 경우 버튼 비활성화(hover 없음) -->
+              <button type="button" id="expand" class="btn_tab_con expand">
+                <span>Expand</span>
+              </button>
+              <!-- 확장된 상태에서는 텍스트, class가 close로 변경 -->
+              <!--
+              <button type="button" id="close" class="btn_tab_con close">
+                <span>Close</span>
+              </button>
+              -->
+              <div class="tabs_con">
+                <!-- 최근 본 포럼이 없을 경우
+                <div class="none_msg recent">
+                  <span>There are no recently visited forums.</span>
+                </div>
+                -->
+                <!-- 북마크된 포럼이 없을 경우
+                <div class="none_msg bookmark">
+                  <span>There are no recently visited forums.</span>
+                  <button type="button" class="btn primary_line login">
+                    <span>Login</span>
+                  </button>
+                </div>
+                -->
+                <ul class="recent_forum_list line01">
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>League of Legends</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo none"></span>
+                      <button type="button" class="forum_name">
+                        <span>Uma Museum Pretty Derby</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>Fortress M</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>RF online</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>Rimworld</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>Super Kongz : NFT</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>LG twins</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>3D art</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>Bali Surfers</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>Airport Tycoon</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>Real Farm</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>PUBG : Battleground</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>Keroro M</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>Honey Bang</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>CCR play</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                  <li>
+                    <div class="forum_info">
+                      <span class="forum_logo"></span>
+                      <button type="button" class="forum_name">
+                        <span>Musical Art Directer</span>
+                      </button>
+                    </div>
+                    <button type="button" class="close">
+                      <span class="a11y">삭제</span>
+                    </button>
+                  </li>
+                </ul>
+                <!-- 최근 본 포럼이 있을 경우 All delete 보여집니다. -->
+                <div class="trash">
+                  <button type="button">
+                    <span>All delete</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- E : 최근 방문한 포럼 리스트 -->
+
+          <!-- S : Post Ranking -->
+          <div class="post_ranking">
+            <div class="content_subtitle">
+              <h4 class="h4Type eng">Post Ranking</h4>
+              <div class="title_menu">
+                <button type="button" class="active text_btn">
+                  <span>Live</span>
+                </button>
+                <button type="button" class="text_btn">
+                  <span>Weekly</span>
+                </button>
+                <button type="button" class="text_btn">
+                  <span>Monthly</span>
+                </button>
+              </div>
+            </div>
+            <div class="nav_category">
+              <!-- default는 안보임 /  리스트가 우측으로 이동시 나타남 (좌측버튼도 동일적용)
+              <div class="btn_move left">
+                <button type="button" class="btn_post_category left">
+                  <span class="a11y">왼쪽으로 이동</span>
+                </button>
+              </div>
+              -->
+              <div class="btn_category">
+                <div class="slick-slider">
+                  <div class="slick-list">
+                    <div class="slick-track">
+                      <div class="slick-slide">
+                        <button type="button" class="post_categoty active">
+                          <span>All</span>
+                        </button>
+                        <button type="button" class="post_categoty">
+                          <span>Game</span>
+                        </button>
+                        <button type="button" class="post_categoty">
+                          <span>Celebrity</span>
+                        </button>
+                        <button type="button" class="post_categoty">
+                          <span>Sports</span>
+                        </button>
+                        <button type="button" class="post_categoty">
+                          <span>Travel</span>
+                        </button>
+                        <button type="button" class="post_categoty">
+                          <span>Food</span>
+                        </button>
+                        <button type="button" class="post_categoty">
+                          <span>Animal</span>
+                        </button>
+                        <button type="button" class="post_categoty">
+                          <span>Hobby</span>
+                        </button>
+                        <button type="button" class="post_categoty">
+                          <span>Life</span>
+                        </button>
+                        <button type="button" class="post_categoty">
+                          <span>Art</span>
+                        </button>
+                        <button type="button" class="post_categoty">
+                          <span>Cook</span>
+                        </button>
+                        <button type="button" class="post_categoty">
+                          <span>Dating</span>
+                        </button>
+                        <button type="button" class="post_categoty">
+                          <span>NFT</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="btn_move right">
+                <button type="button" class="btn_post_category right">
+                  <span class="a11y">오른쪽으로 이동</span>
+                </button>
+              </div>
+            </div>
+            <ul class="ranking_list">
+              <li>
+                <dl class="forum_thum_list small">
+                  <dt class="forum_thum_img"><img src="../../img/com/thumb.png">
+                    <!-- 순위는 1~3위까지만 -->
+                    <div class="rank">
+                      <span class="rank_badge_small gold"></span>
+                    </div>
+                    <!-- 뱃지는 최대 4개까지 -->
+                    <div class="best">
+                      <span class="post_badge_best live"></span>
+                    </div>
+                    <!-- 뱃지는 최대 2개까지 -->
+                    <div class="badge">
+                      <span class="post_badge new"></span>
+                      <span class="post_badge great"></span>
+                    </div>
+                    <div class="img_over">
+                      <div class="user_info">
+                        <div class="user_thum"><img src="../../img/com/user thumb.png"></div>
+                        <dl>
+                          <dt class="user_name">ghr4df31467a1b..</dt>
+                          <dd class="user_date">23h ago</dd>
+                        </dl>
+                      </div>
+                      <div class="text">How to get a ban pick in T1 is very simple. The first thing to reme mber when you play thing to reme mber</div>
+                    </div>
+                  </dt>
+                  <dd class="forum_thum_name">League of Legends</dd>
+                  <dd class="forum_thum_text"><span class="msg">How to win ban pT1  ck in to win ban pT1  ckban pT1  c in in T1<span class="num forum_thum_text_num" data="32">()</span></span></dd>
+                </dl>
+                <div class="forum_thum_list_info">
+                  <div class="emoji_group">
+                    <!-- 감정 이모지는 최대 3개까지 -->
+                    <span class="emoji like"></span>
+                    <span class="emoji fun"></span>
+                    <span class="emoji_num">926</span>
+                  </div>
+                  <div class="view_num">
+                    <span>38M</span>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <dl class="forum_thum_list small">
+                  <dt class="forum_thum_img"><img src="../../img/com/thumb.png">
+                    <div class="rank">
+                      <span class="rank_badge_small silver"></span>
+                    </div>
+                    <div class="best">
+                      <span class="post_badge_best live"></span>
+                    </div>
+                    <div class="badge">
+                      <span class="post_badge great"></span>
+                    </div>
+                    <div class="img_over">
+                      <div class="user_info">
+                        <div class="user_thum"><img src="../../img/com/user thumb.png"></div>
+                        <dl>
+                          <dt class="user_name">ghr4df31467a1b..</dt>
+                          <dd class="user_date">23h ago</dd>
+                        </dl>
+                      </div>
+                      <div class="text">How to get a ban pick in T1 is very simple. The first thing to reme mber when you play thing to reme mber</div>
+                    </div>
+                  </dt>
+                  <dd class="forum_thum_name">League of Legends</dd>
+                  <dd class="forum_thum_text"><span class="msg">How to win ban pT1  ck in to win ban <span class="num forum_thum_text_num">(32)</span></span></dd>
+                </dl>
+                <div class="forum_thum_list_info">
+                  <div class="emoji_group">
+                    <span class="emoji like"></span>
+                    <span class="emoji fun"></span>
+                    <span class="emoji_num">926</span>
+                  </div>
+                  <div class="view_num">
+                    <span>38M</span>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <dl class="forum_thum_list small">
+                  <dt class="forum_thum_img"><img src="../../img/com/thumb.png">
+                    <div class="rank">
+                      <span class="rank_badge_small bronze"></span>
+                    </div>
+                    <div class="best">
+                      <span class="post_badge_best live"></span>
+                    </div>
+                    <div class="badge">
+                      <span class="post_badge great"></span>
+                    </div>
+                    <div class="img_over">
+                      <div class="user_info">
+                        <div class="user_thum"><img src="../../img/com/user thumb.png"></div>
+                        <dl>
+                          <dt class="user_name">ghr4df31467a1b..</dt>
+                          <dd class="user_date">23h ago</dd>
+                        </dl>
+                      </div>
+                      <div class="text">How to get a ban pick in T1 is very simple. The first thing to reme mber when you play thing to reme mber</div>
+                    </div>
+                  </dt>
+                  <dd class="forum_thum_name">League of Legends</dd>
+                  <dd class="forum_thum_text"><span class="msg">How to win ban pick in T1<span class="num">(32)</span></span></dd>
+                </dl>
+                <div class="forum_thum_list_info">
+                  <div class="emoji_group">
+                    <span class="emoji like"></span>
+                    <span class="emoji fun"></span>
+                    <span class="emoji_num">926</span>
+                  </div>
+                  <div class="view_num">
+                    <span>38M</span>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <dl class="forum_thum_list small">
+                  <dt class="forum_thum_img"><img src="../../img/com/thumb.png">
+                    <div class="best">
+                      <span class="post_badge_best live"></span>
+                    </div>
+                    <div class="badge">
+                      <span class="post_badge great"></span>
+                    </div>
+                    <div class="img_over">
+                      <div class="user_info">
+                        <div class="user_thum"><img src="../../img/com/user thumb.png"></div>
+                        <dl>
+                          <dt class="user_name">ghr4df31467a1b..</dt>
+                          <dd class="user_date">23h ago</dd>
+                        </dl>
+                      </div>
+                      <div class="text">How to get a ban pick in T1 is very simple. The first thing to reme mber when you play thing to reme mber</div>
+                    </div>
+                  </dt>
+                  <dd class="forum_thum_name">League of Legends</dd>
+                  <dd class="forum_thum_text"><span class="msg">How to win ban pick in T1<span class="num">(32)</span></span></dd>
+                </dl>
+                <div class="forum_thum_list_info">
+                  <div class="emoji_group">
+                    <span class="emoji like"></span>
+                    <span class="emoji fun"></span>
+                    <span class="emoji_num">926</span>
+                  </div>
+                  <div class="view_num">
+                    <span>38M</span>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <dl class="forum_thum_list small">
+                  <dt class="forum_thum_img"><img src="../../img/com/thumb.png">
+                    <div class="best">
+                      <span class="post_badge_best live"></span>
+                    </div>
+                    <div class="badge">
+                      <span class="post_badge great"></span>
+                    </div>
+                    <div class="img_over">
+                      <div class="user_info">
+                        <div class="user_thum"><img src="../../img/com/user thumb.png"></div>
+                        <dl>
+                          <dt class="user_name">ghr4df31467a1b..</dt>
+                          <dd class="user_date">23h ago</dd>
+                        </dl>
+                      </div>
+                      <div class="text">How to get a ban pick in T1 is very simple. The first thing to reme mber when you play thing to reme mber</div>
+                    </div>
+                  </dt>
+                  <dd class="forum_thum_name">League of Legends</dd>
+                  <dd class="forum_thum_text"><span class="msg">How to win ban pick in T1<span class="num">(32)</span></span></dd>
+                </dl>
+                <div class="forum_thum_list_info">
+                  <div class="emoji_group">
+                    <span class="emoji like"></span>
+                    <span class="emoji fun"></span>
+                    <span class="emoji_num">926</span>
+                  </div>
+                  <div class="view_num">
+                    <span>38M</span>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <dl class="forum_thum_list small">
+                  <dt class="forum_thum_img"><img src="../../img/com/thumb.png">
+                    <div class="best">
+                      <span class="post_badge_best live"></span>
+                    </div>
+                    <div class="badge">
+                      <span class="post_badge great"></span>
+                    </div>
+                    <div class="img_over">
+                      <div class="user_info">
+                        <div class="user_thum"><img src="../../img/com/user thumb.png"></div>
+                        <dl>
+                          <dt class="user_name">ghr4df31467a1b..</dt>
+                          <dd class="user_date">23h ago</dd>
+                        </dl>
+                      </div>
+                      <div class="text">How to get a ban pick in T1 is very simple. The first thing to reme mber when you play thing to reme mber</div>
+                    </div>
+                  </dt>
+                  <dd class="forum_thum_name">League of Legends</dd>
+                  <dd class="forum_thum_text"><span class="msg">How to win ban pick in T1<span class="num">(32)</span></span></dd>
+                </dl>
+                <div class="forum_thum_list_info">
+                  <div class="emoji_group">
+                    <span class="emoji like"></span>
+                    <span class="emoji fun"></span>
+                    <span class="emoji_num">926</span>
+                  </div>
+                  <div class="view_num">
+                    <span>38M</span>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <dl class="forum_thum_list small">
+                  <dt class="forum_thum_img"><img src="../../img/com/thumb.png">
+                    <div class="best">
+                      <span class="post_badge_best live"></span>
+                    </div>
+                    <div class="badge">
+                      <span class="post_badge great"></span>
+                    </div>
+                    <div class="img_over">
+                      <div class="user_info">
+                        <div class="user_thum"><img src="../../img/com/user thumb.png"></div>
+                        <dl>
+                          <dt class="user_name">ghr4df31467a1b..</dt>
+                          <dd class="user_date">23h ago</dd>
+                        </dl>
+                      </div>
+                      <div class="text">How to get a ban pick in T1 is very simple. The first thing to reme mber when you play thing to reme mber</div>
+                    </div>
+                  </dt>
+                  <dd class="forum_thum_name">League of Legends</dd>
+                  <dd class="forum_thum_text"><span class="msg">How to win ban pick in T1<span class="num">(32)</span></span></dd>
+                </dl>
+                <div class="forum_thum_list_info">
+                  <div class="emoji_group">
+                    <span class="emoji like"></span>
+                    <span class="emoji fun"></span>
+                    <span class="emoji_num">926</span>
+                  </div>
+                  <div class="view_num">
+                    <span>38M</span>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <dl class="forum_thum_list small">
+                  <dt class="forum_thum_img"><img src="../../img/com/thumb.png">
+                    <div class="best">
+                      <span class="post_badge_best live"></span>
+                    </div>
+                    <div class="badge">
+                      <span class="post_badge great"></span>
+                    </div>
+                    <div class="img_over">
+                      <div class="user_info">
+                        <div class="user_thum"><img src="../../img/com/user thumb.png"></div>
+                        <dl>
+                          <dt class="user_name">ghr4df31467a1b..</dt>
+                          <dd class="user_date">23h ago</dd>
+                        </dl>
+                      </div>
+                      <div class="text">How to get a ban pick in T1 is very simple. The first thing to reme mber when you play thing to reme mber</div>
+                    </div>
+                  </dt>
+                  <dd class="forum_thum_name">League of Legends</dd>
+                  <dd class="forum_thum_text"><span class="msg">How to win ban pick in T1<span class="num">(32)</span></span></dd>
+                </dl>
+                <div class="forum_thum_list_info">
+                  <div class="emoji_group">
+                    <span class="emoji like"></span>
+                    <span class="emoji fun"></span>
+                    <span class="emoji_num">926</span>
+                  </div>
+                  <div class="view_num">
+                    <span>38M</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- E : Post Ranking -->
+
+          <!-- S : Forum Ranking -->
+          <div class="forum_ranking">
+            <div class="content_subtitle">
+              <h4 class="h4Type eng">Forum Ranking</h4>
+              <div class="title_menu">
+                <button type="button" class="text_btn">
+                  <span>Live</span>
+                </button>
+                <button type="button" class="active text_btn">
+                  <span>Weekly</span>
+                </button>
+                <button type="button" class="text_btn">
+                  <span>Monthly</span>
+                </button>
+              </div>
+            </div>
+            <div class="forum_swiper">
+              <div class="slick-slider">
+                <button type="button" class="swiper_button left">
+                  <span class="a11y">좌측으로</span>
+                </button>
+                <div class="slick-list">
+                  <div class="slick-track">
+                    <div class="slick-slide">
+                      <div>
+                        <img src="../../img/com/swiper_thumbnail.png">
+                        <div class="swiper_badge">
+                          <span class="rank_badge_big gold"></span>
+                          <span class="ranknum down">23</span>
+                        </div>
+                        <div class="swiper_over">
+                          <span class="category">PHOTO</span>
+                          <dl>
+                            <dt>Black & White Nights</dt>
+                            <dd>The 5 owners of “Black & White Nights : The Afterparty” will be the first five people to select any piece they like .. from “Black & White Days” before I release it to the public, and I’ll give them that piece for free.</dd>
+                          </dl>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="swiper_button right">
+                  <span class="a11y">우측으로</span>
+                </button>
+              </div>
+            </div>
+            <ul class="forum_list">
+              <li>
+                <div class="forum_list_img"><img src="../../img/com/post_thumb.png"></div>
+                <dl>
+                  <dt>omgkirby Genesis</dt>
+                  <dd class="forum_title"><span class="forum_title_text">omgkirby GENESIS #356</span><span class="forum_comment">(32)</span></dd>
+                  <dd class="forum_name"><span>Writer Name</span><span>1h ago</span></dd>
+                </dl>
+                <div class="emoji_group">
+                  <span class="emoji like"></span>
+                  <span class="emoji devil"></span>
+                  <span class="emoji fun"></span>
+                  <span class="emoji_num">1,320</span>
+                </div>
+                <div class="view_num">
+                  <span>3,467</span>
+                </div>
+              </li>
+              <li>
+                <div class="forum_list_img"><img src="../../img/com/post_thumb.png"></div>
+                <dl>
+                  <dt>omgkirby Genesis</dt>
+                  <dd class="forum_title"><span class="forum_title_text">omgkirby GENESIS #1113 sfsdfsfsdfsdfomgkirby GENESIS #1113omgkirby GENESIS #1113o</span><span class="forum_comment">(2)</span></dd>
+                  <dd class="forum_name"><span>Writer Name</span><span>1h ago</span></dd>
+                </dl>
+                <div class="emoji_group">
+                  <span class="emoji like"></span>
+                  <span class="emoji devil"></span>
+                  <span class="emoji fun"></span>
+                  <span class="emoji_num">1,320</span>
+                </div>
+                <div class="view_num">
+                  <span>3,467</span>
+                </div>
+              </li>
+              <li>
+                <div class="forum_list_img"><img src="../../img/com/post_thumb.png"></div>
+                <dl>
+                  <dt>omgkirby Genesis</dt>
+                  <dd class="forum_title"><span class="forum_title_text">omgkirby GENESIS #356</span><span class="forum_comment">(32)</span></dd>
+                  <dd class="forum_name"><span>Writer Name</span><span>1h ago</span></dd>
+                </dl>
+                <div class="emoji_group">
+                  <span class="emoji like"></span>
+                  <span class="emoji devil"></span>
+                  <span class="emoji fun"></span>
+                  <span class="emoji_num">1,320</span>
+                </div>
+                <div class="view_num">
+                  <span>3,467</span>
+                </div>
+              </li>
+              <li>
+                <div class="forum_list_img"><img src="../../img/com/post_thumb.png"></div>
+                <dl>
+                  <dt>omgkirby Genesis</dt>
+                  <dd class="forum_title"><span class="forum_title_text">omgkirby GENESIS #356</span><span class="forum_comment">(32)</span></dd>
+                  <dd class="forum_name"><span>Writer Name</span><span>1h ago</span></dd>
+                </dl>
+                <div class="emoji_group">
+                  <span class="emoji like"></span>
+                  <span class="emoji devil"></span>
+                  <span class="emoji fun"></span>
+                  <span class="emoji_num">1,320</span>
+                </div>
+                <div class="view_num">
+                  <span>3,467</span>
+                </div>
+              </li>
+              <li>
+                <div class="forum_list_img"><img src="../../img/com/post_thumb.png"></div>
+                <dl>
+                  <dt>omgkirby Genesis</dt>
+                  <dd class="forum_title"><span class="forum_title_text">omgkirby GENESIS #356</span><span class="forum_comment">(32)</span></dd>
+                  <dd class="forum_name"><span>Writer Name</span><span>1h ago</span></dd>
+                </dl>
+                <div class="emoji_group">
+                  <span class="emoji like"></span>
+                  <span class="emoji devil"></span>
+                  <span class="emoji fun"></span>
+                  <span class="emoji_num">1,320</span>
+                </div>
+                <div class="view_num">
+                  <span>3,467</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- E : Forum Ranking -->
+
+          <!-- S : Simulation -->
+          <div class="board_list">
+            <div class="content_subtitle">
+              <h4 class="h4Type eng">Simulation</h4>
+              <div class="btn_right_align">
+                <div class="count_group">
+                  <span class="forum_count">135</span>
+                  <span class="post_count">23,242</span>
+                  <span class="comment_count">646,348</span>
+                </div>
+                <div class="title_menu">
+                  <button type="button" class="text_btn">
+                    <span>See all</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <ul class="board_thum">
+              <li>
+                <dl>
+                  <dt>
+                    <div class="badge">
+                      <span class="forum_badge new"></span>
+                      <span class="forum_badge excellent"></span>
+                      <span class="forum_badge best_live_simple"></span>
+                      <span class="forum_badge recommend_forum"></span>
+                    </div>
+                    <img src="../../img/com/forum_thumb_01.png">
+                  </dt>
+                  <dd class="simul_title">YOMIURI GIANTS Official Fan Board</dd>
+                  <dd class="simul_text">Let’s follow their own league, the big giant of Japanese baseball! No one can stop us.</dd>
+                </dl>
+              </li>
+              <li>
+                <dl>
+                  <dt><img src="../../img/com/forum_thumb_01.png"></dt>
+                  <dd class="simul_title">CyberKongz - Forum</dd>
+                  <dd class="simul_text">CyberKongz are unique and randomly generated 2D/3D NFT Social Avatars for your online experiences. Some appear normal. Some look weirdsfsdfsfsfdf.</dd>
+                </dl>
+              </li>
+              <li>
+                <dl>
+                  <dt><img src="../../img/com/forum_thumb_01.png"></dt>
+                  <dd class="simul_title">YOMIURI GIANTS Official Fan Board</dd>
+                  <dd class="simul_text">Let’s follow their own league, the big giant of Japanese baseball! No one can stop us.</dd>
+                </dl>
+              </li>
+              <li>
+                <dl>
+                  <dt><img src="../../img/com/forum_thumb_01.png"></dt>
+                  <dd class="simul_title">YOMIURI GIANTS Official Fan Board</dd>
+                  <dd class="simul_text">Let’s follow their own league, the big giant of Japanese baseball! No one can stop us.</dd>
+                </dl>
+              </li>
+              <li>
+                <dl>
+                  <dt><img src="../../img/com/forum_thumb_01.png"></dt>
+                  <dd class="simul_title">YOMIURI GIANTS Official Fan Board</dd>
+                  <dd class="simul_text">Let’s follow their own league, the big giant of Japanese baseball! No one can stop us.</dd>
+                </dl>
+              </li>
+              <li>
+                <dl>
+                  <dt><img src="../../img/com/forum_thumb_01.png"></dt>
+                  <dd class="simul_title">YOMIURI GIANTS Official Fan Board</dd>
+                  <dd class="simul_text">Let’s follow their own league, the big giant of Japanese baseball! No one can stop us.</dd>
+                </dl>
+              </li>
+            </ul>
+          </div>
+          <!-- E : Simulation -->
+
+           <!-- S : NFT -->
+           <div class="board_list">
+            <div class="content_subtitle">
+              <h4 class="h4Type eng">NFT</h4>
+              <div class="btn_right_align">
+                <div class="count_group">
+                  <span class="forum_count">650</span>
+                  <span class="post_count">83,009</span>
+                  <span class="comment_count">1,646,348</span>
+                </div>
+                <div class="title_menu">
+                  <button type="button" class="text_btn">
+                    <span>See all</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <ul class="board_thum">
+              <li>
+                <dl>
+                  <dt>
+                    <div class="badge">
+                      <span class="forum_badge new"></span>
+                      <span class="forum_badge excellent"></span>
+                      <span class="forum_badge best_live_simple"></span>
+                      <span class="forum_badge recommend_forum"></span>
+                    </div>
+                    <img src="../../img/com/forum_thumb_01.png">
+                  </dt>
+                  <dd class="simul_title">YOMIURI GIANTS Official Fan Board</dd>
+                  <dd class="simul_text">Let’s follow their own league, the big giant of Japanese baseball! No one can stop us.</dd>
+                </dl>
+              </li>
+              <li>
+                <dl>
+                  <dt><img src="../../img/com/forum_thumb_01.png"></dt>
+                  <dd class="simul_title">CyberKongz - Forum</dd>
+                  <dd class="simul_text">CyberKongz are unique and randomly generated 2D/3D NFT Social Avatars for your online experiences. Some appear normal. Some look weirdsfsdfsfsfdf.</dd>
+                </dl>
+              </li>
+              <li>
+                <dl>
+                  <dt><img src="../../img/com/forum_thumb_01.png"></dt>
+                  <dd class="simul_title">YOMIURI GIANTS Official Fan Board</dd>
+                  <dd class="simul_text">Let’s follow their own league, the big giant of Japanese baseball! No one can stop us.</dd>
+                </dl>
+              </li>
+              <li>
+                <dl>
+                  <dt><img src="../../img/com/forum_thumb_01.png"></dt>
+                  <dd class="simul_title">YOMIURI GIANTS Official Fan Board</dd>
+                  <dd class="simul_text">Let’s follow their own league, the big giant of Japanese baseball! No one can stop us.</dd>
+                </dl>
+              </li>
+              <li>
+                <dl>
+                  <dt><img src="../../img/com/forum_thumb_01.png"></dt>
+                  <dd class="simul_title">YOMIURI GIANTS Official Fan Board</dd>
+                  <dd class="simul_text">Let’s follow their own league, the big giant of Japanese baseball! No one can stop us.</dd>
+                </dl>
+              </li>
+              <li>
+                <dl>
+                  <dt><img src="../../img/com/forum_thumb_01.png"></dt>
+                  <dd class="simul_title">YOMIURI GIANTS Official Fan Board</dd>
+                  <dd class="simul_text">Let’s follow their own league, the big giant of Japanese baseball! No one can stop us.</dd>
+                </dl>
+              </li>
+            </ul>
+          </div>
+          <!-- E : NFT -->
+        </div>
+        <div class="right_div">
+
+          <!-- S : What do you like -->
+          <div class="what_like">
+            <dl class="what_like_title">
+              <dt>What do you like?</dt>
+              <dd>Enjoy various forums or create your<br/>own forum and communicate freely.</dd>
+            </dl>
+            <div class="posts like_num">
+              <dl>
+                <dt>40,523,423</dt>
+                <dd>posts</dd>
+              </dl>
+            </div>
+            <div class="comments like_num">
+              <dl>
+                <dt>1,936,820,923</dt>
+                <dd>comments</dd>
+              </dl>
+            </div>
+            <button type="button" class="btn primary button_md forum_creat">
+              <span>Create a Forum</span>
+            </button>
+          </div>
+          <!-- E : What do you like -->
+
+          <!-- S : Chat -->
+          <div class="main_chat">
+            <div class="main_chat_title">
+              <div class="title on">Chat</div>
+              <div class="btn_group">
+                <button type="button" class="expand">
+                  <span class="a11y">확장</span>
+                </button>
+                <button type="button" class="logout">
+                  <span class="a11y">로그아웃</span>
+                </button>
+              </div>
+            </div>
+            <div class="main_chat_list">
+              <div class="main_chat_over"></div>
+              <ul>
+                <li>
+                  <div class="chat_profile"><img src="../../img/com/chat.png"></div>
+                  <div class="ballon">
+                    <span class="chat_name">Cherry Blossom</span>
+                    <span class="chat_con">Hi! Nice to meet you 😊</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="chat_profile"><img src="../../img/com/chat.png"></div>
+                  <div class="ballon">
+                    <span class="chat_name">Cherry Blossom</span>
+                    <span class="chat_con">Hi! Nice to meet you 😊</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="chat_profile"><img src="../../img/com/chat.png"></div>
+                  <div class="ballon">
+                    <span class="chat_name">Cherry Blossom</span>
+                    <span class="chat_con">Hi! Nice to meet you 😊</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="chat_profile"><img src="../../img/com/chat.png"></div>
+                  <div class="ballon">
+                    <span class="chat_name">Cherry Blossom</span>
+                    <span class="chat_con">Hi! Nice to meet you 😊</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="chat_profile"><img src="../../img/com/chat.png"></div>
+                  <div class="ballon">
+                    <span class="chat_name">Cherry Blossom</span>
+                    <span class="chat_con">Hi! Nice to meet you 😊</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="chat_profile"><img src="../../img/com/chat.png"></div>
+                  <div class="ballon">
+                    <span class="chat_name">Cherry Blossom</span>
+                    <span class="chat_con">Hi! Nice to meet you 😊</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="chat_profile"><img src="../../img/com/chat.png"></div>
+                  <div class="ballon">
+                    <span class="chat_name">Cherry Blossom</span>
+                    <span class="chat_con">Hi! Nice to meet you 😊</span>
+                  </div>
+                </li>
+                <li class="my_chat">
+                  <div class="ballon">
+                    <span class="chat_name">Cherry Blossom</span>
+                    <span class="chat_con">Hello~</span>
+                  </div>
+                  <div class="chat_profile"><img src="../../img/com/chat.png"></div>
+                </li>
+              </ul>
+            </div>
+            <div class="main_chat_form">
+              <div class="main_chat_setting">
+                <ul>
+                  <li>
+                    <button type="button">
+                      <span>👋Hello~</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button">
+                      <span>🎉Congratulations!</span>
+                    </button>
+                  </li>
+                </ul>
+                <button type="button" class="input_setting">
+                  <span class="a11y">설정</span>
+                </button>
+              </div>
+              <div class="main_chat_input">
+                <div class="chat_profile"><img src="../../img/com/chat.png"></div>
+                <div class="form_wrap">
+                  <span class="form_cell form_input input_lg">
+                    <input type="text" value="Hellow~">
+                  </span>
+                </div>
+                <button type="button" class="input_submit">
+                  <span class="a11y">입력</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- E : Chat -->
+
+          <!-- S : Slide Banner -->
+          <div class="slide_banner">
+            <button type="button" class="slide_btn left">
+              <span class="a11y">왼쪽으로</span>
+            </button>
+            <div class="slide_img">
+              <img src="../../img/com/banner_img02.png">
+            </div>
+            <button type="button" class="slide_btn right">
+              <span class="a11y">오른쪽으로</span>
+            </button>
+            <div class="slide_dot">
+              <button type="button" class="dot"></button>
+              <button type="button" class="dot on"></button>
+              <button type="button" class="dot"></button>
+              <button type="button" class="dot"></button>
+            </div>
+          </div>
+          <!-- E : Slide Banner -->
+
+          <!-- S : New Forum -->
+          <div class="new_forum">
+            <div class="content_subtitle">
+              <h4 class="h4Type eng">New Forums</h4>
+              <div class="title_menu">
+                <button type="button" class="text_btn">
+                  <span>See All</span>
+                </button>
+              </div>
+            </div>
+            <ul class="new_forum_list">
+              <li>
+                <div class="new_forum_img"><img src="../../img/com/right_thumb.png"></div>
+                <dl>
+                  <dt><span>SPORTS</span></dt>
+                  <dd>SEOUL LG TWINS  : wins Fan Board SEOUL LG TWINS</dd>
+                </dl>
+              </li>
+              <li>
+                <div class="new_forum_img"><img src="../../img/com/right_thumb.png"></div>
+                <dl>
+                  <dt><span>SPORTS</span></dt>
+                  <dd>SEOUL LG TWINS  : wins Fan Board</dd>
+                </dl>
+              </li>
+              <li>
+                <div class="new_forum_img"><img src="../../img/com/right_thumb.png"></div>
+                <dl>
+                  <dt><span>SPORTS</span></dt>
+                  <dd>SEOUL LG TWINS  : wins Fan Board</dd>
+                </dl>
+              </li>
+              <li>
+                <div class="new_forum_img"><img src="../../img/com/right_thumb.png"></div>
+                <dl>
+                  <dt><span>SPORTS</span></dt>
+                  <dd>SEOUL LG TWINS  : wins Fan Board</dd>
+                </dl>
+              </li>
+              <li>
+                <div class="new_forum_img"><img src="../../img/com/right_thumb.png"></div>
+                <dl>
+                  <dt><span>SPORTS</span></dt>
+                  <dd>SEOUL LG TWINS  : wins Fan Board</dd>
+                </dl>
+              </li>
+              <li>
+                <div class="new_forum_img"><img src="../../img/com/right_thumb.png"></div>
+                <dl>
+                  <dt><span>SPORTS</span></dt>
+                  <dd>SEOUL LG TWINS  : wins Fan Board</dd>
+                </dl>
+              </li>
+              <li>
+                <div class="new_forum_img"><img src="../../img/com/right_thumb.png"></div>
+                <dl>
+                  <dt><span>SPORTS</span></dt>
+                  <dd>SEOUL LG TWINS  : wins Fan Board</dd>
+                </dl>
+              </li>
+              <li>
+                <div class="new_forum_img"><img src="../../img/com/right_thumb.png"></div>
+                <dl>
+                  <dt><span>SPORTS</span></dt>
+                  <dd>SEOUL LG TWINS  : wins Fan Board</dd>
+                </dl>
+              </li>
+            </ul>
+          </div>
+          <!-- E : New Forum -->
+
+          <!-- S : Today Forum -->
+          <div class="today_forum">
+            <div class="content_subtitle">
+              <h4 class="h4Type eng">Today’s Forum</h4>
+            </div>
+            <div class="today_forum_thum">
+              <img src="../../img/com/today_thum.jpg">
+              <div class="today_forum_thum_title">
+                <span>TWICE - Cheer Up</span>
+              </div>
+            </div>
+            <ul>
+              <li>
+                <div class="new_forum_img"><img src="../../img/com/today_list.jpg"></div>
+                <dl>
+                  <dt><span class="list_title">My favorite album is what is love? My favorite </span><span class="list_num">(232)</span></dt>
+                  <dd>
+                    <div class="emoji_group">
+                      <span class="emoji like"></span>
+                      <span class="emoji fun"></span>
+                      <span class="emoji_num">926</span>
+                    </div>
+                    <div class="view_num">
+                      <span>3,467</span>
+                    </div>
+                  </dd>
+                </dl>
+              </li>
+              <li>
+                <div class="new_forum_img"><img src="../../img/com/today_list.jpg"></div>
+                <dl>
+                  <dt><span class="list_title">My favorite album is what is love?</span><span class="list_num">(232)</span></dt>
+                  <dd>
+                    <div class="emoji_group">
+                      <span class="emoji like"></span>
+                      <span class="emoji fun"></span>
+                      <span class="emoji_num">926</span>
+                    </div>
+                    <div class="view_num">
+                      <span>3,467</span>
+                    </div>
+                  </dd>
+                </dl>
+              </li>
+              <li>
+                <div class="new_forum_img"><img src="../../img/com/today_list.jpg"></div>
+                <dl>
+                  <dt><span class="list_title">My favorite album is what is love?</span><span class="list_num">(232)</span></dt>
+                  <dd>
+                    <div class="emoji_group">
+                      <span class="emoji like"></span>
+                      <span class="emoji fun"></span>
+                      <span class="emoji_num">926</span>
+                    </div>
+                    <div class="view_num">
+                      <span>3,467</span>
+                    </div>
+                  </dd>
+                </dl>
+              </li>
+              <li>
+                <div class="new_forum_img"><img src="../../img/com/today_list.jpg"></div>
+                <dl>
+                  <dt><span class="list_title">My favorite album is what is love?</span><span class="list_num">(232)</span></dt>
+                  <dd>
+                    <div class="emoji_group">
+                      <span class="emoji like"></span>
+                      <span class="emoji fun"></span>
+                      <span class="emoji_num">926</span>
+                    </div>
+                    <div class="view_num">
+                      <span>3,467</span>
+                    </div>
+                  </dd>
+                </dl>
+              </li>
+              <li>
+                <div class="new_forum_img"><img src="../../img/com/today_list.jpg"></div>
+                <dl>
+                  <dt><span class="list_title">My favorite album is what is love?</span><span class="list_num">(232)</span></dt>
+                  <dd>
+                    <div class="emoji_group">
+                      <span class="emoji like"></span>
+                      <span class="emoji fun"></span>
+                      <span class="emoji_num">926</span>
+                    </div>
+                    <div class="view_num">
+                      <span>3,467</span>
+                    </div>
+                  </dd>
+                </dl>
+              </li>
+            </ul>
+          </div>
+          <!-- E : Today Forum -->
+
+        </div>
+      </div>
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+</html>

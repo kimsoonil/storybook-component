@@ -1,0 +1,80 @@
+{
+  "title": "언어변환 테스트",
+  "popup": {
+    "contents_subscribe": "구독",
+    "contents_unsubscribe": "구독취소"
+  },
+  "lang": "{{testname}}",
+  "label": {
+    "gotomain": "메인",
+    "login": "로그인",
+    "privacy": "프라이버시",
+    "market": "마켓",
+    "confirm": "확인",
+    "email": "이메일",
+    "staylogin": "Stay signed in",
+    "account": {
+      "change": "Change"
+    },
+    "signup": {
+      "email": "이메일",
+      "phone": "전화번호",
+      "ID": "아이디"
+    },
+    "userinfo": {
+      "name": "이름",
+      "pwd": "비밀번호",
+      "pwdConfirm": "비밀번호 확인",
+      "nat": "국가",
+      "join": "가입하기"
+    },
+    "emailauth": {
+      "auth": "확인",
+      "back": "취소",
+      "signup": "가입"
+    },
+    "terms": {
+      "all": "모두 동의.",
+      "agree": "동의",
+      "disagree": "동의안함",
+      "contents_privacy": "프라이버시 동의",
+      "contents_market": "마켓 동의"
+    },
+    "forum": {
+      "history": {
+        "login": {
+          "nobookmarked": "구독한 포럼 없음"
+        },
+        "logout": {
+          "auth": "로그인이 필요",
+          "bookmark": "최근 방문한 포럼 없음"
+        }
+      },
+      "viewallforum": "View All forum"
+    }
+  },
+  "validation": {
+    "require": "{{require}} is required",
+    "userinfo": {
+      "id": "id",
+      "email_format": "email format error",
+      "email_check": "email 중복체크 해주세요",
+      "name_maxLength": "이름 maxlength",
+      "password_minLength": "비밀번호 minLength.",
+      "password_maxLength": "비밀번호 maxLength",
+      "password_validSC1": "비밀번호 validSC1",
+      "password_validSC2": "비밀번호 validSC2",
+      "password_confirmPwd": "비밀번호 다름"
+    },
+    "emailauth": {
+      "email": "이메일 format error",
+      "phone": "전화번호 format error"
+    },
+    "forum": {
+      "uploadfile": {
+        "maxsize": "Images cannot exceed 10mb.",
+        "invalidfile": "only the extensions jpg, gif, and png are allowed."
+      }
+    }
+  }
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    #modal{
+      display:block;
+    }
+    .modal_popup {
+      display:block;
+    }
+  </style>
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container">
+
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+
+<div id="modal"></div>
+<!-- Reasons for Ban -->
+<div class="modal_popup modal_text" style="width:480px;">
+  <div class="modal_con reason">
+    <button type="button" class="close"></button>
+    <h2 class="modal_title">Reasons for Ban</h2>
+    <div class="bg_con ">
+      <div class="forum_reason_title">Enter a reason to ban this member.</div>
+      <div class="text_area">
+        <textarea placeholder="Please enter a reason to ban"></textarea>
+        <!-- "0"은 회색이였다가 글 쓰기 시작하면 black class가 붙으면서 검은색으로 바뀝니다. -->
+        <span class="num"><span class="black">0</span>/20</span>
+      </div>
+    </div>
+    <div class="popup_btn_wrap right">
+      <button type="button" class="btn default button_lg">
+        <span>cancel</span>
+      </button>
+      <button type="button" class="btn primary button_lg">
+        <span>Save</span>
+      </button>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+</html>

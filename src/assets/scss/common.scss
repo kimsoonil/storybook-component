@@ -24,6 +24,12 @@ $black: #000;
   }
   color: $color;
 }
+.fliter-position {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  z-index: 1000;
+}
 .root-center {
   width: 100vw;
   height: 100vh;
@@ -74,7 +80,12 @@ $black: #000;
 .m-4 {
   margin: 32px;
 }
-
+.mr-6 {
+  margin-right: 48px;
+}
+.mr-3 {
+  margin-right: 24px;
+}
 .p-1 {
   padding: 8px;
 }
@@ -86,4 +97,45 @@ $black: #000;
 }
 .p-4 {
   padding: 32px;
+}
+.no-data {
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  margin-top: 40px;
+  &-title {
+    font-family: 'Poppins-Bold';
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 48px;
+    color: #242a3c;
+  }
+  &-content {
+    font-family: 'Poppins-SemiBold';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 18px;
+    color: #242a3c;
+  }
+}
+.color {
+  &-BRONZE {
+    color: #ec7a12;
+  }
+  &-SILVER {
+    color: #b5b5b5;
+  }
+  &-GOLD {
+    color: #ffc700;
+  }
+  &-PLATINUM {
+    color: #00877f;
+  }
+  &-DIAMOND {
+    color: #0017e3;
+  }
+  &-LEGEND {
+    color: #8701fe;
+  }
 }

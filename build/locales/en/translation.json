@@ -1,0 +1,85 @@
+{
+  "title": "language test",
+  "popup": {
+    "contents_subscribe": "Subscribed to the forum.",
+    "contents_unsubscribe": "I have unsubscribed from the forum."
+  },
+  "lang": "{{testname}}",
+  "label": {
+    "gotomain": "Go to Main",
+    "login": "Login",
+    "privacy": "privacy",
+    "market": "market",
+    "confirm": "confirm",
+    "email": "email",
+    "staylogin": "Stay signed in",
+    "account": {
+      "change": "Change"
+    },
+    "signup": {
+      "email": "E-MAIL",
+      "phone": "PHONE-NUMBER",
+      "ID": "ID"
+    },
+    "userinfo": {
+      "name": "Name",
+      "pwd": "Password",
+      "pwdConfirm": "Password Confirm",
+      "nat": "Nationality",
+      "join": "Join Membership"
+    },
+    "emailauth": {
+      "auth": "Authenticate",
+      "back": "cancel",
+      "signup": "next"
+    },
+    "terms": {
+      "all": "Everyone agrees.",
+      "agree": "Agree",
+      "disagree": "Disagree",
+      "contents_privacy": "By creating on account you agree to Super club’s Privacy Policy and Terms of use.",
+      "contents_market": "By creating on account you agree to Super club’s Marketing policies"
+    },
+    "forum": {
+      "history": {
+        "login": {
+          "nobookmarked": "There are no bookmarked forums."
+        },
+        "logout": {
+          "auth": "Please log in first to view bookmarked forums",
+          "bookmark": "There are no recently visited forums"
+        }
+      },
+      "viewallforum": "View All forum"
+    }
+  },
+  "validation": {
+    "recapcha": "Please verify security.",
+    "require": "{{require}} is required",
+    "userinfo": {
+      "id": "id",
+      "email_format": "invalid email format",
+      "email_check": "email check error",
+      "name_maxLength": "name maxlength",
+      "password_minLength": "password minlength",
+      "password_maxLength": "password maxlength",
+      "password_validSC1": "password validSC1",
+      "password_validSC2": "password validSC2",
+      "password_confirmPwd": "password do not match",
+      "password": {
+        "invalid": "invalid format",
+        "notmatch": "The new password and confirmation do not match"
+      }
+    },
+    "emailauth": {
+      "email": "email format error",
+      "phone": "phone-number format error"
+    },
+    "forum": {
+      "uploadfile": {
+        "maxsize": "Images cannot exceed 10mb.",
+        "invalidfile": "only the extensions jpg, gif, and png are allowed."
+      }
+    }
+  }
+}

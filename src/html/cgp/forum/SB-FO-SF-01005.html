@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    #modal{
+      display:block;
+    }
+    .modal_popup {
+      display:block;
+    }
+  </style>
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container">
+
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+
+<div id="modal"></div>
+<!-- All Forums -->
+<div class="modal_popup modal_text" style="width:1000px;">
+  <div class="forum_con">
+    <button type="button" class="close"></button>
+    <h2 class="modal_title">All Forums</h2>
+    <ul class="pop_category">
+      <li>
+        <button type="button" class="on">
+          <span>All</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>Game</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>Celebrity</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>Sports</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>Travel</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>Food</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>Animal</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>Hobby</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>Life</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>Art</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>Cook</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>Dating</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>RPG Game</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>NFT</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>Action</span>
+        </button>
+      </li>
+      <li>
+        <button type="button">
+          <span>Puzzle</span>
+        </button>
+      </li>
+    </ul>
+    <div class="pop_category_search">
+      <div class="search_title">Total <span class="search_num">1,500</span></div>
+      <div class="search_terms">
+        <div class="pop_terms">
+          <div class="radio_button">
+            <div class="radio_wrap six">
+              <span class="form_cell btn_radio size_md">
+                <input type="radio" id="radio10">
+                <label for="radio10">
+                  <span>ABC</span>
+                </label>
+              </span>
+              <span class="form_cell btn_radio size_md">
+                <input type="radio" id="radio11">
+                <label for="radio11">
+                  <span>Live</span>
+                </label>
+              </span>
+              <span class="form_cell btn_radio size_md">
+                <input type="radio" id="radio12" checked>
+                <label for="radio12">
+                  <span>Weekly</span>
+                </label>
+              </span>
+              <span class="form_cell btn_radio size_md">
+                <input type="radio" id="radio13">
+                <label for="radio13">
+                  <span>Monthly</span>
+                </label>
+              </span>
+              <span class="form_cell btn_radio size_md">
+                <input type="radio" id="radio14">
+                <label for="radio14">
+                  <span>New</span>
+                </label>
+              </span>
+              <span class="form_cell btn_radio size_md">
+                <input type="radio" id="radio15">
+                <label for="radio15">
+                  <span>Rising</span>
+                </label>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="pop_search">
+          <div class="form_wrap">
+            <span class="form_cell form_input search">
+              <input type="text" placeholder="Search...">
+              <button class="btn_input input_search">
+                <span class="a11y">검색</span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 검색결과값이 없을 때
+    <div class="pop_nosearch">
+      <dl>
+        <!- ''는 검색어 ->
+        <dt>'Newjeans' is not found forum</dt>
+        <dd>This forum was not found.<br/>Change your search terms or visit other recommended forums.</dd>
+      </dl>
+    </div>
+    -->
+    <div class="pop_search_con">
+      <ul>
+        <li>
+          <div class="search_img"><img src="../../img/com/search_thum.jpg">
+            <div class="rank_badge_small gold"></div>
+          </div>
+          <div class="search_con">
+            <span class="label">CELEBRITY</span>
+            <dl>
+              <!-- 검색어에 포인트로 search_text class 추가  -->
+              <dt>dddt</dt>
+              <dd>ddd.</dd>
+            </dl>
+            <div class="forum_writer">
+              <span class="write_img"><img src="../../img/com/chat.png"></span>
+              <span class="write_name">Forum_master</span>
+            </div>
+          </div>
+          <div class="search_other">
+            <div class="count_group search">
+              <span class="post_count">200</span>
+              <span class="comment_count">600</span>
+            </div>
+            <div class="search_area">
+              <span class="ranknum down">23</span>
+              <div class="search_badge">
+                <span class="forum_badge new"></span>
+                <span class="forum_badge good"></span>
+                <span class="forum_badge best_live_simple"></span>
+                <span class="forum_badge best_weekly_simple"></span>
+                <span class="badge_forum_best_monthly_simple"></span>
+                <span class="forum_badge rising_forum"></span>
+                <span class="forum_badge recommend_forum"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="search_img"><img src="../../img/com/search_thum.jpg">
+            <div class="rank_badge_small gold"></div>
+          </div>
+          <div class="search_con">
+            <span class="label">CELEBRITY</span>
+            <dl>
+              <dt>dddt</dt>
+              <dd>ddd.</dd>
+            </dl>
+            <div class="forum_writer">
+              <span class="write_img"><img src="../../img/com/chat.png"></span>
+              <span class="write_name">Forum_master</span>
+            </div>
+          </div>
+          <div class="search_other">
+            <div class="count_group search">
+              <span class="post_count">23,242</span>
+              <span class="comment_count">646,348</span>
+            </div>
+            <div class="search_area">
+              <span class="ranknum down">23</span>
+              <div class="search_badge">
+                <span class="forum_badge new"></span>
+                <span class="forum_badge good"></span>
+                <span class="forum_badge best_live_simple"></span>
+                <span class="forum_badge best_weekly_simple"></span>
+                <span class="badge_forum_best_monthly_simple"></span>
+                <span class="forum_badge rising_forum"></span>
+                <span class="forum_badge recommend_forum"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="search_img"><img src="../../img/com/search_thum.jpg">
+            <div class="rank_badge_small gold"></div>
+          </div>
+          <div class="search_con">
+            <span class="label">CELEBRITY</span>
+            <dl>
+              <dt>dddt</dt>
+              <dd>ddd.</dd>
+            </dl>
+            <div class="forum_writer">
+              <span class="write_img"><img src="../../img/com/chat.png"></span>
+              <span class="write_name">Forum_master</span>
+            </div>
+          </div>
+          <div class="search_other">
+            <div class="count_group search">
+              <span class="post_count">23,242</span>
+              <span class="comment_count">646,348</span>
+            </div>
+            <div class="search_area">
+              <span class="ranknum down">23</span>
+              <div class="search_badge">
+                <span class="forum_badge new"></span>
+                <span class="forum_badge good"></span>
+                <span class="forum_badge best_live_simple"></span>
+                <span class="forum_badge best_weekly_simple"></span>
+                <span class="badge_forum_best_monthly_simple"></span>
+                <span class="forum_badge rising_forum"></span>
+                <span class="forum_badge recommend_forum"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="search_img"><img src="../../img/com/search_thum.jpg">
+            <div class="rank_badge_small gold"></div>
+          </div>
+          <div class="search_con">
+            <span class="label">CELEBRITY</span>
+            <dl>
+              <dt>dddt</dt>
+              <dd>ddd.</dd>
+            </dl>
+            <div class="forum_writer">
+              <span class="write_img"><img src="../../img/com/chat.png"></span>
+              <span class="write_name">Forum_master</span>
+            </div>
+          </div>
+          <div class="search_other">
+            <div class="count_group search">
+              <span class="post_count">23,242</span>
+              <span class="comment_count">646,348</span>
+            </div>
+            <div class="search_area">
+              <span class="ranknum down">23</span>
+              <div class="search_badge">
+                <span class="forum_badge new"></span>
+                <span class="forum_badge good"></span>
+                <span class="forum_badge best_live_simple"></span>
+                <span class="forum_badge best_weekly_simple"></span>
+                <span class="badge_forum_best_monthly_simple"></span>
+                <span class="forum_badge rising_forum"></span>
+                <span class="forum_badge recommend_forum"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="search_img"><img src="../../img/com/search_thum.jpg">
+            <div class="rank_badge_small gold"></div>
+          </div>
+          <div class="search_con">
+            <span class="label">CELEBRITY</span>
+            <dl>
+              <dt>dddt</dt>
+              <dd>ddd.</dd>
+            </dl>
+            <div class="forum_writer">
+              <span class="write_img"><img src="../../img/com/chat.png"></span>
+              <span class="write_name">Forum_master</span>
+            </div>
+          </div>
+          <div class="search_other">
+            <div class="count_group search">
+              <span class="post_count">23,242</span>
+              <span class="comment_count">646,348</span>
+            </div>
+            <div class="search_area">
+              <span class="ranknum down">23</span>
+              <div class="search_badge">
+                <span class="forum_badge new"></span>
+                <span class="forum_badge good"></span>
+                <span class="forum_badge best_live_simple"></span>
+                <span class="forum_badge best_weekly_simple"></span>
+                <span class="badge_forum_best_monthly_simple"></span>
+                <span class="forum_badge rising_forum"></span>
+                <span class="forum_badge recommend_forum"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+</html>

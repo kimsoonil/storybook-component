@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container">
+      <div class="login_wrap">
+        <div class="signup">
+          <h3 class="h3Type eng">SIGN UP</h3>
+          <span>Create your SUPER CLUB member profile and get first<br/>access to the inspiration and community.</span>
+        </div>
+        <div class="form_wrap sign_name">
+          <label>Name</label>
+          <div class="HGroup">
+            <span class="form_cell form_input input_lg">
+              <input type="text" aria-invalid="false" placeholder="First Name">
+              <!-- <button class="btn_reset">
+                <span class="a11y">삭제</span>
+              </button> -->
+            </span>
+            <span class="form_cell form_input input_lg">
+              <input type="text" aria-invalid="false" placeholder="Last Name">
+              <!-- <button class="btn_reset">
+                <span class="a11y">삭제</span>
+              </button> -->
+            </span>
+          </div>
+        </div>
+        <div class="sign_pass">
+          <label>Password</label>
+          <div class="security_guide">
+            <button type="button" class="open_tip">
+              <span>Security Guide</span>
+            </button>
+            <div class="tooltip password">
+              <h4>Strong Password</h4>
+              <span>Enter a password that contains 8 - 16 characters from at least three of the following categories: uppercase/lowercase letters, numbers, and special characters.</span>
+              <span>Repeated or sequence characters and letters, birthday, contact number, and other passwords that are easy to predict or are related to personal information are vulnerable due to weak security strength.</span>
+              <span>Using a password that you use in other websites can also endanger the account security.</span>
+            </div>
+          </div>
+        </div>
+        <div class="form_wrap msg error">
+          <span class="form_cell form_input input_lg">
+            <input type="password" id="password1" aria-invalid="false" placeholder="Password">
+            <button class="btn_input eyes" id="pass_view1">
+              <span class="a11y">비밀번호 표시</span>
+            </button>
+          </span>
+          <span class="error_txt msg" id="input_error">Error message</span>
+        </div>
+        <div class="form_wrap msg error">
+          <span class="form_cell form_input input_lg">
+            <input type="password" id="password2" aria-invalid="false" placeholder="Confirm Password">
+            <button class="btn_input eyes" id="pass_view2">
+              <span class="a11y">비밀번호 표시</span>
+            </button>
+          </span>
+          <span class="error_txt msg" id="input_error">Error message</span>
+        </div>
+        <div class="login_captcha">
+          I’m not a robot
+        </div>
+        <span class="error_msg">Please verify security.</span>
+        <button type="button" class="btn primary button_xl join_next" disabled>
+          <span>Join Membership</span>
+        </button>
+        <div class="join_link">
+          <span>Already a membership?</span>
+          <button type="button" class="color">
+            <span>Login</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+const pass1 = document.querySelector('#password1');
+const pass2 = document.querySelector('#password2');
+const btn1 = document.querySelector('#pass_view1');
+const btn2 = document.querySelector('#pass_view2');
+btn1.addEventListener('click', () => {
+  if (pass1.type === 'text') {
+    pass1.type = 'password';
+    btn1.className = 'btn_input eyes';
+  } else {
+    pass1.type = 'text';
+    btn1.className = 'btn_input eyes show';
+  }
+});
+btn2.addEventListener('click', () => {
+  if (pass2.type === 'text') {
+    pass2.type = 'password';
+    btn2.className = 'btn_input eyes';
+  } else {
+    pass2.type = 'text';
+    btn2.className = 'btn_input eyes show';
+  }
+});
+</script>
+</html>

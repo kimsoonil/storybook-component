@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div id="main">
+    <div id="mail_container">
+      <div class="mail_wrap02">
+        <div class="mail_img"></div>
+        <div class="mail_msg">
+          <h3 class="h3Type eng">UNSUBSCRIPTION<br/>COMPLETE</h3>
+        </div>
+        <div class="mail_text">If you would like to receive it again, please change whether<br/>to receive e-mail in <span>Member Information > Edit Personal Information.</span><br/>Thank you.</div>
+        <div class="page_btn_wrap">
+          <button type="button" class="btn primary button_xl">
+            <span>Homepage</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+</html>

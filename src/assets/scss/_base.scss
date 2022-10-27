@@ -57,6 +57,13 @@ button {
   margin: 0 auto;
 }
 
+// @mixin showHover {
+//   display: none;
+//   &:hover {
+//     display: flex;
+//   }
+// }
+
 .jg {
   &-row {
     display: flex;

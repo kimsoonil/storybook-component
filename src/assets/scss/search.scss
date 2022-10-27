@@ -2,27 +2,44 @@
 .search {
   width: 1280px;
   margin: 120px auto;
-
+  &-title {
+    font-family: 'Poppins-Bold';
+    font-size: 40px;
+    line-height: 58px;
+    color: #111111;
+  }
   &-tabs {
     display: flex;
-    gap: 40px;
+    gap: 8px;
     &-item {
-      font-family: 'Poppins-Bold';
-      font-size: 36px;
-      color: $gray-900;
-      opacity: 0.5;
+      padding: 8px 12px;
+      background: #eeeeee;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      font-family: 'Poppins-Regular';
+      font-size: 14px;
+      line-height: 24px;
+      color: #121212;
       cursor: pointer;
       &.active {
-        opacity: 1;
+        color: #fff;
+        background: linear-gradient(270deg, #ff47a4 0%, #ff5ec9 100%);
       }
     }
   }
+  &-flex {
+    display: flex;
+    gap: 8px;
+  }
   &-input {
-    margin-top: 12px;
-    input {
+    margin-top: 8px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    &-box {
       height: 60px;
-      width: calc(100% - 20px);
-      background: #f0f0f0;
+      width: 100%;
+      background: #f8f8f8;
       border-radius: 8px;
       border: 0;
       outline: 0;
@@ -30,10 +47,11 @@
       font-size: 20px;
       box-sizing: border-box;
       &::placeholder {
-        color: #999999;
+        color: #cdcdd1;
         font-size: 18px;
       }
     }
+
     &-btn {
       position: absolute;
       top: 0px;
@@ -41,7 +59,7 @@
       width: 100px;
       height: 60px;
       border-radius: 0 8px 8px 0;
-      background: #8701fe;
+      // background: #8701fe;
       cursor: pointer;
       img {
         width: 40px;
@@ -49,7 +67,13 @@
     }
   }
   &-club {
-    margin-top: 90px;
+    background-color: #fff;
+    margin-top: 50px;
+    padding: 30px;
+    border-radius: 20px;
+    & > .flex-between {
+      margin-bottom: 40px;
+    }
     &-title {
       height: 58px;
       font-family: 'Poppins-Bold';
@@ -111,62 +135,29 @@
         }
       }
     }
+    .content {
+      margin-bottom: 54px;
+    }
   }
   &-post {
+    background-color: #fff;
     margin-top: 50px;
-    &-hashtag {
-      display: flex;
-      gap: 10px;
-      .item {
-        padding: 12px 10px;
-        background: #fff;
-        border-radius: 8px;
-        color: $black;
-        font-size: 16px;
-        border: 1px solid $black;
-        cursor: pointer;
-        &.active {
-          background: #8801fe;
-          color: #fff;
-        }
-      }
-    }
-    &-list {
-      margin: 30px 0 60px;
+    padding: 30px;
+    border-radius: 20px;
+
+    .posts-list {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
+      border-top: 1px solid #cdcdd1;
       &-item {
-        width: 630px;
-        height: 155px;
-        display: flex;
-        justify-content: space-between;
-        &-container {
-          padding-right: 26px;
-        }
-        &-nick {
-          font-family: 'Poppins-Bold';
-          font-size: 14px;
-          color: $gray-700;
+        width: 570px;
+        &:nth-child(2n) {
+          margin-left: 40px;
         }
         &-title {
-          margin-top: 16px;
-          font-family: 'Poppins-Bold';
-          font-size: 29px;
-          color: $gray-800;
-        }
-        &-content {
-          margin-top: 4px;
-          font-family: 'Poppins-Regular';
-          font-size: 16px;
-          height: 45px;
-          color: $gray-500;
-        }
-        &-info {
-          margin-top: 16px;
-          font-family: 'Poppins-Regular';
-          font-size: 18px;
-          color: #999999;
+          display: flex;
+          align-items: center;
         }
       }
     }
@@ -174,6 +165,36 @@
       img {
         height: 155px;
       }
+    }
+  }
+  &-keyword {
+    gap: 4px;
+    &-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 4px 6px;
+      background: #ebebeb;
+      border-radius: 20px;
+      color: #8801fe;
+      font-size: 14px;
+    }
+    &-fixItem {
+      display: flex;
+      align-items: center;
+      padding: 4px 6px;
+      background: #ffffff;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+  }
+  &-filter {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    .flex-center {
+      gap: 4px;
+      align-items: flex-end;
     }
   }
 }
@@ -201,4 +222,19 @@
     height: 20px;
     filter: invert(1);
   }
+}
+.checkBtnSwitch {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  border-radius: 50%;
+  background-color: #c1c7cd;
+  display: block;
+  background-image: url('/images/club/checkbox.png');
+  cursor: pointer;
+}
+
+/* 체크박스가 체크되면 변경 이벤트 */
+.checkBottom:checked ~ .checkBtnSwitch {
+  background-image: url('/images/club/checkbox_checked.png');
 }

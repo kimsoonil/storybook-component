@@ -1,45 +1,42 @@
-import axios from 'axios';
+import axios from 'util/axios.config';
 
-// const API_ENDPOINT = 'https://www.omdbapi.com/?apikey=4a9c128b';
+// SignUp
+export const fetchReCapcha = (token) => axios.post(`${process.env.REACT_APP_API_URL}/post`, { token });
+export const fetchLogIn1 = (userInfo) => axios.post(`${process.env.REACT_APP_API_ACCOUNT_URL}1/login`, userInfo);
+export const fetchLogIn2 = (userInfo) => axios.post(`${process.env.REACT_APP_API_PLATFORM_URL}auth/login`, userInfo);
+// 삭제 예정
+export const fetchAuthSns = (snsType) => window.open(`${process.env.REACT_APP_API_PLATFORM_URL}auth/${snsType}`);
+// email 체크
+export const fetchAuthEmail = (data) => axios.post(`${process.env.REACT_APP_API_ACCOUNT_URL}1/verify/send`, data);
+// auth code 확인
+export const fetchAuthCodeCheck = (data) => axios.post(`${process.env.REACT_APP_API_ACCOUNT_URL}1/verify/check`, data);
+// 비밀번호변경
+export const fetchChangePwd = (data) => axios.post(`${process.env.REACT_APP_API_ACCOUNT_URL}1/verify/password`, data);
+// 회원가입
+export const fetchSignUp = (data) => axios.post(`${process.env.REACT_APP_API_ACCOUNT_URL}1/register`, data);
+// 닉네임 변경
+export const fetchChangeNickname = (data) => axios.put(`${process.env.REACT_APP_API_PLATFORM_URL}auth/users/me`, data);
 
-// export const fetchMovies = async (movieName) => axios.get(`${API_ENDPOINT}&s=${movieName}`);
-
-// export const fetchMovie = async (movieId) => axios.get(`${API_ENDPOINT}&i=${movieId}`);
-
-// export const fetchReCapcha = async (token) => axios.post(`${process.env.REACT_APP_API_URL}/post`, { token });
-
-const AEP = 'http://localhost:3001/';
-
-export const fetchClub = async (id) => axios.get(`${AEP}club?id=${id}`);
-
-// export const fetchMyClub = async (id) => axios.get(`${AEP}club?id=${id}`);
-export const fetchMyClub = async () => {
-  return new Promise((resolve, reject) => {
-    resolve({
-      status: 200,
-      data: {
-        name: 'admin',
-        address: 'adress',
-        category: 'Game',
-        profile: {
-          file: '',
-          data: require('images/admin/club-master-profile.png')
-        },
-        banner: {
-          file: '',
-          data: require('images/admin/club-master-banner.png')
-        },
-        description: 'description',
-        tags: [
-          'tag1글씨는 이렇게',
-          '태그2이이이이이이잉',
-          '뉴진스가뭐임?',
-          '나르시시스틱마갓알러빗서로를비춘밤',
-          '놀러오세요동물의숲닌텐도정규식어떻게'
-        ],
-        autoApproval: 1,
-        boardGroups: [{}]
-      }
-    });
+// Forum
+export const fetchUploadFile = (data) =>
+  axios.post('http://localhost:8080/upload', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
   });
-};
+export const fetchDeleteFile = (filename) => axios.delete(`http://localhost:8080/files/${filename}`);
+
+export const fetchCreateForum = (data) =>
+  axios.post(`${process.env.REACT_APP_API_URL}forum`, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+export const fetchEditForum = (data) => axios.post(`${process.env.REACT_APP_API_URL}forum/${data.id}`, data);
+
+// get
+export const fetchForumInfo = (data) => axios.get(`${process.env.REACT_APP_API_URL}forum/${data}`);
+export const fetchForumList = (data) => axios.get(`${process.env.REACT_APP_API_URL}forums`, data);
+export const fetchCategoryList = () => axios.get(`${process.env.REACT_APP_API_URL}forums/categories`);
+export const fetchForumBest = () => axios.get(`${process.env.REACT_APP_API_URL}forums/best`);
+export const fetchForumRankingList = (data) => axios.get(`${process.env.REACT_APP_API_URL}forums/best`, data);

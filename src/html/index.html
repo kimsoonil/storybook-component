@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <link href="https://webfontworld.github.io/naver/NanumSquareRound.css" rel="stylesheet">
+    <title>CGP Markup</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: 'NanumSquareRound', sans-serif;
+        line-height: 1.6em;
+      }
+      .wrap {
+        max-width: 100% !important;
+        padding: 20px;
+      }
+      .page_title {
+        color: #69c;
+        font-size: 30px;
+        font-weight: 700;
+      }
+      .area_title {
+        color: #5752D0;
+        font-size: 25px;
+        font-weight: 700;
+        margin-bottom:10px;
+      }
+      .area_title span {
+        font-size:18px;
+        font-weight:normal;
+        color:#777;
+      }
+      .guide_title {
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        padding:0 20px 10px;
+        border-bottom:3px solid #eee;
+        margin-bottom:20px;
+      }
+      .guide_title > div a {
+        display:inline-block;
+        padding:10px 20px;
+        text-align:center;
+        border-radius:6px;
+        background:#9013FE;
+        color:#fff;
+        font-size:20px;
+        text-decoration: none;
+        font-weight:bold;
+      }
+      ul {
+        list-style: none;
+      }
+      .page_list {
+        display:flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding-bottom:30px;
+        margin-bottom:30px;
+        border-bottom:1px solid #999;
+      }
+      .page_list > div {
+        width:calc((100% - 20px) / 2)
+      }
+      table {
+        border-collapse:collapse;
+        border-spacing: 0;
+        width:100%;
+      }
+      table tr td,
+      table tr th {
+        border:1px solid #E0E0E0;
+        padding:12px;
+        font-size:14px;
+        text-align:left;
+      }
+      table tr th {
+        background:#F8F8F8;
+      }
+      table tr td a:link,
+      table tr td a:visited,
+      table tr td a:active {
+        text-decoration: none;
+        color:#000;
+      }
+      table tr td a:hover {
+        color:#FF2A55;
+      }
+      table tr th a:link,
+      table tr th a:visited,
+      table tr th a:active {
+        text-decoration: none;
+        color:#000;
+      }
+      table tr th a:hover {
+        color:#FF2A55;
+      }
+    </style>
+  </head>
+  <body>
+  <div class="wrap">
+    <div class="guide_title">
+      <h1 class="page_title">CGP HTML List</h1>
+      <div>
+        <a target="_blank" href="guide.html">Guide</a>
+        <a target="_blank" href="popup.html">Popup</a>
+      </div>
+    </div>
+    <div class="page_list">
+      <div>
+        <h2 class="area_title">회원가입 <span>/member</span></h2>
+        <table>
+          <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+          </colgroup>
+          <tbody>
+            <tr>
+              <th><a target="_blank" href="./cgp/member/SB-FO-ME-01001.html">이메일 로그인</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-ME-01001.html">SB-FO-ME-01001</a></td>
+              <th><a target="_blank" href="./cgp/member/Login_Popup.html">로그인 관련 Alert, Popup 모음</a></th>
+              <td><a target="_blank" href="./cgp/member/Login_Popup.html">SB-FO-ME-01001</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/member/SB-FO-ME-01106.html">아이디/비밀번호 찾기</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-ME-01106.html">SB-FO-ME-01106</a></td>
+              <th><a target="_blank" href="./cgp/member/SB-FO-ME-01101.html">비밀번호 찾기_이메일 인증</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-ME-01101.html">SB-FO-ME-01101</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/member/SB-FO-ME-01102.html">비밀번호 찾기_휴대폰번호 인증</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-ME-01102.html">SB-FO-ME-01102</a></td>
+              <th><a target="_blank" href="./cgp/member/SB-FO-ME-01103.html">비밀번호 찾기_비밀번호 변경</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-ME-01103.html">SB-FO-ME-01103</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/member/SB-FO-ME-01301.html">회원가입 방법 선택</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-ME-01301.html">SB-FO-ME-01301</a></td>
+              <th><a target="_blank" href="./cgp/member/SB-FO-ME-01302.html">이메일로 가입_이메일인증</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-ME-01302.html">SB-FO-ME-01302</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/member/SB-FO-ME-01303.html">이메일로 가입_회원정보 입력</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-ME-01303.html">SB-FO-ME-01303</a></td>
+              <th><a target="_blank" href="./cgp/member/SB-FO-ME-01304.html">이메일로 가입_회원가입 완료</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-ME-01304.html">SB-FO-ME-01304</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/member/SB-FO-ME-01801.html">SNS로 가입</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-ME-01801.html">SB-FO-ME-01801</a></td>
+              <th><a target="_blank" href="./cgp/member/SB-FO-ME-01602.html">SNS로 가입완료(트위터)</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-ME-01602.html">SB-FO-ME-01602</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h2 class="area_title">계정관리 <span>/member</span></h2>
+        <table>
+          <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+          </colgroup>
+          <tbody>
+            <tr>
+              <th><a target="_blank" href="./cgp/member/SB-FO-MP-01001.html">계정관리_계정정보 변경전</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-MP-01001.html">SB-FO-MP-01001</a></td>
+              <th><a target="_blank" href="./cgp/member/SB-FO-MP-01015.html">계정관리_닉네임 변경 alert</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-MP-01015.html">SB-FO-MP-01015</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/member/SB-FO-MP-01002.html">계정관리_이메일 수정/등록</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-MP-01002.html">SB-FO-MP-01002</a></td>
+              <th><a target="_blank" href="./cgp/member/SB-FO-MP-01003.html">계정관리_휴대폰번호 수정/등록</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-MP-01003.html">SB-FO-MP-01003</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/member/SB-FO-MP-01004.html">계정관리_계정연동 동의 팝업</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-MP-01004.html">SB-FO-MP-01004</a></td>
+              <th><a target="_blank" href="./cgp/member/SB-FO-MP-01006.html">계정관리_비밀번호 변경 이메일인증</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-MP-01006.html">SB-FO-MP-01006</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/member/SB-FO-MP-01016.html">계정관리_비밀번호 변경 휴대폰인증</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-MP-01016.html">SB-FO-MP-01016</a></td>
+              <th><a target="_blank" href="./cgp/member/SB-FO-MP-01018.html">계정관리_이메일 회원가입 변경전</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-MP-01018.html">SB-FO-MP-01018</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/member/SB-FO-MP-01007.html">계정관리_이메일 회원가입 인증</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-MP-01007.html">SB-FO-MP-01007</a></td>
+              <th><a target="_blank" href="./cgp/member/SB-FO-MP-01008.html">계정관리_이메일 회원가입 정보입력</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-MP-01008.html">SB-FO-MP-01008</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="page_list">
+      <div>
+        <h2 class="area_title">회원탈퇴 <span>/member</span></h2>
+        <table>
+          <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+          </colgroup>
+          <tbody>
+            <tr>
+              <th><a target="_blank" href="./cgp/member/SB-FO-MP-01201.html">회원탈퇴 신청_이메일</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-MP-01201.html">SB-FO-MP-01201</a></td>
+              <th><a target="_blank" href="./cgp/member/SB-FO-MP-01203.html">회원탈퇴 신청_사유 입력</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-MP-01203.html">SB-FO-MP-01203</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/member/SB-FO-MP-01204.html">회원탈퇴 신청_완료</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-MP-01204.html">SB-FO-MP-01204</a></td>
+              <th><a target="_blank" href="./cgp/member/SB-FO-MP-01205.html">회원탈퇴_탈퇴신청 취소(팝업포함)</a></th>
+              <td><a target="_blank" href="./cgp/member/SB-FO-MP-01205.html">SB-FO-MP-01205</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div></div>
+    </div>
+    <div class="page_list">
+      <div>
+        <h2 class="area_title">포럼 <span>/forum</span></h2>
+        <table>
+          <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+          </colgroup>
+          <tbody>
+            <tr>
+              <th><a target="_blank" href="./cgp/forum/SB-FO-SF-01001.html">Forum Home</a></th>
+              <td><a target="_blank" href="./cgp/forum/SB-FO-SF-01001.html">SB-FO-SF-01001</a></td>
+              <th><a target="_blank" href="./cgp/forum/SB-FO-SF-01005.html">Forum Category Menu</a></th>
+              <td><a target="_blank" href="./cgp/forum/SB-FO-SF-01005.html">SB-FO-SF-01005</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/forum/SB-FO-SF-01015.html">Forum 생성 전 화면</a></th>
+              <td><a target="_blank" href="./cgp/forum/SB-FO-SF-01015.html">SB-FO-SF-01015</a></td>
+              <th><a target="_blank" href="./cgp/forum/SB-FO-SF-01008.html">Forum 게시판_생성</a></th>
+              <td><a target="_blank" href="./cgp/forum/SB-FO-SF-01008.html">SB-FO-SF-01008</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/forum/SB-FO-SF-01009.html">Forum 게시판 설정</a></th>
+              <td><a target="_blank" href="./cgp/forum/SB-FO-SF-01009.html">SB-FO-SF-01009</a></td>
+              <th><a target="_blank" href="./cgp/forum/SB-FO-SF-01010.html">Forum 게시판 설정 변경</a></th>
+              <td><a target="_blank" href="./cgp/forum/SB-FO-SF-01010.html">SB-FO-SF-01010</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/forum/SB-FO-SF-01016.html">사용자 제한 사유입력 popup</a></th>
+              <td><a target="_blank" href="./cgp/forum/SB-FO-SF-01016.html">SB-FO-SF-01016</a></td>
+              <th><a target="_blank" href="./cgp/forum/SB-FO-SF-01011.html">Forum 게시판_스태프 권한 이전</a></th>
+              <td><a target="_blank" href="./cgp/forum/SB-FO-SF-01011.html">SB-FO-SF-01011</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/forum/SB-FO-SF-01013.html">Forum 게시판_권한 이전 대상 스태프 없음</a></th>
+              <td><a target="_blank" href="./cgp/forum/SB-FO-SF-01013.html">SB-FO-SF-01013</a></td>
+              <th><a target="_blank" href="./cgp/forum/SB-FO-SF-01003.html">Forum 포럼 배지</a></th>
+              <td><a target="_blank" href="./cgp/forum/SB-FO-SF-01003.html">SB-FO-SF-01003</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/forum/SB-FO-SF-01012.html">Forum 게시글 배지</a></th>
+              <td><a target="_blank" href="./cgp/forum/SB-FO-SF-01012.html">SB-FO-SF-01012</a></td>
+              <th><a target="_blank" href="./cgp/forum/SB-FO-SF-01004.html">Forum 활성화 첫화면</a></th>
+              <td><a target="_blank" href="./cgp/forum/SB-FO-SF-01004.html">SB-FO-SF-01004</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/forum/SB-FO-SF-01006.html">Forum 게시글 상세보기</a></th>
+              <td><a target="_blank" href="./cgp/forum/SB-FO-SF-01006.html">SB-FO-SF-01006</a></td>
+              <th></th>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div></div>
+    </div>
+    <div class="page_list">
+      <div>
+        <h2 class="area_title">공통 <span>/common</span></h2>
+        <table>
+          <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+          </colgroup>
+          <tbody>
+            <tr>
+              <th><a target="_blank" href="./cgp/common/SB-FO-DP-01101.html">시스템 점검</a></th>
+              <td><a target="_blank" href="./cgp/common/SB-FO-DP-01101.html">SB-FO-DP-01101</a></td>
+              <th><a target="_blank" href="./cgp/common/SB-FO-DP-01102.html">페이지 오류</a></th>
+              <td><a target="_blank" href="./cgp/common/SB-FO-DP-01102.html">SB-FO-DP-01102</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/common/SB-FO-DP-01103.html">서버 오류</a></th>
+              <td><a target="_blank" href="./cgp/common/SB-FO-DP-01103.html">SB-FO-DP-01103</a></td>
+              <th></th>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h2 class="area_title">E-mail Templete <span>/common</span></h2>
+        <table>
+          <colgroup>
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+            <col width="25%">
+          </colgroup>
+          <tbody>
+            <tr>
+              <th><a target="_blank" href="./cgp/common/SB-FO-DP-01402.html">수신거부 신청</a></th>
+              <td><a target="_blank" href="./cgp/common/SB-FO-DP-01402.html">SB-FO-DP-01402</a></td>
+              <th><a target="_blank" href="./cgp/common/SB-FO-DP-01403.html">수신거부 신청완료</a></th>
+              <td><a target="_blank" href="./cgp/common/SB-FO-DP-01403.html">SB-FO-DP-01403</a></td>
+            </tr>
+            <tr>
+              <th><a target="_blank" href="./cgp/common/SB-FO-DP-01404.html">템플릿 지정</a></th>
+              <td><a target="_blank" href="./cgp/common/SB-FO-DP-01404.html">SB-FO-DP-01404</a></td>
+              <th></th>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>

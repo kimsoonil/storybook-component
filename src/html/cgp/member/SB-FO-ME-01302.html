@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <script src="../../js/libs/jquery.min.js"></script>
+  <script src="../../js/libs/jquery-ui.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container">
+      <div class="login_wrap">
+        <div class="signup">
+          <h3 class="h3Type eng">SIGN UP</h3>
+          <span>Please proceed with email authentication first to<br/>register as a member.</span>
+        </div>
+        <div class="auth_wrap hidden">
+          <div class="form_wrap msg btn_set success">
+            <span class="form_cell form_input input_md default between">
+              <div class="input_set">
+                <input type="text" title="input default" id="input_text" aria-invalid="false" value="superclub@ccr.co.kr">
+                <button class="btn_reset">
+                  <span class="a11y">삭제</span>
+                </button>
+                <!-- <div class="dot error">
+                  <span class="a11y">실패</span>
+                </div> -->
+              </div>
+              <button type="button" class="btn primary button_md">
+                <span>Authenticate</span>
+              </button>
+            </span>
+            <span class="success_txt msg" id="input_alert">Authentication completed!</span>
+          </div>
+          <div class="form_wrap msg btn_set success hidden">
+            <span class="form_cell form_input input_md between">
+              <div class="input_set">
+                <input type="text" title="input default" id="input_text" aria-invalid="false" placeholder="Authentication code">
+                <span class="guide_text time">
+                  <span>2:59</span>
+                </span>
+              </div>
+              <button type="button" class="btn primary button_md" disabled>
+                <span>Confirm</span>
+              </button>
+            </span>
+            <span class="success_txt msg" id="input_alert">Authentication completed!</span>
+          </div>
+        </div>
+        <!-- 성공했을 시 버튼없이 Input만 나오는 상태 -->
+        <div class="form_wrap msg btn_set_under success">
+          <span class="form_cell form_input input_md">
+            <input type="text" title="input default" id="input_text" aria-invalid="false" value="superclub@ccr.co.kr">
+            <div class="dot success">
+              <span class="a11y">성공</span>
+            </div>
+          </span>
+          <span class="success_txt msg" id="input_alert">Authentication completed!</span>
+        </div>
+        <ul class="check_list depth1">
+          <li>
+            <div class="form_wrap join_check">
+              <span class="form_cell form_check">
+                <input type="checkbox" id="check01">
+                <label for="check01" class="checkbox">
+                  <span>By creating an account you agree to SUPER CLUB’s<br/><button type="button" class="color"><span>Privacy Policy</span></button> and <button type="button" class="color"><span>Terms of Use</span></button>.</span>
+                </label>
+              </span>
+            </div>
+          </li>
+          <li>
+            <div class="form_wrap join_check">
+              <span class="form_cell form_check">
+                <input type="checkbox" id="check02">
+                <label for="check02" class="checkbox">
+                  <span>By creating an account you agree to SUPER CLUB’s<br/><button type="button" class="color"><span>Marketing Policies</span></button>.</span>
+                </label>
+              </span>
+            </div>
+          </li>
+        </ul>
+        <button type="button" class="btn primary button_xl join_next">
+          <span>Next</span>
+        </button>
+        <div class="join_link">
+          <span>Already a membership?</span>
+          <button type="button" class="color">
+            <span>Login</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+
+<!-- Privacy
+<div class="modal_popup modal_text privacy" style="width:720px; height:760px;">
+  <div class="modal_con">
+    <button type="button" class="close"></button>
+    <h2 class="modal_title">Privacy policy</h2>
+    <div class="date_select">
+      <span class="date">Effective Date : May 06, 2022</span>
+      <div class="select_wrap">
+        <div class="select privacy">
+          <div class="selected">
+            <div class="selected-value">Previous terms</div>
+            <button type="button" class="arrow">
+              <span class="a11y">선택</span>
+            </button>
+          </div>
+          <ul>
+            <li class="option">Option 1</li>
+            <li class="option">Selected Option</li>
+            <li class="option">Option 3</li>
+            <li class="option">option 3</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="con scroll">
+      <p>Creta Co., Ltd. (hereinafter referred to as the 'Company') values ​​the personal information of customers and complies with the personal information protection regulations in the relevant laws and regulations that the company must comply with, such as the 'Personal Information Protection Act'.</p>
+      <p>Through the personal information processing policy, the company informs you about the purpose and method of using the personal information you provide, and what measures are being taken to protect your personal information, and contains the following contents.</p>
+      <p>1. Items of personal information to be collected and methods of collection<br/>2. Processing of unique identification information<br/>3. Purpose of collection and use of personal information<br/>4. Retention and use period of personal information<br/>5. Procedure and method of destruction of personal information<br/>6. Separate storage and management of personal information for long-term unused accounts<br/>7. Provision of personal information<br/>8. Rights of users and their legal representatives and how to exercise them<br/>9. Matters concerning the installation and operation of the automatic personal information collection device and its rejection<br/>10. Matters concerning measures to ensure the safety of personal information<br/>11. Changes to the Privacy Policy<br/>12. Personal Information Protection Officer</p>
+      <p><span>1. Items of personal information to be collected and methods of collection</span><br/>(1) Items of personal information to be collected</p>
+    </div>
+  </div>
+</div>
+-->
+<!-- Marketing policies
+<div class="modal_popup modal_text marketing" style="width:720px; height:436px;">
+  <div class="modal_con">
+    <button type="button" class="close"></button>
+    <h2 class="modal_title">Marketing policies</h2>
+    <div class="con scroll">
+      <p class="subtitle">Consent to use of marketing information</p>
+      <p>You can refuse to receive marketing information and collect and use personal information for<br/>marketing,<br/>and even if you refuse, you can use the super club service.</p>
+      <p><span>Personal information collection items</span><br/>- Name, mobile phone number, email</p>
+      <p><span>Purpose of collection and use of personal information</span><br/>- Event operation and advertising information transmission<br/>- Transmission of service-related information</p>
+      <p><span>Retention and use period</span><br/>- Retention and use until the user withdraws consent or withdraws</p>
+    </div>
+  </div>
+</div>-->
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+<script src="../../js/app.js"></script>
+</html>

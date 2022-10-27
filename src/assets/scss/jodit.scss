@@ -1,4 +1,15 @@
 @import 'common.scss';
+.jodit-tobar {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-top: 1px solid #e0e0e0;
+  padding: 20px 40px;
+  .editer-icon {
+    cursor: pointer;
+  }
+}
 .jodit {
   .jodit-toolbar-button_emoji {
     // display: flex;

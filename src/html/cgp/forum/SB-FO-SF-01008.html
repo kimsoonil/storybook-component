@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container">
+      <div class="main_div">
+        <div class="con_div">
+
+          <!-- S : Forum 게시판 생성 -->
+          <div class="creat_div">
+            <div class="content_subtitle creat">
+              <h4 class="title creat">Create a Forum</h4>
+              <div class="title_menu">
+                <button type="button" class="text_btn">
+                  <span>Cancle</span>
+                </button>
+              </div>
+            </div>
+            <div class="creat_form">
+              <span class="info title">Required Information</span>
+              <div class="form_div">
+                <div>
+                  <span class="form_title">Forum Name</span>
+                  <div class="form_wrap msg default">
+                    <span class="form_cell form_input input_lg">
+                      <input type="text" placeholder="Please enter your forum name">
+                      <span class="guide_text num">
+                        <span>0</span>/20
+                      </span>
+                    </span>
+                    <span class="default_txt msg" id="input_help">You can change the name of the forum 30 days before the forum is created.</span>
+                  </div>
+                </div>
+                <div>
+                  <span class="form_title">Category</span>
+                  <!-- error시 error 클래스를 붙여주시고 하단에 error_txt를 보여주세요 -->
+                  <div class="select_wrap error">
+                    <div class="select">
+                      <div class="selected">
+                        <div class="selected-value">Please select a forum category</div>
+                        <button type="button" class="arrow">
+                          <span class="a11y">선택</span>
+                        </button>
+                      </div>
+                      <ul>
+                        <li class="option">Option 1</li>
+                        <li class="option">Selected Option</li>
+                        <li class="option">Option 3</li>
+                        <li class="option">option 3</li>
+                        <li class="option">option 3</li>
+                        <li class="option">option 3</li>
+                        <li class="option">option 3</li>
+                        <li class="option">loooooooooooooooooong text option</li>
+                      </ul>
+                    </div>
+                    <span class="error_txt">Please select a category as required.</span>
+                  </div>
+                </div>
+                <div>
+                  <span class="form_title">Introduction</span>
+                  <div class="text_area">
+                    <textarea placeholder="Please enter an introduction to the forum"></textarea>
+                    <!-- 글자수가 0일때는 black이 붙지않고 글자수가 늘어나면서부터 색상이 바뀝니다. -->
+                    <span class="num"><span class="black">0</span>/20</span>
+                  </div>
+                </div>
+              </div>
+              <span class="img title">Image Registration</span>
+              <div class="form_div">
+                <div>
+                  <span class="form_title">Forum Thumbnail <span>(Option)</span></span>
+                  <span class="title_text">Forum’s thumbnail can only use image files with jpg, gif, or png extensions of less than 10MB. <span>(Best size : 200 x 200px)</span></span>
+                  <div class="img_upload thum">
+                    <!-- 이미지 업로드 후
+                    <img src="../../img/com/img_thum.png">
+                    <button type="button" class="img_delete">
+                      <span class="a11y">이미지 업로드 삭제</span>
+                    </button>
+                    -->
+                    <div class="img_upload_box">
+                      <span>Drag and drop<br/>your files here</span>
+                    </div>
+                    <div class="img_upload_btn">
+                      <div class="or_line">
+                        <span>OR</span>
+                      </div>
+                      <button type="button">
+                        <span>Browse files</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <span class="form_title">Forum Top Image <span>(Option)</span></span>
+                  <span class="title_text">Forum’s top image can only use image files with jpg, gif, or png extensions of less than 10MB. <span>(Best size :  1280 x 268px)</span></span>
+                  <div class="img_upload top">
+                    <!-- 이미지 업로드 후
+                    <img src="../../img/com/img_thum.png">
+                    <button type="button" class="img_delete">
+                      <span class="a11y">이미지 업로드 삭제</span>
+                    </button>
+                    -->
+                    <div class="img_upload_box">
+                      <span>Drag and drop your files here</span>
+                    </div>
+                    <div class="img_upload_btn">
+                      <div class="or_line">
+                        <span>OR</span>
+                      </div>
+                      <button type="button">
+                        <span>Browse files</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="page_btn_wrap full">
+              <button type="button" class="btn primary button_xl" disabled>
+                <span>Create a Forum</span>
+              </button>
+            </div>
+          </div>
+          <!-- E :  Forum 게시판 생성 -->
+        </div>
+        <div class="right_div">
+          <!-- S : What do you like -->
+          <div class="what_like">
+            <dl class="what_like_title">
+              <dt>What do you like?</dt>
+              <dd>Enjoy various forums or create your<br/>own forum and communicate freely.</dd>
+            </dl>
+            <div class="posts like_num">
+              <dl>
+                <dt>40,523,423</dt>
+                <dd>posts</dd>
+              </dl>
+            </div>
+            <div class="comments like_num">
+              <dl>
+                <dt>1,936,820,923</dt>
+                <dd>comments</dd>
+              </dl>
+            </div>
+            <button type="button" class="btn primary button_md forum_creat">
+              <span>Create a Forum</span>
+            </button>
+          </div>
+          <!-- E : What do you like -->
+          <div class="slide_banner">
+            <button type="button" class="slide_btn left">
+              <span class="a11y">왼쪽으로</span>
+            </button>
+            <div class="slide_img">
+              <img src="../../img/com/banner_img04.png">
+            </div>
+            <button type="button" class="slide_btn right">
+              <span class="a11y">오른쪽으로</span>
+            </button>
+            <div class="slide_dot">
+              <button type="button" class="dot"></button>
+              <button type="button" class="dot on"></button>
+              <button type="button" class="dot"></button>
+              <button type="button" class="dot"></button>
+            </div>
+          </div>
+          <div class="category">
+            <div class="content_subtitle">
+              <h4 class="h4Type eng">Category</h4>
+              <div class="title_menu">
+                <button type="button" class="hover text_btn">
+                  <span>All forums</span>
+                </button>
+              </div>
+            </div>
+            <ul class="category_list">
+              <li>
+                <span class="category_name">Movie & Art</span>
+                <span class="category_level">28</span>
+              </li>
+              <li>
+                <span class="category_name">Sports</span>
+                <span class="category_level">2</span>
+              </li>
+              <li>
+                <span class="category_name">Game</span>
+                <span class="category_level">10</span>
+              </li>
+              <li>
+                <span class="category_name">Food & Cook</span>
+                <span class="category_level">0</span>
+              </li>
+              <li>
+                <span class="category_name">Simulation</span>
+                <span class="category_level">1</span>
+              </li>
+              <li>
+                <span class="category_name">NFTs</span>
+                <span class="category_level">5</span>
+              </li>
+              <li>
+                <span class="category_name">Tips and know-how</span>
+                <span class="category_level">1</span>
+              </li>
+              <li>
+                <span class="category_name">Pets</span>
+                <span class="category_level">0</span>
+              </li>
+              <li>
+                <span class="category_name">Celebrity</span>
+                <span class="category_level">3</span>
+              </li>
+              <li>
+                <span class="category_name">Event</span>
+                <spa class="category_level"n>8</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+
+  // Select
+const selectBoxElements = document.querySelectorAll('.select');
+function toggleSelectBox(selectBox) {
+  selectBox.classList.toggle('active');
+}
+function selectOption(optionElement) {
+  const selectBox = optionElement.closest('.select');
+  const selectedElement = selectBox.querySelector('.selected-value');
+  selectedElement.textContent = optionElement.textContent;
+}
+selectBoxElements.forEach((selectBoxElement) => {
+  selectBoxElement.addEventListener('click', (e) => {
+    const targetElement = e.target;
+    const isOptionElement = targetElement.classList.contains('option');
+    if (isOptionElement) {
+      selectOption(targetElement);
+    }
+    toggleSelectBox(selectBoxElement);
+  });
+});
+
+document.addEventListener('click', (e) => {
+  const targetElement = e.target;
+  const isSelect = targetElement.classList.contains('select') || targetElement.closest('.select');
+  if (isSelect) {
+    return;
+  }
+  const allSelectBoxElements = document.querySelectorAll('.select');
+  allSelectBoxElements.forEach((boxElement) => {
+    boxElement.classList.remove('active');
+  });
+});
+</script>
+</html>

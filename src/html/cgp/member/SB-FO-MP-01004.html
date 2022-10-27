@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    #modal{
+      display:block;
+    }
+    .modal_popup {
+      display:block;
+    }
+  </style>
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container">
+
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+
+<div id="modal"></div>
+<!-- Change Nickname -->
+<div class="modal_popup modal_text" style="width:480px; height:450px;">
+  <div class="modal_con member">
+    <button type="button" class="close"></button>
+    <h2 class="modal_title">Account Interworking</h2>
+    <div class="bg_con account">
+      <span class="account_text">Log in easily by connecting to your SNS account.<br/>Please accept the terms and conditions for interworking.</span>
+      <span class="shadow_line popup"></span>
+      <div class="form_wrap">
+        <span class="form_cell form_check account">
+          <input type="checkbox" id="check30">
+          <label for="check30" class="checkbox">
+            <span>[Requirement] Agree to collect and use personal<br/>information</span>
+          </label>
+        </span>
+      </div>
+      <span class="account_stext des eng">We provide services by receiving personal information of external accounts for linking service accounts and identification. More detailed personal information can be found in the terms and conditions. Information will be destroyed without delay when disconnecting or leaving the service.</span>
+    </div>
+    <div class="popup_btn_wrap right">
+      <button class="btn default button_lg">
+        <span>Cancel</span>
+      </button>
+      <button class="btn primary button_lg agree">
+        <span>Agree and Continue</span>
+      </button>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+</html>

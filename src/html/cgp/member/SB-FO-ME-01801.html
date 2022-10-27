@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container">
+      <div class="login_wrap">
+        <div class="signup">
+          <h3 class="h3Type eng">TERMS OF SERVICE</h3>
+          <span>You need to agree to the terms of use and personal<br/>information collection for use of the service.</span>
+        </div>
+        <div class="terms_agree">
+          <div class="form_wrap join_check">
+            <span class="form_cell form_check">
+              <input type="checkbox" id="check03">
+              <label for="check03" class="checkbox">
+                <span class="bodytitle p1 eng">Everyone agrees</span>
+              </label>
+            </span>
+          </div>
+        </div>
+        <ul class="check_list depth2">
+          <li>
+            <div class="form_wrap join_check">
+              <span class="form_cell form_check">
+                <input type="checkbox" id="check01">
+                <label for="check01" class="checkbox">
+                  <span>By creating an account you agree to SUPER CLUB’s<br/><button type="button" class="color"><span>Privacy Policy</span></button> and <button type="button" class="color"><span>Terms of Use</span></button>.</span>
+                </label>
+              </span>
+            </div>
+          </li>
+          <li>
+            <div class="form_wrap join_check">
+              <span class="form_cell form_check">
+                <input type="checkbox" id="check02">
+                <label for="check02" class="checkbox">
+                  <span>By creating an account you agree to SUPER CLUB’s<br/><button type="button" class="color"><span>Marketing Policies</span></button>.</span>
+                </label>
+              </span>
+            </div>
+          </li>
+        </ul>
+        <div class="page_btn_wrap half agree">
+          <button type="button" class="btn default button_xl">
+            <span>Disagree</span>
+          </button>
+          <button type="button" class="btn primary button_xl" disabled>
+            <span>Agree</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+</html>

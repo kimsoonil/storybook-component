@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    #modal{
+      display:block;
+    }
+    .modal_popup {
+      display:block;
+    }
+  </style>
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container">
+
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+
+<div id="modal"></div>
+<!-- Change Nickname -->
+<div class="modal_popup modal_text" style="width:480px;">
+  <div class="modal_con member">
+    <button type="button" class="close"></button>
+    <h2 class="modal_title">Change Password</h2>
+    <div class="bg_con">
+      <div class="search_title">
+        <span class="step">STEP 02</span>
+        <span class="title_text">Change Password</span>
+      </div>
+      <div class="search_text nopadding">Please enter 8 to 16 digits using a combination of English’s uppercase letters, lowercase letters, numbers, and special characters.</div>
+      <div class="security_guide">
+        <button type="button" class="open_tip">
+          <span>Security Guide</span>
+        </button>
+        <div class="tooltip password">
+          <h4>Strong Password</h4>
+          <span>Enter a password that contains 8 - 16 characters from at least three of the following categories: uppercase/lowercase letters, numbers, and special characters.</span>
+          <span>Repeated or sequence characters and letters, birthday, contact number, and other passwords that are easy to predict or are related to personal information are vulnerable due to weak security strength.</span>
+          <span>Using a password that you use in other websites can also endanger the account security.</span>
+        </div>
+      </div>
+      <div class="form_wrap msg error">
+        <span class="form_cell form_input input_lg">
+          <input type="password" title="input default" id="password" aria-invalid="false" value="Password">
+            <button class="btn_input eyes" id="pass_view">
+              <span class="a11y">비밀번호 표시</span>
+            </button>
+          <!-- <div class="dot error">
+            <span class="a11y">실패</span>
+          </div> -->
+        </span>
+        <span class="error_txt msg" id="input_error">Please enter your new password.</span>
+      </div>
+      <div class="form_wrap msg error">
+        <span class="form_cell form_input input_lg">
+          <input type="password" title="input default" id="password" aria-invalid="false" value="Password">
+            <button class="btn_input eyes" id="pass_view">
+              <span class="a11y">비밀번호 표시</span>
+            </button>
+          <!-- <div class="dot error">
+            <span class="a11y">실패</span>
+          </div> -->
+        </span>
+        <span class="error_txt msg" id="input_error">The password you entered does not match.</span>
+      </div>
+    </div>
+    <div class="popup_btn_wrap full">
+      <button class="btn primary button_lg btn_close">
+        <span>Change Password</span>
+      </button>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+</html>
