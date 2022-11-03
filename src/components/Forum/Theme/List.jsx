@@ -7,7 +7,7 @@ import { Loader } from 'components/idist/Loader';
 import classNames from 'classnames';
 import Item from './Item';
 
-function FilterPopup({ isVisible, schOption, setSchOption }) {
+function FilterPopup({ isVisible, setIsFilterVisible, schOption, setSchOption }) {
   const arrPeriod = [
     { id: 1, text: 'A week' },
     { id: 2, text: '3 month' },
@@ -113,10 +113,10 @@ function FilterPopup({ isVisible, schOption, setSchOption }) {
         </li>
       </ul>
       <div className="page_btn_wrap">
-        <button type="button" className="cancel">
+        <button type="button" className="cancel" onClick={() => setIsFilterVisible(false)}>
           <span>Cancel</span>
         </button>
-        <button type="button" className="done">
+        <button type="button" className="done" onClick={() => setIsFilterVisible(false)}>
           <span>Done</span>
         </button>
       </div>
@@ -130,24 +130,21 @@ function List() {
   const [isFilterVisible, setIsFilterVisible] = useToggle(false);
   const { fourmPosts } = useSelector((state) => state.forumPost);
   const { id } = useParams();
-  const list = [1, 2, 3, 4, 5];
   const menu = [
     { id: 1, text: 'All' },
     { id: 2, text: 'Best' }
   ];
 
   useEffect(() => {
-    dispatch(getFourmPostsInit({ id: id }));
+    dispatch(getFourmPostsInit({ id }));
   }, []);
-
-  console.log('fourmPosts', fourmPosts);
 
   return (
     // className="forum_list"
     <div className="forum_list">
       <div className="forum_list_title">
         <div>
-          <h3 className="h3_title">Forum List</h3>
+          <h3 className="h3_title">Post List</h3>
           <div>
             {menu.map((item) => (
               <button
@@ -174,7 +171,12 @@ function List() {
           <button type="button" className="align feed">
             <span className="a11y">피드형식</span>
           </button>
-          <FilterPopup isVisible={isFilterVisible} schOption={schOption} setSchOption={setSchOption} />
+          <FilterPopup
+            isVisible={isFilterVisible}
+            setIsFilterVisible={setIsFilterVisible}
+            schOption={schOption}
+            setSchOption={setSchOption}
+          />
         </div>
       </div>
       <div className="forum_list">
@@ -184,8 +186,8 @@ function List() {
           </div>
         ) : (
           <ul className="main_forum_list">
-            {fourmPosts.data.map((item) => (
-              <Item info={item} key={item.id} />
+            {fourmPosts.data.map((item, idx) => (
+              <Item info={item} key={item.id} idx={idx} />
             ))}
           </ul>
         )}

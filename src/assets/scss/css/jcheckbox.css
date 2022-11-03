@@ -1,0 +1,33 @@
+.jcheckbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+.jcheckbox-image-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  padding: 3px;
+}
+.jcheckbox-image-wrapper-checked:hover img {
+  border: 3px solid rgba(244, 19, 254, 0.2);
+}
+.jcheckbox-image-wrapper-default:hover img {
+  border: 3px solid rgba(224, 224, 224, 0.5);
+}

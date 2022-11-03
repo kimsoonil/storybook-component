@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { takeEvery, all, put, fork, call } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actionTypes from 'redux/idistStore/commentSlice';

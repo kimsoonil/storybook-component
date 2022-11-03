@@ -170,7 +170,9 @@
   left: 0;
   width: 180px;
   height: 100px;
-  background: url("../img/com/logo_pp.svg") no-repeat center center/180px 100px;
+  background: url("../img/com/logo_pp.png") no-repeat center center/180px 100px;
+  width: 180px;
+  height: 100px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -490,7 +492,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  background: url("../img/com/img_Membership.png") no-repeat center center/340px 200px;
+  background: url("../img/com/img_membership.png") no-repeat center center/340px 200px;
 }
 .login_wrap .end_info {
   margin-top: 40px;
@@ -545,7 +547,7 @@
   left: 0;
   top: 0;
   position: absolute;
-  background: url("../img/ico/ic_circle_twitter.png") no-repeat center center/28px 28px;
+  background: url("../img/ico/ic_circle_google.png") no-repeat center center/28px 28px;
 }
 .login_wrap .end_info dl dd.nick {
   font-family: "Poppins", sans-serif;
@@ -1156,7 +1158,7 @@
   font-size: 34px;
   line-height: 38px;
   letter-spacing: -0.68px;
-  color: #ffd300;
+  color: #FFD300;
   padding-top: 60px;
 }
 .withdrawal_wrap .sorry_guide span {

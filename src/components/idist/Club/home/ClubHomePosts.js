@@ -50,11 +50,23 @@ function ClubHomePosts(props) {
       setSelectTag(item);
     }
   };
-  return (
+  if (posts.message !== 'ok')
+    return (
+      <div className="flex-center">
+        <Loader />
+      </div>
+    );
+
+  return posts.data.length !== 0 ? (
     <div className="club-home-content club-posts">
       <div className="flex-between">
         <div className="club-home-title">Posts</div>
-        <div className="see-all" onClick={() => navigate(`/clubs/search/posts`)}>
+        <div
+          className="see-all"
+          onClick={() =>
+            navigate(`/club/${props.clubId.data.id}/board/${props.clubId.data.board_groups[0].boards[0].id}`)
+          }
+        >
           See all
         </div>
       </div>
@@ -87,72 +99,66 @@ function ClubHomePosts(props) {
         )}
       </div>
       <div className="club-post-list">
-        {posts.message !== 'ok' ? (
-          <div className="flex-center">
-            <Loader />
-          </div>
-        ) : (
-          <div className="posts-list">
-            {posts.data.map((postsItem, index) => {
-              if (index < 8)
-                return (
-                  <div
-                    className="posts-list-item relative"
-                    key={index}
-                    style={{ borderTop: index < 2 ? '0' : '1px solid #cdcdd1' }}
-                    onClick={() => handleClickPosts(postsItem)}
-                  >
-                    <div className="posts-list-item-container">
-                      <div className="posts-list-item-title">
-                        {postsItem.title}
-                        {postsItem.is_secret && <img src={require('images/club/ic-lock.png')} alt="" />}
+        <div className="posts-list">
+          {posts.data.map((postsItem, index) => {
+            if (index < 8)
+              return (
+                <div
+                  className="posts-list-item relative"
+                  key={index}
+                  style={{ borderTop: index < 2 ? '0' : '1px solid #cdcdd1' }}
+                  onClick={() => handleClickPosts(postsItem)}
+                >
+                  <div className="posts-list-item-container">
+                    <div className="posts-list-item-title">
+                      {postsItem.title}
+                      {postsItem.is_secret && <img src={require('images/club/ic-lock.png')} alt="" />}
+                    </div>
+                    <div
+                      className="posts-list-item-content"
+                      dangerouslySetInnerHTML={{ __html: postsItem.content }}
+                    ></div>
+                    <div className="posts-list-item-profile">
+                      <div className="posts-list-item-profile-img">
+                        <img
+                          onError={({ currentTarget }) => {
+                            currentTarget.onerror = null; // prevents looping
+                            currentTarget.src = require('images/main/temporary-profile.png');
+                          }}
+                          src={postsItem?.user?.profile_image_url}
+                        />
                       </div>
-                      <div
-                        className="posts-list-item-content"
-                        dangerouslySetInnerHTML={{ __html: postsItem.content }}
-                      ></div>
-                      <div className="posts-list-item-profile">
-                        <div className="posts-list-item-profile-img">
-                          <img
-                            src={
-                              postsItem.profile.user.profile_image_url
-                                ? postsItem.profile.user.profile_image_url
-                                : require('images/main/temporary-profile.png')
-                            }
-                          />
-                        </div>
-                        <div>
-                          <div className="posts-list-item-nick">
-                            {postsItem.profile.user.username}
-                            {postsItem?.profile?.staff_title === null ? (
+                      <div>
+                        <div className="posts-list-item-nick">
+                          {postsItem?.user.username}
+                          {/* {postsItem?.profile?.staff_title === null ? (
                               <>
                                 <div className="profile-rating flex-center">{postsItem?.profile?.grade_title}</div>
                                 <div className="profile-level">LV {postsItem?.profile?.level}</div>
                               </>
                             ) : (
                               <div className="profile-staff flex-center">{postsItem?.profile?.staff_title}</div>
-                            )}
+                            )} */}
+                        </div>
+                        <div className="posts-list-item-info">
+                          <div className="flex-center">
+                            <img src={require('images/main/icon-view.png')} /> {postsItem.view_count}
                           </div>
-                          <div className="posts-list-item-info">
-                            <div className="flex-center">
-                              <img src={require('images/main/icon-view.png')} /> {postsItem.view_count}
-                            </div>
-                            <div className="flex-center">
-                              <img src={require('images/main/icon-comment.png')} /> {postsItem.comment_count}
-                            </div>
-                            <div className="flex-center">{dateCalculation(postsItem.created)}</div>
+                          <div className="flex-center">
+                            <img src={require('images/main/icon-comment.png')} /> {postsItem.comment_count}
                           </div>
+                          <div className="flex-center">{dateCalculation(postsItem.created)}</div>
                         </div>
                       </div>
                     </div>
-                    <div className="posts-img ">
-                      <img src={postsItem.thumbnail_image_url} alt="" />
-                    </div>
                   </div>
-                );
-            })}
-          </div>
-        )}
+                  <div className="posts-img ">
+                    <img src={postsItem.thumbnail_image_url} alt="" />
+                  </div>
+                </div>
+              );
+          })}
+        </div>
       </div>
       <InputPopup
         open={secretOpen}
@@ -162,6 +168,8 @@ function ClubHomePosts(props) {
         secretPosts={secretPosts}
       />
     </div>
+  ) : (
+    <div className="club-content-nodata"></div>
   );
 }
 

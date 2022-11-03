@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div class="top_slider">
+      <div class="game_top_banner">
+        <div class="swiper game">
+          <div><img src="../../img/temp/Game_top_bigbanner.png"></div>
+          <ul class="slick-dots">
+            <li><button type="button"></button></li>
+            <li class="slick-active"><button type="button"></button></li>
+            <li><button type="button"></button></li>
+            <li><button type="button"></button></li>
+          </ul>
+        </div>
+        <ul class="game_top_right">
+          <li><img src="../../img/temp/Game_top_banner_01.png"></li>
+          <li><img src="../../img/temp/Game_top_banner_02.png"></li>
+          <li><img src="../../img/temp/Game_top_banner_03.png"></li>
+          <li><img src="../../img/temp/Game_top_banner_04.png"></li>
+        </ul>
+      </div>
+    </div>
+    <div class="main_div">
+      <div id="container">
+        <div class="game01">
+          <div class="div953">
+            <div class="game_list_title">
+              <h2 class="h2Type eng">HOT GAMES</h2>
+              <div>
+                <button type="button" class="tab_box active">
+                  <span>POPULAR</span>
+                </button><button type="button" class="tab_box">
+                  <span>SPECIAL</span>
+                </button><button type="button" class="tab_box">
+                  <span>UPDATE</span>
+                </button>
+              </div>
+            </div>
+            <div style="margin-bottom:28px;"><img src="../../img/temp/Popular_game.png"></div>
+            <div><img src="../../img/temp/New_game.png"></div>
+          </div>
+          <div class="div299">
+            <div style="margin-bottom:28px;"><img src="../../img/temp/chat_layer.png"></div>
+            <div><img src="../../img/temp/Discount_game.png"></div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content: space-between;margin-bottom:28px;">
+          <div><img src="../../img/temp/Upcoming_game.png"></div>
+          <div><img src="../../img/temp/BestSeller_game.png"></div>
+        </div>
+        <div style="display:flex; justify-content: space-between;margin-bottom:28px;">
+          <div><img src="../../img/temp/Game_news.png"></div>
+          <div><img src="../../img/temp/Game_shop.png"></div>
+        </div>
+        <div><img src="../../img/temp/User_video.png"></div>
+      </div>
+      <div class="game_widget">
+        <ul>
+          <li>
+            <button type="button" class="widget hot">
+              <span class="a11y"></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="widget new">
+              <span class="a11y"></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="widget upcoming">
+              <span class="a11y"></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="widget discount">
+              <span class="a11y"></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="widget best">
+              <span class="a11y"></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="widget shop">
+              <span class="a11y"></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="widget video">
+              <span class="a11y"></span>
+            </button>
+          </li>
+          <li class="trash">
+            <button type="button" class="widget">
+              <span class="a11y"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+</html>

@@ -1,0 +1,1028 @@
+@charset "UTF-8";
+/* Setting */
+/* Color */
+/* Font */
+/* 가상 선택자 content, display 설정 */
+/* Title */
+.h2Type.kor, .h2Type.cha, .h2Type.eng {
+  font-size: 44px;
+  color: #242A3C;
+  letter-spacing: -0.88px;
+  line-height: 48px;
+}
+
+.h3Type.kor, .h3Type.cha, .h3Type.eng {
+  font-size: 40px;
+  color: #242A3C;
+  letter-spacing: -0.8px;
+  line-height: 48px;
+}
+
+.h4Type.kor, .h4Type.cha, .h4Type.eng {
+  font-size: 26px;
+  color: #242A3C;
+  letter-spacing: -0.52px;
+  line-height: 32px;
+}
+
+.bodytitle.p1.kor, .bodytitle.p1.cha, .bodytitle.p1.eng {
+  font-size: 18px;
+  color: #121212;
+  letter-spacing: -0.36px;
+  line-height: 24px;
+}
+
+.bodytitle.p2.kor, .bodytitle.p2.cha, .bodytitle.p2.eng {
+  font-size: 16px;
+  color: #121212;
+  letter-spacing: -0.32px;
+  line-height: 20px;
+}
+
+.bodytitle.p4.kor, .bodytitle.p4.cha, .bodytitle.p4.eng {
+  font-size: 14px;
+  color: #121212;
+  letter-spacing: -0.28px;
+  line-height: 20px;
+}
+
+.des.kor, .des.cha, .des.eng {
+  font-size: 13px;
+  color: #121212;
+  letter-spacing: -0.26px;
+  line-height: 17px;
+}
+
+/* Title */
+.h2Type.eng {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+}
+.h2Type.cha {
+  font-family: "M_PLUS_1p", sans-serif;
+  font-weight: 800;
+}
+.h2Type.kor {
+  font-family: "NanumSquareRound", sans-serif;
+  font-weight: 800;
+}
+
+.h3Type.eng {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+}
+.h3Type.cha {
+  font-family: "M_PLUS_1p", sans-serif;
+  font-weight: 800;
+}
+.h3Type.kor {
+  font-family: "NanumSquareRound", sans-serif;
+  font-weight: 800;
+}
+
+.h4Type.eng {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+.h4Type.cha {
+  font-family: "M_PLUS_1p", sans-serif;
+  font-weight: bold;
+}
+.h4Type.kor {
+  font-family: "NanumSquareRound", sans-serif;
+  font-weight: bold;
+}
+
+.bodytitle.p1.eng {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+.bodytitle.p1.cha {
+  font-family: "M_PLUS_1p", sans-serif;
+  font-weight: 500;
+}
+.bodytitle.p1.kor {
+  font-family: "NanumSquareRound", sans-serif;
+  font-weight: bold;
+}
+
+.bodytitle.p2.eng {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+.bodytitle.p2.cha {
+  font-family: "M_PLUS_1p", sans-serif;
+  font-weight: bold;
+}
+.bodytitle.p2.kor {
+  font-family: "NanumSquareRound", sans-serif;
+  font-weight: 800;
+}
+
+.bodytitle.p4.eng {
+  font-family: "Poppins", sans-serif;
+}
+.bodytitle.p4.cha {
+  font-family: "M_PLUS_1p", sans-serif;
+}
+.bodytitle.p4.kor {
+  font-family: "NanumSquareRound", sans-serif;
+}
+
+.des.eng {
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+}
+.des.cha {
+  font-family: "M_PLUS_1p", sans-serif;
+  font-weight: normal;
+}
+.des.kor {
+  font-family: "NanumSquareRound", sans-serif;
+  font-weight: normal;
+}
+
+/* 스크롤 디자인 */
+/* Placeholder */
+/* Input reset Icon */
+/* 말줄임 */
+/* Logo Color */
+/* Tooltip Arrow */
+/* 나라별 국기 */
+/* text border */
+@keyframes FadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes ZoomInOut {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.3, 1.3);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+.body_chat {
+  overflow: hidden;
+  min-width: 1100px;
+  min-height: 650px;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.App {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  max-height: 100%;
+  width: 100%;
+}
+
+.chat_main_div {
+  background-color: #f5f5f5;
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+.chat_main_div div::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+.chat_main_div .toolbar {
+  height: 100%;
+  width: 68px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e7e7e8;
+}
+.chat_main_div .toolbar > div {
+  background-color: #CDCDD1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  margin: 10px 0 10px;
+}
+.chat_main_div .chat_div {
+  display: flex;
+  flex: 1;
+  margin: 20px 28px 20px 0;
+}
+.chat_main_div .chat_div .toolbar_handle {
+  width: 28px;
+  display: flex;
+}
+.chat_main_div .chat_div > div:not(:first-of-type) {
+  margin-left: 28px;
+}
+.chat_main_div .chat_div .side_div {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+.chat_main_div .chat_div .side_div .profile {
+  height: 268px;
+  display: flex;
+}
+.chat_main_div .chat_div .side_div .profile .custom_profile_card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.chat_main_div .chat_div .side_div .profile .custom_profile_card .profile_background {
+  height: 100px;
+  margin-bottom: 50px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.chat_main_div .chat_div .side_div .profile .custom_profile_card .profile_background .center_avatar_container {
+  height: 100px;
+  width: 100px;
+  position: relative;
+  left: calc(50% - 50px);
+  top: 50px;
+}
+.chat_main_div .chat_div .side_div .profile .custom_profile_card .name_memo_div {
+  width: 100%;
+  flex: 1;
+}
+.chat_main_div .chat_div .side_div .profile .custom_profile_card .name_memo_div .name_div {
+  display: flex;
+  margin-top: 6px;
+}
+.chat_main_div .chat_div .side_div .profile .custom_profile_card .name_memo_div .name_div .role_container {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+}
+.chat_main_div .chat_div .side_div .profile .custom_profile_card .name_memo_div .name_div .name {
+  padding: 0 2px;
+  max-width: 180px;
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.28;
+  letter-spacing: -0.36px;
+  text-align: center;
+  color: #242a3c;
+}
+.chat_main_div .chat_div .side_div .profile .custom_profile_card .name_memo_div .name_div .spacer {
+  flex: 1;
+}
+.chat_main_div .chat_div .side_div .profile .custom_profile_card .name_memo_div .memo {
+  max-width: 250px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.77;
+  letter-spacing: -0.26px;
+  color: #a7a8ab;
+}
+.chat_main_div .chat_div .side_div .profile .bottom_div {
+  position: relative;
+  height: 47.5px;
+  border-top: 1px solid #eee;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  bottom: 0;
+}
+.chat_main_div .chat_div .side_div .profile .bottom_div > div {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  padding: 0 30px;
+}
+.chat_main_div .chat_div .side_div .profile .bottom_div > div > input[type=range] {
+  width: 100%;
+  -webkit-appearance: none;
+  background: transparent;
+}
+.chat_main_div .chat_div .side_div .profile .bottom_div > div > input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-top: -5px;
+  border-radius: 6px;
+  background-color: #9013fe;
+}
+.chat_main_div .chat_div .side_div .profile .bottom_div > div > input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  background-color: #e0e0e0;
+  height: 2px;
+  cursor: pointer;
+}
+.chat_main_div .chat_div .side_div .profile .bottom_div > div > input[type=range]::-webkit-fill-lower {
+  background-color: red;
+}
+.chat_main_div .chat_div .side_div .profile .bottom_div .controller_headphone {
+  border-left: 1px solid #eee;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider {
+  background: none;
+  width: 100%;
+  border: 0;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider > div:not(:first-of-type) {
+  margin-top: 28px;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member {
+  height: 100%;
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_channel_list_header,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_channel_list_header {
+  height: 20px;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list .list_item:nth-child(1n),
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list .list_item:nth-child(1n) {
+  animation-delay: 0.04s;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list .list_item:nth-child(2n),
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list .list_item:nth-child(2n) {
+  animation-delay: 0.08s;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list .list_item:nth-child(3n),
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list .list_item:nth-child(3n) {
+  animation-delay: 0.12s;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list .list_item:nth-child(4n),
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list .list_item:nth-child(4n) {
+  animation-delay: 0.16s;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list .list_item:nth-child(5n),
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list .list_item:nth-child(5n) {
+  animation-delay: 0.2s;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list .list_item:nth-child(6n),
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list .list_item:nth-child(6n) {
+  animation-delay: 0.24s;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list .list_item:nth-child(7n),
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list .list_item:nth-child(7n) {
+  animation-delay: 0.28s;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list .list_item:nth-child(8n),
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list .list_item:nth-child(8n) {
+  animation-delay: 0.32s;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list .list_item:nth-child(9n),
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list .list_item:nth-child(9n) {
+  animation-delay: 0.36s;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list .list_item:nth-child(10n),
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list .list_item:nth-child(10n) {
+  animation-delay: 0.4s;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list {
+  flex: 1;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list .selected,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list .selected {
+  border: solid 1px #3fccce;
+  background-color: #f0fffb;
+  transition: 0s;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 8px 22px 8px 24px;
+  animation: FadeIn 0.11s ease-out;
+  animation-fill-mode: both;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item > div,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item > div {
+  display: flex;
+  flex: 1;
+  height: 52px;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .channel_list_item .channel_img,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .channel_list_item .channel_img {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .channel_list_item .channel_description,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .channel_list_item .channel_description {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-left: 5px;
+  width: 100px;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .channel_list_item .channel_description .channel_name,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .channel_list_item .channel_description .channel_name {
+  padding-top: 4px;
+  font-weight: bolder;
+  flex: 1;
+  max-width: 90%;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .channel_list_item .channel_description .channel_name p,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .channel_list_item .channel_description .channel_name p {
+  margin: 0 26px 7px 0;
+  font-family: Poppins;
+  font-size: 15px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: -0.3px;
+  text-align: left;
+  color: #121212;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .channel_list_item .channel_description .channel_additional_info,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .channel_list_item .channel_description .channel_additional_info {
+  flex: 1;
+  max-width: 90%;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.67;
+  letter-spacing: -0.24px;
+  text-align: left;
+  color: #bdbdbd;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .channel_list_item .channel_list_action,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .channel_list_item .channel_list_action {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .channel_list_item .channel_list_action .message_count,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .channel_list_item .channel_list_action .message_count {
+  border-radius: 10px;
+  background-color: #FF45A1;
+  min-width: 25px;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .channel_list_item .channel_list_action .message_count div,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .channel_list_item .channel_list_action .message_count div {
+  margin: 0 7px;
+  height: 15px;
+  font-family: Poppins;
+  font-size: 11px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: -0.2px;
+  text-align: center;
+  color: #FFF;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .member_list_item,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .member_list_item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .member_list_item .member_avatar,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .member_list_item .member_avatar {
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .member_list_item .member_name,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .member_list_item .member_name {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: -0.32px;
+  text-align: left;
+  color: #242a3c;
+  margin-left: 5px;
+  margin-right: 8px;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .member_list_item .member_status,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .member_list_item .member_status {
+  flex: 1;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .member_list_item .member_status > div,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .member_list_item .member_status > div {
+  min-width: 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  float: left;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .member_list_item .member_status .online,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .member_list_item .member_status .online {
+  background-color: greenyellow;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > .list_item .member_list_item .member_status .offline,
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > .list_item .member_list_item .member_status .offline {
+  background-color: #CDCDD1;
+}
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .channel .custom_list > :hover:not(.selected),
+.chat_main_div .chat_div .side_div .sendbird_channel_list_provider .member .custom_list > :hover:not(.selected) {
+  background-color: #F8F8F8;
+  cursor: pointer;
+  transition: 0s;
+}
+.chat_main_div .chat_div .center_div {
+  display: flex;
+  flex: 1;
+}
+.chat_main_div .chat_div .center_div .chat {
+  display: flex;
+  flex: 1;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation {
+  border: none;
+  background-color: #f8f8f8;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .sendbird-conversation__messages-padding {
+  padding: 0;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header {
+  height: 100px;
+  background-color: #242a3c;
+  padding: 20px 22px 8px 20px;
+  display: flex;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_main {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_main img {
+  height: 60px;
+  width: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_main .header_title_description {
+  flex: 1;
+  margin: 0 0 4px 13px;
+  font-family: Poppins;
+  font-stretch: normal;
+  font-style: normal;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_main .header_title_description .header_title {
+  margin-top: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.11;
+  letter-spacing: -0.36px;
+  text-align: left;
+  color: #f8f8f8;
+  display: flex;
+  flex-direction: row;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_main .header_title_description .header_title .title {
+  padding-top: 1px;
+  flex: 1;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_main .header_title_description .header_title .action_icons {
+  padding-left: 5px;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_main .header_title_description .header_title .action_icons .more_button {
+  width: 24px;
+  height: 24px;
+  background: url("../img/ico/ic_dropdown_more.png");
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_main .header_title_description .header_title .action_icons .more_button:hover {
+  background: url("../img/ico/ic_dropdown_more_on.png");
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_main .header_title_description .header_bottom {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_main .header_title_description .header_bottom .header_description {
+  flex: 1;
+  height: 50px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.43;
+  letter-spacing: -0.28px;
+  text-align: left;
+  color: #e0e0e0;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_bottom {
+  height: 24px;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_bottom .channel_type_icons {
+  float: left;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_bottom .member_display {
+  float: right;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_bottom .member_display span {
+  font-family: Poppins;
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.32px;
+  text-align: left;
+  color: #cdcdd1;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .channel_header .header_inner .header_bottom .member_display span span {
+  font-weight: bold;
+  color: white;
+  padding: 0 5px;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .notices {
+  position: relative;
+  background-color: white;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 65px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .notices .notice_avatar {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .notices .notice_info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .notices .notice_info .notice_message {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: -0.28px;
+  text-align: left;
+  color: #121212;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .notices .notice_info .notice_time {
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.67;
+  letter-spacing: -0.24px;
+  text-align: left;
+  color: #bdbdbd;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .notices .control_buttons {
+  display: flex;
+  flex-direction: column;
+  width: 30px;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .notices .control_buttons .button_prev {
+  height: 50%;
+  width: 50%;
+  background: url("../img/ico/ic_arrow_up_sm_gr.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .notices .control_buttons .button_next {
+  height: 50%;
+  width: 50%;
+  background: url("../img/ico/ic_arrow_down_sm_gr.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .sendbird-admin-message {
+  display: none;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .message_item {
+  min-height: 50px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  transition: 0s;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .message_item .message_avatar {
+  width: 44px;
+  height: 44px;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .message_item .message_author_contents {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0 4px;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .message_item .message_author_contents .message_author {
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: -0.24px;
+  text-align: left;
+  color: #242a3c;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .message_item .message_author_contents .message_contents {
+  flex: 1;
+  flex-wrap: wrap;
+  display: flex;
+  max-width: 70%;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .message_item .message_author_contents .message_contents .contents {
+  padding: 4px 12px 6px;
+  border-radius: 0 22px 22px 22px;
+  border: solid 1px #e0e0e0;
+  background-color: #fff;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .message_item .message_author_contents .message_contents .contents p {
+  max-width: 400px;
+  word-break: break-all;
+  font-family: Poppins;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: -0.26px;
+  text-align: left;
+  color: #000;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .message_item .message_author_contents .message_contents .contents .contents_image {
+  margin: 2px;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .message_item .message_author_contents .message_contents .contents .contents_image img {
+  max-width: 300px;
+  border-radius: 22px 22px;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .message_item .message_author_contents .message_contents .send_time {
+  display: flex;
+  align-items: flex-end;
+  margin: 0 5px;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .message_item .message_author_contents .message_contents .send_time p {
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: -0.24px;
+  text-align: left;
+  color: #bdbdbd;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .message_item .control-bottons {
+  position: relative;
+  left: 0px;
+  top: 0px;
+  height: 20px;
+  display: none;
+  transition: 0s;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .message_item:hover {
+  background-color: #eee;
+  transition: 0s;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .mine .message_avatar {
+  order: 2;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .mine .message_author_contents {
+  order: 1;
+  align-items: flex-end;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .mine .message_author_contents .message_contents {
+  justify-content: flex-end;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .mine .message_author_contents .message_contents .send_time {
+  order: 1;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .mine .message_author_contents .message_contents .contents {
+  order: 2;
+  border-radius: 22px 0px 22px 22px;
+  background-color: #cdcdd1;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .mine:hover .control-bottons {
+  display: block;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .sendbird-conversation__footer {
+  padding: 0px;
+  margin: 0px;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .sendbird-conversation__footer .sendbird-message-input-wrapper {
+  padding: 10px 0;
+  border-top: 2px solid #ccc;
+  min-height: 80px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .sendbird-conversation__footer .sendbird-message-input-wrapper .sendbird-message-input {
+  display: flex;
+  align-items: center;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .sendbird-conversation__footer .sendbird-message-input-wrapper .sendbird-message-input .sendbird-message-input-text-field {
+  overflow-wrap: anywhere;
+  height: 48px;
+  border: solid 1px #e0e0e0;
+  border-radius: 24px !important;
+  padding-top: 11px;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: -0.32px;
+  text-align: left;
+  color: #121212;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .sendbird-conversation__footer .sendbird-message-input-wrapper .sendbird-message-input .sendbird-message-input--placeholder {
+  top: 14px;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: -0.32px;
+  text-align: left;
+  color: #bdbdbd;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .sendbird-conversation__footer .sendbird-message-input-wrapper .sendbird-message-input .sendbird-iconbutton {
+  right: 6px !important;
+  bottom: 6px !important;
+  background-color: #9013fe;
+  height: 36px !important;
+  width: 36px !important;
+  border-radius: 20px;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .sendbird-conversation__footer .sendbird-message-input-wrapper .sendbird-message-input .sendbird-iconbutton svg path {
+  fill: white;
+}
+.chat_main_div .chat_div .center_div .chat .sendbird-conversation .sendbird-conversation__footer__typing-indicator {
+  display: none;
+}
+.chat_main_div .chat_div .list_header {
+  height: 130px;
+}
+.chat_main_div .chat_div .list_header .title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 24px 12px 24px;
+}
+.chat_main_div .chat_div .list_header .title p {
+  font-family: Poppins;
+  font-size: 26px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 0.88;
+  letter-spacing: -0.52px;
+  text-align: left;
+}
+.chat_main_div .chat_div .list_header .title button img {
+  width: 32px;
+  height: 32px;
+}
+.chat_main_div .chat_div .list_header .search_bar input {
+  width: 260px;
+  height: 44px;
+  margin: 0 20px;
+  padding: 10px 10px 10px 16px;
+  border-radius: 8px;
+  background-color: #F8F8F8;
+  border: none;
+}
+.chat_main_div .chat_div .list_header .search_bar input:focus {
+  outline: none !important;
+  border: 1px solid red;
+}
+.chat_main_div .chat_div .list_header .search_bar input::-webkit-input-placeholder {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: -0.28px;
+  text-align: left;
+  color: #A7A8AB;
+}
+.chat_main_div .chat_div .user_avatar {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(142deg, #1088ff 14%, #7a00e5 86%);
+}
+.chat_main_div .chat_div .user_avatar .user_avatar_img {
+  width: 92%;
+  height: 92%;
+  border-radius: 100px;
+  background-color: white;
+  overflow: hidden;
+  padding: 3%;
+}
+.chat_main_div .chat_div .user_avatar .user_avatar_img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #aaa;
+  border-radius: 100px;
+}
+.chat_main_div .chat_div .role_badge {
+  width: 57px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #f2e3ff;
+  animation: ZoomInOut 0.09s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chat_main_div .chat_div .role_badge span {
+  font-family: Poppins;
+  font-size: 11px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  color: #9013fe;
+}
+.chat_main_div .channel_type_icons {
+  display: flex;
+  flex-direction: row;
+}
+.chat_main_div .channel_type_icons > div {
+  height: 22px;
+  width: 22px;
+  opacity: 1;
+}
+.chat_main_div .channel_type_icons .ic_lock_bk {
+  background: url("../img/ico/ic_lock_bk.png") no-repeat center center;
+  background-size: contain;
+  filter: contrast(0.05);
+  -webkit-filter: contrast(0.05);
+}
+.chat_main_div .ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.chat_main_div .chat_widget {
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #FFF;
+}
+
+.sendbird-modal .sendbird-modal__content {
+  border-radius: 15px;
+}

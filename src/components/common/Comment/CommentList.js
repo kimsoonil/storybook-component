@@ -1,12 +1,11 @@
 /* eslint-disable */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { dateCalculation } from 'utils/dateCalculation';
-import { patchCommentInit } from 'redux/idistStore/commentSlice';
 import 'assets/scss/club.scss';
 import CommentTextArea from './CommentTextArea';
 
-function Comment(props) {
+function CommentList(props) {
   const [openETC, setOpenETC] = useState(null);
 
   const EditCommentOpen = (id) => {
@@ -18,7 +17,7 @@ function Comment(props) {
     });
     props.setSelectComment(props.commentItem.id);
   };
-
+  const randomIndex = Math.floor(Math.random() * 40);
   return (
     <div className="comment-list">
       {props.editComment === props.commentItem.id ? (
@@ -28,7 +27,7 @@ function Comment(props) {
             PostReply={props.PatchEditComment}
             ReplySecret={props.EditCommentSecret}
             ReplyInput={props.EditCommenInput}
-            clubId={props.clubId}
+            user={props.user}
             setEditComment={props.setEditComment}
           />
         </div>
@@ -36,26 +35,29 @@ function Comment(props) {
         <>
           <img
             className="comment-list-img"
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null; // prevents looping
+              currentTarget.src = require('images/main/temporary-profile.png');
+            }}
             src={
-              props.commentItem?.profile?.user?.profile_image_url
-                ? props.commentItem?.profile?.user?.profile_image_url
-                : require('images/main/temporary-profile.png')
+              props.commentItem?.user?.profile_image_url
+                ? props.commentItem?.user?.profile_image_url
+                : require(`images/profile/profile-img${randomIndex}.png`)
             }
-            alt=""
           />
           <div className="comment-list-item">
             <div className="flex-between">
               <div className="comment-list-item-icon">
-                <div className="comment-list-item-title">{props.commentItem.profile?.user?.username}</div>
+                <div className="comment-list-item-title">{props.commentItem.user?.username}</div>
 
-                {props.commentItem.profile?.staff_title === null ? (
+                {/* {props.commentItem?.user?.staff_title === null ? (
                   <>
                     <div className="profile-rating flex-center">{props.commentItem.profile?.grade_title}</div>
                     <div className="profile-level">LV {props.commentItem.profile?.level}</div>
                   </>
                 ) : (
                   <div className="profile-staff flex-center">{props.commentItem.profile?.staff_title}</div>
-                )}
+                )} */}
               </div>
               <div className="etc">
                 <div className="etc-img" onClick={() => setOpenETC(props.commentItem.id)} />
@@ -114,24 +116,24 @@ function Comment(props) {
                     <img
                       className="comment-list-img"
                       src={
-                        childItem?.profile?.user?.profile_image_url
-                          ? childItem?.profile?.user?.profile_image_url
-                          : require('images/main/temporary-profile.png')
+                        childItem?.user?.profile_image_url
+                          ? childItem?.user?.profile_image_url
+                          : require(`images/profile/profile-img${randomIndex}.png`)
                       }
                       alt=""
                     />
                     <div className="comment-list-item">
                       <div className="flex-between">
                         <div className="comment-list-item-icon">
-                          <div className="comment-list-item-title">{childItem.profile?.user?.username}</div>
+                          <div className="comment-list-item-title">{childItem.user?.username}</div>
 
-                          {childItem.profile?.staff_title === null ? (
+                          {childItem.staff_title === null ? (
                             <>
-                              <div className="profile-rating flex-center">{childItem.profile?.grade_title}</div>
-                              <div className="profile-level">LV {childItem.profile?.level}</div>
+                              <div className="profile-rating flex-center">{childItem.grade_title}</div>
+                              <div className="profile-level">LV {childItem.level}</div>
                             </>
                           ) : (
-                            <div className="profile-staff flex-center">{childItem.profile?.staff_title}</div>
+                            <div className="profile-staff flex-center">{childItem.staff_title}</div>
                           )}
                         </div>
                         <div>
@@ -175,4 +177,4 @@ function Comment(props) {
   );
 }
 
-export default Comment;
+export default CommentList;

@@ -7,7 +7,7 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Pagination, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import ScrollTopBtn from 'components/common/ScrollTopBtn';
 import { Loader } from 'components/idist/Loader';
 import Header from 'components/common/header/Header';
 import Footer from 'components/common/footer/Footer';
@@ -28,7 +28,6 @@ function Home() {
   useEffect(() => {
     dispatch(getClubsRecommendInit({ parameters: '' }));
   }, [dispatch]);
-  console.log('recommend', recommend);
   if (recommend.message !== 'ok')
     return (
       <div className="flex-center">
@@ -36,7 +35,7 @@ function Home() {
       </div>
     );
   return (
-    <div id="root">
+    <div>
       <Header />
 
       <div className="slideView relative">
@@ -49,21 +48,22 @@ function Home() {
           observeParents={true}
           navigation={recommend.data.length > 0 ? true : false}
           loop={true}
+          loopedSlides={4}
           loopFillGroupWithBlank={true}
           pagination={{
             clickable: true
           }}
           modules={[Pagination, Navigation]}
-          breakpoints={{
-            1280: {
-              slidesPerView: 2,
-              slidesPerGroup: 2
-            },
-            720: {
-              slidesPerView: 1,
-              slidesPerGroup: 1
-            }
-          }}
+          // breakpoints={{
+          //   1280: {
+          //     slidesPerView: 2,
+          //     slidesPerGroup: 2
+          //   },
+          //   720: {
+          //     slidesPerView: 1,
+          //     slidesPerGroup: 1
+          //   }
+          // }}
         >
           {recommend.data.map((recommendItem, index) => {
             return (
@@ -74,7 +74,7 @@ function Home() {
               >
                 <div
                   className="slider-item-img"
-                  style={{ backgroundImage: `url(${recommendItem.club.banner_image_url})` }}
+                  style={{ backgroundImage: `url(${recommendItem.club.profile_image_url})` }}
                 />
                 <div
                   className="slider-item-profileimg"
@@ -95,6 +95,7 @@ function Home() {
       <div className="main">
         <Outlet />
       </div>
+      <ScrollTopBtn />
       <Footer />
     </div>
   );

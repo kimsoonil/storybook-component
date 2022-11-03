@@ -1,8 +1,6 @@
-/* eslint-disable */
 import _ from 'lodash';
 import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { boardGroupPayload, boardType } from 'redux/idistApi/model';
 import {
   deleteBoardGroupInit,
@@ -15,7 +13,7 @@ import JButton from '../JButton';
 
 const rootClassName = 'admin-boards-info';
 
-const GroupInfo = ({ title, setTitle, setAddState }) => {
+function GroupInfo({ title, setTitle, setAddState }) {
   const dispatch = useDispatch();
   const info = useSelector((state) => state.boardAdmin.info);
   const { id: clubId } = useSelector((state) => state.commonAdmin.club);
@@ -35,18 +33,21 @@ const GroupInfo = ({ title, setTitle, setAddState }) => {
   }, [info]);
 
   const activationClassName = useCallback(
-    (isActive) =>
-      isActive
-        ? {
-            button: rootClassName + '-activation-activate',
-            icon: rootClassName + '-activation-activate-icon',
-            label: rootClassName + '-activation-activate-label'
-          }
-        : {
-            button: rootClassName + '-activation-deactivate',
-            icon: rootClassName + '-activation-deactivate-icon',
-            label: rootClassName + '-activation-deactivate-label'
-          },
+    (value) => {
+      if (value) {
+        return {
+          button: `${rootClassName}-activation-activate`,
+          icon: `${rootClassName}-activation-activate-icon`,
+          label: `${rootClassName}-activation-activate-label`
+        };
+      }
+      return {
+        button: `${rootClassName}-activation-deactivate`,
+        icon: `${rootClassName}-activation-deactivate-icon`,
+        label: `${rootClassName}-activation-deactivate-label`
+      };
+    },
+
     []
   );
 
@@ -59,9 +60,8 @@ const GroupInfo = ({ title, setTitle, setAddState }) => {
   }, []);
 
   const onClickMerge = useCallback(() => {
-    confirm('팝업 띄우기');
+    // confirm('팝업 띄우기');
     // 추가 중이면 처음 화면.
-
     // 수정 중이면 수정 초기 화면
   }, []);
 
@@ -94,13 +94,25 @@ const GroupInfo = ({ title, setTitle, setAddState }) => {
         <div className={`${rootClassName}-label-description`}>If disable the group, cannot access this group.</div>
 
         <div className={`${rootClassName}-activation-container`}>
-          <div className={`${activationClassName(isActive).button}`} onClick={() => onClickActivation(true)}>
+          <div
+            className={`${activationClassName(isActive).button}`}
+            onClick={() => onClickActivation(true)}
+            onKeyDown={(e) => (e.key === 'Enter' ? onClickActivation(true) : {})}
+            role="button"
+            tabIndex="0"
+          >
             <div className={`${activationClassName(isActive).icon}`} />
             <div className={`${activationClassName(isActive).label}`}>Activation</div>
           </div>
 
           {!isDefault && (
-            <div className={`${activationClassName(!isActive).button}`} onClick={() => onClickActivation(false)}>
+            <div
+              className={`${activationClassName(!isActive).button}`}
+              onClick={() => onClickActivation(false)}
+              onKeyDown={(e) => (e.key === 'Enter' ? onClickActivation(false) : {})}
+              role="button"
+              tabIndex="0"
+            >
               <div className={`${activationClassName(!isActive).icon}`} />
               <div className={`${activationClassName(!isActive).label}`}>Deactivation</div>
             </div>
@@ -147,21 +159,21 @@ const GroupInfo = ({ title, setTitle, setAddState }) => {
 
       {!isDefault && info?.id && (
         <div className={`${rootClassName}-merge-wrapper`}>
-          <JButton label={'Merge'} color="none" onClick={onClickMerge} />
+          <JButton label="Merge" color="none" onClick={onClickMerge} />
         </div>
       )}
 
       <div className={`${rootClassName}-bottom-container`}>
-        <JButton label={'Cancel'} color="none" outline onClick={onClickCancel} />
-        {!isDefault && info?.id && <JButton label={'Delete'} color="none" outline onClick={onClickDelete} />}
+        <JButton label="Cancel" color="none" outline onClick={onClickCancel} />
+        {!isDefault && info?.id && <JButton label="Delete" color="none" outline onClick={onClickDelete} />}
         <JButton
-          label={'Save'}
+          label="Save"
           disabled={!(title && titleInputState !== IVD.error) || !hasChanged}
           onClick={onClickSave}
         />
       </div>
     </div>
   );
-};
+}
 
 export default GroupInfo;

@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import useToggle from 'hook/useToggle';
 import classNames from 'classnames';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { checkLogin } from 'util/common';
 import { reset, delLogOutHistory } from 'redux/store/forum/forumHistorySlice';
-// import { reqForumBookMarkedList } from 'redux/store/forum/forumBookmarkedSlice';
+import { reqForumBookMarkedList } from 'redux/store/forum/forumBookmarkedSlice';
 
 function NoRecentVisitedForum({ strHistory }) {
   return (
@@ -37,16 +37,18 @@ function BookMark() {
   const [menu, setMenu] = useState(isLogin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   let strNohistory = '';
   useEffect(() => {
     if (arrHistory?.length > 0) return;
 
     if (isLogin) {
-      strNohistory = t('label.forum.history.login.nobookmarked');
+      // strNohistory = t('label.forum.history.login.nobookmarked');
+      strNohistory = 'There are no bookmarked forums.';
     } else {
-      strNohistory = arrHistory?.length === 0 && t('label.forum.history.logout.bookmark');
+      // strNohistory = arrHistory?.length === 0 && t('label.forum.history.logout.bookmark');
+      strNohistory = arrHistory?.length === 0 && 'There are no recently visited forums';
     }
     setStrHistroy(strNohistory);
   }, [arrHistory]);
@@ -56,9 +58,9 @@ function BookMark() {
     setArrHistroy(tmpHistory);
   }, [bookMarkedList, history, menu]);
 
-  // useEffect(() => {
-  //   dispatch(reqForumBookMarkedList({ is_pined: true }));
-  // }, []);
+  useEffect(() => {
+    dispatch(reqForumBookMarkedList({ is_pined: true }));
+  }, []);
 
   return (
     <div className="recent">
@@ -94,7 +96,7 @@ function BookMark() {
                 <li key={item.id}>
                   <div className="forum_info">
                     <span className="forum_logo" />
-                    <button type="button" className="forum_name" onClick={() => navigate(`/board/${item.id}`)}>
+                    <button type="button" className="forum_name" onClick={() => navigate(`/forum/${item.id}/theme`)}>
                       <span>{item.title}</span>
                     </button>
                   </div>

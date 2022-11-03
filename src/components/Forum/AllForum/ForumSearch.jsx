@@ -25,7 +25,7 @@ function ForumSearch({ reqOption, setReqOption }) {
         </button>
       ))}
       <input onChange={(e) => setForumId(e.target.value)} />
-      <button type="button" onClick={() => dispatch(reqForumList(reqOption))}>
+      <button type="button" onClick={() => dispatch(reqForumList({ forum_category: reqOption.forum_category }))}>
         Go
       </button>
     </>

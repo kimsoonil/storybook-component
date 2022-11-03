@@ -1,10 +1,11 @@
 /* eslint-disable */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
 import { useParams } from 'react-router';
-import { postPostCommentInit, getPostCommentsInit } from 'redux/idistStore/postsSlice';
+import { getUserInit } from 'redux/idistStore/userSlice';
+import { postPostCommentInit, getPostCommentsInit, getMoreCommentInit } from 'redux/idistStore/postsSlice';
 import {
   postCommentLikeInit,
   postCommentUnlikeInit,
@@ -14,14 +15,14 @@ import {
   deleteCommentInit
 } from 'redux/idistStore/commentSlice';
 import { Loader } from 'components/idist/Loader';
-
+import { Button } from 'components/idist/Button';
 import 'assets/scss/club.scss';
 import CommentTextArea from './CommentTextArea';
 import CommentList from './CommentList';
 
 function Comment(props) {
   const dispatch = useDispatch();
-  const { comment } = useSelector((state) => state.post);
+  const { comment, commentList } = useSelector((state) => state.post);
   const { id, postId } = useParams();
   const [commentValue, setCommentValue] = useState({
     parent_comment: null,
@@ -35,6 +36,8 @@ function Comment(props) {
   const [disLikeCount, setDisLikeCount] = useState(0);
   const [selectComment, setSelectComment] = useState(null);
   const [editComment, setEditComment] = useState(null);
+  const { user } = useSelector((state) => state.user);
+  const parameters = { page_size: 20 };
   const [editValue, setEditValue] = useState({
     content: '',
     is_secret: false
@@ -44,11 +47,10 @@ function Comment(props) {
     content: '',
     is_secret: false
   });
-
   useEffect(() => {
-    dispatch(getPostCommentsInit({ id: postId }));
-  }, []);
-
+    dispatch(getPostCommentsInit({ id: postId, parameters: parameters }));
+    dispatch(getUserInit());
+  }, [postId]);
   useEffect(() => {
     if (comment.data) {
       setLikeCount(comment?.data[0]?.like_count);
@@ -83,7 +85,6 @@ function Comment(props) {
     setCommentValue({ ...commentValue, parent_comment: null, content: '', is_secret: false });
   };
   const PostReply = () => {
-    console.log('replyValue', replyValue);
     dispatch(
       postPostCommentInit({
         id: postId,
@@ -163,60 +164,82 @@ function Comment(props) {
     setEditComment(null);
     setCommentValue({ ...editValue, content: '', is_secret: false });
   };
+
+  const commentMoreList = () => {
+    console.log('parameters', parameters);
+    dispatch(getMoreCommentInit({ id: postId, parameters: parameters }));
+  };
   return (
     <div className="posts-container-comment ">
       <div className="flex-between">
         <div className="posts-container-comment-count flex-center">
           <img src={require('images/club/messaging.png')} alt="" />
-          Comments {comment?.data?.length}
+          Comments {comment?.count}
         </div>
-        <div className="posts-container-comment-filter">
+        {/* <div className="posts-container-comment-filter">
           <div className="comment-list-filter flex-center">
             <div className="flex-center active">Recent</div>
             <div className="flex-center">Popular</div>
           </div>
-        </div>
+        </div> */}
       </div>
-      <CommentTextArea
-        replyValue={commentValue}
-        PostReply={PostComment}
-        ReplySecret={CommentSecret}
-        ReplyInput={CommenInput}
-        clubId={clubId}
-      />
+      {user.message !== 'ok' ? (
+        <div className="flex-center">
+          <Loader />
+        </div>
+      ) : (
+        <CommentTextArea
+          replyValue={commentValue}
+          PostReply={PostComment}
+          ReplySecret={CommentSecret}
+          ReplyInput={CommenInput}
+          clubId={clubId}
+          user={user}
+        />
+      )}
       <div className="comment">
-        {comment.message !== 'ok' ? (
+        {comment.message !== 'ok' && user.message !== 'ok' ? (
           <div className="flex-center">
             <Loader />
           </div>
         ) : (
-          comment.data.map((commentItem, index) => {
+          commentList.map((commentItem, index) => {
             return (
-              <CommentList
-                deleteComment={deleteComment}
-                commentItem={commentItem}
-                clickCommentLike={clickCommentLike}
-                clickCommentDisLike={clickCommentDisLike}
-                ReplyOpen={ReplyOpen}
-                replyValue={replyValue}
-                PostReply={PostReply}
-                ReplySecret={ReplySecret}
-                ReplyInput={ReplyInput}
-                clubId={clubId}
-                PatchEditComment={PatchEditComment}
-                EditCommentSecret={EditCommentSecret}
-                EditCommenInput={EditCommenInput}
-                setEditValue={setEditValue}
-                editValue={editValue}
-                setSelectComment={setSelectComment}
-                editComment={editComment}
-                setEditComment={setEditComment}
-                key={index}
-              />
+              <>
+                <CommentList
+                  deleteComment={deleteComment}
+                  commentItem={commentItem}
+                  clickCommentLike={clickCommentLike}
+                  clickCommentDisLike={clickCommentDisLike}
+                  ReplyOpen={ReplyOpen}
+                  replyValue={replyValue}
+                  PostReply={PostReply}
+                  ReplySecret={ReplySecret}
+                  ReplyInput={ReplyInput}
+                  clubId={clubId}
+                  PatchEditComment={PatchEditComment}
+                  EditCommentSecret={EditCommentSecret}
+                  EditCommenInput={EditCommenInput}
+                  setEditValue={setEditValue}
+                  editValue={editValue}
+                  setSelectComment={setSelectComment}
+                  editComment={editComment}
+                  setEditComment={setEditComment}
+                  key={index}
+                  user={user.data}
+                />
+              </>
             );
           })
         )}
       </div>
+      {comment.count === commentList.length || commentList.length <= 0 ? (
+        <div></div>
+      ) : (
+        <div className="flex-center" style={{ marginTop: '20px' }}>
+          <Button label="More" size="s" width={90} onClick={() => commentMoreList()} />
+        </div>
+      )}
     </div>
   );
 }

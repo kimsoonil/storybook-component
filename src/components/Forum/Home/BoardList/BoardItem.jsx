@@ -1,23 +1,25 @@
+/* eslint-disable camelcase */
 import React from 'react';
-import ForumThumb01 from 'html/img/com/forum_thumb_01.png';
+import { useNavigate } from 'react-router';
 
-function BoardItem() {
+function BoardItem({ info }) {
+  const { title, description, thumbnail_image, id } = info;
+  const navigate = useNavigate();
   return (
-    <li>
+    <li onClick={() => navigate(`/forum/${id}/theme`)} aria-hidden>
       <dl>
         <dt>
           <div className="badge">
-            <span className="forum_badge new" />
-            <span className="forum_badge excellent" />
-            <span className="forum_badge best_live_simple" />
-            <span className="forum_badge recommend_forum" />
+            {Math.floor(Math.random() * 2) === 1 && <span className="forum_badge new" />}
+            {Math.floor(Math.random() * 2) === 1 && <span className="forum_badge excellent" />}
+            {Math.floor(Math.random() * 2) === 1 && <span className="forum_badge best_live_simple" />}
+            {Math.floor(Math.random() * 2) === 1 && <span className="forum_badge recommend_forum" />}
           </div>
-          <img src={ForumThumb01} alt="" />
+          <div className="badge_over" />
+          <img src={thumbnail_image} alt="" />
         </dt>
-        <dd className="simul_title">YOMIURI GIANTS Official Fan Board</dd>
-        <dd className="simul_text">
-          Let’s follow their own league, the big giant of Japanese baseball! No one can stop us.
-        </dd>
+        <dd className="simul_title">{title}</dd>
+        <dd className="simul_text">{description}</dd>
       </dl>
     </li>
   );

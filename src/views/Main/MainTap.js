@@ -9,7 +9,7 @@ function MainTap(prop) {
 
   const clubsTabArr = [
     { url: '', title: 'Home' },
-    { url: 'myclubs', title: 'My Clubs' },
+    { url: 'myclub', title: 'My Clubs' },
     { url: 'newfeeds', title: 'New Feeds' },
     { url: 'activity', title: 'Activity' }
   ];

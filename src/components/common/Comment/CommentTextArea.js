@@ -11,14 +11,18 @@ function CommentTextArea(props) {
     <div className="relative">
       <div className="flex-center posts-container-comment-profile">
         <img
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null; // prevents looping
+            currentTarget.src = require('images/main/temporary-profile.png');
+          }}
           src={
-            props?.clubId?.data?.profile?.profile_image_url
-              ? props?.clubId?.data?.profile.profile_image_url
+            props?.user?.data?.profile_image_url
+              ? props?.user?.data?.profile_image_url
               : require('images/main/temporary-profile.png')
           }
           alt=""
         />
-        <div>{props?.clubId?.data?.profile?.user?.username}</div>
+        <div>{props?.user?.data?.username}</div>
       </div>
       <textarea
         placeholder="Please leave a comment"
@@ -28,7 +32,7 @@ function CommentTextArea(props) {
       />
       <div className="flex-between posts-container-comment-bottom">
         <div className="flex-center posts-container-comment-icon">
-          <div>
+          {/* <div>
             <img src={require('images/club/icon-comment1.png')} alt="" />
           </div>
           <div>
@@ -36,7 +40,7 @@ function CommentTextArea(props) {
           </div>
           <div>
             <img src={require('images/club/icon-comment3.png')} alt="" />
-          </div>
+          </div> */}
           <div onClick={() => props.ReplySecret()}>
             <img
               src={
@@ -62,11 +66,11 @@ function CommentTextArea(props) {
           )}
 
           <Button
-            size={'s'}
-            label={'Post'}
-            disabled={props.replyValue.length === 0}
+            size="s"
+            label="Post"
             width={80}
             onClick={() => props.PostReply()}
+            disabled={props.replyValue.content.length === 0}
           />
         </div>
       </div>

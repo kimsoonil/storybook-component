@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/4638.eb49be54.chunk.js","mappings":"4HAOA,UALgB,WAEd,OADAA,QAAQC,IAAI,mBACL,oCACR,C","sources":["views/Admin/Statistics.js"],"sourcesContent":["import React from 'react';\n\nconst Statics = () => {\n  console.log('Render Statics');\n  return <div>Statics</div>;\n};\n\nexport default Statics;\n"],"names":["console","log"],"sourceRoot":""}

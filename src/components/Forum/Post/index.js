@@ -15,19 +15,18 @@ import {
   postPostUnPinInit,
   deletePostInit
 } from 'redux/idistStore/postsSlice';
+import { reqForumIdPostList } from 'redux/store/forum/forumIdPostListSlice';
 import { useOutletContext } from 'react-router-dom';
 import { useParams } from 'react-router';
 
 import { Loader } from 'components/idist/Loader';
-import Profile from 'components/idist/Profile';
+
 import SharePopup from 'components/idist/popup/SharePopup';
 import ReportPopup from 'components/idist/popup/ReportPopup';
-import SideMember from 'components/idist/Club/SideMember';
+
 import Header from 'components/common/header/Header';
 import Footer from 'components/common/footer/Footer';
-import SideEvent from 'components/idist/Club/SideEvent';
 
-import HotPosts from 'components/idist/Club/HotPosts';
 import PostContent from 'components/common/Post/PostContent';
 import PostList from 'components/common/Post/PostList';
 import PostRecent from 'components/common/Post/PostRecent';
@@ -35,11 +34,12 @@ import PostRecent from 'components/common/Post/PostRecent';
 import 'assets/scss/post.scss';
 import 'assets/scss/main.scss';
 
-function Posts(props) {
+function Posts() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [openPopup, setOpenPopup] = useState(false);
   const { post, like } = useSelector((state) => state.post);
+  const { forumIdPostList } = useSelector((state) => state.forumIdPostList);
   const { id, postId } = useParams();
   const clubId = useOutletContext();
   const [listState, setListState] = useState(false);
@@ -48,11 +48,15 @@ function Posts(props) {
   const [disLikeCount, setDisLikeCount] = useState(0);
   const [openETC, setOpenETC] = useState(false);
   const [reportOpen, setReportOpen] = useState(false);
+
   useEffect(() => {
     dispatch(getPostInit({ id: postId }));
     dispatch(getPostLikesInit({ id: postId }));
   }, [postId]);
 
+  useEffect(() => {
+    if (id) dispatch(reqForumIdPostList({ forumId: id }));
+  }, [id]);
   useEffect(() => {
     if (post?.data) {
       setListState(post?.data?.is_liked);
@@ -63,7 +67,7 @@ function Posts(props) {
       localStorage.setItem('boardGroup', post.data.board_group_title);
     }
   }, [post]);
-
+  console.log('post', post);
   const handleClickPin = (pin) => {
     if (pin) {
       dispatch(
@@ -148,12 +152,13 @@ function Posts(props) {
   const deletePost = (id, club, board) => {
     if (confirm('Are you sure you want to delete the post?')) {
       dispatch(deletePostInit({ id: id }));
-      navigate(`/forum/theme/1`);
+      navigate(`/forum/1/theme`);
     }
   };
   const postNavigate = () => {
     navigate(`/forum/${id}`);
   };
+
   if (post.message !== 'ok')
     return (
       <div className="flex-center">
@@ -167,7 +172,7 @@ function Posts(props) {
         <div className="posts container">
           <div className="item">
             <PostContent
-              type={'forum'}
+              type="forum"
               postNavigate={postNavigate}
               post={post}
               clubId={clubId}
@@ -187,8 +192,14 @@ function Posts(props) {
               handleClickLike={handleClickLike}
               handleClickDisLike={handleClickDisLike}
             />
-            <PostList post={post} id={id} />
-            <PostRecent post={post} />
+            <PostList
+              type="forum"
+              prev={post?.data?.prev_post}
+              next={post?.data?.next_post}
+              post={forumIdPostList}
+              id={id}
+            />
+            <PostRecent type="forum" post={forumIdPostList} id={id} />
           </div>
           {/* 사이드바 */}
           <div className="item">
@@ -196,9 +207,9 @@ function Posts(props) {
         <SideEvent id={id} />
         <HotPosts />
         <SideMember /> */}
-            <div className="chatting">
+            {/* <div className="chatting">
               <img src={require(`images/main/chatting.png`)} alt="" />
-            </div>
+            </div> */}
           </div>
 
           <SharePopup open={openPopup} setOpen={setOpenPopup} sharefuc={handleClickShare} />

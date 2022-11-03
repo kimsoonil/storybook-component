@@ -1,13 +1,12 @@
-/* eslint-disable */
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeAllDialog, closeDialog } from 'redux/idistStore/admin/dialogSlice';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { closeDialog } from 'redux/idistStore/admin/dialogSlice';
+import { Dialog } from '@mui/material';
 import 'assets/scss/component/dialog.scss';
-import PropTypes from 'prop-types';
+import exitImage from 'images/admin/icon-x.svg';
 import JButton from '../JButton';
 
-const ContentsActivationDialog = ({ submit }) => {
+function ContentsActivationDialog() {
   const dispatch = useDispatch();
   const contentsActivation = useSelector((state) => state.adminDialog.contentsActivation);
 
@@ -108,7 +107,7 @@ const ContentsActivationDialog = ({ submit }) => {
       aria-labelledby="alert-dialog-title"
     >
       <div className="contents-activation">
-        <img className="exit-image" onClick={close} src={require('images/admin/icon-x.svg').default} />
+        <img className="exit-image" onClick={close} role="presentation" src={exitImage} alt="exit" />
         <div className="contents-activation-title">Disactivate the post/review</div>
 
         <div className="contents-activation-description">
@@ -146,23 +145,29 @@ const ContentsActivationDialog = ({ submit }) => {
           </div>
         </div>
 
-        <div className={`contents-activation-button-wrapper`}>
-          <JButton width={200} label={'Cancel'} color={'none'} onClick={close} />
-          <JButton width={200} label={'Confirm'} onClick={close} disabled={reason.id === 12 && !additionalText} />
+        <div className="contents-activation-button-wrapper">
+          <JButton width={200} label="Cancel" color="none" onClick={close} />
+          <JButton width={200} label="Confirm" onClick={close} disabled={reason.id === 12 && !additionalText} />
         </div>
       </div>
     </Dialog>
   );
-};
+}
 
 export default ContentsActivationDialog;
 
-const ReasonButton = ({ reasonItem, onClick, selected }) => {
+function ReasonButton({ reasonItem, onClick, selected }) {
   const selectedClassName = selected ? 'contents-activation-reason-button-selected' : '';
   return (
-    <div className={`contents-activation-reason-button ${selectedClassName}`} onClick={() => onClick(reasonItem)}>
+    <div
+      className={`contents-activation-reason-button ${selectedClassName}`}
+      onClick={() => onClick(reasonItem)}
+      onKeyDown={(e) => (e.key === 'Enter' ? onClick(reasonItem) : {})}
+      tabIndex={0}
+      role="button"
+    >
       {reasonItem.title}
       {/* <div className="contents-activation-reason-text">{}</div> */}
     </div>
   );
-};
+}

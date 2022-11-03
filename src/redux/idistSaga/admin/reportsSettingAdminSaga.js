@@ -53,11 +53,11 @@ function* deleteReportChoice({ payload }) {
   }
 }
 
-function* _reportsSettingAdminSaga() {
+function* reportsSettingAdminSagas() {
   yield all([takeEvery(actionTypes.getReportChoicesInit, getReportChoices)]);
   yield all([takeEvery(actionTypes.patchReportChoiceInit, patchReportChoice)]);
   yield all([takeEvery(actionTypes.postReportChoiceInit, postReportChoice)]);
   yield all([takeEvery(actionTypes.deleteReportChoiceInit, deleteReportChoice)]);
 }
 
-export const reportsSettingAdminSaga = [fork(_reportsSettingAdminSaga)];
+export const reportsSettingAdminSaga = [fork(reportsSettingAdminSagas)];

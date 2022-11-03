@@ -19,6 +19,7 @@ const PostWriting = loadable(() => import('views/Club/PostWriting'));
 const PostsId = loadable(() => import('views/Club/Post'));
 const Member = loadable(() => import('views/Club/Member'));
 const MemberProfile = loadable(() => import('views/Club/Member/MemberProfile'));
+const SuperClub = loadable(() => import('views/Club/SuperClub'));
 const Notfound = loadable(() => import('views/Error/Notfound'));
 
 const Create = loadable(() => import('views/Admin/Create'));
@@ -39,7 +40,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/clubs" element={<MainDashboard />}>
         <Route path="" element={<Home />} />
-        <Route path="myclubs" element={<MyClub />} />
+        <Route path="myclub" element={<MyClub />} />
         <Route path="newfeeds" element={<NewFeeds />} />
         <Route path="activity" element={<Activity />} />
         <Route path="chat" element={<Home />} />
@@ -52,6 +53,7 @@ function AppRoutes() {
       <Route path="/club/:id" element={<Club />}>
         <Route path="home" element={<ClubHome />} />
         <Route path="member" element={<Member />} />
+        <Route path="superclub" element={<SuperClub />} />
         <Route path="board/:boardId" element={<Board />} />
         <Route path="writing" element={<PostWriting />} />
         <Route path="writing/:postId" element={<PostWriting />} />

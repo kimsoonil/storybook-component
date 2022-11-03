@@ -1,0 +1,66 @@
+.radio-button-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.radio-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.radio-button-label {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+  padding-right: 15px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.radio-button-label:hover .checkmark {
+  background-color: #ccc;
+}
+.radio-button-label .default-input {
+  display: none;
+}
+.radio-button-label .default-input:checked ~ .checkmark {
+  background-color: #9013fe;
+  border: none;
+}
+.radio-button-label .default-input:checked ~ .checkmark::after {
+  content: "";
+  background-color: white;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.radio-button-label .checkmark {
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 18px;
+  width: 18px;
+  margin-right: 15px;
+  border-radius: 50%;
+  background-color: white;
+  box-sizing: border-box;
+  border: 1px solid #bdbdbd;
+}
+
+.radio-button-explain {
+  font-size: 16px;
+  color: #bdbdbd;
+  line-height: 22px;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) *//*# sourceMappingURL=radio-button.css.map */

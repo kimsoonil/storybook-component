@@ -15,7 +15,7 @@ function Chat() {
           </button>
         </div>
       </div>
-      <div className="main_chat_list">
+      {/* <div className="main_chat_list">
         <div className="main_chat_over" />
         <ul>
           <li>
@@ -91,7 +91,7 @@ function Chat() {
             </div>
           </li>
         </ul>
-      </div>
+      </div> */}
       <div className="main_chat_form">
         <div className="main_chat_setting">
           <ul>

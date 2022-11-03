@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/4889.8bad294f.chunk.js","mappings":"gIAOA,UALA,WAEE,OADAA,QAAQC,IAAI,uBACL,wCACR,C","sources":["views/Admin/Permissions.js"],"sourcesContent":["import React from 'react';\n\nfunction Permissions() {\n  console.log('Render Permissions');\n  return <div>Permissions</div>;\n}\n\nexport default Permissions;\n"],"names":["console","log"],"sourceRoot":""}

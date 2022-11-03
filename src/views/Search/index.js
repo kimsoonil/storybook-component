@@ -1,9 +1,10 @@
 /* eslint-disable */
 
 import React, { useState, useEffect } from 'react';
-import { Header } from 'components/idist/Header';
+import Header from 'components/common/header/Header';
+import Footer from 'components/common/footer/Footer';
 import { useNavigate, Outlet, useSearchParams } from 'react-router-dom';
-
+import ScrollTopBtn from 'components/common/ScrollTopBtn';
 import 'assets/scss/search.scss';
 import { Button } from 'components/idist/Button';
 import { Fliter } from 'components/idist/Fliter';
@@ -27,7 +28,7 @@ function Search() {
   }, [searchParams]);
 
   return (
-    <div id="root">
+    <div>
       <Header />
       <div className="main">
         <div className="search">
@@ -77,23 +78,14 @@ function Search() {
                 <Fliter doneFuc={() => setOpenFilter(!openFilter)} />
               </div>
             </div>
-            {/* <div className="search-input-btn flex-center" onClick={() => searchFuc()}>
-              <img src={require('images/components/ic_search.png')} alt="" />
-            </div> */}
-            {/* <div className="flex-between ">
-              <div className="flex-center search-keyword">
-                <div className="search-keyword-item">club</div>
-                <div className="search-keyword-fixItem">And</div>
-                <div className="search-keyword-fixItem">Or</div>
-                <div className="search-keyword-fixItem">Except</div>
-              </div>
-            </div> */}
           </div>
           <div>
             <Outlet />
           </div>
         </div>
       </div>
+      <Footer />
+      <ScrollTopBtn />
     </div>
   );
 }

@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcmp=self.webpackChunkcmp||[]).push([[2511],{22511:function(e,n,c){c.r(n);c(72791);var r=c(80184);n.default=function(){return console.log("Render Operation"),(0,r.jsx)("div",{children:"Operation"})}}}]);
+//# sourceMappingURL=2511.5ab97547.chunk.js.map

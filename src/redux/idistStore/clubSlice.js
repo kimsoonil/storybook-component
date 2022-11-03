@@ -7,7 +7,8 @@ const initialState = () => ({
   isEndOfCatalogue: false,
   clubs: {},
   clubList: [],
-  myclubs: {},
+  managing: {},
+  join: {},
   clubId: {},
   members: {},
   recommend: {},
@@ -35,10 +36,14 @@ const clubSlice = createSlice({
       state.isLoading = true;
     },
     getClubsSuccess: (state, { payload }) => {
+      console.log('getClubsSuccess', payload);
       state.isLoading = false;
       switch (payload.payload?.type) {
-        case 'myclub':
-          state.myclubs = payload;
+        case 'join':
+          state.join = payload;
+          break;
+        case 'managing':
+          state.managing = payload;
           break;
         default:
           state.clubs = payload;
@@ -49,10 +54,11 @@ const clubSlice = createSlice({
       state.moreLoading = true;
     },
     getMoreClubsSuccess: (state, { payload }) => {
+      console.log('getMoreClubsSuccess', payload);
       state.moreLoading = false;
       const nextClubList = [...immerParse(state.clubList), ...payload.data];
       state.clubList = nextClubList;
-      if (payload.count > nextClubList.length) {
+      if (payload.count > state.clubList.length) {
         state.currentPage = immerParse(state.currentPage) + 1;
       } else {
         state.isEndOfCatalogue = true;

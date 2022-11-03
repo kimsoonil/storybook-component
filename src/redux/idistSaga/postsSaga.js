@@ -60,7 +60,7 @@ function* getPost({ payload }) {
     );
     if (response.data.message === 'ok') {
       console.log('posts', response.data);
-      yield put(actionTypes.getPostSuccess({ ...response.data }));
+      yield put(actionTypes.getPostSuccess({ ...response.data, payload }));
     }
   } catch (error) {
     yield put(actionTypes.postFailure(error));
@@ -261,7 +261,10 @@ function* postPostComment({ payload }) {
 function* getPostComments({ payload }) {
   try {
     const response = yield call(() =>
-      axios.get(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/post/${payload.id}/comments`, config)
+      axios.get(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/post/${payload.id}/comments`, {
+        params: payload.parameters,
+        ...config
+      })
     );
 
     if (response.data.message === 'ok') {
@@ -271,6 +274,44 @@ function* getPostComments({ payload }) {
         yield all(payload.actionList.map((action) => put(action)));
         yield call(sagaCallback, payload, response?.data?.data);
       }
+    }
+  } catch (error) {
+    yield put(actionTypes.postFailure(error));
+    console.log(error);
+  }
+}
+function* getMoreComments({ payload }) {
+  try {
+    const { currentPage, isEndOfCatalogue } = yield select((state) => state.post);
+    console.log('currentPage', currentPage);
+    console.log('isEndOfCatalogue', isEndOfCatalogue);
+    if (isEndOfCatalogue) return;
+    payload.parameters.page = currentPage + 1;
+
+    const response = yield call(() =>
+      axios.get(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/post/${payload.id}/comments`, {
+        params: payload.parameters,
+        ...config
+      })
+    );
+    if (response.data.message === 'ok') {
+      yield put(actionTypes.getMoreCommentSuccess({ ...response.data, payload }));
+    }
+  } catch (error) {
+    yield put(actionTypes.postFailure(error));
+    console.log(error);
+  }
+}
+
+function* getPostsFeed() {
+  try {
+    const response = yield call(() =>
+      axios.get(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/posts/feed`, {
+        ...config
+      })
+    );
+    if (response.data.message === 'ok') {
+      yield put(actionTypes.getPostsFeedSuccess({ ...response.data }));
     }
   } catch (error) {
     yield put(actionTypes.postFailure(error));
@@ -296,7 +337,9 @@ function* postSaga() {
     takeEvery(actionTypes.postPostUnPinInit, postPostUnPin),
     takeEvery(actionTypes.deletePostTemporaryInit, deletePostTemporary),
     takeEvery(actionTypes.postPostCommentInit, postPostComment),
-    takeEvery(actionTypes.getPostCommentsInit, getPostComments)
+    takeEvery(actionTypes.getPostCommentsInit, getPostComments),
+    takeEvery(actionTypes.getMoreCommentInit, getMoreComments),
+    takeEvery(actionTypes.getPostsFeedInit, getPostsFeed)
   ]);
 }
 

@@ -1,0 +1,78 @@
+.admin-dashboard {
+  padding-bottom: 180px;
+  margin-top: 30px;
+  gap: 20px;
+  padding-bottom: 200px;
+}
+.admin-dashboard-section {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 36px 30px 30px 30px;
+}
+.admin-dashboard-title {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 30px;
+  color: #121212;
+  margin-bottom: 20px;
+}
+.admin-dashboard-item {
+  width: 290px;
+  height: 290px;
+  background: #f8f8f8;
+  border-radius: 20px;
+}
+.admin-dashboard-item-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.admin-dashboard-item-title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
+  margin-top: 30px;
+  align-items: center;
+}
+.admin-dashboard-statistic-value {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 45px;
+}
+.admin-dashboard-statistic-value-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+  justify-content: space-evenly;
+}
+.admin-dashboard-statistic-value-container > div {
+  align-items: center;
+  gap: 6px;
+}
+.admin-dashboard-statistic-value-label {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
+}
+.admin-dashboard-menu-item {
+  width: 290px;
+  height: 290px;
+  background: #f8f8f8;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.admin-dashboard-menu-item-title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
+  margin-top: 30px;
+  align-items: center;
+}
+.admin-dashboard-menu-item-desc {
+  margin-top: 50px;
+  font-size: 15px;
+  line-height: 22px;
+  align-items: center;
+  text-align: center;
+}/*# sourceMappingURL=dashboard.css.map */

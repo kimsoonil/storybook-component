@@ -1,7 +1,4 @@
-/* eslint-disable */
-
-import React, { useState, useEffect, useRef } from 'react';
-import JoditEditor, { Jodit } from 'jodit-pro-react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getClubBoardGroupsInit, deleteClubTemporaryInit } from 'redux/idistStore/clubSlice';
 import { getPostsInit, deletePostTemporaryInit, getPostInit, patchPostInit } from 'redux/idistStore/postsSlice';
@@ -13,7 +10,7 @@ import Writing from 'components/common/Writing';
 import 'assets/scss/club.scss';
 import 'assets/scss/jodit.scss';
 
-function PostWriting(props) {
+function PostWriting() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { boardGroups } = useSelector((state) => state.club);
@@ -45,7 +42,7 @@ function PostWriting(props) {
 
   useEffect(() => {
     dispatch(boardReset());
-    dispatch(getClubBoardGroupsInit({ id: id }));
+    dispatch(getClubBoardGroupsInit({ id }));
     dispatch(getPostsInit({ parameters: { is_temporary: true } }));
   }, []);
 
@@ -84,58 +81,12 @@ function PostWriting(props) {
     }
   }, [post]);
 
-  const config = {
-    readonly: false,
-    height: 600,
-    padding: 20,
-    placeholder: 'Please leave a comment that you want to share.',
-    license: '63DFM-3/H53-ATPPJ-RGIRZ',
-    uploader: {
-      url: 'https://xdsoft.net/jodit/finder/?action=fileUpload'
-    },
-    buttons: [
-      'undo',
-      'redo',
-      '|',
-      'brush',
-      'bold',
-      'italic',
-      '|',
-      'left',
-      'center',
-      'right',
-      '|',
-      'ol',
-      'ul',
-      '|',
-      'table'
-    ]
-  };
-  function preparePaste(jodit) {
-    jodit.e.on(
-      'emoji',
-      (e) => {
-        if (confirm('Change pasted content?')) {
-          jodit.e.stopPropagation('paste');
-          jodit.s.insertHTML(
-            Jodit.modules.Helpers.getDataTransfer(e).getData(Jodit.constants.TEXT_HTML).replace(/a/g, 'b')
-          );
-          return false;
-        }
-      },
-      { top: true }
-    );
-  }
-  Jodit.plugins.add('preparePaste', preparePaste);
-
-  const closeSelect = (text, id) => {
-    // setBoardId(id);
-    setPostsData({ ...postsData, board: id });
+  const closeSelect = (text, boardId) => {
+    setPostsData({ ...postsData, board: boardId });
     setBoardSelect(text);
-    setOpenSelect(false);
   };
 
-  const onCheckedElement = (checked, id) => {
+  const onCheckedElement = (checked, checkId) => {
     switch (id) {
       case 'Comments':
         setPostsData({ ...postsData, is_comment: true });
@@ -149,7 +100,7 @@ function PostWriting(props) {
       case 'Search':
         setPostsData({ ...postsData, is_search: true });
         break;
-      case 'Search':
+      case 'Event':
         setPostsData({ ...postsData, is_event: true });
         break;
       case 'secret':
@@ -158,25 +109,25 @@ function PostWriting(props) {
       default:
     }
     if (checked) {
-      setCheckedList([...checkedList, id]);
+      setCheckedList([...checkedList, checkId]);
     } else if (!checked) {
-      setCheckedList(checkedList.filter((el) => el !== id));
+      setCheckedList(checkedList.filter((el) => el !== checkId));
     }
   };
-  const onClickElement = (id) => {
-    if (id === 'Notice') {
+  const onClickElement = (clickId) => {
+    if (clickId === 'Notice') {
       if (checkedList.indexOf('secret') > -1) {
         setPwdPopupOpen(true);
         setPopupContent('Notice posts cannot be set as secret posts.');
       }
     }
-    if (id === 'secret') {
+    if (clickId === 'secret') {
       if (checkedList.indexOf('Notice') > -1) {
         setPwdPopupOpen(true);
         setPopupContent('You cannot set a notice for a secret message.');
       }
     }
-    if (id === 'event') {
+    if (clickId === 'event') {
       if (checkedList.indexOf('Notice') > -1) {
         setPwdPopupOpen(true);
         setPopupContent('Event posts cannot be set as Notice posts.');
@@ -199,18 +150,20 @@ function PostWriting(props) {
       setTagVale('');
     }
   };
-  const tagKeyBlur = (e) => {
-    setTagList([...tagList, e.target.value]);
-    setTagVale('');
-  };
+
+  // const tagKeyBlur = (e) => {
+  //   setTagList([...tagList, e.target.value]);
+  //   setTagVale('');
+  // };
+
   const tagDelect = (item) => {
     setTagList(tagList.filter((element) => element.tag !== item));
   };
-  const tagEditKeyUP = (e, id) => {
+  const tagEditKeyUP = (e, tagId) => {
     if (e.key === 'Enter') {
-      const findIndex = tagList.findIndex((element) => element.tag == id);
-      let copyArray = [...tagList];
-      if (findIndex != -1) {
+      const findIndex = tagList.findIndex((element) => element.tag === tagId);
+      const copyArray = [...tagList];
+      if (findIndex !== -1) {
         copyArray[findIndex] = { ...copyArray[findIndex], title: e.target.value };
       }
       setTagList(copyArray);
@@ -225,28 +178,24 @@ function PostWriting(props) {
   // 게시글 생성
   const postsCreate = (temp) => {
     console.log('postId', postId);
-    if (temp === 'temp') {
-      console.log(11);
-      setPostsData({ ...postsData, is_temporary: true });
-    } else {
-      if (postsData.title === '') {
-        setPwdPopupOpen(true);
-        setPopupContent('Please enter a title.');
-        return false;
-      }
+    if (postsData.title === '') {
+      setPwdPopupOpen(true);
+      setPopupContent('Please enter a title.');
+      return false;
     }
 
     if (postsData.is_secret) {
       if (postsData.password.length < 4) {
-        alert('비밀번호 4자를 입력해주세요');
+        window.alert('비밀번호 4자를 입력해주세요');
         return false;
       }
     }
-    if (postsData.board === null) {
-      setPwdPopupOpen(true);
-      setPopupContent('Please select a bulletin board.');
-      return false;
-    }
+    if (temp !== 'temp')
+      if (postsData.board === null) {
+        setPwdPopupOpen(true);
+        setPopupContent('Please select a bulletin board.');
+        return false;
+      }
     if (postId !== undefined) {
       dispatch(
         patchPostInit({
@@ -259,14 +208,16 @@ function PostWriting(props) {
         navigate(`/club/${post.data.club}/post/${post.data.id}`);
       }, 500);
     } else {
+      console.log();
       dispatch(
         postBoardPostInit({
-          id: id,
-          parameters: postsData,
+          id,
+          parameters: { ...postsData, is_temporary: temp === 'temp' },
           actionList: [{ type: getPostsInit.type, payload: { parameters: { is_temporary: true } } }]
         })
       );
     }
+    return null;
   };
   // const onlyNumber = (e) => {
   //   const { value } = e.target;
@@ -275,12 +226,12 @@ function PostWriting(props) {
   //   setPostsData({ ...postsData, password: onlyNumberRegular });
   // };
 
-  //TODO 임시글
+  // TODO 임시글 삭제
   const tempAllDetele = () => {
     dispatch(
       deleteClubTemporaryInit({
-        id: id,
-        actionList: [{ type: getPostsInit.type, payload: { parameters: 'is_temporary=true' } }]
+        id,
+        actionList: [{ type: getPostsInit.type, payload: { parameters: { is_temporary: true } } }]
       })
     );
   };
@@ -289,11 +240,11 @@ function PostWriting(props) {
     dispatch(
       deletePostTemporaryInit({
         id: selectId,
-        actionList: [{ type: getPostsInit.type, payload: { parameters: 'is_temporary=true' } }]
+        actionList: [{ type: getPostsInit.type, payload: { parameters: { is_temporary: true } } }]
       })
     );
   };
-
+  console.log('boardState.post', boardState.post);
   if (boardGroups.message !== 'ok')
     return (
       <div className="flex-center">
@@ -303,7 +254,7 @@ function PostWriting(props) {
   return (
     <Writing
       posts={posts}
-      type={'club'}
+      type="club"
       boardSelect={boardSelect}
       closeSelect={closeSelect}
       setBoardSelect={setBoardSelect}

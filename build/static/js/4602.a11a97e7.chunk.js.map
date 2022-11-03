@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/4602.a11a97e7.chunk.js","mappings":"+HAOA,UALA,WAEE,OADAA,QAAQC,IAAI,kBACL,mCACR,C","sources":["views/Admin/Design.js"],"sourcesContent":["import React from 'react';\n\nfunction Design() {\n  console.log('Render Design');\n  return <div>Design</div>;\n}\n\nexport default Design;\n"],"names":["console","log"],"sourceRoot":""}

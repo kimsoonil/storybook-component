@@ -1,8 +1,7 @@
-/* eslint-disable */
 import React, { useMemo } from 'react';
 import JSwitch from '../JSwitch';
 
-const ActivationSwitch = ({ id, isActive, onChange }) => {
+function ActivationSwitch({ id, isActive, onChange }) {
   const label = useMemo(() => (isActive ? 'Active' : 'Inactive'), [isActive]);
 
   return (
@@ -17,6 +16,6 @@ const ActivationSwitch = ({ id, isActive, onChange }) => {
       />
     </div>
   );
-};
+}
 
 export default ActivationSwitch;

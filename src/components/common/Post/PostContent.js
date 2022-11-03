@@ -20,6 +20,7 @@ function PostContent(props) {
       navigate(`/${props.type}/1/writing/${props.post?.data?.id}`);
     }
   };
+
   return (
     <div className="club-home-content " style={{ marginTop: '20px' }}>
       <div className="posts-container">
@@ -29,15 +30,19 @@ function PostContent(props) {
               {props.type === 'club' && `${props.post?.data?.board_group_title} > ${props.post?.data?.board_title}`}
             </div>
             <div className="posts-container-title">
-              {props.post?.data?.title}{' '}
+              {props.post?.data?.title}
               {props.post?.data?.is_secret && <img src={require('images/club/ic-lock.png')} alt="" />}
             </div>
             <div className="posts-container-profile">
               <div>
                 <img
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null; // prevents looping
+                    currentTarget.src = require('images/main/temporary-profile.png');
+                  }}
                   src={
-                    props.post?.data?.profile_image_url
-                      ? props.post?.data?.profile_image_url
+                    props.post?.data?.user?.profile_image_url
+                      ? props.post?.data?.user?.profile_image_url
                       : require('images/main/temporary-profile.png')
                   }
                   alt=""
@@ -62,39 +67,75 @@ function PostContent(props) {
               </div>
             </div>
           </div>
-          <div className="flex-center">
-            <div>
-              <div className="flex-center posts-header-btn">
-                <div className="item flex-center" onClick={() => props.setOpenPopup(!props.openPopup)}>
-                  <img src={require(`images/club/rank.png`)} alt="" />
-                </div>
-                <div className="item flex-center" onClick={() => props.handleClickPin(props.post?.data?.is_pined)}>
-                  <img
-                    src={require(props.post?.data?.is_pined
-                      ? props.post?.data?.is_pined
-                        ? `images/club/club-bookmark.png`
-                        : `images/club/icon-bookmark-line.png`
-                      : `images/club/icon-bookmark-line.png`)}
-                    alt=""
-                  />
-                </div>
-                <div className="item etc relative">
-                  <div className="etc-img" onClick={() => props.setOpenETC(!props.openETC)} />
-                  <div className="etc-box" style={{ display: props.openETC ? 'block' : 'none' }}>
-                    {/* {props?.clubId?.data?.profile ? ( */}
-                    <>
-                      <div onClick={() => postEdit()}>Edit</div>
-                      <div
-                        onClick={() =>
-                          props.deletePost(props.post?.data?.id, props.post?.data?.club, props.post?.data?.board)
-                        }
-                      >
-                        Delete
-                      </div>
-                    </>
-                    {/* ) : (
+          <div>
+            <div className="flex-center posts-container-icon">
+              <div
+                onClick={() =>
+                  navigate(
+                    `/${props.type}/${props.type === 'club' ? props.post?.data?.club : props.post?.data?.forum}/post/${
+                      props.post?.data?.prev_post.id
+                    }`
+                  )
+                }
+              >
+                <img src={require('images/club/ic-prev.png')} />
+              </div>
+              <div
+                onClick={() =>
+                  navigate(
+                    `/${props.type}/${props.type === 'club' ? props.post?.data?.club : props.post?.data?.forum}/theme`
+                  )
+                }
+              >
+                <img src={require('images/club/ic-list.png')} />
+              </div>
+              <div
+                onClick={() =>
+                  navigate(
+                    `/${props.type}/${props.type === 'club' ? props.post?.data?.club : props.post?.data?.forum}/post/${
+                      props.post?.data?.next_post.id
+                    }`
+                  )
+                }
+              >
+                <img src={require('images/club/ic-next.png')} />
+              </div>
+            </div>
+
+            <div className="flex-center">
+              <div>
+                <div className="flex-center posts-header-btn">
+                  <div className="item flex-center" onClick={() => props.setOpenPopup(!props.openPopup)}>
+                    <img src={require(`images/club/rank.png`)} alt="" />
+                  </div>
+                  <div className="item flex-center" onClick={() => props.handleClickPin(props.post?.data?.is_pined)}>
+                    <img
+                      src={require(props.post?.data?.is_pined
+                        ? props.post?.data?.is_pined
+                          ? `images/club/club-bookmark.png`
+                          : `images/club/icon-bookmark-line.png`
+                        : `images/club/icon-bookmark-line.png`)}
+                      alt=""
+                    />
+                  </div>
+                  <div className="item etc relative">
+                    <div className="etc-img" onClick={() => props.setOpenETC(!props.openETC)} />
+                    <div className="etc-box" style={{ display: props.openETC ? 'block' : 'none' }}>
+                      {/* {props?.clubId?.data?.profile ? ( */}
+                      <>
+                        <div onClick={() => postEdit()}>Edit</div>
+                        <div
+                          onClick={() =>
+                            props.deletePost(props.post?.data?.id, props.post?.data?.club, props.post?.data?.board)
+                          }
+                        >
+                          Delete
+                        </div>
+                      </>
+                      {/* ) : (
                       <div onClick={() => props.setReportOpen(!props.reportOpen)}>Report</div>
                     )} */}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -124,14 +165,18 @@ function PostContent(props) {
                 props.like?.data?.length === 1 ? (
                   <div className="posts-container-avatar">
                     <img
+                      onError={({ currentTarget }) => {
+                        currentTarget.onerror = null; // prevents looping
+                        currentTarget.src = require('images/main/temporary-profile.png');
+                      }}
                       src={
-                        props.like?.data[0]?.profile_data?.user?.profile_image_url
-                          ? props.like?.data[0]?.profile_data?.user?.profile_image_url
+                        props.like?.data[0]?.user?.profile_image_url
+                          ? props.like?.data[0]?.user?.profile_image_url
                           : require('images/main/temporary-profile.png')
                       }
                       alt=""
                     />
-                    {props.like.data[0]?.profile_data.user?.username}
+                    {props.like.data[0]?.user?.username}
                   </div>
                 ) : (
                   <div className="posts-container-avatar relative">
@@ -140,9 +185,13 @@ function PostContent(props) {
                         return (
                           <div key={index} className="mul-img" style={{ left: index * 18 + 'px' }}>
                             <img
+                              onError={({ currentTarget }) => {
+                                currentTarget.onerror = null; // prevents looping
+                                currentTarget.src = require('images/main/temporary-profile.png');
+                              }}
                               src={
-                                likeItem.profile_data?.user?.profile_image_url
-                                  ? likeItem.profile_data?.user?.profile_image_url
+                                props.like?.data[0]?.user?.profile_image_url
+                                  ? props.like?.data[0]?.user?.profile_image_url
                                   : require('images/main/temporary-profile.png')
                               }
                               alt=""
@@ -175,16 +224,50 @@ function PostContent(props) {
                 {/* {props.post.data.like_count} */}
               </div>
               <div
-                className={'btn-unlike flex-center ' + (props.disListState && 'active')}
+                className={'btn-unlike flex-center ' + (props.post.data.is_disliked && 'active')}
                 onClick={() => props.handleClickDisLike()}
               >
                 <img src={require('images/club/unlike.png')} alt="" />
-                {/* {props.post.data.dislike_count} */}
-                {props.disLikeCount}
+                {props.post.data.dislike_count}
+                {/* {props.disLikeCount} */}
               </div>
             </div>
           </div>
           <Comment />
+
+          <div className="flex-end posts-container-icon" style={{ marginTop: '11px' }}>
+            <div
+              onClick={() =>
+                navigate(
+                  `/${props.type}/${props.type === 'club' ? props.post?.data?.club : props.post?.data?.forum}/post/${
+                    props.post?.data?.prev_post.id
+                  }`
+                )
+              }
+            >
+              <img src={require('images/club/ic-prev.png')} />
+            </div>
+            <div
+              onClick={() =>
+                navigate(
+                  `/${props.type}/${props.type === 'club' ? props.post?.data?.club : props.post?.data?.forum}/theme`
+                )
+              }
+            >
+              <img src={require('images/club/ic-list.png')} />
+            </div>
+            <div
+              onClick={() =>
+                navigate(
+                  `/${props.type}/${props.type === 'club' ? props.post?.data?.club : props.post?.data?.forum}/post/${
+                    props.post?.data?.next_post.id
+                  }`
+                )
+              }
+            >
+              <img src={require('images/club/ic-next.png')} />
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,30 +1,39 @@
+/* eslint-disable camelcase */
 import React from 'react';
+import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
-import { reqlatestPosts } from 'redux/store/forum/latestPostsSlice';
-import forumSwiper from 'html/img/com/swiper_thumbnail.png';
+import { reqForumIdPostList } from 'redux/store/forum/forumIdPostListSlice';
 
-function ForumDetail({ info }) {
+function ForumDetail({ info, idx }) {
+  const { id, forum_category, title, description, thumbnail_image } = info;
   const dispatch = useDispatch();
   const onLoadPostList = () => {
-    dispatch(reqlatestPosts({ forumId: info.forumId }));
+    dispatch(reqForumIdPostList({ forumId: id, page_size: 5 }));
   };
 
   return (
     <div onClick={onLoadPostList} aria-hidden="true">
-      <img src={forumSwiper} alt="true" />
+      <img src={thumbnail_image} alt="true" />
       <div className="swiper_badge">
-        <span className="rank_badge_big gold" />
-        <span className="ranknum down">23</span>
+        {/* <span className="rank_badge_big silver" /> */}
+        <span
+          className={classNames(
+            'rank_badge_big',
+            { gold: idx === 0 },
+            { silver: idx === 1 },
+            { bronze: idx === 2 },
+            { normal: idx > 2 }
+          )}
+        >
+          {idx > 2 && <span>{idx + 1}</span>}
+        </span>
+        <span className="ranknum down">{Math.floor(Math.random() * 2)}</span>
       </div>
       <div className="swiper_over">
-        <span className="category">PHOTO</span>
+        <span className="category">{forum_category.title}</span>
         <dl>
-          <dt>Black &amp; White Nights</dt>
-          <dd>
-            The 5 owners of “Black &amp; White Nights : The Afterparty” will be the first five people to select any
-            piece they like .. from “Black &amp; White Days” before I release it to the public, and I’ll give them that
-            piece for free.
-          </dd>
+          <dt>Black &amp; {title}</dt>
+          <dd>{description}</dd>
         </dl>
       </div>
     </div>

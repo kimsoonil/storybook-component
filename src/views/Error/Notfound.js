@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 
-import { Header } from 'components/idist/Header';
+import Header from 'components/common/header/Header';
+import Footer from 'components/common/footer/Footer';
 
 import 'assets/scss/error.scss';
 import 'assets/scss/reset.scss';
@@ -18,7 +19,7 @@ function NotFound() {
   const { id } = useParams();
 
   return (
-    <div id="root">
+    <div>
       <Header />
       <div className="error flex-center">
         <img src={require('images/Error/img_error_page.png')} alt="" />
@@ -36,6 +37,7 @@ function NotFound() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

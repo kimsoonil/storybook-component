@@ -1,9 +1,9 @@
-/* eslint-disable */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/no-unstable-nested-components */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import 'assets/scss/admin/reports.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
 import AdminTable from 'components/idist/admin/datatable/AdminTable';
 import { getBoardGroupsInit } from 'redux/idistStore/admin/boardAdminSlice';
 import JButton from 'components/idist/admin/JButton';
@@ -15,6 +15,28 @@ import ActivationSwitch from 'components/idist/admin/reports/ActivationSwitch';
 import { openContentsActivationDialog } from 'redux/idistStore/admin/dialogSlice';
 import ContentsActivationDialog from 'components/idist/admin/reports/ContentsActivationDialog';
 import ReportHistoryDialog from 'components/idist/admin/reports/ReportHistoryDialog';
+
+import clubMasterImage from 'images/admin/club-master-profile.png';
+import advancedSearchImage from 'images/admin/advanced-search.svg';
+
+function ReportsEmpty() {
+  return (
+    <div className="admin-reports-empty">
+      <div>Umm...</div>
+      <div>🧐</div>
+      <div>NO CONTENT YET</div>
+      <div>There are no reports yet</div>
+    </div>
+  );
+}
+
+function AdvancedSearchButton({ onClick }) {
+  return (
+    <div onClick={onClick} onKeyDown={(e) => (e.key === 'Enter' ? onClick(e) : {})} tabIndex={0} role="button">
+      <img src={advancedSearchImage} alt="advanced-search" />
+    </div>
+  );
+}
 
 function Reports() {
   const dispatch = useDispatch();
@@ -45,7 +67,7 @@ function Reports() {
     {
       id: 237,
       reporter: {
-        profileImage: require('images/admin/club-master-profile.png'),
+        profileImage: clubMasterImage,
         name: 'Kate',
         staff: true
       },
@@ -58,7 +80,7 @@ function Reports() {
       reportCount: 4,
       activation: true,
       staff: {
-        profileImage: require('images/admin/club-master-profile.png'),
+        profileImage: clubMasterImage,
         name: 'Jerry',
         staff: true
       },
@@ -68,7 +90,7 @@ function Reports() {
     {
       id: 280,
       reporter: {
-        profileImage: require('images/admin/club-master-profile.png'),
+        profileImage: clubMasterImage,
         name: 'Kate',
         staff: true
       },
@@ -81,7 +103,7 @@ function Reports() {
       reportCount: 2,
       activation: false,
       staff: {
-        profileImage: require('images/admin/club-master-profile.png'),
+        profileImage: clubMasterImage,
         name: 'Jerry',
         staff: true
       },
@@ -100,9 +122,9 @@ function Reports() {
     setSortState((prev) => (prev.field === field ? { field, step: (prev.step + 1) % 3 } : { field, step: 1 }));
   }, []);
 
-  const handleActivationSwitch = (id) => {
-    setRows((prev) => prev.map((item) => (item.id === id ? { ...item, activation: !item.activation } : item)));
-  };
+  // const handleActivationSwitch = (id) => {
+  //   setRows((prev) => prev.map((item) => (item.id === id ? { ...item, activation: !item.activation } : item)));
+  // };
 
   const columns = useMemo(
     () => [
@@ -115,13 +137,13 @@ function Reports() {
         field: 'reporter',
         name: 'Reporter',
         width: 150,
-        RowComponents: (props) => <Profile user={props.reporter} />
+        RowComponents: ({ reporter }) => <Profile user={reporter} />
       },
       {
         field: 'board',
         name: 'Board',
         width: 150,
-        RowComponents: (props) => <BoardName board={props.board} onClick={(id) => confirm(`${id} 보드로 이동`)} />
+        RowComponents: ({ board }) => <BoardName board={board} onClick={() => {}} />
       },
       {
         field: 'type',
@@ -132,9 +154,7 @@ function Reports() {
         field: 'content',
         name: 'Content',
         width: 150,
-        RowComponents: (props) => (
-          <ContentTitle content={props.content} onClick={(id) => confirm(`${id} 컨텐츠로 이동`)} {...props} />
-        )
+        RowComponents: ({ content, ...props }) => <ContentTitle content={content} onClick={() => {}} {...props} />
       },
       {
         field: 'reportCount',
@@ -146,19 +166,15 @@ function Reports() {
         field: 'activation',
         name: 'Activation',
         width: 150,
-        RowComponents: (props) => (
-          <ActivationSwitch
-            isActive={props.activation}
-            id={props.id}
-            onChange={() => dispatch(openContentsActivationDialog(true))}
-          />
+        RowComponents: ({ activation: isActive, id }) => (
+          <ActivationSwitch isActive={isActive} id={id} onChange={() => dispatch(openContentsActivationDialog(true))} />
         )
       },
       {
         field: 'staff',
         name: 'Staff',
         width: 150,
-        RowComponents: (props) => <Profile user={props.staff} />
+        RowComponents: ({ staff }) => <Profile user={staff} />
       },
       {
         field: 'reason',
@@ -247,7 +263,7 @@ function Reports() {
           <JButton label="Search" width={85} disabled={searchButtonDisabled} onClick={() => setRows([])} />
           <AdvancedSearchButton
             onClick={() => {
-              confirm('고급 검색');
+              // confirm('고급 검색');
             }}
           />
         </div>
@@ -269,22 +285,3 @@ function Reports() {
 }
 
 export default Reports;
-
-function ReportsEmpty() {
-  return (
-    <div className="admin-reports-empty">
-      <div>Umm...</div>
-      <div>🧐</div>
-      <div>NO CONTENT YET</div>
-      <div>There are no reports yet</div>
-    </div>
-  );
-}
-
-function AdvancedSearchButton({ onClick }) {
-  return (
-    <div onClick={onClick}>
-      <img src={require('images/admin/advanced-search.svg').default} />
-    </div>
-  );
-}

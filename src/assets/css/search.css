@@ -1,0 +1,468 @@
+@charset "UTF-8";
+/* TODO: All  */
+.fliter-position {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  z-index: 1000;
+}
+
+.root-center {
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.flex-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.flex-between {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.flex-end {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.none {
+  display: none;
+}
+
+.relative {
+  position: relative;
+}
+
+.container {
+  width: 1280px;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.container > .item:nth-child(1) {
+  padding-right: 22px;
+  grid-column: 1/span 1;
+  grid-row: 1/span 1;
+}
+
+.container > .item:nth-child(2) {
+  grid-column: 2/span 1;
+  grid-row: 1/span 1;
+}
+
+.m-1 {
+  margin: 8px;
+}
+
+.m-2 {
+  margin: 16px;
+}
+
+.m-3 {
+  margin: 24px;
+}
+
+.m-4 {
+  margin: 32px;
+}
+
+.mr-6 {
+  margin-right: 48px;
+}
+
+.mr-3 {
+  margin-right: 24px;
+}
+
+.p-1 {
+  padding: 8px;
+}
+
+.p-2 {
+  padding: 16px;
+}
+
+.p-3 {
+  padding: 24px;
+}
+
+.p-4 {
+  padding: 32px;
+}
+
+.no-data {
+  width: 100%;
+  height: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 40px;
+}
+.no-data-title {
+  font-family: "Poppins-Bold";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 48px;
+  color: #242a3c;
+}
+.no-data-content {
+  font-family: "Poppins-SemiBold";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 18px;
+  color: #242a3c;
+}
+
+.color-BRONZE {
+  color: #ec7a12;
+}
+.color-SILVER {
+  color: #b5b5b5;
+}
+.color-GOLD {
+  color: #ffc700;
+}
+.color-PLATINUM {
+  color: #00877f;
+}
+.color-DIAMOND {
+  color: #0017e3;
+}
+.color-LEGEND {
+  color: #8701fe;
+}
+
+.scrollTop {
+  position: fixed;
+  top: 50%;
+  right: 50px;
+  background: #111111;
+  -webkit-box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.16);
+          box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.16);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.search {
+  width: 1280px;
+  margin: 120px auto;
+}
+.search-title {
+  font-family: "Poppins-Bold";
+  font-size: 40px;
+  line-height: 58px;
+  color: #111111;
+}
+.search-tabs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 8px;
+}
+.search-tabs-item {
+  padding: 8px 12px;
+  background: #eeeeee;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-family: "Poppins-Regular";
+  font-size: 14px;
+  line-height: 24px;
+  color: #121212;
+  cursor: pointer;
+}
+.search-tabs-item.active {
+  color: #fff;
+  background: -webkit-gradient(linear, right top, left top, from(#ff47a4), to(#ff5ec9));
+  background: linear-gradient(270deg, #ff47a4 0%, #ff5ec9 100%);
+}
+.search-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 8px;
+}
+.search-input {
+  margin-top: 8px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+.search-input-box {
+  height: 60px;
+  width: 100%;
+  background: #f8f8f8;
+  border-radius: 8px;
+  border: 0;
+  outline: 0;
+  padding-left: 20px;
+  font-size: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.search-input-box::-webkit-input-placeholder {
+  color: #cdcdd1;
+  font-size: 18px;
+}
+.search-input-box::-moz-placeholder {
+  color: #cdcdd1;
+  font-size: 18px;
+}
+.search-input-box:-ms-input-placeholder {
+  color: #cdcdd1;
+  font-size: 18px;
+}
+.search-input-box::-ms-input-placeholder {
+  color: #cdcdd1;
+  font-size: 18px;
+}
+.search-input-box::placeholder {
+  color: #cdcdd1;
+  font-size: 18px;
+}
+.search-input-btn {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  width: 100px;
+  height: 60px;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+}
+.search-input-btn img {
+  width: 40px;
+}
+.search-club {
+  background-color: #fff;
+  margin-top: 50px;
+  padding: 30px;
+  border-radius: 20px;
+}
+.search-club > .flex-between {
+  margin-bottom: 40px;
+}
+.search-club-title {
+  height: 58px;
+  font-family: "Poppins-Bold";
+  font-size: 36px;
+  color: #111;
+}
+.search-club-tab {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+.search-club-tab .item {
+  width: 110px;
+  height: 52px;
+  background: #f2f2f2;
+  border-radius: 8px;
+  color: #555555;
+  font-size: 16px;
+  cursor: pointer;
+}
+.search-club-tab .item.active {
+  background: #8801fe;
+  color: #fff;
+}
+.search-club-list {
+  margin: 50px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 20px;
+}
+.search-club-list-item {
+  width: 305px;
+  height: 265px;
+  -webkit-box-shadow: 3px 1px 1px 1px #d9d9d9;
+          box-shadow: 3px 1px 1px 1px #d9d9d9;
+  border-radius: 0 0 8px 8px;
+  cursor: pointer;
+}
+.search-club-list-item img {
+  width: 305px;
+  height: 183px;
+}
+.search-club-list-item-content {
+  padding: 14px;
+}
+.search-club-list-item-name {
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 18px;
+  color: #000;
+  height: 24px;
+}
+.search-club-list-item-info {
+  margin-top: 8px;
+  height: 22px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #878d96;
+}
+.search-club .content {
+  margin-bottom: 54px;
+}
+.search-post {
+  background-color: #fff;
+  margin-top: 50px;
+  padding: 30px;
+  border-radius: 20px;
+}
+.search-post .posts-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 20px;
+  border-top: 1px solid #cdcdd1;
+}
+.search-post .posts-list-item {
+  width: 570px;
+}
+.search-post .posts-list-item:nth-child(2n) {
+  margin-left: 40px;
+}
+.search-post .posts-list-item-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.search-post-img img {
+  height: 155px;
+}
+.search-keyword {
+  gap: 4px;
+}
+.search-keyword-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 4px 6px;
+  background: #ebebeb;
+  border-radius: 20px;
+  color: #8801fe;
+  font-size: 14px;
+}
+.search-keyword-fixItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 4px 6px;
+  background: #ffffff;
+  border-radius: 20px;
+  font-size: 14px;
+}
+.search-filter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 28px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.search-filter .flex-center {
+  gap: 4px;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.super-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  background: #d9d9d9;
+  position: absolute;
+  border-radius: 50%;
+  color: #941afe;
+  margin: 4px;
+}
+
+.bookmark {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ffd2fd;
+  bottom: 20px;
+  right: 14px;
+}
+.bookmark img {
+  width: 20px;
+  height: 20px;
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+.checkBtnSwitch {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  border-radius: 50%;
+  background-color: #c1c7cd;
+  display: block;
+  background-image: url("/images/club/checkbox.png");
+  cursor: pointer;
+}
+
+/* 체크박스가 체크되면 변경 이벤트 */
+.checkBottom:checked ~ .checkBtnSwitch {
+  background-image: url("/images/club/checkbox_checked.png");
+}

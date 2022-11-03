@@ -33,7 +33,7 @@ function* patchBoardGroup({ payload }) {
         config
       )
     );
-    if (response.status == 200) {
+    if (response.data.message === 'ok') {
       yield put(actionTypes.patchBoardGroupSuccess({ ...response.data }));
       yield call(sagaCallback, payload, response?.data?.data);
     }
@@ -52,7 +52,7 @@ function* postBoardGroupBoard({ payload }) {
         config
       )
     );
-    if (response.status == 200 || response.status == 201) {
+    if (response.data.message === 'ok') {
       yield put(actionTypes.postBoardGroupBoardSuccess({ ...response.data }));
       yield call(sagaCallback, payload, response?.data?.data);
       // if (payload.actionList) {
@@ -75,7 +75,7 @@ function* patchBoardGroupMerge({ payload }) {
         config
       )
     );
-    if (response.status == 200) {
+    if (response.data.message === 'ok') {
       yield put(actionTypes.patchBoardGroupMergeSuccess({ ...response.data }));
       yield call(sagaCallback, payload, response?.data?.data);
       // if (payload.actionList) {

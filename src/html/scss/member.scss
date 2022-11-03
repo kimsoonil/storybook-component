@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import "variables";
+@import "_variables";
 
 .login_wrap {
   margin:0 auto;
@@ -12,6 +12,8 @@
     height:100px;
     &:before {
       @include logo (pp, 180px, 100px);
+      width:180px;
+      height:100px;
       left:50%;
       transform: translateX(-50%);
     }
@@ -319,7 +321,7 @@
       position:absolute;
       left:50%;
       transform: translateX(-50%);
-      background:url('#{$img_root_path}/com/img_Membership.png') no-repeat center center / 340px 200px;
+      background:url('#{$img_root_path}/com/img_membership.png') no-repeat center center / 340px 200px;
     }
   }
   .end_info {
@@ -367,7 +369,7 @@
               left:0;
               top:0;
               position:absolute;
-              background:url('#{$img_root_path}/ico/ic_circle_twitter.png') no-repeat center center / 28px 28px;
+              background:url('#{$img_root_path}/ico/ic_circle_google.png') no-repeat center center / 28px 28px;
             }
           }
         }
@@ -1001,7 +1003,7 @@
     font-size:$font_base + 20px;
     line-height:38px;
     letter-spacing:-0.68px;
-    color:#ffd300;
+    color:$new_color;
     padding-top:60px;
     span {
       @include eng_font(medium);

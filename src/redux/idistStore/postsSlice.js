@@ -6,11 +6,16 @@ const postSlice = createSlice({
   initialState: {
     isLoading: false,
     isEndOfCatalogue: false,
+    ismoreLoading: false,
     posts: {},
     post: {},
+    next: {},
+    prev: {},
+    feed: {},
     postsList: [],
     like: {},
     comment: {},
+    commentList: [],
     eventPosts: {},
     noticePosts: {},
     currentPage: 1,
@@ -54,10 +59,10 @@ const postSlice = createSlice({
       }
     },
     getMorePostsInit: (state) => {
-      state.isLoading = true;
+      state.ismoreLoading = true;
     },
     getMorePostsSuccess: (state, { payload }) => {
-      state.isLoading = false;
+      state.ismoreLoading = false;
       const nextPostList = [...immerParse(state.postsList), ...payload.data];
       if (payload.count > nextPostList.length) {
         state.currentPage = immerParse(state.currentPage) + 1;
@@ -72,7 +77,16 @@ const postSlice = createSlice({
     },
     getPostSuccess: (state, { payload }) => {
       state.isLoading = false;
-      state.post = payload;
+      switch (payload.payload?.type) {
+        case 'prev':
+          state.prev = payload;
+          break;
+        case 'next':
+          state.next = payload;
+          break;
+        default:
+          state.post = payload;
+      }
     },
     deletePostInit: (state) => {
       state.isLoading = true;
@@ -178,6 +192,29 @@ const postSlice = createSlice({
     getPostCommentSuccess: (state, { payload }) => {
       state.isLoading = false;
       state.comment = payload;
+      state.commentList = payload.data;
+    },
+    getMoreCommentInit: (state) => {
+      state.ismoreLoading = true;
+    },
+    getMoreCommentSuccess: (state, { payload }) => {
+      console.log('getMoreCommentSuccess', payload);
+      state.ismoreLoading = false;
+      const nextCommentList = [...immerParse(state.commentList), ...payload.data];
+      state.commentList = nextCommentList;
+
+      if (payload.data.count === nextCommentList) {
+        state.isEndOfCatalogue = true;
+      } else {
+        state.currentPage = immerParse(state.currentPage) + 1;
+      }
+    },
+    getPostsFeedInit: (state) => {
+      state.isLoading = true;
+    },
+    getPostsFeedSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.feed = payload;
     },
     postFailure: (state, error) => {
       console.log('error : ', error.payload.message);
@@ -222,6 +259,10 @@ export const {
   postPostCommentSuccess,
   getPostCommentsInit,
   getPostCommentSuccess,
+  getMoreCommentInit,
+  getMoreCommentSuccess,
+  getPostsFeedInit,
+  getPostsFeedSuccess,
   postFailure
 } = postSlice.actions;
 

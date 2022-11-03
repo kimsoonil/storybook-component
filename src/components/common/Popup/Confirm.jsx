@@ -19,7 +19,7 @@ function Confirm({ onHide }) {
           <span>Cancel</span>
         </button>
         <button className="btn primary button_l btn_close" onClick={() => onConfirm()}>
-          <span>Submit</span>
+          <span>Confirm</span>
         </button>
       </div>
     </div>

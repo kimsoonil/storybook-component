@@ -1,8 +1,47 @@
-/* eslint-disable */
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo, useRef } from 'react';
 import Select from 'react-select';
 import 'assets/scss/component/jselect.scss';
-import { IVD } from '../../../views/Admin';
+
+import selectArrowClose from 'images/admin/ic-select-arrow-close.svg';
+import selectArrowOpenFocus from 'images/admin/ic-select-arrow-open-focus.svg';
+import selectArrowCloseFocus from 'images/admin/ic-select-arrow-close-focus.svg';
+
+function DropdownIndicator({ selectProps, isFocused, isDisabled }) {
+  const isOpen = useMemo(() => selectProps.menuIsOpen, [selectProps.menuIsOpen]);
+  const imageSource = useMemo(() => {
+    if (isDisabled) {
+      return selectArrowClose;
+    }
+    if (isOpen) {
+      return selectArrowOpenFocus;
+    }
+    if (isFocused) {
+      return selectArrowCloseFocus;
+    }
+    return selectArrowClose;
+  }, [isDisabled, isOpen, isFocused]);
+
+  // const imageSource = useMemo(
+  //   () =>
+  //     isDisabled
+  //       ? require('images/admin/ic-select-arrow-close.svg').default
+  //       : isOpen
+  //       ? require('images/admin/ic-select-arrow-open-focus.svg').default
+  //       : isFocused
+  //       ? require('images/admin/ic-select-arrow-close-focus.svg').default
+  //       : inputState === IVD.success
+  //       ? require('images/admin/ic-select-arrow-close-success.svg').default
+  //       : require('images/admin/ic-select-arrow-close.svg').default,
+  //   [isDisabled, isOpen, isFocused, inputState]
+  // );
+
+  return (
+    <div className={`${selectProps.classNamePrefix}__indicators`}>
+      <img src={imageSource} alt="indicator" />
+    </div>
+  );
+}
 
 /**
  *
@@ -26,7 +65,7 @@ import { IVD } from '../../../views/Admin';
  * }
  */
 
-const JSelect = ({
+function JSelect({
   forwardedRef,
   options,
   selectedOption,
@@ -41,22 +80,20 @@ const JSelect = ({
   defaultValue,
   components,
   ...props
-}) => {
-  const _ref = useRef();
-  const selectRef = forwardedRef || _ref;
+}) {
+  const ref = useRef();
+  const selectRef = forwardedRef || ref;
 
-  const _styles = {
+  const newStyles = {
     control:
       styles?.control ||
-      ((provided, { selectProps, menuIsOpen }) => {
-        return {
-          ...provided,
-          ...(selectProps?.width && { width: `${selectProps.width}px` }),
-          ...(!menuIsOpen && selectProps?.inputState === 'error' && { border: '1px solid #ff2a55 !important' }),
-          ...(!menuIsOpen && selectProps?.inputState === 'success' && { border: '1px solid #00b78b !important' })
-        };
-      }),
-    menu: styles?.menu || ((provided, state) => ({ ...provided, ...(width && { width: `${width}px` }) })),
+      ((provided, { selectProps, menuIsOpen }) => ({
+        ...provided,
+        ...(selectProps?.width && { width: `${selectProps.width}px` }),
+        ...(!menuIsOpen && selectProps?.inputState === 'error' && { border: '1px solid #ff2a55 !important' }),
+        ...(!menuIsOpen && selectProps?.inputState === 'success' && { border: '1px solid #00b78b !important' })
+      })),
+    menu: styles?.menu || ((provided) => ({ ...provided, ...(width && { width: `${width}px` }) })),
     ...styles
   };
 
@@ -65,7 +102,7 @@ const JSelect = ({
       <Select
         isDisabled={isDisabled}
         ref={selectRef}
-        classNamePrefix={'react-select'}
+        classNamePrefix="react-select"
         options={options}
         defaultValue={defaultValue || selectedOption}
         value={selectedOption}
@@ -79,7 +116,7 @@ const JSelect = ({
             focusedOption: options.find((option) => option.value === selectedOption?.value)
           });
         }}
-        styles={_styles}
+        styles={newStyles}
         // styles={{
         //   control: (provided, { isDisabled,  }) => {
         //     console.log(isDisabled);
@@ -96,61 +133,6 @@ const JSelect = ({
       />
     </div>
   );
-};
-
-const DropdownIndicator = ({ selectProps, isFocused, isDisabled, hasValue, inputState = IVD.none, ...props }) => {
-  const isOpen = useMemo(() => selectProps.menuIsOpen, [selectProps.menuIsOpen]);
-  const imageSource = useMemo(
-    () =>
-      isDisabled
-        ? require('images/admin/ic-select-arrow-close.svg').default
-        : isOpen
-        ? require('images/admin/ic-select-arrow-open-focus.svg').default
-        : isFocused
-        ? require('images/admin/ic-select-arrow-close-focus.svg').default
-        : require('images/admin/ic-select-arrow-close.svg').default,
-    [isDisabled, isOpen, isFocused]
-  );
-  // const imageSource = useMemo(
-  //   () =>
-  //     isDisabled
-  //       ? require('images/admin/ic-select-arrow-close.svg').default
-  //       : isOpen
-  //       ? require('images/admin/ic-select-arrow-open-focus.svg').default
-  //       : isFocused
-  //       ? require('images/admin/ic-select-arrow-close-focus.svg').default
-  //       : inputState === IVD.success
-  //       ? require('images/admin/ic-select-arrow-close-success.svg').default
-  //       : require('images/admin/ic-select-arrow-close.svg').default,
-  //   [isDisabled, isOpen, isFocused, inputState]
-  // );
-
-  return (
-    <div className={`${selectProps.classNamePrefix}__indicators`}>
-      <img src={imageSource} />
-    </div>
-  );
-};
+}
 
 export default React.forwardRef((props, ref) => <JSelect {...props} forwardedRef={ref} />);
-
-{
-  /* 
-<div class="react-select-container">
-  <div class="react-select__control">
-    <div class="react-select__value-container">
-      ...
-    </div>
-    <div class="react-select__indicators">
-      ...
-    </div>
-  </div>
-  <div class="react-select__menu">
-    <div class="react-select__menu-list">
-      <div class="react-select__option">
-        ...
-      </div>
-    </div>
-  </div>
-</div> */
-}

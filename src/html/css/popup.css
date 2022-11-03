@@ -212,13 +212,15 @@
   height: 100%;
   position: relative;
 }
+.modal_text .modal_con.service {
+  padding: 22px 24px 32px 24px;
+}
 .modal_text .modal_con .modal_title {
-  height: 56px;
+  height: 50px;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   font-size: 22px;
   line-height: 30px;
-  letter-spacing: -0.44px;
   color: #242A3C;
 }
 .modal_text .modal_con .con {
@@ -241,7 +243,7 @@
   width: 6px;
   background: #E0E0E0;
   background-clip: padding-box;
-  border-radius: 3px;
+  border-radius: 16px;
   border-right: 10px solid transparent;
 }
 .modal_text .modal_con .con.scroll::-webkit-scrollbar-track {
@@ -684,6 +686,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 64px;
   padding-bottom: 12px;
   border-bottom: 1px solid #E0E0E0;
 }
@@ -692,7 +695,6 @@
   font-weight: 500;
   font-size: 17px;
   line-height: 22px;
-  letter-spacing: -0.34px;
   color: #6563FF;
   position: relative;
   margin-left: 30px;
@@ -713,8 +715,9 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 22px;
-  letter-spacing: -0.28px;
   color: #121212;
+  padding-top: 20px;
+  padding-right: 20px;
 }
 .modal_popup .modal_con .con p + p {
   margin-top: 20px;
@@ -723,9 +726,13 @@
   font-family: "Poppins", sans-serif;
   font-weight: 600;
 }
+.modal_popup .modal_con .con p span.line {
+  text-decoration: underline;
+}
 .modal_popup .modal_con .con.scroll {
   overflow-y: auto;
   overflow-x: hidden;
+  margin-right: -20px;
 }
 .modal_popup .modal_con .con.scroll::-webkit-scrollbar {
   width: 16px;
@@ -735,11 +742,14 @@
   width: 6px;
   background: #E0E0E0;
   background-clip: padding-box;
-  border-radius: 3px;
+  border-radius: 16px;
   border-right: 10px solid transparent;
 }
 .modal_popup .modal_con .con.scroll::-webkit-scrollbar-track {
   background: transparent;
+}
+.modal_popup .modal_con .con.scroll .policy {
+  height: 571px;
 }
 .modal_popup .modal_con .con .popup_nick {
   background: #F8F8F8;
@@ -765,12 +775,6 @@
   letter-spacing: -0.32px;
   color: #242A3C;
   margin-bottom: 20px;
-}
-.modal_popup.privacy .con {
-  height: 570px;
-}
-.modal_popup.marketing .con {
-  height: 332px;
 }
 
 .forum_con {
@@ -875,10 +879,10 @@
 .forum_con .pop_category_search .search_terms .pop_terms .six .form_cell + .form_cell input[type=radio]:checked + label {
   border-left: 1px solid #9013FE;
 }
-.forum_con .pop_category_search .search_terms .pop_search .form_wrap .search {
+.forum_con .pop_category_search .search_terms .pop_search .form_wrap .search_noline {
   height: 44px;
 }
-.forum_con .pop_category_search .search_terms .pop_search .form_wrap .search input {
+.forum_con .pop_category_search .search_terms .pop_search .form_wrap .search_noline input {
   height: 44px;
 }
 .forum_con .pop_search_con {
@@ -1078,6 +1082,7 @@
 }
 
 .mini_profile_popup {
+  display: none;
   position: absolute;
   top: 48px;
   left: -135px;
@@ -1121,6 +1126,9 @@
 .mini_profile_popup .mini_profile_top {
   height: 140px;
   position: relative;
+  background: #c3c5cc;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 .mini_profile_popup .mini_profile_top img {
   width: 300px;
@@ -1199,7 +1207,17 @@
   width: 100px;
   height: 100px;
   border-radius: 50px;
-  background-image: linear-gradient(141deg, #ffd300 14%, #ff45a1 86%);
+  background-image: linear-gradient(141deg, #FFD300 14%, #ff45a1 86%);
+}
+.mini_profile_popup .mini_profile_con .mini_profile_photo.default {
+  background-image: none;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_photo.default .profile_photo_div {
+  width: 92px;
+  height: 92px;
+  background: none;
+  border: 4px solid #FFF;
+  padding: 0;
 }
 .mini_profile_popup .mini_profile_con .mini_profile_photo .profile_photo_div {
   width: 92px;
@@ -1228,6 +1246,18 @@
   height: 32px;
   border-radius: 16px;
 }
+.mini_profile_popup .mini_profile_con .mini_profile_photo .forum_logo.setting {
+  background: #E0E0E0;
+  border-radius: 16px;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_photo .forum_logo.setting:before {
+  content: "";
+  clear: both;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background: url("../img/ico/ic_setting_bl.png") no-repeat center center/24px 24px;
+}
 .mini_profile_popup .mini_profile_con .mini_profile_name {
   position: relative;
   display: inline-flex;
@@ -1249,13 +1279,16 @@
   letter-spacing: -0.4px;
   color: #A7A8AB;
 }
-.mini_profile_popup .mini_profile_con .mini_profile_name .status {
+.mini_profile_popup .mini_profile_con .mini_profile_name .status_group {
+  position: relative;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_name .status_group .status {
   display: inline-block;
   width: 24px;
   height: 24px;
   position: relative;
 }
-.mini_profile_popup .mini_profile_con .mini_profile_name .status.on:after {
+.mini_profile_popup .mini_profile_con .mini_profile_name .status_group .status.on:after {
   content: "";
   clear: both;
   display: inline-block;
@@ -1273,8 +1306,15 @@
   font-weight: normal;
   font-size: 13px;
   line-height: 20px;
-  letter-spacing: -0.26px;
   color: #A7A8AB;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_info.default {
+  width: 100%;
+  height: 19px;
+  text-align: center;
+}
+.mini_profile_popup .mini_profile_con .form_wrap.profile input:focus, .mini_profile_popup .mini_profile_con .form_wrap.profile input:active {
+  border: 1px solid #121212;
 }
 .mini_profile_popup .mini_profile_con .mini_profile_in {
   display: inline-flex;
@@ -1291,6 +1331,15 @@
 .mini_profile_popup .mini_profile_con .mini_profile_total li {
   width: 33.3333333333%;
   text-align: center;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_total li:hover {
+  cursor: pointer;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_total li:hover dl dt {
+  text-decoration: underline;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_total li:hover dl dd {
+  text-decoration: underline;
 }
 .mini_profile_popup .mini_profile_con .mini_profile_total li dl {
   text-align: center;
@@ -1330,20 +1379,35 @@
   color: #6563FF;
 }
 .mini_profile_popup .mini_profile_con .mini_profile_textarea::-webkit-scrollbar {
-  width: 12px;
+  width: 18px;
   background: transparent;
 }
 .mini_profile_popup .mini_profile_con .mini_profile_textarea::-webkit-scrollbar-thumb {
   width: 6px;
   background: #E0E0E0;
   background-clip: padding-box;
-  border-radius: 6px;
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
+  border-radius: 9999px;
+  border-top: 4px solid transparent;
+  border-left: 6px solid transparent;
   border-right: 6px solid transparent;
+  border-bottom: 4px solid transparent;
 }
 .mini_profile_popup .mini_profile_con .mini_profile_textarea::-webkit-scrollbar-track {
   background: transparent;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_textarea::-webkit-input-placeholder {
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+  color: #BDBDBD;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_textarea:-ms-input-placeholder {
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+  letter-spacing: -0.32px;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_textarea:focus, .mini_profile_popup .mini_profile_con .mini_profile_textarea:active {
+  border: 1px solid #121212;
+  color: #121212;
 }
 .mini_profile_popup .mini_profile_con .mini_profile_friends {
   display: flex;
@@ -1425,6 +1489,13 @@
   top: 0px;
   background: url("../img/ico/ic_tag_memo_sm_gr.png") no-repeat center center/20px 20px;
 }
+.mini_profile_popup .mini_profile_con .mini_profile_note.default span {
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  color: #BDBDBD;
+}
 .mini_profile_popup .mini_profile_con .mini_profile_btn {
   margin-top: 20px;
   border-top: 1px solid #E0E0E0;
@@ -1432,6 +1503,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_btn .btn_tooltip_group {
+  position: relative;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_btn .btn_tooltip_group .tooltip {
+  top: -32px;
 }
 .mini_profile_popup .mini_profile_con .mini_profile_btn button {
   width: 126px;
@@ -1468,6 +1545,24 @@
   top: -2px;
   background: url("../img/ico/ic_follow_wh.png") no-repeat center center/24px 24px;
 }
+.mini_profile_popup .mini_profile_con .mini_profile_btn button.friend {
+  background: #F8F8F8;
+  border: 1px solid #6563FF;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_btn button.friend span {
+  color: #6563FF;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_btn button.friend span:before {
+  left: 0;
+  top: -2px;
+  background: url("../img/ico/ic_following.png") no-repeat center center/24px 24px;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_btn button.friend:hover {
+  background: #EEEEEE;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_btn button.none span:before {
+  background: none;
+}
 .mini_profile_popup .mini_profile_con .mini_profile_btn button.msg {
   border: 1px solid #9013FE;
   background: #F8F8F8;
@@ -1479,6 +1574,63 @@
   left: 0;
   top: -2px;
   background: url("../img/ico/ic_message_pp.png") no-repeat center center/24px 24px;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_btn button.msg:hover {
+  background: #EEEEEE;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_btn button.home {
+  background: #ED348F;
+  border: 1px solid #ED348F;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_btn button.home span {
+  color: #FFF;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_btn button.home span:before {
+  left: 0;
+  top: -2px;
+  background: url("../img/ico/ic_miniroom_wh.png") no-repeat center center/24px 24px;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_btn button.acc {
+  background: #EEEEEE;
+}
+.mini_profile_popup .mini_profile_con .mini_profile_btn button.acc span:before {
+  left: 0;
+  top: -2px;
+  background: url("../img/ico/ic_setting_pp.png") no-repeat center center/24px 24px;
+}
+.mini_profile_popup .mini_profile_con .option {
+  margin-top: 12px;
+}
+.mini_profile_popup .mini_profile_con .option .more {
+  background: #F8F8F8;
+  width: 100%;
+}
+.mini_profile_popup .mini_profile_con .option .more span {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: #BDBDBD;
+  position: relative;
+  padding-left: 28px;
+}
+.mini_profile_popup .mini_profile_con .option .more span:before {
+  content: "";
+  clear: both;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: -2px;
+  left: 0;
+  background: url("../img/ico/ic_plus_sm_gr.png") no-repeat center center/24px 24px;
+}
+.mini_profile_popup .mini_profile_con .option .more:hover {
+  background: #EEEEEE;
+}
+.mini_profile_popup .mini_profile_con .option .more:hover span {
+  color: #242A3C;
+}
+.mini_profile_popup .mini_profile_con .option .more:hover span:before {
+  background: url("../img/ico/ic_plus_sm_bk.png") no-repeat center center/24px 24px;
 }
 
 .staff_popup {
@@ -1526,6 +1678,24 @@
 .staff_popup .staff_popup_list {
   display: flex;
   flex-wrap: wrap;
+  overflow-x: hidden;
+  max-height: 348px;
+  overflow-y: auto;
+  margin-right: -20px;
+}
+.staff_popup .staff_popup_list::-webkit-scrollbar {
+  width: 6px;
+  background-color: #E0E0E0;
+}
+.staff_popup .staff_popup_list::-webkit-scrollbar-thumb {
+  width: 6px;
+  background: #E0E0E0;
+  background-clip: padding-box;
+  border-radius: 3px;
+  border-right: 6px solid transparent;
+}
+.staff_popup .staff_popup_list::-webkit-scrollbar-track {
+  background: transparent;
 }
 .staff_popup .staff_popup_list li {
   width: calc((100% - 34px) / 3);
@@ -1533,11 +1703,8 @@
   padding-top: 8px;
   cursor: pointer;
 }
-.staff_popup .staff_popup_list li + li {
+.staff_popup .staff_popup_list li + li:not(:nth-child(3n+1)) {
   margin-left: 17px;
-}
-.staff_popup .staff_popup_list li:nth-child(4n) {
-  margin-left: 0;
 }
 .staff_popup .staff_popup_list li .staff_popup_info {
   display: block;
@@ -1559,4 +1726,116 @@
   line-height: 16px;
   color: #242A3C;
   word-break: break-all;
+}
+
+.status_list {
+  display: none;
+  position: absolute;
+  top: -10px;
+  right: -152px;
+  background: #FFF;
+  border: 1px solid #BDBDBD;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  width: 148px;
+  border-radius: 8px;
+  z-index: 20;
+}
+.status_list:after {
+  content: "";
+  clear: both;
+  display: inline-block;
+  position: absolute;
+  top: 20px;
+  left: -6px;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 10px;
+  border-bottom: 5px solid transparent;
+  border-top: 6px solid transparent;
+  border-left: 0px;
+  border-right: 6px solid #FFF;
+}
+.status_list:before {
+  content: "";
+  clear: both;
+  display: inline-block;
+  position: absolute;
+  top: 19px;
+  left: -8px;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 12px;
+  border-bottom: 6px solid transparent;
+  border-top: 8px solid transparent;
+  border-left: 0px;
+  border-right: 8px solid #BDBDBD;
+}
+.status_list li {
+  position: relative;
+  height: 28px;
+}
+.status_list li:hover {
+  background: #F8F8F8;
+}
+.status_list li:hover .status_select span {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: #9013FE;
+}
+.status_list li:first-child {
+  margin-top: 8px;
+}
+.status_list li:last-child {
+  margin-bottom: 8px;
+}
+.status_list li .status_select {
+  display: inline-block;
+  width: 100%;
+  height: 28px;
+  padding-left: 34px;
+  position: relative;
+}
+.status_list li .status_select span {
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  color: #242A3C;
+}
+.status_list li .status_select:after {
+  content: "";
+  clear: both;
+  display: inline-block;
+  position: absolute;
+  top: calc(50% - 4px);
+  left: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+}
+.status_list li .status_select.on:after {
+  background: #3fccce;
+}
+.status_list li .status_select.dis:after {
+  background: #FF2A55;
+}
+.status_list li .status_select.away:after {
+  background: #FFD300;
+}
+.status_list li .status_select.off:after {
+  background: #BDBDBD;
+}
+.status_list li .status_select.auto:after {
+  background-image: linear-gradient(to bottom, #9013fe, #ffd300);
+}
+.status_list li .status_select.game:after {
+  content: "";
+  clear: both;
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  background: url("../img/ico/ic_state_gaming.png") no-repeat center center/24px 24px;
 }

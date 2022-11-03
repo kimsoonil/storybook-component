@@ -20,21 +20,15 @@ import MainTap from './MainTap';
 
 function Home() {
   const dispatch = useDispatch();
-  const userState = useSelector((state) => state.user);
-  const clubState = useSelector((state) => state.club);
-  const categories = useSelector((state) => state.categories);
+  const { user } = useSelector((state) => state.user);
+  const { clubs } = useSelector((state) => state.club);
+  const { list } = useSelector((state) => state.categories);
 
   useEffect(() => {
     dispatch(categoriesInit());
     dispatch(getUserInit());
     dispatch(getClubsInit({ parameters: '' }));
   }, [dispatch]);
-
-  const { user, error } = userState;
-  const { clubs } = clubState;
-  const { isLoading, list } = categories;
-
-  console.log('clubs', clubs);
 
   const handleClickPin = (e, pin, id) => {
     e.stopPropagation();

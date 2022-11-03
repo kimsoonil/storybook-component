@@ -1,0 +1,15 @@
+<svg id="ic_headphone_pp" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #9013fe;
+      }
+    </style>
+  </defs>
+  <path id="패스_11709" data-name="패스 11709" class="cls-1" d="M0,0H24V24H0Z"/>
+  <path id="패스_11710" data-name="패스 11710" class="cls-2" d="M11,3.8A7.2,7.2,0,0,0,3.8,11H6.5a1.8,1.8,0,0,1,1.8,1.8v4.5a1.8,1.8,0,0,1-1.8,1.8H3.8A1.8,1.8,0,0,1,2,17.3V11a9,9,0,0,1,18,0v6.3a1.8,1.8,0,0,1-1.8,1.8H15.5a1.8,1.8,0,0,1-1.8-1.8V12.8A1.8,1.8,0,0,1,15.5,11h2.7A7.2,7.2,0,0,0,11,3.8Zm-7.2,9v4.5H6.5V12.8Zm11.7,0v4.5h2.7V12.8Z" transform="translate(1 1)"/>
+</svg>

@@ -8,7 +8,6 @@ import { getClubInit, postClubJoinInit } from 'redux/idistStore/clubSlice';
 
 import { Button } from './Button.js';
 import 'assets/scss/components.scss';
-import TokenLogin from './TokenLogin';
 
 function Profile(props) {
   const dispatch = useDispatch();
@@ -23,7 +22,7 @@ function Profile(props) {
       })
     );
   };
-
+  // console.log('props.userData.profile', props.userData.profile);
   return (
     <>
       {props.type === 'logout' ? (
@@ -36,7 +35,7 @@ function Profile(props) {
             </div>
           </div>
           <div className="m-1">
-            <Button primary="point" label="Login" size="m" width={265} onClick={() => setOpen(!open)} />
+            <Button primary="point" label="LOGIN" size="m" width={265} onClick={() => navigate('/login')} />
           </div>
         </div>
       ) : props.type === 'login' ? (
@@ -44,16 +43,18 @@ function Profile(props) {
           <div className="admin-nav " onClick={() => navigate('/manage')}>
             <img src={require(`images/main/admin.png`)} alt="" /> Admin
           </div>
-          <div className="profile-img">
-            <img
-              src={
-                props.userData.profile_image
-                  ? props.userData.profile_image
-                  : require('images/main/temporary-profile.png')
-              }
-              alt=""
-            />
-            <div className="profile-name">{props.userData.username}</div>
+          <div onClick={() => navigate(`/club/1/memberProfile/1`)}>
+            <div className="profile-img">
+              <img
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null; // prevents looping
+                  currentTarget.src = require('images/main/temporary-profile.png');
+                }}
+                src={props.userData.profile_image_url}
+                alt=""
+              />
+              <div className="profile-name">{props.userData.username}</div>
+            </div>
           </div>
 
           <div className="flex-center">
@@ -74,45 +75,47 @@ function Profile(props) {
             <Button primary="point" label="Create Club" size="m" width={265} onClick={() => navigate('/club/new')} />
           </div>
         </div>
-      ) : props.userData.club ? (
+      ) : props.userData.profile ? (
         <div className="side-box profile image relative">
           <div className="admin-nav " onClick={() => navigate('/manage')}>
             <img src={require(`images/main/admin.png`)} alt="" /> Admin
           </div>
-          <div className="profile-img ">
-            <img
-              src={
-                props.userData.user.profile_image_url
-                  ? props.userData.user.profile_image_url
-                  : require('images/main/temporary-profile.png')
-              }
-              alt=""
-            />
-            <div className="profile-name">
-              {props.userData.user.username}
-              {props?.userData?.staff_title === null ? (
-                <>
-                  <div className="profile-rating flex-center">{props?.userData?.grade_title}</div>
-                  <div className="profile-level">LV {props?.userData?.level}</div>
-                </>
-              ) : (
-                <div className="profile-staff flex-center">{props?.userData?.staff_title}</div>
-              )}
+          <div onClick={() => navigate(`/club/1/memberProfile/1`)}>
+            <div className="profile-img ">
+              <img
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null; // prevents looping
+                  currentTarget.src = require('images/main/temporary-profile.png');
+                }}
+                src={props.userData.user.profile_image_url}
+                alt=""
+              />
+              <div className="profile-name">
+                {props.userData.user.username}
+                {props?.userData?.profile?.staff_title === null ? (
+                  <>
+                    <div className="profile-rating flex-center">{props?.userData?.profile?.grade_title}</div>
+                    <div className="profile-level">LV {props?.userData?.profile?.level}</div>
+                  </>
+                ) : (
+                  <div className="profile-staff flex-center">{props?.userData?.profile?.staff_title}</div>
+                )}
+              </div>
             </div>
           </div>
           <div className="flex-center">
             <div className="profile-info flex-center">
-              <div className="profile-info-title">{props.userData.visit_count}</div>
+              <div className="profile-info-title">{props.userData?.profile?.visit_count}</div>
               <div className="profile-info-content">Visit</div>
             </div>
 
             <div className="profile-info flex-center">
-              <div className="profile-info-title">{props.userData.post_count}</div>
+              <div className="profile-info-title">{props.userData?.profile?.post_count}</div>
               <div className="profile-info-content">Posts</div>
             </div>
 
             <div className="profile-info flex-center">
-              <div className="profile-info-title">{props.userData.comment_count}</div>
+              <div className="profile-info-title">{props.userData?.profile?.comment_count}</div>
               <div className="profile-info-content">Comments</div>
             </div>
           </div>
@@ -134,23 +137,28 @@ function Profile(props) {
         </div>
       ) : (
         <div className="side-box profile image relative">
-          <div className="profile-img">
-            <img
-              src={
-                props.userData.profile_image
-                  ? props.userData.profile_image
-                  : require('images/main/temporary-profile.png')
-              }
-              alt=""
-            />
-            <div className="profile-name">{props.userData.username}</div>
+          <div onClick={() => navigate(`/club/1/memberProfile/1`)}>
+            <div className="profile-img">
+              <img
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null; // prevents looping
+                  currentTarget.src = require('images/main/temporary-profile.png');
+                }}
+                src={
+                  props.userData.user.profile_image_url
+                    ? props.userData.user.profile_image_url
+                    : require('images/main/temporary-profile.png')
+                }
+                alt=""
+              />
+              <div className="profile-name">{props.userData.user.username}</div>
+            </div>
           </div>
           <div className="m-1">
             <Button primary="point" label="Join" size="m" width={265} onClick={() => handleClickJoin()} />
           </div>
         </div>
       )}
-      <TokenLogin open={open} setOpen={setOpen} />
     </>
   );
 }

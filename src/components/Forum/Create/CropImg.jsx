@@ -61,11 +61,13 @@ function CropImg(props, ref) {
     fileRejections.forEach((file) => {
       file.errors.forEach((err) => {
         if (err.code === 'file-too-large') {
-          setErrors({ ...errors, [imgType]: t('validation.forum.uploadfile.maxsize') });
+          // setErrors({ ...errors, [imgType]: t('validation.forum.uploadfile.maxsize') });
+          setErrors({ ...errors, [imgType]: 'Images cannot exceed 10mb.' });
         }
 
         if (err.code === 'file-invalid-type') {
-          setErrors({ ...errors, [imgType]: t('validation.forum.uploadfile.invalidfile') });
+          // setErrors({ ...errors, [imgType]: t('validation.forum.uploadfile.invalidfile') });
+          setErrors({ ...errors, [imgType]: 'only the extensions jpg, gif, and png are allowed.' });
         }
       });
     });

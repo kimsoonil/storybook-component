@@ -5,14 +5,14 @@ import { fetchEditForum } from '../../api';
 
 function* onLoadForumEditAsync({ payload }) {
   console.log(payload);
-  const { navigate, formData } = payload;
+  const { navigate, formData, id } = payload;
   console.log('formData', formData);
   try {
-    const response = yield call(fetchEditForum, formData);
+    const response = yield call(fetchEditForum, formData, id);
     console.log(response);
     if (response.status === SUCCESS) {
       yield put(forumEditSuccess({ ...response }));
-      navigate(`/forum/theme/${response.data.data.id}`);
+      navigate(`/forum/${response.data.data.id}/theme`);
     }
   } catch (error) {
     console.log(error);

@@ -1,23 +1,21 @@
-import { takeLeading, takeLatest, put, fork } from 'redux-saga/effects';
+import { takeLatest, put, fork, call } from 'redux-saga/effects';
 import {
   reset,
   reqPostRankingList,
   postRankingListSuccess,
-  postRankingListFailure,
-  setLikePost
+  postRankingListFailure
 } from 'redux/store/forum/postRankingListSlice';
+import { SUCCESS } from 'constants/type';
 
-import Api from '../../api2';
+import { fetchForumPostList } from '../../api';
+// import Api from '../../api2';
 
 function* onLoadpostRankingListAsync({ payload }) {
-  console.log(payload);
   try {
-    // const response = yield call(Api.fetchSignUp, payload);
-    // if (response.status === SUCCESS) {
-    //   yield put(AuthEmailSuccess({ ...response.data }));
-    // }
-    const response = Api.getPostRankingList(payload);
-    yield put(postRankingListSuccess({ ...response }));
+    const response = yield call(fetchForumPostList, payload);
+    if (response.status === SUCCESS) {
+      yield put(postRankingListSuccess({ ...response.data }));
+    }
   } catch (error) {
     console.log(error);
     yield put(postRankingListFailure(error));
@@ -41,21 +39,4 @@ function* onLoadpostRankingListReset() {
   yield takeLatest(reset.type, onLoadpostRankingListResetAsync);
 }
 
-function* onLoadPostRankingLikeAsync({ payload }) {
-  try {
-    console.log(payload);
-    yield put(setLikePost(payload));
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-function* onLoadPostRankingLike() {
-  yield takeLeading(setLikePost.type, onLoadPostRankingLikeAsync);
-}
-
-export const postRankingListSaga = [
-  fork(onLoadpostRankingList),
-  fork(onLoadpostRankingListReset),
-  fork(onLoadPostRankingLike)
-];
+export const postRankingListSaga = [fork(onLoadpostRankingList), fork(onLoadpostRankingListReset)];

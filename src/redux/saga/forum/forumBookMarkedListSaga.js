@@ -7,11 +7,11 @@ import {
 } from 'redux/store/forum/forumBookmarkedSlice';
 import { SUCCESS } from 'constants/type';
 
-import { fetchForumList } from '../../api';
+import { fetchBookMarkedForumList } from '../../api';
 
 function* onLoadForumBookMarkedListAsync({ payload }) {
   try {
-    const response = yield call(fetchForumList, payload);
+    const response = yield call(fetchBookMarkedForumList, payload);
     if (response.status === SUCCESS) {
       yield put(forumBookMarkedListSuccess({ ...response.data }));
     }

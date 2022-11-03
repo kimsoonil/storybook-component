@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { openReportHistoryDialog } from 'redux/idistStore/admin/dialogSlice';
@@ -12,7 +11,13 @@ function ReportCount({ reportCount }) {
 
   return (
     <div className="report-count">
-      <div className="report-count-button" onClick={handleClick}>
+      <div
+        className="report-count-button"
+        onClick={handleClick}
+        onKeyDown={(e) => (e.key === 'Enter' ? handleClick(e) : {})}
+        tabIndex={0}
+        role="button"
+      >
         <div className="report-count-label">{reportCount}</div>
       </div>
     </div>

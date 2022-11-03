@@ -1,7 +1,6 @@
 /* eslint-disable */
-
 import React, { useState, useEffect, useRef } from 'react';
-import JoditEditor, { Jodit } from 'jodit-pro-react';
+import JoditEditor from 'jodit-react';
 import { useNavigate } from 'react-router-dom';
 import ToggleBtn from 'components/idist/ToggleBtn';
 import { Button } from 'components/idist/Button';
@@ -14,53 +13,13 @@ import 'assets/scss/jodit.scss';
 function Writing(props) {
   const editor = useRef(null);
   const navigate = useNavigate();
-
+  const [isHidePassword, setIsHidePassword] = useState(false);
   const [openSelect, setOpenSelect] = useState(false);
   const [tempPopupOpen, setTempPopupOpen] = useState(false);
-
-  const config = {
-    readonly: false,
-    height: 600,
-    padding: 20,
-    placeholder: 'Please leave a comment that you want to share.',
-    license: '63DFM-3/H53-ATPPJ-RGIRZ',
-    uploader: {
-      url: 'https://xdsoft.net/jodit/finder/?action=fileUpload'
-    },
-    buttons: [
-      'undo',
-      'redo',
-      '|',
-      'brush',
-      'bold',
-      'italic',
-      '|',
-      'left',
-      'center',
-      'right',
-      '|',
-      'ol',
-      'ul',
-      '|',
-      'table'
-    ]
-  };
-  function preparePaste(jodit) {
-    jodit.e.on(
-      'emoji',
-      (e) => {
-        if (confirm('Change pasted content?')) {
-          jodit.e.stopPropagation('paste');
-          jodit.s.insertHTML(
-            Jodit.modules.Helpers.getDataTransfer(e).getData(Jodit.constants.TEXT_HTML).replace(/a/g, 'b')
-          );
-          return false;
-        }
-      },
-      { top: true }
-    );
-  }
-  Jodit.plugins.add('preparePaste', preparePaste);
+  const [joditConfig] = useState({
+    toolbarStyle: 'top',
+    minHeight: '615px',
+  });
 
   const closeSelect = (text, id) => {
     props.setPostsData({ ...props.postsData, board: id });
@@ -153,27 +112,10 @@ function Writing(props) {
               onChange={(e) => props.setPostsData({ ...props.postsData, title: e.target.value })}
             />
           </div>
-          <div className="jodit-tobar">
-            <div className="editer-icon">
-              <img src={require('images/editor/icon-emoticon.png')} alt="" />
-            </div>
-            <div className="editer-icon">
-              <img src={require('images/editor/icon-image.png')} alt="" />
-            </div>
-            <div className="editer-icon">
-              <img src={require('images/editor/icon-gif.png')} alt="" />
-            </div>
-            <div className="editer-icon">
-              <img src={require('images/editor/icon-video.png')} alt="" />
-            </div>
-            <div className="editer-icon">
-              <img src={require('images/editor/icon-file.png')} alt="" />
-            </div>
-          </div>
           <JoditEditor
             ref={editor}
+            config={joditConfig}
             value={props.postsData.content}
-            config={config}
             tabIndex={1} // tabIndex of textarea
             onBlur={(newContent) => props.setPostsData({ ...props.postsData, content: newContent })} // preferred to use only this option to update the content for performance reasons
           />
@@ -262,17 +204,30 @@ function Writing(props) {
                   />
                 </div>
                 {props.checkedList.indexOf('secret') > -1 && (
-                  <div className="board-password">
-                    <div className="board-password-input">
+                  <div className="board-password ">
+                    <div className="board-password-input relative">
                       password
                       <input
                         value={props.postsData.password || ''}
                         maxLength="4"
-                        type="password"
+                        type={isHidePassword ? 'text' : 'password'}
                         onChange={(e) => onlyNumber(e)}
                       />
+                      {isHidePassword ? (
+                        <div className="password-btn" onClick={() => setIsHidePassword(!isHidePassword)}>
+                          <img src={require('images/club/ic-show-gr.png')} />
+                        </div>
+                      ) : (
+                        <div className="password-btn" onClick={() => setIsHidePassword(!isHidePassword)}>
+                          <img src={require('images/club/ic-hide-gr.png')} />
+                        </div>
+                      )}
                     </div>
-                    <div className="remark">*You can view posts by entering your password.</div>
+                    {props.postsData.password.length === 4 || props.postsData.password.length === 0 ? (
+                      <div className="remark">*You can view posts by entering your password.</div>
+                    ) : (
+                      <div className="password-error">*Please enter a four-digit password.</div>
+                    )}
                   </div>
                 )}
               </div>

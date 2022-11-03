@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useLayoutEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -124,7 +122,13 @@ function MenuItem({ data }) {
   };
 
   return (
-    <div className={`${rootClassName}-menu-item`} onClick={onClick}>
+    <div
+      className={`${rootClassName}-menu-item`}
+      onClick={onClick}
+      onKeyDown={(e) => (e.key === 'Enter' ? onClick(e) : {})}
+      tabIndex={0}
+      role="button"
+    >
       <div className={`${rootClassName}-menu-item-title`}>{data.title}</div>
       <div className={`${rootClassName}-menu-item-desc`}>{data.desc}</div>
     </div>

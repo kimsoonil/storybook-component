@@ -1,26 +1,27 @@
-/* eslint-disable */
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+/* eslint-disable react/no-unstable-nested-components */
+import React, { useCallback, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeDialog } from 'redux/idistStore/admin/dialogSlice';
 import { Dialog } from '@mui/material';
 import 'assets/scss/component/dialog.scss';
+import clubMasterImage from 'images/admin/club-master-profile.png';
 import JButton from '../JButton';
 import AdminTable from '../datatable/AdminTable';
 import Profile from './Profile';
 
-const ReportHistoryDialog = ({ submit }) => {
+function ReportHistoryDialog() {
   const dispatch = useDispatch();
   const reportHistory = useSelector((state) => state.adminDialog.reportHistory);
   const rootClassName = 'report-history-dialog';
 
   const close = () => dispatch(closeDialog('reportHistory'));
 
-  const _rows = [
+  const rowMockData = [
     {
       id: 1,
       type: 'Post',
       reporter: {
-        profileImage: require('images/admin/club-master-profile.png'),
+        profileImage: clubMasterImage,
         name: 'Kate',
         staff: true
       },
@@ -31,7 +32,7 @@ const ReportHistoryDialog = ({ submit }) => {
       id: 2,
       type: 'Post',
       reporter: {
-        profileImage: require('images/admin/club-master-profile.png'),
+        profileImage: clubMasterImage,
         name: 'mina',
         staff: true
       },
@@ -42,7 +43,7 @@ const ReportHistoryDialog = ({ submit }) => {
       id: 3,
       type: 'Post',
       reporter: {
-        profileImage: require('images/admin/club-master-profile.png'),
+        profileImage: clubMasterImage,
         name: 'rurua',
         staff: true
       },
@@ -53,7 +54,7 @@ const ReportHistoryDialog = ({ submit }) => {
       id: 4,
       type: 'Post',
       reporter: {
-        profileImage: require('images/admin/club-master-profile.png'),
+        profileImage: clubMasterImage,
         name: 'ddd',
         staff: true
       },
@@ -61,7 +62,7 @@ const ReportHistoryDialog = ({ submit }) => {
       reportedDate: '2022. 08. 30'
     }
   ];
-  const [rows, setRows] = useState(_rows);
+  const [rows] = useState(rowMockData);
   const [sortState, setSortState] = useState({ field: '', step: 0 });
 
   const onClickSortButton = useCallback(({ field }) => {
@@ -84,7 +85,7 @@ const ReportHistoryDialog = ({ submit }) => {
         field: 'reporter',
         name: 'Reported User',
         width: 120,
-        RowComponents: (props) => <Profile user={props.reporter} />
+        RowComponents: ({ reporter }) => <Profile user={reporter} />
       },
       {
         field: 'reason',
@@ -115,11 +116,11 @@ const ReportHistoryDialog = ({ submit }) => {
         <hr />
 
         <div className={`${rootClassName}-button-wrapper`}>
-          <JButton width={200} label={'Confirm'} onClick={close} />
+          <JButton width={200} label="Confirm" onClick={close} />
         </div>
       </div>
     </Dialog>
   );
-};
+}
 
 export default ReportHistoryDialog;

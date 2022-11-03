@@ -1,3 +1,7 @@
+/* eslint-disable camelcase */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-restricted-syntax */
 // export const clubModel = (data) => ({
 //   ...(data?.address && { address: data?.address }),
 //   ...(data?.banner_image && { bannerImage: data?.banner_image }),
@@ -32,9 +36,8 @@ const optimizeModel = (data) => {
       }
     }
     return ret;
-  } else {
-    return data;
   }
+  return data;
 };
 
 export const clubModel = (data) => {
@@ -54,7 +57,7 @@ export const clubModel = (data) => {
     profileImage: data?.profile_image,
     profileImageUrl: data?.profile_image_url,
 
-    boardGroups: boardGroups,
+    boardGroups,
 
     isAutoApproval: data?.is_auto_approval,
     isPined: data?.is_pined,
@@ -91,7 +94,7 @@ export const boardGroupModel = (data) => {
     type,
     isActive: data?.is_active,
     order: data?.order,
-    boards: boards,
+    boards,
     clubId: data?.clubId,
     isGroup: true
   };
@@ -200,4 +203,4 @@ export const boardPayload = (data) => {
   return optimizeModel(payload);
 };
 
-export const userModel = (data) => {};
+export const userModel = () => {};

@@ -211,6 +211,7 @@
 }
 .common_wrap .system_msg {
   text-align: center;
+  margin-bottom: 48px;
 }
 .common_wrap .system_msg span {
   font-family: "Poppins", sans-serif;
@@ -288,15 +289,23 @@
 }
 .common_wrap .back {
   width: 200px;
-  margin: 0 auto;
   display: block;
+  position: relative;
 }
-.common_wrap .back span:before {
+.common_wrap .back:before {
   content: "";
   clear: both;
   display: inline-block;
   width: 32px;
   height: 32px;
+  position: absolute;
+  top: 50%;
+  left: 43px;
+  transform: translateY(-50%);
+  background: url("../img/ico/ic_goback.png") no-repeat center top/32px 32px;
+}
+.common_wrap .back span {
+  padding-left: 36px;
 }
 
 .mail_wrap01 {
@@ -387,4 +396,351 @@
 }
 .mail_wrap02 .page_btn_wrap .btn {
   width: 200px;
+}
+
+.landing {
+  background: #FFF;
+}
+.landing .main_img {
+  height: 900px;
+  background: url("../img/com/img_landing_main.png") no-repeat center center/cover;
+}
+.landing .main_img .header {
+  height: 99px;
+  border-bottom: 1px solid #f5f5f5;
+  text-align: center;
+}
+.landing .main_img .header .landing_gnb {
+  width: 1280px;
+  height: 99px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+.landing .main_img .header .landing_gnb h1 {
+  width: 100px;
+  height: 57px;
+  margin-right: 181px;
+}
+.landing .main_img .header .landing_gnb h1 a {
+  display: inline-block;
+  width: 100px;
+  height: 57px;
+  position: relative;
+}
+.landing .main_img .header .landing_gnb h1 a:before {
+  content: "";
+  clear: both;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 57px;
+  background: url("../img/com/logo_wh.png") no-repeat center center/100px 57px;
+}
+.landing .main_img .header .landing_gnb button + button {
+  margin-left: 114px;
+}
+.landing .main_img .header .landing_gnb button span {
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  color: #FFF;
+}
+.landing .main_img .header .landing_gnb button:hover span {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+.landing .main_img .header .landing_top_text {
+  margin-top: 248px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 64px;
+  letter-spacing: -0.2px;
+  color: #FFF;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+.landing .main_img .header .landing_top_text span {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+.landing .main_img .header .button_xl {
+  margin-top: 60px;
+  width: 207px;
+}
+.landing .landing_con01 {
+  width: 984px;
+  margin: 160px auto 0;
+  text-align: center;
+}
+.landing .landing_con01 .landing_title01 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-size: 72px;
+  line-height: 74px;
+  letter-spacing: -0.2px;
+  color: #242A3C;
+}
+.landing .landing_con01 .landing_text01 {
+  margin-top: 8px;
+  margin-bottom: 80px;
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: -0.2px;
+  color: #242A3C;
+}
+.landing .landing_con01 ul {
+  margin-top: 80px;
+  margin-bottom: 160px;
+  display: inline-flex;
+  align-items: center;
+  width: 984px;
+}
+.landing .landing_con01 ul li {
+  width: 33.3333333333%;
+  position: relative;
+  padding-top: 120px;
+}
+.landing .landing_con01 ul li.landing_subjext {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: -0.2px;
+  color: #242A3C;
+}
+.landing .landing_con01 ul li:before {
+  content: "";
+  clear: both;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.landing .landing_con01 ul li.img01:before {
+  background: url("../img/ico/ic_main_chat.png") no-repeat center top/100px 100px;
+}
+.landing .landing_con01 ul li.img02:before {
+  background: url("../img/ico/ic_main_certification.png") no-repeat center top/100px 100px;
+}
+.landing .landing_con01 ul li.img03:before {
+  background: url("../img/ico/ic_main_money.png") no-repeat center top/100px 100px;
+}
+.landing .landing_con02 {
+  background: #9013FE;
+  padding: 160px 0;
+}
+.landing .landing_con02 .landing_title02 {
+  text-align: center;
+  margin-bottom: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: -0.2px;
+  color: #FFF;
+}
+.landing .landing_con02 .landing_text02 {
+  text-align: center;
+  height: 101px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-size: 72px;
+  line-height: 74px;
+  letter-spacing: -0.3px;
+  color: #FFF;
+}
+.landing .landing_con02 ul {
+  width: 1280px;
+  margin: 120px auto 0;
+}
+.landing .landing_con02 ul li {
+  padding: 62px 0 0 440px;
+  height: 300px;
+  position: relative;
+}
+.landing .landing_con02 ul li + li {
+  margin-top: 60px;
+}
+.landing .landing_con02 ul li:before {
+  content: "";
+  clear: both;
+  display: inline-block;
+  width: 400px;
+  height: 300px;
+  position: absolute;
+}
+.landing .landing_con02 ul li.right {
+  padding: 80px 440px 0 0;
+}
+.landing .landing_con02 ul li.right dl {
+  text-align: right;
+}
+.landing .landing_con02 ul li dl dt {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -0.2px;
+  color: #ffe600;
+}
+.landing .landing_con02 ul li dl dd {
+  padding-top: 16px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: -0.2px;
+  color: #FFF;
+}
+.landing .landing_con02 ul li.club:before {
+  left: 0;
+  top: 0;
+  background: url("../img/com/img_landing_superclub.png") no-repeat center center/400px 300px;
+}
+.landing .landing_con02 ul li.forum:before {
+  right: 0;
+  top: 0;
+  background: url("../img/com/img_landing_forum.png") no-repeat center center/400px 300px;
+}
+.landing .landing_con02 ul li.people:before {
+  left: 0;
+  top: 0;
+  background: url("../img/com/img_landing_peoples.png") no-repeat center center/400px 300px;
+}
+.landing .landing_con03 {
+  padding: 160px 0;
+  width: 1280px;
+  margin: 0 auto;
+}
+.landing .landing_con03 .landing_title03 {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: -0.3px;
+  color: #242A3C;
+}
+.landing .landing_con03 .landing_text03 {
+  text-align: center;
+  margin-top: 4px;
+  height: 101px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-size: 72px;
+  line-height: 74px;
+  letter-spacing: -0.2px;
+  color: #242A3C;
+}
+.landing .landing_con03 ul {
+  margin-top: 120px;
+}
+.landing .landing_con03 ul li {
+  padding: 80px 0 0 440px;
+  height: 300px;
+  position: relative;
+}
+.landing .landing_con03 ul li + li {
+  margin-top: 60px;
+}
+.landing .landing_con03 ul li:before {
+  content: "";
+  clear: both;
+  display: inline-block;
+  width: 400px;
+  height: 300px;
+  position: absolute;
+}
+.landing .landing_con03 ul li.right {
+  padding-right: 440px;
+  padding-left: 0;
+}
+.landing .landing_con03 ul li.right dl {
+  text-align: right;
+}
+.landing .landing_con03 ul li dl dt {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -0.2px;
+  color: #9013FE;
+}
+.landing .landing_con03 ul li dl dd {
+  padding-top: 16px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: -0.2px;
+  color: #242A3C;
+}
+.landing .landing_con03 ul li.community:before {
+  left: 0;
+  top: 0;
+  background: url("../img/com/img_landing_custom.png") no-repeat center center/400px 300px;
+}
+.landing .landing_con03 ul li.chatting:before {
+  right: 0;
+  top: 0;
+  background: url("../img/com/img_landing_superchat.png") no-repeat center center/400px 300px;
+}
+.landing .landing_con03 ul li.ranking:before {
+  left: 0;
+  top: 0;
+  background: url("../img/com/img_landing_ranking.png") no-repeat center center/400px 300px;
+}
+.landing .landing_con03 ul li.chatting:before {
+  right: 0;
+  top: 0;
+  background: url("../img/com/img_landing_finance.png") no-repeat center center/400px 300px;
+}
+.landing .landing_con04 {
+  background: rgba(144, 19, 254, 0.05);
+  padding-top: 20px;
+}
+.landing .landing_con04 .landing_guide {
+  width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+}
+.landing .landing_con04 .landing_guide .how {
+  margin-left: 70px;
+  margin-bottom: 70px;
+  padding-top: 138px;
+  display: inline-block;
+  width: 200px;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: -0.2px;
+}
+.landing .landing_con04 .landing_guide .how:before {
+  content: "";
+  clear: both;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 114px;
+  background: url("../img/com/logo_pp.png") no-repeat center center/200px 114px;
+}
+.landing .landing_con04 .landing_guide .btn_guide {
+  margin-left: 240px;
+  margin-bottom: 63px;
+}
+.landing .landing_con04 .landing_guide .btn_guide button {
+  width: 240px;
 }

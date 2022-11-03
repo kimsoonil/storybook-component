@@ -1,8 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/no-array-index-key */
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
 import 'assets/scss/admin/reports.scss';
 import {
   getReportChoicesInit,
@@ -85,29 +82,32 @@ function ReportsSetting() {
     <div className={`${rootClassName}`}>
       <div className={`${rootClassName}-container`}>
         <div className={`${rootClassName}-choices-container`}>
-          {reportChoices.map((reportChoiceItem, reportChoiceIndex) => (
-            // console.log(reportChoiceItem);
-            <div className={`${rootClassName}-choice-item-container`} key={reportChoiceIndex}>
-              {reportChoiceItem.id === editingId ? (
-                <div className={`${rootClassName}-choice-input-container`}>
-                  <input type="text" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} />
-                  <textarea value={editContent} onChange={(e) => setEditContent(e.target.value)} />
-                </div>
-              ) : (
-                <>
-                  <div className={`${rootClassName}-choice-item-title`}>
-                    {reportChoiceItem.is_active ? '활성화' : '비활성화'}
+          {reportChoices.map((reportChoiceItem, reportChoiceIndex) => {
+            const key = `report${reportChoiceIndex}`;
+            return (
+              // console.log(reportChoiceItem);
+              <div className={`${rootClassName}-choice-item-container`} key={key}>
+                {reportChoiceItem.id === editingId ? (
+                  <div className={`${rootClassName}-choice-input-container`}>
+                    <input type="text" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} />
+                    <textarea value={editContent} onChange={(e) => setEditContent(e.target.value)} />
                   </div>
-                  <div className={`${rootClassName}-choice-item-title`}> {reportChoiceItem.title}</div>
-                  <div className={`${rootClassName}-choice-item-content`}> {reportChoiceItem.content}</div>
-                  <div style={{ gap: '10px' }}>
-                    <JButton label="활성화/비활성화" onClick={() => onClickActivation(reportChoiceItem)} />
-                    <JButton label="수정" onClick={() => onClickEdit(reportChoiceItem)} />
-                  </div>
-                </>
-              )}
-            </div>
-          ))}
+                ) : (
+                  <>
+                    <div className={`${rootClassName}-choice-item-title`}>
+                      {reportChoiceItem.is_active ? '활성화' : '비활성화'}
+                    </div>
+                    <div className={`${rootClassName}-choice-item-title`}> {reportChoiceItem.title}</div>
+                    <div className={`${rootClassName}-choice-item-content`}> {reportChoiceItem.content}</div>
+                    <div style={{ gap: '10px' }}>
+                      <JButton label="활성화/비활성화" onClick={() => onClickActivation(reportChoiceItem)} />
+                      <JButton label="수정" onClick={() => onClickEdit(reportChoiceItem)} />
+                    </div>
+                  </>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         <div className={`${rootClassName}-choice-input-container`}>

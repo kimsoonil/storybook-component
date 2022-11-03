@@ -1,22 +1,34 @@
+/* eslint-disable */
 import axios from 'axios';
 import { getToken } from 'utils/Cookies/Cookies';
+import { getStorage } from 'util/storage';
 
-const tokenConfig = getToken();
+const accessToken = getStorage('accessToken');
+const tokenConfig = getToken() || accessToken;
 const endUrl = `${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1`;
 
 const _axios = axios.create({
   baseURL: endUrl,
   headers: {
-    ...tokenConfig?.headers,
     'Content-Type': 'application/json; charset=utf-8',
     Accept: 'application/json'
   }
 });
 
 _axios.interceptors.request.use(
-  (config) =>
-    // console.log(config.url);
-    config,
+  (config) => {
+    const locale = getStorage('lang');
+    console.log('locale:', locale);
+    if (locale) {
+      config.headers['Accept-Language'] = locale;
+    }
+    const accessToken = getStorage('accessToken');
+    console.log('accessToken axios:::', accessToken);
+    // if (accessToken && (isApiUrl || isApiPlatformUrl)) config.headers.Authorization = `Bearer ${accessToken}`;
+    console.log('idist axios::', config);
+    config.headers.Authorization = accessToken && `Bearer ${accessToken}`;
+    return config;
+  },
   (error) => {
     console.log(error);
     return Promise.reject(error);
@@ -187,7 +199,8 @@ const getForum = (props) => _axios.get(`/forum/${props.id}`, { params: props?.pa
 const patchForum = (props) => _axios.patch(`/forum/${props.id}`, props?.data);
 const patchForumBannerImage = (props) => _axios.patch(`/forum/${props.id}/banner-image`, props?.data);
 const postForumPin = (props) => _axios.post(`/forum/${props.id}/pin`, props?.data);
-const postForumPost = (props) => _axios.post(`/forum/${props.id}/post`, props?.data);
+const postForumPost = (props) =>
+  _axios.post(`/forum/${props.id}/post`, props?.data, { headers: { Authorization: `Bearer ${accessToken}` } });
 const patchForumThumbnailImage = (props) => _axios.patch(`/forum/${props.id}/thumbnail-image`, props?.data);
 const postForumTitleCheck = (props) => _axios.post(`/forum/${props.id}/title/check`, props?.data);
 const postForumUnpin = (props) => _axios.post(`/forum/${props.id}/unpin`, props?.data);

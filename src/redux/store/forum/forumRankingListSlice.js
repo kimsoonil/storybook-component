@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = () => ({
-  list: [],
+  rankingList: [],
+  firstForumId: 1,
   message: '',
   error: '',
   isLoading: false
@@ -18,7 +19,9 @@ const forumRankingListSlice = createSlice({
       state.isLoading = true;
     },
     forumRankingListSuccess: (state, { payload }) => {
-      Object.assign(state, payload);
+      // Object.assign(state, payload);
+      state.rankingList = payload.data;
+      if (payload.data.length > 0) state.firstForumId = payload.data[0].id;
       state.isLoading = false;
     },
     forumRankingListFailure: (state, error) => {

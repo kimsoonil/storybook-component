@@ -15,7 +15,6 @@ const categoryListSlice = createSlice({
       state.isLoading = true;
     },
     categoryListSuccess: (state, { payload }) => {
-      console.log('category', payload);
       state.catList = payload.data;
       state.isLoading = false;
     },

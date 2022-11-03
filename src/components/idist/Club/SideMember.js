@@ -15,8 +15,14 @@ function SideMember() {
   useEffect(() => {
     dispatch(getclubProfilesInit({ id: clubId.data.id }));
   }, [dispatch]);
+  if (profile.message !== 'ok')
+    return (
+      <div className="root-center">
+        <Loader />
+      </div>
+    );
 
-  return (
+  return profile.data.length !== 0 ? (
     <div className="club-home-content side-member">
       <div className="flex-between">
         <div className="side-box-title">Member</div>
@@ -24,35 +30,36 @@ function SideMember() {
           See All
         </div>
       </div>
-      {profile.message !== 'ok' ? (
-        <div className="root-center">
-          <Loader />
-        </div>
-      ) : (
-        <div className="side-member-list">
-          {profile.data.map((members, index) => {
-            return (
-              <div
-                className="side-member-list-item flex-center"
-                key={index}
-                onClick={() => navigate(`/club/${clubId.data.id}/memberProfile/${members.id}`)}
-              >
-                <div className="side-member-list-img">
-                  <img
-                    src={
-                      members.user.profile_image_url
-                        ? members.user.profile_image_url
-                        : require('images/main/temporary-profile.png')
-                    }
-                  />
-                </div>
-                <div className="side-member-list-name">{members.user.username}</div>
+
+      <div className="side-member-list">
+        {profile.data.map((members, index) => {
+          return (
+            <div
+              className="side-member-list-item flex-center"
+              key={index}
+              onClick={() => navigate(`/club/${clubId.data.id}/memberProfile/${members.id}`)}
+            >
+              <div className="side-member-list-img">
+                <img
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null; // prevents looping
+                    currentTarget.src = require('images/main/temporary-profile.png');
+                  }}
+                  src={
+                    members?.profile?.user?.profile_image_url
+                      ? members?.profile?.user?.profile_image_url
+                      : require('images/main/temporary-profile.png')
+                  }
+                />
               </div>
-            );
-          })}
-        </div>
-      )}
+              <div className="side-member-list-name">{members?.user?.username}</div>
+            </div>
+          );
+        })}
+      </div>
     </div>
+  ) : (
+    <div className="club-content-nodata"></div>
   );
 }
 

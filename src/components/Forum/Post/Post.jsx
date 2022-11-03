@@ -7,6 +7,7 @@ import SideImgBanner from 'components/Forum/SideBanner/SideImgBanner';
 import HistoryBanner from 'components/Forum/SideBanner/HistoryBanner';
 import ForumListBanner from 'components/Forum/SideBanner/ForumCategoryBanner';
 import Top5Forums from 'components/Forum/SideBanner/Top5Forums';
+import WriteBtn from 'components/Forum/SideBanner/WriteBtn';
 
 function Post() {
   return (
@@ -18,11 +19,7 @@ function Post() {
           <div className="main_div blank">
             <div className="con_div">Post</div>
             <div className="right_div">
-              <div>
-                <button type="button" className="btn writing">
-                  <span>Writing</span>
-                </button>
-              </div>
+              <WriteBtn />
               <SideImgBanner />
               <HistoryBanner />
               <ForumListBanner />

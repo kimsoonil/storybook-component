@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { reqLogIn } from 'redux/store/common/logInSlice';
 // // import { showPopup, hidePopup } from 'redux/store/popupSlice';
-import { encryptCode } from 'util/common';
 import { useNavigate } from 'react-router-dom';
 import ReCapcha from 'components/common/ReCapcha';
 import { getStorage, setStorage } from 'util/storage';
@@ -46,9 +45,10 @@ function LogIn() {
   const { t } = useTranslation();
 
   const onLogIn = async () => {
-    const userInfo = { username: getValues('email'), password: encryptCode(getValues('password')) };
+    const userInfo = { username: getValues('email'), password: getValues('password') };
     if (loginFailCnt >= LOGIN_FAIL_COUNT && !isCapcha) {
-      setError('verifyCapcha', { type: 'custom', message: t('validation.recapcha') });
+      // setError('verifyCapcha', { type: 'custom', message: t('validation.recapcha') });
+      setError('verifyCapcha', { type: 'custom', message: 'Please verify security.' });
       return;
     }
     if (
@@ -66,7 +66,8 @@ function LogIn() {
   const onValidation = async () => {
     await trigger(['email', 'password']);
     if (loginFailCnt >= LOGIN_FAIL_COUNT && !isCapcha) {
-      setError('verifyCapcha', { type: 'custom', message: t('validation.recapcha') });
+      // setError('verifyCapcha', { type: 'custom', message: t('validation.recapcha') });
+      setError('verifyCapcha', { type: 'custom', message: 'Please verify security.' });
     }
   };
 
@@ -133,7 +134,8 @@ function LogIn() {
                       onClick={() => setAutoLogin(!isAutoLogin)}
                     />
                     <label htmlFor="autoLogin" className="checkbox">
-                      <span>{t('label.staylogin')}</span>
+                      {/* <span>{t('label.staylogin')}</span> */}
+                      <span>Stay signed in</span>
                     </label>
                   </span>
                 </div>

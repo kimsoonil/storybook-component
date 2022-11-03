@@ -19,13 +19,16 @@
     background:$main_color;
     border:1px solid $main_active;
     color:$white_color;
-    @include eng_font(medium);
+    @include eng_font(normal);
     &:hover {
       background:$main_active;
     }
     &:active {
       background:$main_active;
       border:1px solid #6D09c3;
+    }
+    .email {
+      @include eng_font(semibold);
     }
   }
   &.secondary {
@@ -206,41 +209,23 @@
   }
   &.btn_small_xs {
     @include eng_font(normal);
-    padding:4px 6px 4px 24px;
+    padding:4px 6px;
     font-size:$font_base - 1px;
     color:$title_text;
     background:$gray_color06;
     border:1px solid $gray_color03;
     border-radius:4px;
     position: relative;
-    &:before {
-      @include content;
-      position:absolute;
-      width:16px;
-      height:16px;
-      left:8px;
-      top:6px;
-      background:url('#{$img_root_path}/ico/ic_check_sm_bk.png') no-repeat center top / 16px 16px;
-    }
   }
   &.btn_small_sm {
     @include eng_font(normal);
-    padding:6px 8px 6px 28px;
+    padding:4px 6px;
     font-size:$font_base - 1px;
     color:$title_text;
     background:$gray_color06;
     border:1px solid $gray_color03;
     border-radius:4px;
     position: relative;
-    &:before {
-      @include content;
-      position:absolute;
-      width:16px;
-      height:16px;
-      left:8px;
-      top:8px;
-      background:url('#{$img_root_path}/ico/ic_check_sm_bk.png') no-repeat center top / 16px 16px;
-    }
   }
   &:is(.btn_small_xs, .btn_small_sm) {
     &:hover {
@@ -251,6 +236,18 @@
     }
     &:disabled {
       opacity: 0.3;
+    }
+  }
+  &.check {
+    padding-left:24px;
+    &:before {
+      @include content;
+      position:absolute;
+      width:16px;
+      height:16px;
+      left:8px;
+      top:6px;
+      background:url('#{$img_root_path}/ico/ic_check_sm_bk.png') no-repeat center top / 16px 16px;
     }
   }
   &.view {
@@ -573,6 +570,11 @@
 .page_btn_wrap {
   text-align: center;
   width:100%;
+  &.flex {
+    display:inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
   &.between {
     display:flex;
     justify-content: space-between;

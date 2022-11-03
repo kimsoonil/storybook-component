@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+  .mini_profile_popup {display:block; position:relative; top:0; left:0;}
+  .mini_profile_popup + .mini_profile_popup {margin-left:30px;}
+  .profile_group {clear:both; margin:100px auto 0; width:1300px;}
+  .profile_group > div {float: left;}
+  </style>
+</head>
+<body>
+<div class="profile_group">
+  <!-- 신규유저(기본형태) -->
+  <div class="mini_profile_popup">
+    <div class="mini_profile_top">
+      <button type="button" class="btn_logout">
+        <span class="a11y">로그아웃</span>
+      </button>
+    </div>
+    <div class="mini_profile_con">
+      <div class="mini_profile_photo default">
+        <div class="profile_photo_div"><img src="../../img/profile/user.png"></div>
+      </div>
+      <div class="mini_profile_name">
+        <span class="nick">fsf23fswd</span>
+        <span class="num">#U34TY</span>
+        <div class="status_group">
+          <div class="status on open_tip"></div>
+          <div class="tooltip top">
+            <span>Away</span>
+          </div>
+        </div>
+      </div>
+      <div class="mini_profile_info default">-</div>
+
+      <!-- "0"일때는 hover 효과 없게 해주세요 -->
+      <ul class="mini_profile_total">
+        <li>
+          <dl>
+            <dt>0</dt>
+            <dd>Friends</dd>
+          </dl>
+        </li>
+        <li>
+          <dl>
+            <dt>0</dt>
+            <dd>Heart</dd>
+          </dl>
+        </li>
+        <li>
+          <dl>
+            <dt>0</dt>
+            <dd>Respect</dd>
+          </dl>
+        </li>
+      </ul>
+      <textarea class="mini_profile_textarea" placeholder="No registered introduction."></textarea>
+      <div class="mini_profile_note default">
+        <span>Click to add a note!</span>
+      </div>
+      <div class="mini_profile_btn">
+        <div class="btn_tooltip_group">
+          <button type="button" class="friend open_tip">
+            <span>Friend</span>
+          </button>
+          <div class="tooltip top">
+            <span>Unfriend</span>
+          </div>
+        </div>
+        <button type="button" class="msg">
+          <span>Message</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 신규유저(본인용) -->
+  <div class="mini_profile_popup">
+    <div class="mini_profile_top">
+      <button type="button" class="btn_logout">
+        <span class="a11y">로그아웃</span>
+      </button>
+    </div>
+    <div class="mini_profile_con">
+      <div class="mini_profile_photo default">
+        <div class="profile_photo_div"><img src="../../img/profile/user.png"></div>
+        <button class="forum_logo setting"></button>
+      </div>
+      <div class="mini_profile_name">
+        <span class="nick">fsf23fswd</span>
+        <span class="num">#U34TY</span>
+        <div class="status_group">
+          <button class="status on open_tip">
+            <span class="a11y">Online</span>
+          </button>
+          <div class="tooltip top">
+            <span>Online</span>
+          </div>
+        </div>
+        <ul class="status_list">
+          <li class="select">
+            <button type="button" class="status_select on">
+              <span>Online</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="status_select dis">
+              <span>Do not disturb</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="status_select away">
+              <span>Away</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="status_select off">
+              <span>Offline</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="status_select game">
+              <span>Gaming</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="status_select auto">
+              <span>Automatically</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <button class="mini_profile_info default">-</button>
+      <!-- 프로필 메세지 버튼 클릭 시 바로 input으로 바뀌면서 자동포커스 -->
+      <!--
+      <div class="form_wrap profile">
+        <span class="form_cell form_input input_sm">
+          <input type="text" value="I’ve been waiting ages!">
+          <button class="btn_reset">
+            <span class="a11y">삭제</span>
+          </button>
+        </span>
+      </div>
+      -->
+      <div class="mini_profile_in">
+        <span class="ico_in music"></span>
+        <span class="ico_in dog"></span>
+      </div>
+      <ul class="mini_profile_total">
+        <li>
+          <dl>
+            <dt>0</dt>
+            <dd>Friends</dd>
+          </dl>
+        </li>
+        <li>
+          <dl>
+            <dt>0</dt>
+            <dd>Heart</dd>
+          </dl>
+        </li>
+        <li>
+          <dl>
+            <dt>0</dt>
+            <dd>Respect</dd>
+          </dl>
+        </li>
+      </ul>
+      <textarea class="mini_profile_textarea" placeholder="No registered introduction."></textarea>
+      <div class="mini_profile_btn">
+        <button type="button" class="home">
+          <span>My Home</span>
+        </button>
+        <button type="button" class="msg acc">
+          <span>Account</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 완성형 -->
+  <div class="mini_profile_popup">
+    <div class="mini_profile_top">
+      <div class="user_badge_area">
+        <span class="user_badge ex2"></span>
+        <span class="user_badge ex3"></span>
+        <span class="user_badge ex1"></span>
+        <span class="user_badge ex4"></span>
+      </div>
+      <img src="../../img/com/profile_top.jpg">
+      <button type="button" class="btn_setting">
+        <span class="a11y">설정</span>
+      </button>
+      <button type="button" class="btn_logout">
+        <span class="a11y">로그아웃</span>
+      </button>
+    </div>
+    <div class="mini_profile_con">
+      <div class="mini_profile_photo">
+        <div class="profile_photo_div"><img src="../../img/com/profile.jpg"></div>
+        <div class="forum_logo"><img src="../../img/com/logo.jpg"></div>
+      </div>
+      <div class="mini_profile_name">
+        <span class="nick">ONCE:Master</span>
+        <span class="num">#U34TY</span>
+        <span class="status on"></span>
+      </div>
+      <div class="mini_profile_info">I’ve been waiting ages!</div>
+      <div class="mini_profile_in">
+        <span class="ico_in music"></span>
+        <span class="ico_in dog"></span>
+        <span class="ico_in swim"></span>
+        <span class="ico_in wine"></span>
+      </div>
+      <ul class="mini_profile_total">
+        <li>
+          <dl>
+            <dt>458</dt>
+            <dd>Friends</dd>
+          </dl>
+        </li>
+        <li>
+          <dl>
+            <dt>780</dt>
+            <dd>Heart</dd>
+          </dl>
+        </li>
+        <li>
+          <dl>
+            <dt>168</dt>
+            <dd>Respect</dd>
+          </dl>
+        </li>
+      </ul>
+      <textarea class="mini_profile_textarea">Hi! I’m master of TWICE’s official fan club ONCE. I like to use Korean, English, and Japanese and travel.. to various countries.Hi! I’m master of TWICE’s official fan club ONCE. I like to use Korean, English, and Japanese and travel.. to various countries.</textarea>
+      <div class="mini_profile_friends">
+        <div class="friends_img">
+          <img src="../../img/com/user thumb.png" class="img01">
+          <img src="../../img/com/user thumb.png" class="img02">
+          <img src="../../img/com/user thumb.png" class="img03">
+          <img src="../../img/com/user thumb.png" class="img04">
+          <img src="../../img/com/user thumb.png" class="img05">
+          <img src="../../img/com/user thumb.png" class="img06">
+        </div>
+        <div class="friends_num">Mutual Friends by <span>28 others</span></div>
+      </div>
+      <div class="mini_profile_note">
+        <span>Twice Fan, ONCE’s Master</span>
+      </div>
+      <div class="mini_profile_btn">
+        <button type="button" class="follow">
+          <span>Add Friend</span>
+        </button>
+        <button type="button" class="msg">
+          <span>Message</span>
+        </button>
+      </div>
+
+      <!-- 채팅프로필에 나옴 -->
+      <div class="option">
+        <button type="button" class="btn button_sm more">
+          <span>More Options</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 채팅용 옵션 프로필 -->
+  <div class="mini_profile_popup">
+    <div class="mini_profile_top">
+      <div class="user_badge_area">
+        <span class="user_badge ex2"></span>
+        <span class="user_badge ex3"></span>
+        <span class="user_badge ex1"></span>
+        <span class="user_badge ex4"></span>
+      </div>
+      <img src="../../img/com/profile_top.jpg">
+      <button type="button" class="btn_setting">
+        <span class="a11y">설정</span>
+      </button>
+      <button type="button" class="btn_logout">
+        <span class="a11y">로그아웃</span>
+      </button>
+    </div>
+    <div class="mini_profile_con">
+      <div class="mini_profile_photo">
+        <div class="profile_photo_div"><img src="../../img/com/profile.jpg"></div>
+        <div class="forum_logo"><img src="../../img/com/logo.jpg"></div>
+      </div>
+      <div class="mini_profile_name">
+        <span class="nick">ONCE:Master</span>
+        <span class="num">#U34TY</span>
+        <span class="status on"></span>
+      </div>
+      <div class="mini_profile_info">I’ve been waiting ages!</div>
+      <div class="mini_profile_in">
+        <span class="ico_in music"></span>
+        <span class="ico_in dog"></span>
+        <span class="ico_in swim"></span>
+        <span class="ico_in wine"></span>
+      </div>
+      <ul class="mini_profile_total">
+        <li>
+          <dl>
+            <dt>458</dt>
+            <dd>Friends</dd>
+          </dl>
+        </li>
+        <li>
+          <dl>
+            <dt>780</dt>
+            <dd>Heart</dd>
+          </dl>
+        </li>
+        <li>
+          <dl>
+            <dt>168</dt>
+            <dd>Respect</dd>
+          </dl>
+        </li>
+      </ul>
+      <textarea class="mini_profile_textarea">Hi! I’m master of TWICE’s official fan club ONCE. I like to use Korean, English, and Japanese and travel.. to various countries.Hi! I’m master of TWICE’s official fan club ONCE. I like to use Korean, English, and Japanese and travel.. to various countries.</textarea>
+      <div class="mini_profile_friends">
+        <div class="friends_img">
+          <img src="../../img/com/user thumb.png" class="img01">
+          <img src="../../img/com/user thumb.png" class="img02">
+          <img src="../../img/com/user thumb.png" class="img03">
+          <img src="../../img/com/user thumb.png" class="img04">
+          <img src="../../img/com/user thumb.png" class="img05">
+          <img src="../../img/com/user thumb.png" class="img06">
+        </div>
+        <div class="friends_num">Mutual Friends by <span>28 others</span></div>
+      </div>
+      <div class="mini_profile_note">
+        <span>Twice Fan, ONCE’s Master</span>
+      </div>
+      <div class="mini_profile_btn">
+        <button type="button" class="friend none">
+          <span>Cancel Request</span>
+        </button>
+        <button type="button" class="msg">
+          <span>Message</span>
+        </button>
+      </div>
+
+      <!-- 채팅프로필에 나옴 -->
+      <div class="option">
+        <button type="button" class="btn button_sm more">
+          <span>Fewer Options</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

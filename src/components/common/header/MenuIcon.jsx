@@ -2,10 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
-function MenuIcon({ name, path, leftMenuArr }) {
+function MenuIcon({ name, path }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const [menu, setSelectMenu] = useState('HOME');
+  const [menu, setSelectMenu] = useState('');
 
   const onClickIcon = useCallback(() => {
     setSelectMenu(name);
@@ -13,10 +13,14 @@ function MenuIcon({ name, path, leftMenuArr }) {
   }, [menu]);
 
   useEffect(() => {
-    const arrCurMenu = leftMenuArr?.filter((item) => item.path === location.pathname);
-    const curMenu = arrCurMenu.length === 0 ? 'HOME' : arrCurMenu[0].name;
+    // const arrCurMenu = leftMenuArr?.filter((item) => item.path === location.pathname);
+    // const curMenu = arrCurMenu.length === 0 ? 'HOME' : arrCurMenu[0].name;
+
+    const pathName = location.pathname.split('/')[1].toUpperCase();
+    const curMenu = pathName || 'HOME';
     setSelectMenu(curMenu);
   }, [menu]);
+
   return (
     <li className={name.toLowerCase()}>
       <button

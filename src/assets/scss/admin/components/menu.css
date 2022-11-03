@@ -1,0 +1,33 @@
+.jnav {
+  display: flex;
+  flex-direction: row;
+  width: 1280px;
+  margin: 0 auto;
+  gap: 32px;
+  height: 60px;
+  box-sizing: border-box;
+}
+.jnav-menu {
+  display: flex;
+  flex-direction: column;
+  line-height: 20px;
+  text-decoration: none;
+  color: #a7a7a7;
+  justify-content: center;
+}
+.jnav-menu:active {
+  display: flex;
+  color: #9013fe;
+}
+.jnav-menu:hover {
+  display: flex;
+  color: #545454;
+}
+.jnav-menu-active {
+  color: #9013fe;
+  border-bottom: 4px solid #9013fe;
+}
+.jnav-submenu {
+  width: 1280px;
+  margin: 0 auto;
+}/*# sourceMappingURL=menu.css.map */

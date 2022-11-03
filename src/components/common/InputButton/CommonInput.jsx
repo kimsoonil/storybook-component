@@ -36,13 +36,20 @@ function CommonInput({ isFocus, setIsFocus, errors, inputVal, placeholder, regis
   }, [isFocus]);
   return (
     <div
+      // className={classNames(
+      //   'form_wrap',
+      //   {
+      //     msg: errors || (!errors && inputVal)
+      //   },
+      //   { error: errors },
+      //   { success: !errors && inputVal }
+      // )}
       className={classNames(
         'form_wrap',
         {
           msg: errors || (!errors && inputVal)
         },
-        { error: errors },
-        { success: !errors && inputVal }
+        { error: errors }
       )}
       onBlur={() => setIsFocus(false)}
       onFocus={() => setIsFocus(true)}

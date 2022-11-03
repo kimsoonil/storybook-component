@@ -1,4 +1,5 @@
-/* eslint-disable */
+/* eslint-disable react/jsx-props-no-spreading */
+
 import React, { useCallback, useMemo, useState } from 'react';
 import 'assets/scss/admin/boards.scss';
 import { Draggable } from 'react-beautiful-dnd';
@@ -11,9 +12,15 @@ import {
   setInfo,
   switchActivateBoardGroupInit
 } from 'redux/idistStore/admin/boardAdminSlice';
-import JDropDown from '../JDropDown';
-import { TextInput } from '../TextInput';
+import selectArrowOpen from 'images/admin/ic-select-arrow-open.svg';
+import selectArrowClose from 'images/admin/ic-select-arrow-close.svg';
+import selectArrowOpenDisabled from 'images/admin/ic-select-arrow-open-disabled.svg';
+import selectArrowCloseDisabled from 'images/admin/ic-select-arrow-close-disabled.svg';
+import moreOptionImg from 'images/admin/board/ic-more.svg';
+import addImg from 'images/admin/board/ic-plus-fill.svg';
 import BoardList from './BoardList';
+import { TextInput } from '../TextInput';
+import JDropDown from '../JDropDown';
 
 const rootClassName = 'admin-boards-sidebar-boardGroup';
 
@@ -38,19 +45,18 @@ function BoardGroupItem({
   const [anchorEl, setAnchorEl] = useState(null);
   const info = useSelector((state) => state.boardAdmin.info);
 
-  const extendImageSrc = useMemo(
-    () =>
-      boardGroup.isActive
-        ? isExtended
-          ? require('images/admin/ic-select-arrow-open.svg').default
-          : require('images/admin/ic-select-arrow-close.svg').default
-        : isExtended
-        ? require('images/admin/ic-select-arrow-open-disabled.svg').default
-        : require('images/admin/ic-select-arrow-close-disabled.svg').default,
-    [isExtended, boardGroup.isActive]
-  );
-  const moreOptionImg = useMemo(() => require('images/admin/board/ic-more.svg').default, []);
-  const addImg = useMemo(() => require('images/admin/board/ic-plus-fill.svg').default, []);
+  const extendImageSrc = useMemo(() => {
+    if (boardGroup.isActive) {
+      if (isExtended) {
+        return selectArrowOpen;
+      }
+      return selectArrowClose;
+    }
+    if (isExtended) {
+      return selectArrowOpenDisabled;
+    }
+    return selectArrowCloseDisabled;
+  }, [(isExtended, boardGroup.isActive)]);
 
   const isDefault = useMemo(() => boardGroup.type === boardType.DEFAULT, []);
   // const isMoreOptionActive = useMemo(() => moreOptionState?.group === boardGroup.id, [moreOptionState]);
@@ -70,6 +76,11 @@ function BoardGroupItem({
     e?.stopPropagation();
     setAnchorEl(e.currentTarget);
     setMoreOptionState({ groupId: boardGroup.id });
+  }, []);
+
+  const onCloseOption = useCallback(() => {
+    setAnchorEl(null);
+    setMoreOptionState(null);
   }, []);
 
   const onClickRename = useCallback(() => {
@@ -105,25 +116,21 @@ function BoardGroupItem({
     onCloseOption();
   }, [boardGroup.isActive]);
 
-  const onCloseOption = useCallback(() => {
-    setAnchorEl(null);
-    setMoreOptionState(null);
-  }, []);
-
-  const moreOptionList = useMemo(
-    () =>
-      boardGroup?.type === boardType.DEFAULT
-        ? []
-        : boardGroup?.type === boardType.MEDIA
-        ? [{ label: 'menu2', onClick: onClickActivation }]
-        : boardGroup?.type === boardType.NORMAL
-        ? [
-            { label: 'Rename', onClick: onClickRename },
-            { label: boardGroup.isActive ? 'Deactivation' : 'Activation', onClick: onClickActivation }
-          ]
-        : [],
-    [onClickRename, onClickActivation, boardGroup.isActive]
-  );
+  const moreOptionList = useMemo(() => {
+    if (boardGroup?.type === boardType.DEFAULT) {
+      return [];
+    }
+    if (boardGroup?.type === boardType.MEDIA) {
+      return [{ label: 'menu2', onClick: onClickActivation }];
+    }
+    if (boardGroup?.type === boardType.NORMAL) {
+      return [
+        { label: 'Rename', onClick: onClickRename },
+        { label: boardGroup.isActive ? 'Deactivation' : 'Activation', onClick: onClickActivation }
+      ];
+    }
+    return [];
+  }, [onClickRename, onClickActivation, boardGroup.isActive]);
 
   const onClickAddButton = useCallback(
     (e) => {
@@ -132,7 +139,7 @@ function BoardGroupItem({
         return;
       }
       if (addState) {
-        confirm('다른 작업 중입니다.');
+        // confirm('다른 작업 중입니다.');
         return;
       }
       setTitle('');
@@ -174,16 +181,38 @@ function BoardGroupItem({
               className={`${rootClassName} ${isSelected && `${rootClassName}-selected`} `}
               style={snapshot.isDragging ? { backgroundColor: '#f8f8f8' } : {}}
               onClick={onClickGroup}
+              onKeyDown={(e) => (e.key === 'Enter' ? onClickGroup() : {})}
+              role="button"
+              tabIndex="0"
             >
-              <img className="extend-image" src={extendImageSrc} onClick={onClickExtend} />
+              <img
+                className="extend-image"
+                src={extendImageSrc}
+                onClick={onClickExtend}
+                onKeyDown={(e) => (e.key === 'Enter' ? onClickExtend() : {})}
+                alt="extend"
+                role="presentation"
+              />
               <div className={`${rootClassName}-title ${!boardGroup.isActive && `${rootClassName}-title-disabled`}`}>
                 {boardGroup.title}
               </div>
               <div className={`${rootClassName}-option ${isMoreOptionActive && `${rootClassName}-option-active`}`}>
                 {!isDefault && (
                   <>
-                    <img src={moreOptionImg} onClick={onClickMoreOption} />
-                    <img src={addImg} onClick={onClickAddButton} />
+                    <img
+                      src={moreOptionImg}
+                      onClick={onClickMoreOption}
+                      onKeyDown={(e) => (e.key === 'Enter' ? onClickMoreOption() : {})}
+                      alt="more"
+                      role="presentation"
+                    />
+                    <img
+                      src={addImg}
+                      onClick={onClickAddButton}
+                      onKeyDown={(e) => (e.key === 'Enter' ? onClickExtend() : {})}
+                      alt="add"
+                      role="presentation"
+                    />
                   </>
                 )}
               </div>

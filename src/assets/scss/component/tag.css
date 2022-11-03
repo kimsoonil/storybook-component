@@ -1,0 +1,32 @@
+.tag-root {
+  display: flex;
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  padding: 4px 10px;
+  color: #000000;
+  line-height: 1.43;
+  letter-spacing: -0.28px;
+  font-size: 14px;
+  background-color: #eeeeee;
+  border-radius: 14px;
+  box-sizing: border-box;
+  border: 1px solid #eeeeee;
+}
+.tag-root:hover {
+  border-color: #bdbdbd;
+}
+.tag-root:hover .deletable {
+  display: flex;
+}
+.tag-root .deletable {
+  display: none;
+  margin-left: 2px;
+  color: #bdbdbd;
+}
+.tag-root .deletable:hover {
+  color: #000000;
+}/*# sourceMappingURL=tag.css.map */

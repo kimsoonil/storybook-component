@@ -1,5 +1,4 @@
-/* eslint-disable */
-
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import 'assets/scss/admin/create.scss';
@@ -22,6 +21,7 @@ import AdminHeader from 'views/Admin/AdminHeader';
 import Header from 'components/common/header/Header';
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import { Loader } from 'components/idist/Loader';
+import nonSelectedImage from 'images/admin/non-selected-image.svg';
 
 const VD = {
   header: {
@@ -115,12 +115,12 @@ function Create() {
   const [nameValid, setNameValid] = useState({ status: loadState.NONE, errorText: ' ' });
 
   const checkName = (e) => {
-    const _name = e.target.value;
-    if (_name === '') {
+    const targetName = e.target.value;
+    if (targetName === '') {
       setNameInputState(IVD.error);
       setNameValid({ status: loadState.ERROR, errorText: AVD.errorText.name.empty });
     } else {
-      dispatch(reqCheckClubName({ data: { title: _name } }));
+      dispatch(reqCheckClubName({ data: { title: targetName } }));
     }
   };
 
@@ -140,13 +140,13 @@ function Create() {
   const [addressInputState, setAddressInputState] = useState(IVD.blur);
   const [addressValid, setAddressValid] = useState({ status: loadState.NONE, errorText: ' ' });
   const checkAddress = (e) => {
-    const _address = e.target.value;
+    const targetAddress = e.target.value;
     // valid 로직
-    if (_address === '') {
+    if (targetAddress === '') {
       setAddressInputState(IVD.error);
       setAddressValid({ status: loadState.ERROR, errorText: AVD.errorText.address.empty });
     } else {
-      dispatch(reqCheckClubAddress({ data: { address: _address } }));
+      dispatch(reqCheckClubAddress({ data: { address: targetAddress } }));
     }
   };
   useEffect(() => {
@@ -163,8 +163,8 @@ function Create() {
   const [categoryOption, setCategoryOption] = useState('');
   const [categoryInputState, setCategoryInputState] = useState(IVD.blur);
   const [categoryValid, setCategoryValid] = useState({ status: loadState.NONE, errorText: '' });
-  const checkCategory = (categoryOption) => {
-    if (!categoryOption) {
+  const checkCategory = (option) => {
+    if (!option) {
       setCategoryInputState(IVD.error);
       setCategoryValid({ status: loadState.ERROR, errorText: AVD.errorText.category.empty });
     } else {
@@ -386,7 +386,7 @@ function Create() {
                       <FilePicker setData={setProfileImage} maxSize={{ value: 10, unit: 'mb' }}>
                         <div className={`${rootClassName}-input-profile`} style={profileStyle}>
                           <div className={`${rootClassName}-input-profile-covered`}>
-                            <img src={require('images/admin/non-selected-image.svg').default} />
+                            <img src={nonSelectedImage} alt="non-selected" />
                           </div>
                         </div>
                       </FilePicker>
@@ -406,7 +406,7 @@ function Create() {
                     <FilePicker setData={setBannerImage} maxSize={{ value: 20, unit: 'mb' }}>
                       <div className={`${rootClassName}-input-banner`} style={bannerStyle}>
                         <div className={`${rootClassName}-input-banner-covered`}>
-                          <img src={require('images/admin/non-selected-image.svg').default} />
+                          <img src={nonSelectedImage} alt="non-selected" />
                         </div>
                       </div>
                     </FilePicker>
@@ -450,18 +450,21 @@ function Create() {
                   <div className={`${rootClassName}-input-contents`}>
                     <div className="tags-wrapper">
                       <div className="input-tags-wrapper">
-                        {tags.map((item, index) => (
-                          <button
-                            className="input-tags-button"
-                            key={index}
-                            onClick={() => {
-                              setTags((prev) => prev.filter((_item, _index) => index !== _index));
-                            }}
-                          >
-                            {`# ${item}`}
-                            <div className="input-tags-button-hover">Delete</div>
-                          </button>
-                        ))}
+                        {tags.map((item, index) => {
+                          const key = `tags${index}`;
+                          return (
+                            <button
+                              className="input-tags-button"
+                              key={key}
+                              onClick={() => {
+                                setTags((prev) => prev.filter((_item, _index) => index !== _index));
+                              }}
+                            >
+                              {`# ${item}`}
+                              <div className="input-tags-button-hover">Delete</div>
+                            </button>
+                          );
+                        })}
                         {tags.length < 8 && (
                           <input
                             className="input-tags-text"
@@ -488,14 +491,26 @@ function Create() {
                     </div>
                     <div style={{ gap: '20px' }}>
                       <RadioGroup row name="use-radio-group" defaultValue="Yes">
-                        <div style={{ width: '400px', cursor: 'pointer' }} onClick={() => setAutoApproval('Yes')}>
+                        <div
+                          style={{ width: '400px', cursor: 'pointer' }}
+                          onClick={() => setAutoApproval('Yes')}
+                          tabIndex={0}
+                          onKeyDown={(e) => (e.key === 'Enter' ? setAutoApproval('Yes') : {})}
+                          role="button"
+                        >
                           <FormControlLabel {...controlProps('Yes')} control={<Radio {...radioProps('Yes')} />} />
                           <div style={{ fontWeight: 500, fontSize: '13px', lineHeight: '22px', color: '#121212' }}>
                             {AVD.autoApproval.yesText}
                           </div>
                         </div>
 
-                        <div style={{ cursor: 'pointer' }} onClick={() => setAutoApproval('No')}>
+                        <div
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => setAutoApproval('No')}
+                          tabIndex={0}
+                          onKeyDown={(e) => (e.key === 'Enter' ? setAutoApproval('No') : {})}
+                          role="button"
+                        >
                           <FormControlLabel {...controlProps('No')} control={<Radio {...radioProps('No')} />} />
                           <div style={{ fontWeight: 500, fontSize: '13px', lineHeight: '22px', color: '#121212' }}>
                             {AVD.autoApproval.noText}

@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { reset as authEmailReset, reqAuthEmail } from 'redux/store/common/authEmailSlice';
@@ -21,7 +21,7 @@ import {
 
 function SuccessAuthForm({ isConfirm, email }) {
   return (
-    <div className={classNames('form_wrap', 'msg', 'btn_set_under', 'success', { hidden: !isConfirm })}>
+    <div className={classNames('form_wrap', 'msg', 'success', { hidden: !isConfirm })}>
       <span className="form_cell form_input input_md">
         <input type="text" title="input default" id="input_text" aria-invalid="false" defaultValue={email} />
         <div className="dot success">
@@ -58,8 +58,8 @@ function AuthConfirm({ editType = USER_INFO_SIGNUP, verifyType, formWrapClass })
   const watchCode = useWatch({ control, name: 'code', defaultValue: '' });
   const watchEmail = useWatch({ control, name: reqType, defaultValue: '' });
 
-  const { t } = useTranslation();
-  const authCodeText = 'Auth Code';
+  // const { t } = useTranslation();
+  // const authCodeText = 'Auth Code';
 
   const onAuthCode = useCallback(() => {
     dispatch(
@@ -78,7 +78,6 @@ function AuthConfirm({ editType = USER_INFO_SIGNUP, verifyType, formWrapClass })
   }, []);
 
   const onAuthEmail = () => {
-    console.log('reStartCountDown', reStartCountDown);
     const contents = `The verification email has been ${reStartCountDown > 0 ? 're-' : ''}sent.`;
 
     dispatch(showPopup({ type: POPUP_TYPE_LOGIN_ALERT, contents }));
@@ -140,16 +139,7 @@ function AuthConfirm({ editType = USER_INFO_SIGNUP, verifyType, formWrapClass })
   //   }, [watchPhoneNumber]);
   return (
     <>
-      <div
-        className={classNames(
-          'form_wrap',
-          'msg',
-          'btn_set',
-          'success',
-          { account: formWrapClass },
-          { hidden: isConfirm }
-        )}
-      >
+      <div className={classNames('form_wrap', 'msg', 'btn_set', { account: formWrapClass }, { hidden: isConfirm })}>
         <span className={classNames('form_cell form_input input_md', { default: !formWrapClass }, 'between')}>
           <div className="input_set">
             <input
@@ -158,10 +148,12 @@ function AuthConfirm({ editType = USER_INFO_SIGNUP, verifyType, formWrapClass })
               placeholder={placeHolder}
               aria-invalid={isSend}
               {...register(reqType, {
-                required: t('validation.require', { require: reqType }),
+                // required: t('validation.require', { require: reqType }),
+                required: `${reqType} is required`,
                 pattern: {
                   value: /\S+@\S+\.\S+/,
-                  message: t('validation.emailauth.email')
+                  // message: t('validation.emailauth.email')
+                  message: 'email format error'
                 }
               })}
               disabled={isSend || isConfirm || editType === USER_INFO_EDIT}
@@ -185,7 +177,8 @@ function AuthConfirm({ editType = USER_INFO_SIGNUP, verifyType, formWrapClass })
             }}
             disabled={!watchEmail || !isSendable}
           >
-            <span>{t('label.emailauth.auth')}</span>
+            {/* <span>{t('label.emailauth.auth')}</span> */}
+            <span>Authenticate</span>
           </button>
         </span>
         {errors.email && (
@@ -194,7 +187,7 @@ function AuthConfirm({ editType = USER_INFO_SIGNUP, verifyType, formWrapClass })
           </span>
         )}
       </div>
-      <div className={classNames('form_wrap', 'msg', 'btn_set', 'success', { hidden: !isSend || isConfirm })}>
+      <div className={classNames('form_wrap', 'msg', 'btn_set', { hidden: !isSend || isConfirm })}>
         <span className="form_cell form_input input_md between">
           <div className="input_set">
             <input
@@ -204,7 +197,8 @@ function AuthConfirm({ editType = USER_INFO_SIGNUP, verifyType, formWrapClass })
               placeholder="Auth Code"
               maxLength={AUTH_CODE_LENGTH}
               {...register('code', {
-                required: t('validation.require', { require: authCodeText })
+                // required: t('validation.require', { require: authCodeText })
+                required: 'Authcode is required'
               })}
               // disabled={!isSend}
             />

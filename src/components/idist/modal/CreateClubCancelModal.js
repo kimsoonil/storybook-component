@@ -6,7 +6,7 @@ import AdminModal from 'components/idist/modal/AdminModal';
 import { AVD } from 'views/Admin';
 import { hideModal } from 'redux/idistStore/admin/modalSlice';
 
-const CreateClubCancelModal = () => {
+function CreateClubCancelModal() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const visible = useSelector((state) => state.adminModal.createClubCancel?.visible);
@@ -17,6 +17,6 @@ const CreateClubCancelModal = () => {
   };
 
   return <AdminModal title={AVD.modalText.create} visible={visible} onClickSubmit={onClickSubmit} />;
-};
+}
 
 export default CreateClubCancelModal;

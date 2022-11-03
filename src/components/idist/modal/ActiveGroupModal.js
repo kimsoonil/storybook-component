@@ -1,17 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 import AdminModal from 'components/idist/modal/AdminModal';
-import { AVD } from 'views/Admin';
 import { hideModal } from 'redux/idistStore/admin/modalSlice';
-import { BVD } from 'views/Admin/Boards';
 import { getBoardGroupsInit } from 'redux/idistStore/admin/boardAdminSlice';
 import { getBoardGroupInit, patchBoardGroupInit } from 'redux/idistStore/boardGroupSlice';
 
-const ActiveGroupModal = () => {
+function ActiveGroupModal() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const visible = useSelector((state) => state.adminModal.activeGroup?.visible);
   const modalData = useSelector((state) => state.adminModal.activeGroup?.data);
 
@@ -31,7 +27,7 @@ const ActiveGroupModal = () => {
     dispatch(hideModal({ type: 'activeGroup' }));
   };
 
-  return <AdminModal title={'이런 모달 없나?'} visible={visible} onClickSubmit={onClickSubmit} />;
-};
+  return <AdminModal title="이런 모달 없나?" visible={visible} onClickSubmit={onClickSubmit} />;
+}
 
 export default ActiveGroupModal;

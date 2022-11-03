@@ -40,7 +40,8 @@ function PassWordChange({ email, phoneNumber }) {
         <AuthConfirm reqType={reqType} editType={USER_INFO_EDIT} />
         <PassWordInput isDisabled={isConfirm} setPwd={setPwd} email={email} phoneNumber={phoneNumber} />
         <button type="button" onClick={() => onChangePassWord()} disabled={!(isConfirm && pwd !== '') && 'disabled'}>
-          {t('label.emailauth.auth')}
+          {/* {t('label.emailauth.auth')} */}
+          Authenticate
         </button>
       </form>
     </FormProvider>

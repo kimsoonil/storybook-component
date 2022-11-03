@@ -7,14 +7,18 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = () => ({
   id: 0,
   title: '',
-  forum_category: 0,
+  forum_category: '',
   discription: '',
-  master_nickname: '',
   banner_image: '',
   thumbnail_image: '',
   forbidden_words: [],
   staffs: [],
   banned_users: [],
+  badge: [],
+  user: {
+    username: ''
+  },
+  is_pined: false,
   message: '',
   error: '',
   isLoading: false
@@ -31,18 +35,26 @@ const forumInfoSlice = createSlice({
       state.isLoading = true;
     },
     forumInfoSuccess: (state, { payload }) => {
-      console.log('forumInfoSuccess slice::', payload);
       Object.assign(state, payload.data);
-      Object.assign(state.forbidden_words, ['test1', 'test2', 'test3']);
+      // Object.assign(state.forbidden_words, ['test1', 'test2', 'test3']);
+      // 시연 후 삭제
+      for (let i = 0; i < 6; i += 1) {
+        state.badge.push(Math.floor(Math.random() * 2));
+      }
+      state.isLoading = false;
+    },
+    updateForumInfo: (state, { payload }) => {
+      if (payload.is_pined !== undefined) state.is_pined = payload.is_pined;
       state.isLoading = false;
     },
     forumInfoFailure: (state, error) => {
+      console.log('error:::', error);
       state.error = error.payload.message;
       state.isLoading = false;
     }
   }
 });
 
-export const { reset, reqForumInfo, forumInfoSuccess, forumInfoFailure } = forumInfoSlice.actions;
+export const { reset, reqForumInfo, forumInfoSuccess, updateForumInfo, forumInfoFailure } = forumInfoSlice.actions;
 
 export default forumInfoSlice.reducer;

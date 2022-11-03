@@ -1,17 +1,11 @@
 import React from 'react';
-import Header from './common/header/Header';
-import Footer from './common/footer/Footer';
+import { checkLogin } from 'util/common';
+import LoginMain from './LoginMain';
+import LogoutMain from './LogoutMain';
 
 function Main() {
-  return (
-    <div id="wrap">
-      <Header />
-      <div id="main">
-        <div id="container" />
-        <Footer />
-      </div>
-    </div>
-  );
+  const isLogin = checkLogin();
+  return <div>{isLogin ? <LogoutMain /> : <LoginMain />}</div>;
 }
 
 export default Main;

@@ -83,7 +83,7 @@ function MemberProfile() {
         />
       </div>
       <div className="item">
-        {clubId.data.profile ? <Profile userData={clubId.data.profile} type={'club'} /> : <Profile type={'logout'} />}
+        {clubId.data.profile ? <Profile userData={clubId.data} type={'club'} /> : <Profile type={'logout'} />}
 
         <div>
           <SideEvent />

@@ -23,7 +23,7 @@ function Notion(props) {
       </div>
     );
   }
-  return (
+  return noticePosts.data.length !== 0 ? (
     <div>
       <div className="club-home-content side-box notice">
         <div className="flex-between">
@@ -57,6 +57,8 @@ function Notion(props) {
         </div>
       </div>
     </div>
+  ) : (
+    <div className="club-content-nodata"></div>
   );
 }
 

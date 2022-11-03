@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,15 +8,19 @@ import Footer from 'components/common/footer/Footer';
 import ForumTop from 'components/Forum/ForumTop';
 import SideImgBanner from 'components/Forum/SideBanner/SideImgBanner';
 import HistoryBanner from 'components/Forum/SideBanner/HistoryBanner';
-import ForumListBanner from 'components/Forum/SideBanner/ForumListBanner';
+import ForumCategoryBanner from 'components/Forum/SideBanner/ForumCategoryBanner';
 import { reqForumInfo } from 'redux/store/forum/forumInfoSlice';
 import userThumb from 'html/img/com/user thumb.png';
+import WriteBtn from 'components/Forum/SideBanner/WriteBtn';
+import AllForum from 'components/Forum/AllForum/AllForum';
 
 function InitSetting() {
   const { id, title, forum_category, description, banner_image, thumbnail_image, forum_staffs, forbidden_words, bans } =
     useSelector((state) => ({
       ...state.forumInfo
     }));
+  const [isAllForum, setIsAllForum] = useState(false);
+  const [category, setCategory] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
@@ -36,13 +40,13 @@ function InitSetting() {
                 <div className="content_subtitle creat">
                   <h4 className="title creat">Settings</h4>
                   <div className="title_menu">
-                    <button type="button" className="btn button_md black" onClick={() => navigate(`/forum/auth/${id}`)}>
+                    <button type="button" className="btn button_md black" onClick={() => navigate(`/forum/${id}/auth`)}>
                       <span>Transfer of authority to Staff</span>
                     </button>
                     <button
                       type="button"
                       className="btn primary button_md edit"
-                      onClick={() => navigate(`/forum/edit/${id}`)}
+                      onClick={() => navigate(`/forum/${id}/edit`)}
                     >
                       <span>Edit a Forum</span>
                     </button>
@@ -118,13 +122,13 @@ function InitSetting() {
                     </div>
                     <div>
                       <ul className="staff_list">
-                        {forum_staffs?.map((nickname) => (
-                          <li>
+                        {forum_staffs?.map((item) => (
+                          <li key={item.id}>
                             <dl>
                               <dt>
-                                <img src={userThumb} alt="" />
+                                <img src={item.profile_image || userThumb} alt="" />
                               </dt>
-                              <dd>{nickname}</dd>
+                              <dd>{item.username}</dd>
                             </dl>
                           </li>
                         ))}
@@ -175,20 +179,17 @@ function InitSetting() {
             </div>
             {/* Right Banner Start */}
             <div className="right_div">
-              <div>
-                <button type="button" className="btn writing">
-                  <span>Writing</span>
-                </button>
-              </div>
+              <WriteBtn forumId={params.id} />
               <SideImgBanner />
-              <HistoryBanner />
-              <ForumListBanner />
+              <HistoryBanner setIsShow={setIsAllForum} setCategory={setCategory} />
+              <ForumCategoryBanner setIsShow={setIsAllForum} setCategory={setCategory} />
             </div>
             {/* Right Banner End */}
           </div>
         </div>
         <Footer />
       </div>
+      <AllForum isShow={isAllForum} setIsShow={setIsAllForum} category={category} />
     </div>
   );
 }

@@ -1,0 +1,164 @@
+.jg-button {
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  line-height: 1.47;
+  letter-spacing: -0.3px;
+  box-sizing: border-box;
+}
+
+.jg-button-contain-primary {
+  background-color: #9013fe;
+  border: 1px solid #7d0edf;
+  color: white;
+}
+.jg-button-contain-primary:hover {
+  background-color: #7d0edf;
+}
+.jg-button-contain-primary:active {
+  border: 2px solid #6b09c3;
+}
+.jg-button-contain-secondary {
+  background-color: #6563ff;
+  border: 1px solid #5752d0;
+  color: white;
+}
+.jg-button-contain-secondary:hover {
+  background-color: #5752d0;
+}
+.jg-button-contain-secondary:active {
+  border: 2px solid #423dbe;
+}
+.jg-button-contain-point {
+  background-color: #ff45a1;
+  border: 1px solid #ed348f;
+  color: white;
+}
+.jg-button-contain-point:hover {
+  background-color: #ed348f;
+}
+.jg-button-contain-point:active {
+  border: 2px solid #d31773;
+}
+.jg-button-contain-none {
+  background-color: #777777;
+  border: 1px solid #888;
+  color: white;
+}
+.jg-button-contain-none:hover {
+  background-color: #888;
+}
+.jg-button-contain-none:active {
+  border: 2px solid #777777;
+}
+.jg-button-contain-disabled {
+  border: none;
+  outline: none;
+  font-weight: normal;
+  background-color: #cdcdd1;
+  color: white;
+}
+.jg-button-contain-disabled:hover {
+  border: none;
+  outline: none;
+  font-weight: normal;
+  background-color: #cdcdd1;
+  color: white;
+  cursor: default;
+}
+
+.jg-button-outline-primary {
+  background-color: white;
+  border: 1px solid #7d0edf;
+  color: #9013fe;
+}
+.jg-button-outline-primary:hover {
+  background-color: #f8f8f8;
+}
+.jg-button-outline-primary:active {
+  background-color: #eeeeee;
+}
+.jg-button-outline-secondary {
+  background-color: white;
+  border: 1px solid #5752d0;
+  color: #6563ff;
+}
+.jg-button-outline-secondary:hover {
+  background-color: #f8f8f8;
+}
+.jg-button-outline-secondary:active {
+  background-color: #eeeeee;
+}
+.jg-button-outline-point {
+  background-color: white;
+  border: 1px solid #ed348f;
+  color: #ff45a1;
+}
+.jg-button-outline-point:hover {
+  background-color: #f8f8f8;
+}
+.jg-button-outline-point:active {
+  background-color: #eeeeee;
+}
+.jg-button-outline-none {
+  background-color: #f8f8f8;
+  border: 1px solid #bdbdbd;
+  color: #000000;
+}
+.jg-button-outline-none:hover {
+  background-color: #eeeeee;
+}
+.jg-button-outline-none:active {
+  background-color: #e0e0e0;
+}
+.jg-button-outline-disabled {
+  border: 1px solid #bdbdbd;
+  color: #bdbdbd;
+  background-color: #f8f8f8;
+  cursor: default;
+}
+.jg-button-outline-disabled:hover {
+  border: 1px solid #bdbdbd;
+  color: #bdbdbd;
+  background-color: #f8f8f8;
+}
+
+.jg-button-s {
+  height: 40px;
+  padding: 0 10px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  line-height: 1.71;
+  letter-spacing: -0.28px;
+}
+.jg-button-m {
+  height: 48px;
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 8px;
+  line-height: 1.47;
+  letter-spacing: -0.3px;
+}
+.jg-button-l {
+  height: 52px;
+  padding: 0 16px;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 10px;
+  line-height: 1.41;
+  letter-spacing: -0.34px;
+}
+.jg-button-xl {
+  height: 56px;
+  padding: 0 20px;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 12px;
+  line-height: 1.5;
+  letter-spacing: -0.4px;
+}/*# sourceMappingURL=jbutton.css.map */

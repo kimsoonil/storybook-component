@@ -1,21 +1,19 @@
-/* eslint-disable */
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useCallback, useMemo, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { boardPayload, boardType } from 'redux/idistApi/model';
 import { getBoardInit, renameBoardInit, switchActivateBoardInit } from 'redux/idistStore/admin/boardAdminSlice';
 import { IVD } from 'views/Admin';
+import moreOptionImg from 'images/admin/board/ic-more.svg';
 import JDropDown from '../JDropDown';
 import { TextInput } from '../TextInput';
 
 const rootClassName = 'admin-boards-sidebar-board';
 
-const BoardItem = ({
+function BoardItem({
   board,
   index,
-  addState,
-  setAddState,
   renameTitle,
   setRenameTitle,
   renameState,
@@ -23,13 +21,12 @@ const BoardItem = ({
   setTitle,
   moreOptionState,
   setMoreOptionState
-}) => {
+}) {
   const dispatch = useDispatch();
   const info = useSelector((state) => state.boardAdmin.info);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const moreOptionImg = useMemo(() => require('images/admin/board/ic-more.svg').default, []);
   const isMoreOptionActive = useMemo(() => moreOptionState?.boardId === board.id, [moreOptionState]);
   const isDefault = useMemo(() => board.type === boardType.DEFAULT, []);
   const isSelected = useMemo(() => info?.isBoard && info?.id === board.id, [info]);
@@ -42,6 +39,11 @@ const BoardItem = ({
     e?.stopPropagation();
     setAnchorEl(e.currentTarget);
     setMoreOptionState({ boardId: board.id });
+  }, []);
+
+  const onCloseOption = useCallback(() => {
+    setAnchorEl(null);
+    setMoreOptionState(null);
   }, []);
 
   const onClickRename = useCallback(() => {
@@ -75,22 +77,20 @@ const BoardItem = ({
     onCloseOption();
   }, [board.isActive]);
 
-  const onCloseOption = useCallback(() => {
-    setAnchorEl(null);
-    setMoreOptionState(null);
-  }, []);
-
   const moreOptionList = useMemo(() => {
-    return board?.type === boardType.DEFAULT
-      ? []
-      : board?.type === boardType.MEDIA
-      ? [{ label: board.isActive ? 'Deactivation' : 'Activation', onClick: onClickActivation }]
-      : board?.type === boardType.NORMAL
-      ? [
-          { label: 'Rename', onClick: onClickRename },
-          { label: board.isActive ? 'Deactivation' : 'Activation', onClick: onClickActivation }
-        ]
-      : [];
+    if (board?.type === boardType.DEFAULT) {
+      return [];
+    }
+    if (board?.type === boardType.MEDIA) {
+      return [{ label: board.isActive ? 'Deactivation' : 'Activation', onClick: onClickActivation }];
+    }
+    if (board?.type === boardType.NORMAL) {
+      return [
+        { label: 'Rename', onClick: onClickRename },
+        { label: board.isActive ? 'Deactivation' : 'Activation', onClick: onClickActivation }
+      ];
+    }
+    return [];
   }, [onClickRename, onClickActivation, board.isActive]);
 
   return (
@@ -112,13 +112,16 @@ const BoardItem = ({
               className={`${rootClassName} ${isSelected && `${rootClassName}-selected`} `}
               style={snapshot.isDragging ? { backgroundColor: '#f8f8f8' } : {}}
               onClick={onClickBoard}
+              onKeyDown={(e) => (e.key === 'Enter' ? onClickBoard(e) : {})}
+              role="button"
+              tabIndex="0"
             >
               <div className={`${rootClassName}-title  ${!board.isActive && `${rootClassName}-title-disabled`}  `}>
                 {board.title}
               </div>
               {!isDefault && (
                 <div className={`${rootClassName}-option ${isMoreOptionActive && `${rootClassName}-option-active`}`}>
-                  <img src={moreOptionImg} onClick={onClickMoreOption} />
+                  <img src={moreOptionImg} onClick={onClickMoreOption} alt="more" role="presentation" />
                 </div>
               )}
 
@@ -129,6 +132,6 @@ const BoardItem = ({
       )}
     </Draggable>
   );
-};
+}
 
 export default BoardItem;

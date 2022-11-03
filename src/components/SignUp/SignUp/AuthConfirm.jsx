@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { reset as authEmailReset, reqAuthEmail } from 'redux/store/common/authEmailSlice';
 import { reset as authPhoneReset, reqAuthPhoneNumber } from 'redux/store/common/authPhoneNumberSlice';
@@ -43,8 +43,8 @@ function AuthConfirm({ reqType = USER_INFO_EMAIL, editType = USER_INFO_SIGNUP })
     defaultValue: ''
   });
 
-  const { t } = useTranslation();
-  const authCodeText = 'Auth Code';
+  // const { t } = useTranslation();
+  // const authCodeText = 'Auth Code';
 
   const onResetCode = useCallback(() => {
     setValue('code', '');
@@ -113,16 +113,19 @@ function AuthConfirm({ reqType = USER_INFO_EMAIL, editType = USER_INFO_SIGNUP })
               placeholder={placeHolder}
               aria-invalid={isSend}
               {...register(reqType, {
-                required: t('validation.require', { require: reqType }),
+                // required: t('validation.require', { require: reqType }),
+                required: `${reqType} is required`,
                 pattern:
                   reqType === USER_INFO_EMAIL
                     ? {
                         value: /\S+@\S+\.\S+/,
-                        message: t('validation.emailauth.email')
+                        // message: t('validation.emailauth.email')
+                        message: 'email format error'
                       }
                     : {
                         value: /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/,
-                        message: t('validation.emailauth.phone')
+                        // message: t('validation.emailauth.phone')
+                        message: 'phone-number format error'
                       }
               })}
               disabled={isSend || isConfirm || editType === USER_INFO_EDIT}
@@ -136,7 +139,8 @@ function AuthConfirm({ reqType = USER_INFO_EMAIL, editType = USER_INFO_SIGNUP })
               }}
               disabled={(isSend || isConfirm) && 'disabled'}
             >
-              {t('label.emailauth.auth')}
+              {/* {t('label.emailauth.auth')} */}
+              Authenticate
             </button>
           </label>
           {errors[reqType] && <small role="alert">{errors[reqType].message}</small>}
@@ -152,7 +156,8 @@ function AuthConfirm({ reqType = USER_INFO_EMAIL, editType = USER_INFO_SIGNUP })
               placeholder="Auth Code"
               maxLength={AUTH_CODE_LENGTH}
               {...register('code', {
-                required: t('validation.require', { require: authCodeText })
+                // required: t('validation.require', { require: authCodeText })
+                required: 'Auth Code is required'
               })}
               // disabled={!isSend}
             />
@@ -174,7 +179,8 @@ function AuthConfirm({ reqType = USER_INFO_EMAIL, editType = USER_INFO_SIGNUP })
             }}
             disabled={watchCode?.length !== AUTH_CODE_LENGTH && 'disabled'}
           >
-            {t('label.confirm')}
+            {/* {t('label.confirm')} */}
+            Confirm
           </button>
         </div>
       </li>

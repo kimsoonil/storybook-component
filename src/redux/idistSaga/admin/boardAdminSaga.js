@@ -227,9 +227,8 @@ function* getBoardPosts({ payload }) {
   }
 }
 
-function* _boardAdminSaga() {
+function* boardAdminSagas() {
   yield all([takeEvery(actionTypes.getBoardGroupsInit, getBoardGroups)]);
-
   yield all([takeEvery(actionTypes.getBoardGroupInit, getBoardGroup)]);
   yield all([takeEvery(actionTypes.postBoardGroupInit, postBoardGroup)]);
   yield all([takeEvery(actionTypes.patchBoardGroupInit, patchBoardGroup)]);
@@ -238,7 +237,6 @@ function* _boardAdminSaga() {
   yield all([takeEvery(actionTypes.mergeBoardGroupInit, mergeBoardGroup)]);
   yield all([takeEvery(actionTypes.orderBoardGroupInit, orderBoardGroup)]);
   yield all([takeEvery(actionTypes.deleteBoardGroupInit, deleteBoardGroup)]);
-
   yield all([takeEvery(actionTypes.getBoardInit, getBoard)]);
   yield all([takeEvery(actionTypes.postBoardInit, postBoard)]);
   yield all([takeEvery(actionTypes.patchBoardInit, patchBoard)]);
@@ -247,8 +245,7 @@ function* _boardAdminSaga() {
   yield all([takeEvery(actionTypes.mergeBoardInit, mergeBoard)]);
   yield all([takeEvery(actionTypes.orderBoardInit, orderBoard)]);
   yield all([takeEvery(actionTypes.deleteBoardInit, deleteBoard)]);
-
   yield all([takeEvery(actionTypes.getBoardPostsInit, getBoardPosts)]);
 }
 
-export const boardAdminSaga = [fork(_boardAdminSaga)];
+export const boardAdminSaga = [fork(boardAdminSagas)];

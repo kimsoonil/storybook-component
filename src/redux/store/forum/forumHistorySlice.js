@@ -1,29 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import { MAX_LOCAL_HISTORY_SAVE } from 'constants/type';
 
 const initialState = () => ({
-  history: [
-    'test1',
-    'test2',
-    'test3',
-    'test4',
-    'test5',
-    'test6',
-    'test7',
-    'test8',
-    'test9',
-    'test10',
-    'test11',
-    'test12',
-    'test13',
-    'test14',
-    'test15',
-    'test16',
-    'test17',
-    'test18',
-    'test19',
-    'test20'
-  ]
+  history: []
 });
 
 const forumHistorySlice = createSlice({
@@ -34,7 +13,7 @@ const forumHistorySlice = createSlice({
       Object.assign(state, initialState());
     },
     setLogOutHistory: (state, { payload }) => {
-      if (state.history.findIndex((item) => item === payload) === -1) {
+      if (state.history.findIndex((item) => item.id === payload.id) === -1) {
         if (state.history.length === MAX_LOCAL_HISTORY_SAVE) {
           state.history.pop();
         }
@@ -42,8 +21,7 @@ const forumHistorySlice = createSlice({
       }
     },
     delLogOutHistory: (state, { payload }) => {
-      console.log(payload);
-      state.history = state.history.filter((item) => item !== payload);
+      state.history = current(state.history).filter((item) => item.id !== payload);
     }
   }
 });

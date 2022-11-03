@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/2511.37f233f1.chunk.js","mappings":"4HAOA,UALkB,WAEhB,OADAA,QAAQC,IAAI,qBACL,sCACR,C","sources":["views/Admin/Operation.js"],"sourcesContent":["import React from 'react';\n\nconst Operation = () => {\n  console.log('Render Operation');\n  return <div>Operation</div>;\n};\n\nexport default Operation;\n"],"names":["console","log"],"sourceRoot":""}

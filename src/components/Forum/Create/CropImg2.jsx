@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import ReactCrop, { centerCrop, makeAspectCrop } from 'react-image-crop';
 import { useDropzone } from 'react-dropzone';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 import { IMAGE_TYPE_BANNER, IMAGE_TYPE_THUMBNAIL } from 'constants/type';
 
@@ -32,7 +32,7 @@ function CropImg2(props) {
   const [originImg, setOriginImg] = useState({ bannerImg: '', thumbImg: '' });
   const canvasRef = useRef(null);
   const imgRef = useRef(null);
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const [crop, setCrop] = useState({
     unit: '%',
@@ -62,11 +62,13 @@ function CropImg2(props) {
     fileRejections.forEach((file) => {
       file.errors.forEach((err) => {
         if (err.code === 'file-too-large') {
-          setErrors({ ...errors, [imgType]: t('validation.forum.uploadfile.maxsize') });
+          // setErrors({ ...errors, [imgType]: t('validation.forum.uploadfile.maxsize') });
+          setErrors({ ...errors, [imgType]: 'Images cannot exceed 10mb.' });
         }
 
         if (err.code === 'file-invalid-type') {
-          setErrors({ ...errors, [imgType]: t('validation.forum.uploadfile.invalidfile') });
+          // setErrors({ ...errors, [imgType]: t('validation.forum.uploadfile.invalidfile') });
+          setErrors({ ...errors, [imgType]: 'only the extensions jpg, gif, and png are allowed.' });
         }
       });
     });
@@ -203,9 +205,11 @@ function CropImg2(props) {
           </div>
         )}
         <div className="img_upload_btn">
-          <div className="or_line">
-            <span>OR</span>
-          </div>
+          {!imgSrc && (
+            <div className="or_line">
+              <span>OR</span>
+            </div>
+          )}
           <button type="button" onClick={onBrowseFile}>
             <span>Browse files</span>
           </button>

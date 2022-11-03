@@ -1,0 +1,19 @@
+.jcheckbox {
+  display: flex;
+  flex-direction: row;
+}
+.jcheckbox-image-wrapper {
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 3px;
+}
+.jcheckbox-image-wrapper-checked:hover img {
+  border: 3px solid rgba(244, 19, 254, 0.2);
+}
+.jcheckbox-image-wrapper-default:hover img {
+  border: 3px solid rgba(224, 224, 224, 0.5);
+}/*# sourceMappingURL=jcheckbox.css.map */

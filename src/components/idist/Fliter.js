@@ -1,3 +1,10 @@
+/* eslint-disable no-shadow */
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable global-require */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import 'react-calendar/dist/Calendar.css';
 import TextField from '@material-ui/core/TextField';
@@ -5,11 +12,11 @@ import DateFnsUtils from '@material-ui/pickers/adapter/date-fns';
 import { DateRangePicker, LocalizationProvider, DateRangeDelimiter } from '@material-ui/pickers';
 import 'assets/scss/reset.scss';
 import 'assets/scss/components.scss';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 
 export function Fliter({ doneFuc }) {
   const [date, setDate] = useState('day');
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const [keyword, setKeyword] = useState('');
   const [selectedDate, handleDateChange] = useState([null, null]);
   const [selectOption, setSelectOption] = useState('OR');
@@ -39,7 +46,7 @@ export function Fliter({ doneFuc }) {
             <div className="filter-title">기간</div>
             <div className="flex-center date-box">
               <div
-                className={'box-left filter-box flex-center ' + (date === 'day' && 'active')}
+                className={`box-left filter-box flex-center ${date === 'day' && 'active'}`}
                 onClick={() => setDate('day')}
               >
                 Day
@@ -128,34 +135,28 @@ export function Fliter({ doneFuc }) {
       <div className="filter-tag">
         <div className="filter-tag-list">
           <div className="filter-tag-title">And</div>
-          {arrFilterAnd.map((item, index) => {
-            return (
-              <div className="filter-tag-item" key={index}>
-                {item}
-              </div>
-            );
-          })}
+          {arrFilterAnd.map((item, index) => (
+            <div className="filter-tag-item" key={index}>
+              {item}
+            </div>
+          ))}
         </div>
         <div className="filter-tag-list">
           <div className="filter-tag-title">Or</div>
 
-          {arrFilterOR.map((item, index) => {
-            return (
-              <div className="filter-tag-item" key={index}>
-                {item}
-              </div>
-            );
-          })}
+          {arrFilterOR.map((item, index) => (
+            <div className="filter-tag-item" key={index}>
+              {item}
+            </div>
+          ))}
         </div>
         <div className="filter-tag-list">
           <div className="filter-tag-title">Except</div>
-          {arrFilterExcept.map((item, index) => {
-            return (
-              <div className="filter-tag-item" key={index}>
-                {item}
-              </div>
-            );
-          })}
+          {arrFilterExcept.map((item, index) => (
+            <div className="filter-tag-item" key={index}>
+              {item}
+            </div>
+          ))}
         </div>
       </div>
       <div className="filter-actions">

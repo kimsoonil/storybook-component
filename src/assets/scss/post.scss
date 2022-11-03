@@ -5,6 +5,9 @@
     &-btn {
       gap: 20px;
       cursor: pointer;
+      img {
+        width: 32px;
+      }
     }
   }
   &-left {
@@ -16,7 +19,7 @@
   &-container {
     margin-top: 8px;
     box-sizing: border-box;
-    width: 900px;
+    width: 100%;
     border-radius: 10px;
 
     &-header {
@@ -186,6 +189,7 @@
       margin-top: 16px;
       &-item {
         display: flex;
+        justify-content: space-between;
       }
       &-name {
         font-family: 'Poppins-Bold';
@@ -219,6 +223,13 @@
         display: flex;
         align-items: center;
         gap: 10px;
+      }
+      &-img {
+        img {
+          width: 140px;
+          height: 140px;
+          border-radius: 20px;
+        }
       }
     }
   }
@@ -573,14 +584,20 @@
   }
 }
 .reply {
-  text-decoration: underline;
   cursor: pointer;
   margin-left: 8px;
+  background: #f8f8f8;
+  border: 1px solid #bdbdbd;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #242a3c;
+  width: 46px;
+  height: 24px;
+  display: inline-block;
+  text-align: center;
 }
 
 .member {
-  &-home {
-  }
   &-select {
     display: flex;
     gap: 10px;

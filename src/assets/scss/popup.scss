@@ -41,10 +41,9 @@
   }
   .token-login {
     width: 400px;
-
-    padding: 35px 35px;
+    padding: 35px;
     background: #ffffff;
-    border-radius: 22.6249px;
+    border-radius: 23px;
     &-title {
       font-size: 18px;
       font-family: 'Poppins-Bold';
@@ -66,6 +65,34 @@
         line-height: 40px;
         color: #000000;
         box-sizing: border-box;
+      }
+    }
+  }
+  .activitypopup {
+    width: 350px;
+    padding: 35px;
+    background: #ffffff;
+    border-radius: 23px;
+    &-content {
+      border-top: 1px solid #e0e0e0;
+      padding-top: 14px;
+      &-title {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 27px;
+        color: #000000;
+        margin-bottom: 20px;
+      }
+      &-item {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 27px;
+        color: #000000;
+        margin-bottom: 14px;
       }
     }
   }

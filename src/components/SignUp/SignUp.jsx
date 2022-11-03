@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getStorage, setStorage } from 'util/storage';
 import { useDispatch, useSelector } from 'react-redux';
-import { reqAuthSns, signUpAfterAutoLogin } from 'redux/store/common/logInSlice';
+import { signUpAfterAutoLogin } from 'redux/store/common/logInSlice';
 import { SNS_GOOGLE, SNS_APPLE, SNS_FACEBOOK, SNS_TWITTER } from 'constants/type';
 
 import Header from 'components/common/header/Header';
@@ -18,22 +18,23 @@ function SignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const snsLogin = (snsType) => {
-    console.log(snsType);
-    dispatch(reqAuthSns(snsType));
+    // dispatch(reqAuthSns(snsType));
+    navigate(`/signup/terms/${snsType}`);
   };
   const { isAuthSns } = useSelector((state) => ({ ...state.logIn }));
 
   useEffect(() => {
     console.log('isAuthSns', isAuthSns);
-    // setStorage('google', '');
+    setStorage('google', '');
     if (isAuthSns) {
       window.addEventListener('message', (e) => {
         if (e.data.message === 'passport-login-success' && e.data.source === 'platform-login-api') {
-          const { platforms, authToken } = e.data.data;
+          const { platforms, authToken, userInfo } = e.data.data;
           setStorage('accessToken', authToken);
-
+          console.log('platforms[0]?.type:::', platforms[0]?.type);
+          console.log(platforms, authToken, userInfo);
           if (getStorage(platforms[0]?.type) !== 'true') navigate('/signup/complete');
-          else dispatch(signUpAfterAutoLogin(e.data.data));
+          else dispatch(signUpAfterAutoLogin({ navigate, accessToken: authToken, userInfo }));
           // window.localStorage.setItem('token', e.data.data.authToken);
           // e.data.data.platforms: 바인딩된 플랫폼 배열 (ccr, google, apple, facebook, twitter)
           // e.data.data.userInfo
@@ -41,6 +42,10 @@ function SignUp() {
       });
     }
   }, [isAuthSns]);
+
+  useEffect(() => {
+    setStorage('google', '');
+  }, []);
 
   return (
     <div id="wrap">

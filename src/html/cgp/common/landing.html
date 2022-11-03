@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div class="landing">
+    <div class="main_img">
+      <div class="header">
+        <div class="landing_gnb">
+          <h1><a href="/"><span class="a11y">Super Club</span></a></h1>
+          <button type="button">
+            <span>What's SC?</span>
+          </button>
+          <button type="button">
+            <span>Play in Super Club</span>
+          </button>
+          <button type="button">
+            <span>SC's Point</span>
+          </button>
+          <button type="button">
+            <span>GUIDE</span>
+          </button>
+        </div>
+        <div class="landing_top_text">Life's best community created<br/><span>with diverse people around the world.</span></div>
+        <button type="button" class="btn primary button_xl">
+          <span>START</span>
+        </button>
+      </div>
+    </div>
+    <div class="landing_con01">
+      <div class="landing_title01">SUPER CLUB</div>
+      <div class="landing_text01">Meet the community that adds to your online encounters and fun.</div>
+      <div><img src="../../img/com/img_landing_people.png"></div>
+      <ul>
+        <li class="landing_subjext img01">Chat service with 10,000<br/>users</li>
+        <li class="landing_subjext img02">User trust UP through<br/>authentication</li>
+        <li class="landing_subjext img03">NFT service and<br/>various commerce OPEN!</li>
+      </ul>
+    </div>
+    <div class="landing_con02">
+      <div class="landing_title02">It's possible at superclub!</div>
+      <div class="landing_text02">Play in Super Club</div>
+      <ul>
+        <li class="club">
+          <dl>
+            <dt>SUPER CLUB</dt>
+            <dd>A mega community service that can join 10,000 people!<br/>Join the club you are interested in and connect with people from diverse cultures!</dd>
+          </dl>
+        </li>
+        <li class="forum right">
+          <dl>
+            <dt>SUPER FORUM</dt>
+            <dd>Share and discuss information on superclub's own bulletin board<br/>with games and various categories!</dd>
+          </dl>
+        </li>
+        <li class="people">
+          <dl>
+            <dt>PEOPLE'S</dt>
+            <dd>Check out the list of various people made with big data, and connect with your favorite partner!</dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+    <div class="landing_con03">
+      <div class="landing_title03">Various Key Values unique to Superclub!</div>
+      <div class="landing_text03">POINTS</div>
+      <ul>
+        <li class="community">
+          <dl>
+            <dt>Customized Community</dt>
+            <dd>Freely move and manage the clubs you want!<br/>You can customize the features you want on my page!</dd>
+          </dl>
+        </li>
+        <li class="chatting right">
+          <dl>
+            <dt>Super Chatting System</dt>
+            <dd>Chat OPEN where 10,000 people can enter at the same time!<br/>Create 1:1 chats as well as group chat channels with friends!</dd>
+          </dl>
+        </li>
+        <li class="ranking">
+          <dl>
+            <dt>Recorded Ranking System</dt>
+            <dd>Share all your records with your friends, including games and play!<br/>Recorded rankings are shared forever, and listed into the Hall of Fame<br/>with over 10,000 referrals!</dd>
+          </dl>
+        </li>
+        <li class="chatting right">
+          <dl>
+            <dt>Finance</dt>
+            <dd>You have access to all the features of NFT!<br/>Experience everything that enriches your assets, including<br/>real estate, stocks, and NFTs.</dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+    <div class="landing_con04">
+      <div class="landing_guide">
+        <div><img src="../../img/com/img_landing_guide.png"></div>
+        <div class="how">How to use it?</div>
+        <div class="btn_guide">
+          <button type="button" class="btn point_line button_xl">
+            <span>View Guide</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-include-path="../include/footer.html"></div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+</html>

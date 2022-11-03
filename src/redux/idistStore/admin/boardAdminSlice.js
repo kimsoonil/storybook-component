@@ -55,7 +55,7 @@ const boardAdminSlice = createSlice({
       state.info = payload;
     },
     updateInfo: (state, { payload }) => {
-      state.info = { ...immerParse(info), ...payload };
+      state.info = { ...immerParse(state.info), ...payload };
     },
 
     // boardGroups
@@ -162,7 +162,7 @@ const boardAdminSlice = createSlice({
     mergeBoardGroupInit: (state) => {
       state.mergeBoardGroupLoading = true;
     },
-    mergeBoardGroupSuccess: (state, { payload }) => {
+    mergeBoardGroupSuccess: (state) => {
       // payload = boardGroup
       state.mergeBoardGroupLoading = false;
       state.info = {};
@@ -176,7 +176,7 @@ const boardAdminSlice = createSlice({
     orderBoardGroupInit: (state) => {
       state.orderBoardGroupLoading = true;
     },
-    orderBoardGroupSuccess: (state, { payload }) => {
+    orderBoardGroupSuccess: (state) => {
       state.orderBoardGroupLoading = false;
     },
     orderBoardGroupFailure: (state, { payload }) => {
@@ -292,7 +292,7 @@ const boardAdminSlice = createSlice({
     mergeBoardInit: (state) => {
       state.mergeBoardLoading = true;
     },
-    mergeBoardSuccess: (state, { payload }) => {
+    mergeBoardSuccess: (state) => {
       // payload = boardGroup
       state.mergeBoardLoading = false;
       state.info = {};
@@ -306,7 +306,7 @@ const boardAdminSlice = createSlice({
     orderBoardInit: (state) => {
       state.orderBoardLoading = true;
     },
-    orderBoardSuccess: (state, { payload }) => {
+    orderBoardSuccess: (state) => {
       state.orderBoardLoading = false;
     },
     orderBoardFailure: (state, { payload }) => {
@@ -319,7 +319,7 @@ const boardAdminSlice = createSlice({
     getBoardPostsInit: (state) => {
       state.getBoardPostsLoading = true;
     },
-    getBoardPostsSuccess: (state, { payload }) => {
+    getBoardPostsSuccess: (state) => {
       state.getBoardPostsLoading = false;
       // todo;
     },

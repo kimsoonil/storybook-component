@@ -42,20 +42,24 @@ function ClubsList(props) {
 
       setIsBottom(false);
     }
-  }, [isBottom, clubList, dispatch, setIsBottom, moreLoading]);
+  }, [isBottom, moreLoading]);
 
   function handleUserScroll() {
     const scrollTop = document.documentElement.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight;
-    if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
-      setIsBottom(true);
+    if (scrollHeight > 1000) {
+      if (scrollTop + window.innerHeight + 100 >= scrollHeight) {
+        setIsBottom(true);
+      }
     }
   }
   useEffect(() => {
-    if (props.searchTab !== 'clubs') return;
+    if (props.searchTab !== 'clubs') return window.removeEventListener('scroll', handleUserScroll);
     window.addEventListener('scroll', handleUserScroll);
     return () => window.removeEventListener('scroll', handleUserScroll);
   }, []);
+
+  console.log('clubs', clubs);
 
   if (clubs.message !== 'ok')
     return (
@@ -108,7 +112,7 @@ function ClubsList(props) {
                 <div className="list-img">
                   <img
                     src={
-                      clubItem.profile_image_url ? clubItem.profile_image_url : require('images/club/club-dummy.png')
+                      clubItem?.profile_image_url ? clubItem?.profile_image_url : require('images/club/club-dummy.png')
                     }
                     alt=""
                   />
@@ -116,7 +120,9 @@ function ClubsList(props) {
                 <div className="list-item-profile-image">
                   <img
                     src={
-                      clubItem.profile_image_url ? clubItem.profile_image_url : require('images/club/profile-dummy.png')
+                      clubItem?.profile_image_url
+                        ? clubItem?.profile_image_url
+                        : require('images/club/club-profile.png')
                     }
                   />
                 </div>
@@ -127,12 +133,17 @@ function ClubsList(props) {
                       <div>
                         <img src={require('images/main/icon-user.png')} />
                       </div>
-                      <div>{clubItem.member_count} M Sliver</div>
+                      <div className="flex-center">
+                        {clubItem?.member_count}
+                        <div className={'color-' + clubItem?.master_profile?.grade_title} style={{ marginLeft: '6px' }}>
+                          {clubItem?.master_profile?.grade_title}
+                        </div>
+                      </div>
                     </div>
                     <div className="list-item-pin">
-                      {clubItem.pin === null ? (
+                      {clubItem?.pin === null ? (
                         <img src={require('images/club/club-bookmark-line.png')} />
-                      ) : clubItem.is_pined ? (
+                      ) : clubItem?.is_pined ? (
                         <img src={require('images/club/club-bookmark.png')} />
                       ) : (
                         <img src={require('images/club/club-bookmark-line.png')} />

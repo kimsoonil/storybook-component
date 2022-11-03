@@ -1,5 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import 'assets/scss/reset.scss';
 import 'assets/scss/components.scss';
 

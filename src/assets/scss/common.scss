@@ -47,6 +47,11 @@ $black: #000;
   justify-content: space-between;
   align-items: center;
 }
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 .none {
   display: none;
 }
@@ -138,4 +143,15 @@ $black: #000;
   &-LEGEND {
     color: #8701fe;
   }
+}
+.scrollTop {
+  position: fixed;
+  top: 80%;
+  right: 50px;
+  background: #111111;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.16);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  cursor: pointer;
 }

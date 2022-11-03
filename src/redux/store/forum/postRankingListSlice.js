@@ -1,22 +1,8 @@
 import { createSlice, current } from '@reduxjs/toolkit';
-import { FORUM_CATEGORY_GAME } from 'constants/type';
+// import { FORUM_CATEGORY_GAME } from 'constants/type';
 
 const initialState = () => ({
-  list: [
-    {
-      postId: 0,
-      postName: '',
-      img: '',
-      badge: [],
-      commentCnt: 0,
-      likeCnt: 0,
-      viewCnt: 0,
-      contents: '',
-      category: FORUM_CATEGORY_GAME,
-      masterImg: '',
-      masterNick: ''
-    }
-  ],
+  postList: [],
   message: '',
   error: '',
   isLoading: false
@@ -35,7 +21,7 @@ const postRankingListSlice = createSlice({
     },
     postRankingListSuccess: (state, { payload }) => {
       Object.assign(state, payload);
-      console.log(payload);
+      state.postList = payload.data;
       state.isLoading = false;
     },
     postRankingListFailure: (state, error) => {
@@ -44,7 +30,6 @@ const postRankingListSlice = createSlice({
     },
     setLikePost: (state, { payload }) => {
       const { postId, likeCnt } = payload;
-      console.log(payload);
       const updatedList = current(state.list).map((item) =>
         item.postId === postId ? { ...item, likeCnt, isLiked: true } : item
       );

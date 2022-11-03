@@ -23,7 +23,6 @@ import Profile from 'components/idist/Profile';
 import SharePopup from 'components/idist/popup/SharePopup';
 import ReportPopup from 'components/idist/popup/ReportPopup';
 import SideMember from 'components/idist/Club/SideMember';
-import Footer from 'components/common/footer/Footer';
 import SideEvent from 'components/idist/Club/SideEvent';
 
 import HotPosts from 'components/idist/Club/HotPosts';
@@ -163,7 +162,7 @@ function Posts(props) {
     <div className="posts container">
       <div className="item">
         <PostContent
-          type={'club'}
+          type="club"
           postNavigate={postNavigate}
           post={post}
           clubId={clubId}
@@ -183,12 +182,12 @@ function Posts(props) {
           handleClickLike={handleClickLike}
           handleClickDisLike={handleClickDisLike}
         />
-        <PostList post={post} id={id} />
-        <PostRecent post={post} />
+        <PostList type="club" prev={post?.data?.prev_post} next={post?.data?.next_post} post={post} id={id} />
+        <PostRecent type="club" post={post} />
       </div>
       <div className="item">
-        {clubId.data.profile ? <Profile userData={clubId.data.profile} type={'club'} /> : <Profile type={'logout'} />}
-        <SideEvent id={id} />
+        {clubId.data.profile ? <Profile userData={clubId.data} type={'club'} /> : <Profile type={'logout'} />}
+        <SideEvent />
         <HotPosts />
         <SideMember />
       </div>

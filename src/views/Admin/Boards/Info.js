@@ -1,15 +1,15 @@
-/* eslint-disable */
-import React, { useEffect, useState } from 'react';
+/* eslint-disable no-nested-ternary */
+/* eslint-disable import/no-cycle */
+import React from 'react';
 import 'assets/scss/admin/boards.scss';
 import { useSelector } from 'react-redux';
-import { IVD } from '..';
 import GroupInfo from 'components/idist/admin/boards/GroupInfo';
 import BoardInfo from 'components/idist/admin/boards/BoardInfo';
 import { BVD } from '.';
 
 const rootClassName = 'admin-boards-info';
 
-const Info = ({ title, setTitle, setAddState }) => {
+function Info({ title, setTitle, setAddState }) {
   const info = useSelector((state) => state.boardAdmin.info);
 
   return (
@@ -23,6 +23,6 @@ const Info = ({ title, setTitle, setAddState }) => {
       )}
     </div>
   );
-};
+}
 
 export default Info;

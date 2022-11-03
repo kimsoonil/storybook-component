@@ -1,0 +1,35 @@
+{
+  "name": "jodit-pro-react",
+  "version": "1.3.33",
+  "description": "Jodit PRO is awesome and usefully wysiwyg editor with filebrowser",
+  "main": "jodit-react.js",
+  "types": "index.d.ts",
+  "author": "Chupurnov <chupurnov@gmail.com> (https://xdsoft.net/jodit/pro/)",
+  "keywords": [
+    "react",
+    "jodit",
+    "html",
+    "text",
+    "editor",
+    "wysisyg",
+    "rich editor",
+    "rich text editor",
+    "rte"
+  ],
+  "dependencies": {
+    "jodit-pro": "^1.3"
+  },
+  "peerDependencies": {
+    "react": "~0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "~0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jodit/jodit-pro.git"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://xdsoft.net/jodit/pro/cab/issues"
+  },
+  "homepage": "https://xdsoft.net/jodit/pro/"
+}

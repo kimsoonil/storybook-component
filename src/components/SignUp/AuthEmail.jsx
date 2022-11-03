@@ -4,7 +4,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { showPopup } from 'redux/store/common/popupSlice';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import Footer from 'components/common/footer/Footer';
 import Header from 'components/common/header/Header';
@@ -18,12 +18,13 @@ function AuthEmail() {
 
   const { register, getValues, setValue, watch } = useForm();
   const watchPrivacy = watch('privacy', false);
-  const watchMarket = watch('market', false);
+  // const watchMarket = watch('market', false);
 
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const onTermsPopup = (type) => {
-    const popupType = type === t('label.privacy') ? POPUP_TYPE_PRIVACY_POLICY : POPUP_TYPE_MARKET_POLICY;
+    // const popupType = type === t('label.privacy') ? POPUP_TYPE_PRIVACY_POLICY : POPUP_TYPE_MARKET_POLICY;
+    const popupType = type === 'privacy' ? POPUP_TYPE_PRIVACY_POLICY : POPUP_TYPE_MARKET_POLICY;
     dispatch(showPopup({ type: popupType }));
   };
 
@@ -98,7 +99,7 @@ function AuthEmail() {
               type="button"
               className="btn primary button_xl join_next"
               onClick={() => navigate('/signup/info')}
-              disabled={!(isConfirm && watchPrivacy && watchMarket)}
+              disabled={!(isConfirm && watchPrivacy)}
             >
               <span>Next</span>
             </button>

@@ -14,6 +14,7 @@ function ClubHomeEvent(props) {
   useEffect(() => {
     dispatch(getClubPostsInit({ id: props.clubId.data.id, parameters: { is_event: true }, type: 'event' }));
   }, [dispatch]);
+  console.log(eventPosts.data);
   if (eventPosts.message !== 'ok') {
     return (
       <div className="flex-center">
@@ -21,7 +22,7 @@ function ClubHomeEvent(props) {
       </div>
     );
   }
-  return (
+  return eventPosts.data.length !== 0 ? (
     <div className="club-home-content club-event">
       <div className="flex-between">
         <div className="club-home-title">Event</div>
@@ -54,6 +55,8 @@ function ClubHomeEvent(props) {
         })}
       </div>
     </div>
+  ) : (
+    <div className="club-content-nodata"></div>
   );
 }
 

@@ -75,7 +75,7 @@ function SaveNickname({ tag, newNick, setNewNick, onEditNickname, errors }) {
   );
 }
 
-function CompleteNickname() {
+function CompleteNickname({ nickname, tag }) {
   return (
     <div className="form_wrap">
       <span className="form_cell form_input msg input_lg fix_nick">
@@ -84,14 +84,14 @@ function CompleteNickname() {
           title="input default"
           id="input_text"
           aria-invalid="false"
-          defaultValue="kitty$1004#FGS2G"
+          defaultValue={`${nickname}#${tag}`}
           readOnly="readonly"
         />
         <span className="fix_ico" />
       </span>
-      <div className="toast default show">
+      {/* <div className="toast default show">
         <span>Your nickname changed successfully.</span>
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -165,7 +165,7 @@ function NickName({ user, visibleInfo, nickStatus, setNickStatus }) {
             errors={errors}
           />
         )}
-        {nickStatus === NICKNAME_STATUS_SAVED && <CompleteNickname />}
+        {nickStatus === NICKNAME_STATUS_SAVED && <CompleteNickname nickname={nickname} tag={tag} />}
         <GuideMessage status={nickStatus} />
       </div>
     </div>

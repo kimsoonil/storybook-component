@@ -9,6 +9,7 @@ function* onLoadForumHistorySet() {
   yield takeLatest(setLogOutHistory.type, onLoadForumHistorySetAsync);
 }
 function* onLoadForumHistoryDelAsync({ payload }) {
+  console.log('localhistory::', payload);
   yield put(delLogOutHistory(payload));
 }
 

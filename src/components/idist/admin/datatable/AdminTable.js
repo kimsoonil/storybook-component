@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import JCheckbox from 'components/idist/admin/JCheckbox';
 import AdminColumn from './AdminColumn';
@@ -17,7 +17,7 @@ import 'assets/scss/admin/admin.scss';
  * sortState - 정렬 정보
  * onClickSortButton - 정렬 버튼 클릭시
  */
-const AdminTable = ({
+function AdminTable({
   columns,
   rows,
   checkboxSelection = false,
@@ -29,7 +29,7 @@ const AdminTable = ({
   sortState,
   onClickSortButton,
   EmptyComponent
-}) => {
+}) {
   return (
     <div className="admin-table">
       <div className="admin-table-columns">
@@ -66,9 +66,10 @@ const AdminTable = ({
       ) : (
         <div style={{ overflow: 'auto' }}>
           {rows.map((rowData, rowIndex) => {
+            const key = `row${rowIndex}`;
             return (
               <AdminRow
-                key={rowIndex}
+                key={key}
                 checkboxSelection={checkboxSelection}
                 rowData={rowData}
                 checked={checkedList?.includes?.(rowData.id)}
@@ -81,6 +82,6 @@ const AdminTable = ({
       )}
     </div>
   );
-};
+}
 
 export default AdminTable;

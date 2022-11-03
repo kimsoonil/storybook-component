@@ -37,8 +37,8 @@ function BoardContent(props) {
         </div>
         <div className="flex-center">
           <div className="feed">
-            My feed
-            <ToggleBtn id={'myFeed'} />
+            New feed
+            <ToggleBtn id={'newFeed'} />
           </div>
 
           <div className="board-state">

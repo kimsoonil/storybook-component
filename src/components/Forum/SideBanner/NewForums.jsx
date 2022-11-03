@@ -1,49 +1,43 @@
+/* eslint-disable camelcase */
 import React from 'react';
-import chatProfileImg from 'html/img/com/right_thumb.png';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
-function ForumItem({ info }) {
+function ForumItem({ info, onMove }) {
+  const { thumbnail_image, description, forum_category } = info;
   return (
-    <li>
+    <li onClick={onMove} aria-hidden>
       <div className="new_forum_img">
-        <img src={chatProfileImg} alt="" />
+        <img src={thumbnail_image} alt="" />
       </div>
       <dl>
         <dt>
-          <span>SPORTS</span>
+          <span>{forum_category.title}</span>
         </dt>
-        <dd>SEOUL LG TWINS : {info.constents}</dd>
+        <dd>{description}</dd>
       </dl>
     </li>
   );
 }
 
 function NewForums() {
-  const list = [
-    { id: 1, constents: 'test1' },
-    { id: 2, constents: 'test2' },
-    { id: 3, constents: 'test3' },
-    { id: 4, constents: 'test4' },
-    { id: 5, constents: 'test5' },
-    { id: 6, constents: 'test6' },
-    { id: 7, constents: 'test7' },
-    { id: 8, constents: 'test8' },
-    { id: 9, constents: 'test9' },
-    { id: 10, constents: 'test10' }
-  ];
+  const navigate = useNavigate();
+  const { rankingList } = useSelector((state) => ({ ...state.forumRankingList }));
   return (
     <div className="new_forum">
       <div className="content_subtitle">
         <h4 className="h4Type eng">New Forums</h4>
-        <div className="title_menu">
+        {/* <div className="title_menu">
           <button type="button" className="text_btn">
             <span>See All</span>
           </button>
-        </div>
+        </div> */}
       </div>
       <ul className="new_forum_list">
-        {list.map((item) => (
-          <ForumItem info={item} key={item.id} />
-        ))}
+        {rankingList?.map(
+          (item, idx) =>
+            idx < 5 && <ForumItem key={item.id} info={item} onMove={() => navigate(`/forum/${item.id}/theme`)} />
+        )}
       </ul>
     </div>
   );

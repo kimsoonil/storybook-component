@@ -1,11 +1,11 @@
-/* eslint-disable */
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import Popover from '@mui/material/Popover';
 import 'assets/scss/component/jdropdown.scss';
 
 const rootClassName = 'jdropdown';
 
-const JDropDown = ({
+function JDropDown({
   anchorEl,
   onClose,
   menuList = [],
@@ -19,7 +19,7 @@ const JDropDown = ({
     horizontal: 'right'
   },
   props
-}) => {
+}) {
   return (
     <JPopOver
       anchorEl={anchorEl}
@@ -29,19 +29,29 @@ const JDropDown = ({
       {...props}
     >
       <div className={`${rootClassName}`}>
-        {menuList.map((menu, index) => (
-          <div key={index} className={`${rootClassName}-item`} onClick={menu.onClick}>
-            {menu.label}
-          </div>
-        ))}
+        {menuList.map((menu, index) => {
+          const key = `drop${index}`;
+          return (
+            <div
+              key={key}
+              className={`${rootClassName}-item`}
+              onClick={menu.onClick}
+              onKeyDown={(e) => (e.key === 'Enter' ? menu.onClick(e) : {})}
+              tabIndex={0}
+              role="button"
+            >
+              {menu.label}
+            </div>
+          );
+        })}
       </div>
     </JPopOver>
   );
-};
+}
 
 export default JDropDown;
 
-export const JPopOver = ({ children, anchorEl, onClose, anchorOrigin, transformOrigin, ...props }) => {
+export function JPopOver({ children, anchorEl, onClose, anchorOrigin, transformOrigin, ...props }) {
   return (
     <Popover
       open={!!anchorEl}
@@ -54,7 +64,7 @@ export const JPopOver = ({ children, anchorEl, onClose, anchorOrigin, transformO
       {children}
     </Popover>
   );
-};
+}
 
 // anchorOrigin={{
 //   vertical: 'bottom',

@@ -1,7 +1,5 @@
-/* eslint-disable */
-
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import 'assets/scss/component/text-input.scss';
 
@@ -26,7 +24,7 @@ export function TextInput({
   return (
     <div className={`${rootName} ${rootName}-${state}`} {...containerProps}>
       <input
-        className={`jg-text-input`}
+        className="jg-text-input"
         value={value}
         onChange={onChange}
         disabled={disabled}
@@ -40,22 +38,22 @@ export function TextInput({
   );
 }
 
-TextInput.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  state: PropTypes.oneOf(['blur', 'focus', 'success', 'error']),
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func
-};
+// TextInput.propTypes = {
+//   value: PropTypes.string,
+//   onChange: PropTypes.func,
+//   disabled: PropTypes.bool,
+//   readOnly: PropTypes.bool,
+//   state: PropTypes.oneOf(['blur', 'focus', 'success', 'error']),
+//   onFocus: PropTypes.func,
+//   onBlur: PropTypes.func
+// };
 
-TextInput.defaultProps = {
-  value: '',
-  onChange: () => {},
-  disabled: false,
-  readOnly: false,
-  state: 'blur',
-  onFocus: () => {},
-  onBlur: () => {}
-};
+// TextInput.defaultProps = {
+//   value: '',
+//   onChange: () => {},
+//   disabled: false,
+//   readOnly: false,
+//   state: 'blur',
+//   onFocus: () => {},
+//   onBlur: () => {}
+// };

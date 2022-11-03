@@ -25,7 +25,6 @@ function PostSearch() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(reqOption);
     dispatch(reqPostRankingList(reqOption));
   }, [reqOption]);
 

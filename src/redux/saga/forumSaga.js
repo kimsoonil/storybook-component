@@ -1,4 +1,5 @@
 import { forumListSaga } from './forum/forumListSaga';
+import { forumAllSearchListSaga } from './forum/forumAllSearchListSaga';
 import { subscribeForumSaga } from './forum/subscribeForumSaga';
 import { postRankingListSaga } from './forum/postRankingListSaga';
 import { likePostSaga } from './forum/likePostSaga';
@@ -8,11 +9,14 @@ import { forumPostSaga } from './forum/fourmPostSaga';
 import { forumCreateSaga } from './forum/forumCreateSaga';
 import { forumEditSaga } from './forum/forumEditSaga';
 import { forumInfoSaga } from './forum/forumInfoSaga';
+import { forumBookMarkSaga } from './forum/forumBookMarkSaga';
 import { forumBookMarkedListSaga } from './forum/forumBookMarkedListSaga';
 import { forumBestSaga } from './forum/forumBestSaga';
+import { forumIdPostListSaga } from './forum/forumIdPostListSaga';
 
 const forumSaga = [
   ...forumListSaga,
+  ...forumAllSearchListSaga,
   ...subscribeForumSaga,
   ...postRankingListSaga,
   ...likePostSaga,
@@ -22,7 +26,9 @@ const forumSaga = [
   ...forumCreateSaga,
   ...forumEditSaga,
   ...forumInfoSaga,
+  ...forumBookMarkSaga,
   ...forumBookMarkedListSaga,
-  ...forumBestSaga
+  ...forumBestSaga,
+  ...forumIdPostListSaga
 ];
 export default forumSaga;

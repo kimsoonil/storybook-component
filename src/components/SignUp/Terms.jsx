@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { showPopup } from 'redux/store/common/popupSlice';
 import useCheckBoxAll from 'hook/useCheckBoxAll';
 import Footer from 'components/common/footer/Footer';
@@ -14,13 +14,20 @@ import { setStorage } from 'util/storage';
 
 function Terms() {
   const { isAuthSns } = useSelector((state) => ({ ...state.logIn }));
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
+  // const checkboxLists = [
+  //   {
+  //     id: t('label.privacy'),
+  //     content: t('label.terms.contents', { context: 'privacy' })
+  //   },
+  //   { id: t('label.market'), content: t('label.terms.contents', { context: 'market' }) }
+  // ];
   const checkboxLists = [
     {
-      id: t('label.privacy'),
-      content: t('label.terms.contents', { context: 'privacy' })
+      id: 'privacy',
+      content: 'By creating on account you agree to Super club’s Privacy Policy and Terms of use.'
     },
-    { id: t('label.market'), content: t('label.terms.contents', { context: 'market' }) }
+    { id: 'market', content: 'By creating on account you agree to Super club’s Marketing policies' }
   ];
   const [checkedList, checkAll, checkOne] = useCheckBoxAll(checkboxLists);
   const navigate = useNavigate();
@@ -28,7 +35,8 @@ function Terms() {
   const params = useParams();
 
   const onTermsPopup = (type) => {
-    const popupType = type === t('label.privacy') ? POPUP_TYPE_PRIVACY_POLICY : POPUP_TYPE_MARKET_POLICY;
+    // const popupType = type === t('label.privacy') ? POPUP_TYPE_PRIVACY_POLICY : POPUP_TYPE_MARKET_POLICY;
+    const popupType = type === 'privacy' ? POPUP_TYPE_PRIVACY_POLICY : POPUP_TYPE_MARKET_POLICY;
     dispatch(showPopup({ type: popupType }));
   };
 
@@ -37,16 +45,18 @@ function Terms() {
   };
 
   useEffect(() => {
-    console.log('isAuthSns', isAuthSns);
+    console.log('isAuthSns Terms:::', isAuthSns);
     if (isAuthSns) {
       window.addEventListener('message', (e) => {
         if (e.data.message === 'passport-login-success' && e.data.source === 'platform-login-api') {
           console.log(e.data.data);
-          const { authToken } = e.data.data;
+          const { platforms, authToken, userInfo } = e.data.data;
+          console.log('platforms::', platforms);
           setStorage('accessToken', authToken);
           setStorage(params.snsType, 'true');
-          dispatch(signUpAfterAutoLogin(e.data.data));
-          navigate('/signup/complete');
+          dispatch(signUpAfterAutoLogin({ navigate, accessToken: authToken, userInfo }));
+          // if (accessToken) dispatch(signUpAfterAutoLogin({ navigate, accessToken, userInfo }));
+          navigate('/signup/snscomplete');
           // window.localStorage.setItem('token', e.data.data.authToken);
           // e.data.data.platforms: 바인딩된 플랫폼 배열 (ccr, google, apple, facebook, twitter)
           // e.data.data.userInfo
@@ -54,6 +64,10 @@ function Terms() {
       });
     }
   }, [isAuthSns]);
+
+  useEffect(() => {
+    console.log('checkedList:', checkedList);
+  }, [checkedList]);
 
   return (
     <div id="wrap">
@@ -118,15 +132,17 @@ function Terms() {
             </ul>
             <div className="page_btn_wrap half agree">
               <button type="button" className="btn default button_xl" onClick={() => navigate('/signup')}>
-                <span>{t('label.terms.disagree')}</span>
+                {/* <span>{t('label.terms.disagree')}</span> */}
+                <span>Disagree</span>
               </button>
               <button
                 type="button"
                 className="btn primary button_xl"
-                disabled={checkedList.length !== checkboxLists.length}
+                disabled={checkedList?.findIndex((item) => item.id === 'privacy') === -1}
                 onClick={snsLogin}
               >
-                <span>{t('label.terms.agree')}</span>
+                {/* <span>{t('label.terms.agree')}</span> */}
+                <span>Agree</span>
               </button>
             </div>
           </div>

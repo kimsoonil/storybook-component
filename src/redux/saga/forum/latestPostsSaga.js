@@ -43,7 +43,6 @@ function* onLoadLatestPostReset() {
 
 function* onLoadPostRankingLikeAsync({ payload }) {
   try {
-    console.log(payload);
     yield put(setLikePost(payload));
   } catch (error) {
     console.log(error);

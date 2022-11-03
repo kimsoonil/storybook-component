@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/tabindex-no-positive */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-dupe-keys */
 /* eslint-disable react/jsx-props-no-spreading */
@@ -6,13 +7,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { encryptCode } from 'util/common';
+import { useTabIndex } from 'react-tabindex';
 import { useForm, FormProvider, useWatch } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { showPopup } from 'redux/store/common/popupSlice';
+// import { useTranslation } from 'react-i18next';
 import { reqSignUp } from 'redux/store/common/signUpSlice';
 import Header from 'components/common/header/Header';
 import Footer from 'components/common/footer/Footer';
 import InputStatusBtn from 'components/common/InputButton/InputStatusBtn';
 import ReCapcha from 'components/common/ReCapcha';
+import { POPUP_TYPE_LOGIN_ALERT } from 'constants/type';
+import { setStorage } from 'util/storage';
 import PassWordInput from './PassWordInput';
 import SecurityGuide from './SecurityGuide';
 
@@ -31,16 +36,18 @@ function Info() {
     register,
     control,
     trigger,
+    setFocus,
     setValue,
     formState: { isValid, errors }
   } = useForm({ mode: 'onChange' });
 
+  const tabIndex = useTabIndex();
   const watchFirstName = useWatch({ control, name: 'firstName', defaultValue: '' });
   const watchLastName = useWatch({ control, name: 'lastName', defaultValue: '' });
   const watchPassword = useWatch({ control, name: 'password', defaultValue: '' });
   const watchConfirmPwd = useWatch({ control, name: 'cfrPassword', defaultValue: '' });
 
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const onSignUp = () => {
     const userInfo = {
@@ -51,7 +58,13 @@ function Info() {
       username: email,
       email
     };
-    dispatch(reqSignUp({ userInfo, navigate }));
+    // 임시
+    setStorage('pwd', watchPassword);
+    if (email) dispatch(reqSignUp({ userInfo, navigate }));
+    else {
+      dispatch(showPopup({ type: POPUP_TYPE_LOGIN_ALERT, contents: 'please re-check email' }));
+      navigate('/signup/email');
+    }
   };
 
   useEffect(() => {
@@ -59,6 +72,10 @@ function Info() {
     console.log('watchConfirmPwd:::', watchConfirmPwd);
     if (watchConfirmPwd) trigger('cfrPassword');
   }, [watchPassword, watchConfirmPwd]);
+
+  useEffect(() => {
+    setFocus('firstName');
+  }, []);
 
   const NAME_MAX_LENGTH = 10;
   return (
@@ -93,7 +110,7 @@ function Info() {
                           !isFocusLN)
                     },
                     { error: errors.firstName || errors.lastName },
-                    { success: watchFirstName && watchLastName && !isFocusFN && !isFocusLN },
+                    // { success: watchFirstName && watchLastName && !isFocusFN && !isFocusLN },
                     'sign_name'
                   )}
                 >
@@ -103,13 +120,16 @@ function Info() {
                       <input
                         type="text"
                         id="firstName"
+                        tabIndex={tabIndex}
                         aria-invalid="false"
                         placeholder="First Name"
                         {...register('firstName', {
-                          required: t('validation.require', { require: 'firstName' }),
+                          // required: t('validation.require', { require: 'firstName' }),
+                          required: 'firstName is required',
                           maxLength: {
                             value: NAME_MAX_LENGTH,
-                            message: t('validation.userinfo.name', { context: 'maxLength' })
+                            // message: t('validation.userinfo.name', { context: 'maxLength' })
+                            message: 'exceed maxlength'
                           }
                         })}
                         onFocus={() => setIsFocusFN(true)}
@@ -126,13 +146,16 @@ function Info() {
                       <input
                         type="text"
                         id="lastName"
+                        tabIndex={tabIndex}
                         aria-invalid="false"
                         placeholder="Last Name"
                         {...register('lastName', {
-                          required: t('validation.require', { require: 'lastName' }),
+                          // required: t('validation.require', { require: 'lastName' }),
+                          required: 'Last Name is required',
                           maxLength: {
                             value: NAME_MAX_LENGTH,
-                            message: t('validation.userinfo.name', { context: 'maxLength' })
+                            // message: t('validation.userinfo.name', { context: 'maxLength' })
+                            message: 'exceed maxlength'
                           }
                         })}
                         onFocus={() => setIsFocusLN(true)}
@@ -162,11 +185,13 @@ function Info() {
                   errors={errors}
                   watchPwd={watchPassword}
                   watchConfirmPwd={watchConfirmPwd}
+                  tabIndex={tabIndex}
                 />
                 <ReCapcha setIsCapcha={setIsCapcha} />
                 {errors.verifyCapcha && <span className="error_msg">Please verify security.</span>}
                 <button
                   type="button"
+                  tabIndex={tabIndex}
                   className="btn primary button_xl join_next"
                   onClick={onSignUp}
                   disabled={

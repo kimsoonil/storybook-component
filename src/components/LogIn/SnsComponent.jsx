@@ -28,11 +28,12 @@ function SnsComponent() {
     if (isAuthSns) {
       window.addEventListener('message', (e) => {
         if (e.data.message === 'passport-login-success' && e.data.source === 'platform-login-api') {
-          const { platforms, authToken } = e.data.data;
+          const { platforms, authToken, userInfo } = e.data.data;
+          console.log('authToken', authToken);
           setStorage('accessToken', authToken);
 
           if (getStorage(platforms[0]?.type) !== 'true') navigate('/signup/complete');
-          else dispatch(signUpAfterAutoLogin(e.data.data));
+          else dispatch(signUpAfterAutoLogin({ navigate, accessToken: authToken, userInfo }));
           // window.localStorage.setItem('token', e.data.data.authToken);
           // e.data.data.platforms: 바인딩된 플랫폼 배열 (ccr, google, apple, facebook, twitter)
           // e.data.data.userInfo

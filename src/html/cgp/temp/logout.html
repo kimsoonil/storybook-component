@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div class="container temp">
+      <div class="temp_left">
+        <div style="margin-bottom:27px;"><img src="../../img/temp/Profile_login.png"></div>
+        <div style="margin-bottom:27px;"><img src="../../img/temp/Wallet_layer.png"></div>
+        <div style="margin-bottom:27px;"><img src="../../img/temp/Activity_layer.png"></div>
+        <div style="margin-bottom:27px;"><img src="../../img/temp/Collect_layer.png"></div>
+      </div>
+      <div class="temp_con">
+        <div><img src="../../img/temp/Friends_list.png"></div>
+        <div class="temp_main">
+          <div>
+            <div style="margin-top:28px;"><img src="../../img/temp/Match_layer.png"></div>
+            <div class="temp_center">
+              <div class="content_subtitle">
+                <h4 class="h4Type eng">Explore</h4>
+                <div class="title_menu">
+                  <button type="button" class="hover text_btn">
+                    <span>See All</span>
+                  </button>
+                </div>
+              </div>
+              <div class="btn_category">
+                <button type="button" class="post_categoty active">
+                  <span>NFTs</span>
+                </button>
+                <button type="button" class="post_categoty">
+                  <span>Game</span>
+                </button>
+                <button type="button" class="post_categoty">
+                  <span>Market Place</span>
+                </button>
+                <button type="button" class="post_categoty">
+                  <span>Party</span>
+                </button>
+                <button type="button" class="post_categoty">
+                  <span>Foodcorn</span>
+                </button>
+                <button type="button" class="post_categoty">
+                  <span>OOTD</span>
+                </button>
+              </div>
+              <div style="padding-bottom:28px;"><img src="../../img/temp/Feed_041.png"></div>
+              <div><img src="../../img/temp/Feed_02.png"></div>
+            </div>
+
+          </div>
+          <div class="temp_right">
+            <div style="padding-bottom:28px;"><img src="../../img/temp/Messages_layer.png"></div>
+            <div style="padding-bottom:28px;"><img src="../../img/temp/Suggest_layer.png"></div>
+            <div style="padding-bottom:28px;"><img src="../../img/temp/Popular_nfts.png"></div>
+            <div class="slide_banner">
+              <button type="button" class="slide_btn left">
+                <span class="a11y">왼쪽으로</span>
+              </button>
+              <div class="slide_img">
+                <img src="../../img/temp/banner_cgp.png">
+              </div>
+              <button type="button" class="slide_btn right">
+                <span class="a11y">오른쪽으로</span>
+              </button>
+              <div class="slide_dot">
+                <button type="button" class="dot"></button>
+                <button type="button" class="dot on"></button>
+                <button type="button" class="dot"></button>
+                <button type="button" class="dot"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+</html>

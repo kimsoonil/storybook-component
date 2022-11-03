@@ -14,8 +14,8 @@ function* getClubDashboard({ payload }) {
   }
 }
 
-function* _dashboardAdminSaga() {
+function* dashboardAdminSagas() {
   yield all([takeEvery(actionTypes.getClubDashboardInit, getClubDashboard)]);
 }
 
-export const dashboardAdminSaga = [fork(_dashboardAdminSaga)];
+export const dashboardAdminSaga = [fork(dashboardAdminSagas)];

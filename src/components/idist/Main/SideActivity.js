@@ -24,7 +24,7 @@ function SideActivity() {
         <Loader />
       </div>
     );
-  return (
+  return activities.data.length !== 0 ? (
     <div className="side-box activity">
       <div className="flex-between">
         <div className="side-box-title">Activity</div>
@@ -34,40 +34,32 @@ function SideActivity() {
       </div>
       <div className="side-box-meun">
         <div className="side-activity">
-          {activities.data.length > 0 ? (
-            activities.data.map((activityItem, index) => {
-              if (index < 7)
-                return (
-                  <div className="side-activity-item" key={index}>
-                    <div className="side-activity-item-img">
-                      <img src={require('images/main/icon-activity1.png')} />
-                    </div>
-                    <div className="side-activity-item-content">
-                      <div className="side-activity-item-title">{activityItem.title}</div>
-                      <div
-                        className="side-activity-item-name"
-                        dangerouslySetInnerHTML={{ __html: activityItem.content }}
-                      ></div>
-                      <div className="side-activity-item-greetings">{dateCalculation(activityItem.created)}</div>
-                    </div>
-                    <div className="side-activity-item-profile">
-                      <img src={require('images/main/profile-dummy-img.png')} />
-                    </div>
+          {activities.data.map((activityItem, index) => {
+            if (index < 7)
+              return (
+                <div className="side-activity-item" key={index}>
+                  <div className="side-activity-item-img">
+                    <img src={require('images/main/icon-activity1.png')} />
                   </div>
-                );
-            })
-          ) : (
-            <div className="no-data flex-center">
-              <div>
-                <img src={require('images/Error/img_error_page.png')} alt="" />
-              </div>
-              <div className="no-data-title">No search results found</div>
-              <div className="no-data-content">Try searching with a different keyword.</div>
-            </div>
-          )}
+                  <div className="side-activity-item-content">
+                    <div className="side-activity-item-title">{activityItem.title}</div>
+                    <div
+                      className="side-activity-item-name"
+                      dangerouslySetInnerHTML={{ __html: activityItem.content }}
+                    ></div>
+                    <div className="side-activity-item-greetings">{dateCalculation(activityItem.created)}</div>
+                  </div>
+                  <div className="side-activity-item-profile">
+                    <img src={require('images/main/profile-dummy-img.png')} />
+                  </div>
+                </div>
+              );
+          })}
         </div>
       </div>
     </div>
+  ) : (
+    <div className="club-content-nodata"></div>
   );
 }
 

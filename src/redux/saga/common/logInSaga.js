@@ -83,11 +83,11 @@ function loginProcess(user, dispatch, navigate) {
 
 function* onLoadAuthSnsAsync({ payload }) {
   try {
-    console.log(`payload:: ${payload}`);
     const response = yield call(fetchAuthSns, payload);
     // console.log('sns saga::', response);
     // if (response.status === SUCCESS) {
-    // console.log(`saga in:: ${payload}`);
+    console.log(`onLoadAuthSnsAsync in:: ${response}`);
+
     yield put(authSnsSuccess({ ...response.data }));
     // setStorage('accessToken', response.data.accessToken);
     // }
@@ -119,12 +119,11 @@ function* onLoadLogInAsync({ payload }) {
       const response2 = yield call(fetchLogIn2, ccrLoginInfo);
 
       yield put(logInSuccess({ ...response2.data }));
-      const accessToken = data.authToken;
+      console.log(response2.data);
+      const accessToken = response2.data.authToken;
       setCookie('refreshToken', accessToken, { maxAge: REFRESH_TOKEN_MAX_AGE });
       // set accessToken
       setStorage('accessToken', accessToken);
-      console.log(response2.data);
-      console.log('loginsaga autoLogin::', getStorage('autoLogin'));
       if (getStorage('autoLogin') === 'true') {
         setStorage('username', username);
         setStorage('password', password);
@@ -175,10 +174,11 @@ function* onLoadLogOut() {
 }
 
 function* onLoadSignUpAfterLoginAsync({ payload }) {
-  console.log(payload);
+  console.log('onLoadSignUpAfterLoginAsync:', payload);
   const { navigate, accessToken, userInfo } = payload;
   try {
     yield put(signUpAfterAutoLogin({ accessToken, userInfo }));
+    setStorage('accessToken', accessToken);
     navigate('/home');
   } catch (error) {
     console.log(error);

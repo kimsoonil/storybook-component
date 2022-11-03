@@ -1,7 +1,6 @@
 /* eslint-disable */
 
 import React, { useState, useEffect, useRef } from 'react';
-import JoditEditor, { Jodit } from 'jodit-pro-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPostInit, patchPostInit } from 'redux/idistStore/postsSlice';
 import { getFourmPostsInit, postFourmPostInit, fourmReset } from 'redux/store/forum/fourmPostSlice';
@@ -39,11 +38,19 @@ function ForumWriting(props) {
   }, [postId]);
 
   useEffect(() => {
-    console.log('fourmPosts', fourmPosts);
-    if (fourmPosts.data) {
+    if (fourmPosts.data && id) {
       navigate(`/forum/${id}/post/${fourmPosts.data[0].id}`);
     }
   }, [fourmPosts.data]);
+
+  useEffect(() => {
+    if (fourmPosts.message === 'ok' && postId !== undefined) {
+      setPostsData({
+        title: fourmPosts.data.title,
+        content: fourmPosts.data.content
+      });
+    }
+  }, [fourmPosts]);
 
   useEffect(() => {
     if (post.message === 'ok' && postId !== undefined) {
@@ -53,46 +60,6 @@ function ForumWriting(props) {
       });
     }
   }, [post]);
-
-  const config = {
-    readonly: false,
-    height: 600,
-    padding: 20,
-    placeholder: 'Please leave a comment that you want to share.',
-    license: '63DFM-3/H53-ATPPJ-RGIRZ',
-    uploader: {
-      url: 'https://xdsoft.net/jodit/finder/?action=fileUpload'
-    },
-    buttons: [
-      'undo',
-      'redo',
-      '|',
-      'brush',
-      'bold',
-      'italic',
-      '|',
-      'left',
-      'center',
-      'right',
-      '|',
-      'ol',
-      'ul',
-      '|',
-      'table'
-    ]
-  };
-  function preparePaste(jodit) {
-    jodit.e.on('emoji', (e) => {
-      if (confirm('Change pasted content?')) {
-        jodit.e.stopPropagation('paste');
-        jodit.s.insertHTML(
-          Jodit.modules.Helpers.getDataTransfer(e).getData(Jodit.constants.TEXT_HTML).replace(/a/g, 'b')
-        );
-        return false;
-      }
-    });
-  }
-  Jodit.plugins.add('preparePaste', preparePaste);
 
   // 게시글 생성
   const postsCreate = (temp) => {
@@ -125,7 +92,6 @@ function ForumWriting(props) {
       );
     }
   };
-
   return (
     <div>
       <Header />

@@ -1,24 +1,15 @@
-/* eslint-disable */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import 'assets/scss/admin/boards.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import _ from 'lodash';
+import { useDispatch } from 'react-redux';
 import JButton from 'components/idist/admin/JButton';
 import BoardGroupList from 'components/idist/admin/boards/BoardGroupList';
-import {
-  getBoardGroupsInit,
-  postBoardGroupInit,
-  setBoardAdminBoardGroups,
-  setBoardGroups,
-  setInfo
-} from 'redux/idistStore/admin/boardAdminSlice';
+import { setInfo } from 'redux/idistStore/admin/boardAdminSlice';
 import { TextInput } from 'components/idist/admin/TextInput';
 import { IVD } from '..';
 
 const rootClassName = 'admin-boards';
 
-const Sidebar = ({
+function Sidebar({
   addState,
   setAddState,
 
@@ -29,7 +20,7 @@ const Sidebar = ({
 
   title,
   setTitle
-}) => {
+}) {
   const dispatch = useDispatch();
   const [titleInputState, setTitleInputState] = useState(IVD.blur);
 
@@ -38,7 +29,7 @@ const Sidebar = ({
       return;
     }
     if (addState) {
-      confirm('다른 작업 중입니다.');
+      // confirm('다른 작업 중입니다.');
       return;
     }
     setTitle('');
@@ -49,7 +40,7 @@ const Sidebar = ({
   return (
     <div className={`${rootClassName}-sidebar`}>
       <div className={`${rootClassName}-sidebar-add-group-button-wrapper`}>
-        <JButton label={'+ ADD GROUP'} style={{ flex: 1 }} onClick={() => onClickAdd()} />
+        <JButton label="+ ADD GROUP" style={{ flex: 1 }} onClick={() => onClickAdd()} />
       </div>
 
       <div style={{ overflow: 'scroll', paddingBottom: '50px' }}>
@@ -85,6 +76,6 @@ const Sidebar = ({
       </div>
     </div>
   );
-};
+}
 
 export default Sidebar;

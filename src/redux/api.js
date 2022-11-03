@@ -32,11 +32,24 @@ export const fetchCreateForum = (data) =>
       'Content-Type': 'multipart/form-data'
     }
   });
-export const fetchEditForum = (data) => axios.patch(`${process.env.REACT_APP_API_URL}forum/5`, data);
+export const fetchEditForum = (data, id) => axios.patch(`${process.env.REACT_APP_API_URL}forum/${id}`, data);
 
 // get
 export const fetchForumInfo = (data) => axios.get(`${process.env.REACT_APP_API_URL}forum/${data}`);
-export const fetchForumList = (data) => axios.get(`${process.env.REACT_APP_API_URL}forums`, data);
+export const fetchForumList = (data) => axios.get(`${process.env.REACT_APP_API_URL}forums`, { params: data });
+export const fetchBookMarkedForumList = (data) => axios.get(`${process.env.REACT_APP_API_URL}forums`, { params: data });
 export const fetchCategoryList = () => axios.get(`${process.env.REACT_APP_API_URL}forums/categories`);
 export const fetchForumBest = () => axios.get(`${process.env.REACT_APP_API_URL}forums/best`);
-export const fetchForumRankingList = (data) => axios.get(`${process.env.REACT_APP_API_URL}forums/best`, data);
+export const fetchForumRankingList = (data) => axios.get(`${process.env.REACT_APP_API_URL}forums`, { params: data });
+export const fetchForumPostList = (data) => axios.get(`${process.env.REACT_APP_API_URL}forums/posts`, { params: data });
+// 이름 바꿔야..
+export const fetchForumPostSave = (data, id) =>
+  axios.post(`${process.env.REACT_APP_API_URL}forum/${id}/post`, data.parameters);
+export const fetchForumIdPostList = (data) =>
+  axios.get(`${process.env.REACT_APP_API_URL}forum/${data.forumId}/posts`, { params: data });
+
+export const fetchForumCommentSave = (data) =>
+  axios.post(`${process.env.REACT_APP_API_URL}post/${data.id}/comment`, data?.parameters);
+
+export const fetchForumPin = (data) => axios.post(`${process.env.REACT_APP_API_URL}forum/${data}/pin`);
+export const fetchForumUnpin = (data) => axios.post(`${process.env.REACT_APP_API_URL}forum/${data}/unpin`);

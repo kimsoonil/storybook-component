@@ -1,17 +1,46 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable camelcase */
 import React from 'react';
-import userThumbImg from 'html/img/com/user thumb.png';
-import thumbImg from 'html/img/com/thumb.png';
-// import ForumThumb01 from 'html/img/com/forum_thumb_01.png';
+// import userThumbImg from 'html/img/com/user thumb.png';
+import classNames from 'classnames';
+import { getPostDateFormat } from 'util/common.js';
+import { DATE_FORMAT_WEEK_TO_YEAR } from 'constants/type';
+import { useNavigate } from 'react-router';
 
-function SimplePost({ item }) {
-  const { forumName } = item;
+function SimplePost({ item, idx }) {
+  const {
+    thumbnail_image_url,
+    title,
+    created,
+    like_count,
+    dislike_count,
+    comment_count,
+    visit_count,
+    content_summary,
+    user,
+    id,
+    forum,
+    forum_title
+  } = item;
+  const navigate = useNavigate();
+  console.log('content', item);
   return (
-    <li>
+    <li onClick={() => navigate(`/forum/${forum}/post/${id}`)} aria-hidden>
       <dl className="forum_thum_list small">
         <dt className="forum_thum_img">
-          <img src={thumbImg} alt="" />
+          <img src={thumbnail_image_url} alt="" />
           <div className="rank">
-            <span className="rank_badge_small gold" />
+            <span
+              className={classNames(
+                'rank_badge_small',
+                { gold: idx === 0 },
+                { silver: idx === 1 },
+                { bronze: idx === 2 },
+                { normal: idx > 2 }
+              )}
+            >
+              {idx > 2 && <span>{idx + 1}</span>}
+            </span>
           </div>
           <div className="best">
             <span className="post_badge_best live" />
@@ -23,33 +52,32 @@ function SimplePost({ item }) {
           <div className="img_over">
             <div className="user_info">
               <div className="user_thum">
-                <img src={userThumbImg} alt="" />
+                <img src={user?.profile_image_url} alt="" />
               </div>
               <dl>
-                <dt className="user_name">ghr4df31467a1b..</dt>
-                <dd className="user_date">23h ago</dd>
+                <dt className="user_name">{user.username}</dt>
+                <dd className="user_date">{getPostDateFormat(created, DATE_FORMAT_WEEK_TO_YEAR)}</dd>
               </dl>
             </div>
-            <div className="text">
-              How to get a ban pick in T1 is very simple. The first thing to reme mber when you play thing to reme mber
-            </div>
+            {/* eslint-disable-next-line react/no-danger */}
+            <div className="text">{content_summary}</div>
           </div>
         </dt>
-        <dd className="forum_thum_name">{forumName}</dd>
+        <dd className="forum_thum_name">{forum_title}</dd>
         <dd className="forum_thum_text">
           <span className="msg">
-            How to win ban pick in T1 <span className="num">(32)</span>
+            {title} <span className="num">({comment_count})</span>
           </span>
         </dd>
       </dl>
       <div className="forum_thum_list_info">
         <div className="emoji_group">
-          <span className="emoji like" />
-          <span className="emoji fun" />
-          <span className="emoji_num">926</span>
+          <span className="emoji like">{like_count}</span>
+          <span className="emoji fun">{dislike_count}</span>
+          <span className="emoji_num">{visit_count}</span>
         </div>
         <div className="view_num">
-          <span>38M</span>
+          <span>{visit_count}</span>
         </div>
       </div>
     </li>

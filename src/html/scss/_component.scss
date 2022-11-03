@@ -1,3 +1,4 @@
+@use 'sass:math';
 /* Common */
 .hidden {
   display: none !important;
@@ -18,7 +19,6 @@
     }
     label + .input_xs,
     .input_xs + label {
-      margin-left: 6px;
       margin-left: 6px;
     }
   }
@@ -57,7 +57,7 @@
         }
         &:focus,
         &:active {
-          border-color: $point_color;
+          border-color: $main_color;
           outline: none;
         }
         &:read-only {
@@ -109,37 +109,6 @@
         width: 6px;
         height: 6px;
         border-radius: 3px;
-      }
-    }
-    &.search {
-      input {
-        @include placeholder($gray_color02);
-        border:none;
-        outline:none;
-        background:$gray_color06;
-        border-radius:8px;
-        padding:10px 10px 10px 16px;
-        @include eng_font(medium);
-        font-size:$font_base;
-        line-height:20px;
-        color:$body_text;
-        &:focus {
-          border:1px solid $point_color;
-        }
-      }
-      button {
-        position:absolute;
-        top:50%;
-        right:10px;
-        transform: translateY(-50%);
-        width:24px;
-        height:24px;
-        &:before {
-          @include content;
-          width:24px;
-          height:24px;
-          background:url('#{$img_root_path}/ico/ic_search_gr.png') no-repeat center center / 24px 24px;
-        }
       }
     }
     &.between {
@@ -241,6 +210,24 @@
         }
       }
     }
+    &.search_noline {
+      position: relative;
+      input {
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        background: $gray_color06;
+        padding: 0 40px 0 16px;
+        @include eng_font(medium);
+        font-size: $font_base;
+        color: $body_text;
+        & + button {
+          right: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
   }
   &.success {
     .form_cell {
@@ -303,11 +290,12 @@
       margin-left: 30px;
       input[type='checkbox'] {
         & + label {
-          @include eng_font(normal);
+          @include eng_font(light);
           color: $body_text;
+          font-size: $font_base;
           position: relative;
           display: inline-block;
-          width: calc(100% - 36px);
+          // width: calc(100% - 36px);
           &::before {
             @include content;
             position: absolute;
@@ -315,19 +303,20 @@
             top: -3px;
             width: 30px;
             height: 30px;
-            background: url('#{$img_root_path}/form/checkbox.png') no-repeat center center / 24px 24px;
+            background: transparent url('#{$img_root_path}/form/checkbox.png') no-repeat center center / 24px 24px;
           }
           span {
             display: inline-block;
-            margin-left: 6px;
+            margin-left: 8px;
+            margin-top: 2px;
             word-break: break-all;
-            width: 100%;
           }
         }
         &:hover {
           & + label {
-            &::before {
-              background-color: rgba(244, 224, 224, 0.5);
+            @include eng_font(normal);
+            &:before {
+              background-color: rgba(224, 224, 224, 0.5) !important;
               border-radius: 50%;
             }
           }
@@ -342,8 +331,9 @@
         }
         &:checked:hover {
           & + label {
-            &::before {
-              background-color: rgba(244, 19, 254, 0.2);
+            @include eng_font(normal);
+            &:before {
+              background-color: rgba(244, 19, 254, 0.2) !important;
               border-radius: 50%;
             }
           }
@@ -354,6 +344,11 @@
             &::before {
               background: url('#{$img_root_path}/form/checkbox.png') no-repeat center center / 24px 24px;
               opacity: 0.3;
+            }
+          }
+          &:hover {
+            & + label {
+              @include eng_font(light);
             }
           }
         }
@@ -654,7 +649,6 @@
 
 /* Textarea */
 textarea {
-  @include text_scroll;
   font-family: 'Poppins';
   position: relative;
   min-width: 400px;
@@ -911,6 +905,7 @@ textarea {
     border: 1px solid $gray_color05;
     text-decoration: none;
   }
+  &:active,
   &.active {
     background: linear-gradient(114deg, #ff5ec9, #ff45a1 92%);
     color: $white_color;
@@ -947,7 +942,6 @@ textarea {
     &:active {
       background: linear-gradient(110deg, #ff5ec9, #ff45a1 92%);
       box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15);
-
       color: $white_color;
       @include eng_font(semibold);
     }
@@ -959,7 +953,6 @@ textarea {
 .hashtag_box {
   display: flex;
   flex-wrap: wrap;
-
   .hashtag_text {
     height: 28px;
     position: relative;
@@ -1083,48 +1076,56 @@ textarea {
   }
   .select {
     position: relative;
-    display: flex;
-    width: 100%;
-    height:52px;
-    align-items: center;
-    border: 1px solid $gray_color05;
-    background: $white_color;
-    border-radius: 8px;
-    padding: 14px 12px 14px 16px;
-    box-sizing: border-box;
-    .selected-value {
-      margin-top:14px;
-      @include eng_font(normal);
-      font-size: $font_base + 2px;
-      line-height: 24px;
-      letter-spacing: -0.32px;
-      color: $body_text;
-    }
-    .arrow {
-      &:before {
-        @include content;
-        position: absolute;
-        right: 12px;
-        top: 12px;
-        width: 24px;
-        height: 24px;
-        background: url('#{$img_root_path}/ico/ic_select_arrow_open.png') no-repeat center center / 24px 24px;
-        transition: 0.3s ease-in-out;
+    .selected {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      border: 1px solid $gray_color05;
+      background: $white_color;
+      border-radius: 8px;
+      padding: 14px 12px 14px 16px;
+      box-sizing: border-box;
+      .selected-value {
+        @include eng_font(normal);
+        font-size: $font_base + 2px;
+        line-height: 24px;
+        letter-spacing: -0.32px;
+        color: $body_text;
+      }
+      .arrow {
+        &:before {
+          @include content;
+          position: absolute;
+          right: 12px;
+          top: 12px;
+          width: 24px;
+          height: 24px;
+          background: url('#{$img_root_path}/ico/ic_select_arrow_open.png') no-repeat center center / 24px 24px;
+          transition: 0.3s ease-in-out;
+        }
       }
     }
+    ul li,
+    .selected .selected-value {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    ul {
+      display: none;
+    }
     &.active {
-      border: 1px solid $body_text;
-      border-bottom: none !important;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
+      .selected {
+        border: 1px solid $body_text;
+        border-bottom: none !important;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
       ul {
+        width: 100%;
         position: absolute;
         background: #fff;
-        top:45px;
-        left:-1px;
-        right:-1px;
-        border-top-left-radius: 0px;
-        border-top-right-radius: 0px;
+        margin-top: -3px;
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
         cursor: pointer;
@@ -1164,51 +1165,41 @@ textarea {
         }
       }
     }
-  }
-  ul li,
-  .selected .selected-value {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  ul {
-    display: none;
-  }
-
-  &.tel {
-    width: 84px !important;
-    height: 48px !important;
-    margin-right: 4px;
-    .selected {
-      padding: 12px 10px 12px 16px;
-      .arrow {
-        &:before {
-          right: 8px;
+    &.tel {
+      width: 84px !important;
+      height: 48px !important;
+      margin-right: 4px;
+      .selected {
+        padding: 12px 10px 12px 16px;
+        .arrow {
+          &:before {
+            right: 8px;
+          }
+        }
+      }
+    }
+    &.privacy {
+      width: 200px !important;
+      height: 52px !important;
+      .selected {
+        padding: 12px 10px 12px 16px;
+        .arrow {
+          &:before {
+            right: 8px;
+          }
         }
       }
     }
   }
-  &.privacy {
-    width: 200px !important;
-    height: 52px !important;
-    .selected {
-      padding: 12px 10px 12px 16px;
-      .arrow {
-        &:before {
-          right: 8px;
-        }
-      }
-    }
+  .error_txt {
+    color: $button_error;
+    display: block;
+    @include eng_font(light);
+    font-size: $font_base - 1px;
+    line-height: 20px;
+    letter-spacing: -0.26px;
+    margin-top: 4px;
   }
-}
-.error_txt {
-  color: $button_error;
-  display: block;
-  @include eng_font(light);
-  font-size: $font_base - 1px;
-  line-height: 20px;
-  letter-spacing: -0.26px;
-  margin-top: 4px;
 }
 
 /* Dropdown */
@@ -1238,29 +1229,23 @@ textarea {
           @include content;
           position: absolute;
           right: 12px;
-          top: 16px;
+          top: 12px;
           width: 24px;
           height: 24px;
           background: url('#{$img_root_path}/ico/ic_select_arrow_open.png') no-repeat center center / 24px 24px;
           transition: 0.3s ease-in-out;
         }
       }
-    }
-    .selected_input {
-      display: flex;
-      width: 100%;
-      align-items: center;
-      min-height: 52px;
-      border: 1px solid $gray_color05;
-      background: $white_color;
-      border-radius: 8px;
-      box-sizing: border-box;
-      .form_wrap .form_cell {
-        width:99% !important;
-      }
-      .form_wrap .form_cell.input_lg input {
-        border:none;
-        outline:none;
+      .search {
+        &:before {
+          @include content;
+          position: absolute;
+          right: 12px;
+          top: 12px;
+          width: 24px;
+          height: 24px;
+          background: url('#{$img_root_path}/ico/ic_search_gr.png') no-repeat center center / 24px 24px;
+        }
       }
     }
     ul li,
@@ -1274,7 +1259,7 @@ textarea {
     }
     &.active {
       .selected {
-        border: 1px solid $point_color;
+        border: 1px solid $main_color;
       }
       ul {
         width: 100%;
@@ -1318,7 +1303,6 @@ textarea {
               background: url('#{$img_root_path}/ico/ic_check_pp.png') no-repeat center center / 24px 24px;
             }
           }
-
           &.icon_menu {
             position: sticky;
             bottom: 0;
@@ -1382,7 +1366,6 @@ textarea {
     height: 24px;
     &:before {
       @include content;
-
       width: 24px;
       height: 24px;
       background: url('#{$img_root_path}/ico/ic_dropdown_more.png') no-repeat center center / 24px 24px;
@@ -1734,6 +1717,7 @@ textarea {
   text-align: center;
   padding: 4px 8px;
   width: auto;
+  z-index: 10;
   span {
     @include eng_font(normal);
     display: block;
@@ -2157,8 +2141,30 @@ textarea {
   }
 }
 
+@keyframes fadeInOut {
+  0% {
+    visibility: visible;
+    opacity: 0;
+    top:100%;
+  }
+  30% {
+    opacity: 1;
+    top:50%;
+  }
+  70% {
+    opacity: 1;
+    top:50%;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    top:100%;
+  }
+}
 /* Toast msg */
 .toast {
+  visibility: hidden;
+  animation: fadeInOut 2s linear;
   display: inline-block;
   position: relative;
   width: 360px;
@@ -2168,7 +2174,6 @@ textarea {
   opacity: 0.8;
   span {
     @include eng_font(normal);
-
     line-height: 20px;
     letter-spacing: -0.28px;
   }
@@ -2224,7 +2229,7 @@ textarea {
       color: #b46f00;
     }
     background: rgba(255, 249, 222, 0.95);
-    border: 1px solid #ffd300;
+    border: 1px solid $new_color;
     .close {
       &:before {
         @include content;
@@ -2260,7 +2265,6 @@ textarea {
   &.show {
     position: absolute;
     left: 50%;
-    top: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     padding: 12px;
@@ -2314,7 +2318,6 @@ textarea {
   li {
     display: inline-block;
     @include eng_font(light);
-
     font-size: $font_base;
     line-height: 20px;
     letter-spacing: -0.28px;
@@ -2370,149 +2373,73 @@ textarea {
   }
 }
 .emoji {
-  display:inline-block;
-  width:24px;
-  height:24px;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
   & + .emoji {
-    margin-left:-8px;
+    margin-left: -8px;
   }
   &.like {
-    position:relative;
     &:before {
       @include content;
-      width:24px;
-      height:24px;
-      background:url('#{$img_root_path}/emoji/emoji_like.png') no-repeat center center / 24px 24px;
+      width: 24px;
+      height: 24px;
+      background: url('#{$img_root_path}/emoji/emoji_like.png') no-repeat center center / 24px 24px;
     }
   }
   &.devil {
     &:before {
       @include content;
-      width:24px;
-      height:24px;
-      background:url('#{$img_root_path}/emoji/emoji_devil.png') no-repeat center center / 24px 24px;
+      width: 24px;
+      height: 24px;
+      background: url('#{$img_root_path}/emoji/emoji_devil.png') no-repeat center center / 24px 24px;
     }
   }
   &.fun {
     &:before {
       @include content;
-      width:24px;
-      height:24px;
-      background:url('#{$img_root_path}/emoji/emoji_fun.png') no-repeat center center / 24px 24px;
+      width: 24px;
+      height: 24px;
+      background: url('#{$img_root_path}/emoji/emoji_fun.png') no-repeat center center / 24px 24px;
     }
   }
   &.healing {
     &:before {
       @include content;
-      width:24px;
-      height:24px;
-      background:url('#{$img_root_path}/emoji/emoji_healing.png') no-repeat center center / 24px 24px;
+      width: 24px;
+      height: 24px;
+      background: url('#{$img_root_path}/emoji/emoji_healing.png') no-repeat center center / 24px 24px;
     }
   }
   &.useful {
     &:before {
       @include content;
-      width:24px;
-      height:24px;
-      background:url('#{$img_root_path}/emoji/emoji_useful.png') no-repeat center center / 24px 24px;
+      width: 24px;
+      height: 24px;
+      background: url('#{$img_root_path}/emoji/emoji_useful.png') no-repeat center center / 24px 24px;
     }
   }
   &.legend {
     &:before {
       @include content;
-      width:24px;
-      height:24px;
-      background:url('#{$img_root_path}/emoji/emoji_legend.png') no-repeat center center / 24px 24px;
+      width: 24px;
+      height: 24px;
+      background: url('#{$img_root_path}/emoji/emoji_legend.png') no-repeat center center / 24px 24px;
     }
   }
   &.empathy {
     &:before {
       @include content;
-      width:24px;
-      height:24px;
-      background:url('#{$img_root_path}/emoji/emoji_empathy.png') no-repeat center center / 24px 24px;
+      width: 24px;
+      height: 24px;
+      background: url('#{$img_root_path}/emoji/emoji_empathy.png') no-repeat center center / 24px 24px;
     }
   }
   &.big {
-    width:28px;
-    height:28px;
+    width: 28px;
+    height: 28px;
     &:before {
       background-size: 28px 28px;
-    }
-  }
-}
-.btn_feel_group {
-  position:relative;
-  .emoji_layer {
-    display:none;
-    width:325px;
-    position:absolute;
-    background:$body_text;
-    padding:8px 8px 8px 8px;
-    border-radius:4px;
-    top:-82px;
-    right:0px;
-    opacity:0.8;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    &:before {
-      @include content;
-      position:absolute;
-      bottom:-5px;
-      right:100px;
-      width:7px;
-      height:5px;
-      border-bottom:0px;
-      border-top:5px solid $body_text;
-      border-left:3.5px solid transparent;
-      border-right:3.5px solid transparent;
-    }
-    &.like_arr {
-      &:before {
-        right:100px;
-      }
-    }
-    &.dislike_arr {
-      &:before {
-        right:27px;
-      }
-    }
-    .emoji_big {
-      span {
-        @include eng_font(normal);
-        display:block;
-        width:40px;
-        text-align:center;
-        font-size:$font_base - 4px;
-        line-height:14px;
-        letter-spacing:-0.2px;
-        color:$gray_color03;
-      }
-      &:before {
-        @include content;
-        width:40px;
-        height:40px;
-      }
-      &.like {
-        background:url('#{$img_root_path}/emoji/emoji_like_big.png') no-repeat top center / 40px 40px;
-      }
-      &.fun {
-        background:url('#{$img_root_path}/emoji/emoji_fun_big.png') no-repeat top center / 40px 40px;
-      }
-      &.healing {
-        background:url('#{$img_root_path}/emoji/emoji_healing_big.png') no-repeat top center / 40px 40px;
-      }
-      &.legend {
-        background:url('#{$img_root_path}/emoji/emoji_legend_big.png') no-repeat top center / 40px 40px;
-      }
-      &.useful {
-        background:url('#{$img_root_path}/emoji/emoji_useful_big.png') no-repeat top center / 40px 40px;
-      }
-      &.empathy {
-        background:url('#{$img_root_path}/emoji/emoji_empathy_big.png') no-repeat top center / 40px 40px;
-      }
-      &.devil {
-        background:url('#{$img_root_path}/emoji/emoji_devil_big.png') no-repeat top center / 40px 40px;
-      }
     }
   }
 }
@@ -2733,6 +2660,36 @@ textarea {
   }
 }
 
+.post_badge_best_big {
+  display: inline-block;
+  width: 48px;
+  height: 54px;
+  &.live {
+    &:before {
+      @include content;
+      width: 48px;
+      height: 54px;
+      background: url('#{$img_root_path}/badge/badge_post_best_live.png') no-repeat center center / 48px 54px;
+    }
+  }
+  &.weekly {
+    &:before {
+      @include content;
+      width: 48px;
+      height: 54px;
+      background: url('#{$img_root_path}/badge/badge_post_best_weekly.png') no-repeat center center / 48px 54px;
+    }
+  }
+  &.monthly {
+    &:before {
+      @include content;
+      width: 48px;
+      height: 54px;
+      background: url('#{$img_root_path}/badge/badge_post_best_monthly.png') no-repeat center center / 48px 54px;
+    }
+  }
+}
+
 .rank_badge_big {
   display: inline-block;
   width: 48px;
@@ -2792,11 +2749,27 @@ textarea {
     }
   }
   &.normal {
+    position: relative;
+    width: 48px;
+    height: 48px;
     &:before {
       @include content;
       width: 48px;
       height: 48px;
       background: url('#{$img_root_path}/ico/ic_medal_normal.png') no-repeat center center / 48px 48px;
+    }
+    span {
+      @include eng_font(bold);
+      font-style: italic;
+      font-size: $font_base + 7px;
+      line-height: 40px;
+      letter-spacing: 3px;
+      color: $white_color;
+      text-align: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
     }
   }
 }
@@ -2865,11 +2838,27 @@ textarea {
     }
   }
   &.normal {
+    position: relative;
+    width: 32px;
+    height: 32px;
     &:before {
       @include content;
       width: 32px;
       height: 32px;
       background: url('#{$img_root_path}/ico/ic_medal_normal.png') no-repeat center center / 32px 32px;
+    }
+    span {
+      @include eng_font(bold);
+      font-style: italic;
+      font-size: $font_base;
+      line-height: 26px;
+      letter-spacing: 3px;
+      color: $white_color;
+      text-align: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
     }
   }
 }
@@ -2955,22 +2944,22 @@ textarea {
   }
 }
 
+$swiper_button_size: 54px;
 /* Swiper */
 .swiper {
   position: relative;
   .swiper_button {
-    width: 54px;
-    height: 54px;
+    width: $swiper_button_size;
+    height: $swiper_button_size;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: calc(50% - (math.div($swiper_button_size, 2)));
     z-index: 10;
     &.left {
-      left: 0;
+      left: -(math.div($swiper_button_size, 2) - 7px);
       &:before {
         @include content;
-        width: 54px;
-        height: 54px;
+        width: $swiper_button_size;
+        height: $swiper_button_size;
         opacity: 0.6;
         background: url('#{$img_root_path}/btn/btn_circle_arrow_prev_on.png') no-repeat center center / 54px 54px;
       }
@@ -2981,7 +2970,7 @@ textarea {
       }
     }
     &.right {
-      right: 0;
+      right: -(math.div($swiper_button_size, 2) - 11px);
       &:before {
         @include content;
         width: 54px;
@@ -2992,6 +2981,54 @@ textarea {
       &:hover {
         &:before {
           opacity: 1;
+        }
+      }
+    }
+  }
+  &.banner {
+    button.left {
+      left: 8px;
+      &:before {
+        background: url('#{$img_root_path}/btn/btn_img_prev_on.png') no-repeat center center / 54px 54px;
+      }
+    }
+    button.right {
+      right: 8px;
+      &:before {
+        background: url('#{$img_root_path}/btn/btn_img_next_on.png') no-repeat center center / 54px 54px;
+      }
+    }
+    .slick-slide {
+      border-radius: 20px;
+    }
+  }
+  .slick-dots {
+    position: absolute;
+    display: inline-flex !important;
+    justify-content: center;
+    height: 8px;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    li + li {
+      margin-left: 8px;
+    }
+    li {
+      width: 8px;
+      height: 8px;
+      button {
+        width: 8px;
+        height: 8px;
+        border-radius: 4px;
+        background: $gray_color05;
+        &:before {
+          content: '';
+        }
+      }
+      &.slick-active {
+        button {
+          background: $secon_color01;
+          opacity: 0.8;
         }
       }
     }
@@ -3057,6 +3094,7 @@ textarea {
 
 /* 조회수 */
 .view_num {
+  position:relative;
   span {
     @include eng_font(medium);
     font-size: $font_base;
@@ -3077,13 +3115,13 @@ textarea {
   }
   &.big {
     span {
-      font-size:$font_base + 2px;
-      line-height:24px;
-      letter-spacing:-0.32px;
-      padding-left:28px;
+      font-size: $font_base + 2px;
+      line-height: 24px;
+      letter-spacing: -0.32px;
+      padding-left: 28px;
       &:before {
-        width:24px;
-        height:24px;
+        width: 24px;
+        height: 24px;
         background-size: 24px 24px;
       }
     }
@@ -3114,34 +3152,34 @@ textarea {
 
 /* Profile Icon */
 .ico_in {
-  width:20px;
-  height:16px;
+  width: 20px;
+  height: 16px;
   &:before {
     @include content;
-    width:20px;
-    height:16px;
+    width: 20px;
+    height: 16px;
   }
   &.music {
     &:before {
-      background:url('#{$img_root_path}/ico/ic_in_musiclover.png') no-repeat center center / 20px 16px;
+      background: url('#{$img_root_path}/ico/ic_in_musiclover.png') no-repeat center center / 20px 16px;
     }
   }
   &.dog {
     &:before {
-      background:url('#{$img_root_path}/ico/ic_in_dog.png') no-repeat center center / 20px 16px;
+      background: url('#{$img_root_path}/ico/ic_in_dog.png') no-repeat center center / 20px 16px;
     }
   }
   &.swim {
     &:before {
-      background:url('#{$img_root_path}/ico/ic_in_swim.png') no-repeat center center / 20px 16px;
+      background: url('#{$img_root_path}/ico/ic_in_swim.png') no-repeat center center / 20px 16px;
     }
   }
   &.wine {
     &:before {
-      background:url('#{$img_root_path}/ico/ic_in_wine.png') no-repeat center center / 20px 16px;
+      background: url('#{$img_root_path}/ico/ic_in_wine.png') no-repeat center center / 20px 16px;
     }
   }
   & + .ico_in {
-    margin-left:2px;
+    margin-left: 2px;
   }
 }

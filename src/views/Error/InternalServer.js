@@ -18,7 +18,7 @@ function NotFound() {
   const { id } = useParams();
 
   return (
-    <div id="root">
+    <div>
       <Header />
       <div className="error flex-center">
         <img src={require('images/Error/img_error_page.png')} alt="" />

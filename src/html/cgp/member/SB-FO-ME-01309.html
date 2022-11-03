@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container">
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+<div id="modal"></div>
+<div class="modal_popup modal_text" style="width:720px;">
+  <div class="modal_con service">
+    <button type="button" class="close"></button>
+    <h2 class="modal_title">Marketing policies</h2>
+    <div class="con scroll">
+      <p><span>Consent to use of marketing information</span></p>
+      <p>You can refuse to receive marketing information and collect and use personal information for marketing,<br/>and even if you refuse, you can use the super club service.</p>
+      <p><span>Personal information collection items</span><br/>- Name, mobile phone number, email</p>
+      <p><span>Purpose of collection and use of personal information</span><br/>- Event operation and advertising information transmission<br/>- Transmission of service-related information</p>
+      <p><span>Retention and use period</span><br/>- Retention and use until the user withdraws consent or withdraws</p>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+
+// Select
+const selectBoxElements = document.querySelectorAll('.select');
+function toggleSelectBox(selectBox) {
+  selectBox.classList.toggle('active');
+}
+function selectOption(optionElement) {
+  const selectBox = optionElement.closest('.select');
+  const selectedElement = selectBox.querySelector('.selected-value');
+  selectedElement.textContent = optionElement.textContent;
+}
+selectBoxElements.forEach((selectBoxElement) => {
+  selectBoxElement.addEventListener('click', (e) => {
+    const targetElement = e.target;
+    const isOptionElement = targetElement.classList.contains('option');
+    if (isOptionElement) {
+      selectOption(targetElement);
+    }
+    toggleSelectBox(selectBoxElement);
+  });
+});
+
+document.addEventListener('click', (e) => {
+  const targetElement = e.target;
+  const isSelect = targetElement.classList.contains('select') || targetElement.closest('.select');
+  if (isSelect) {
+    return;
+  }
+  const allSelectBoxElements = document.querySelectorAll('.select');
+  allSelectBoxElements.forEach((boxElement) => {
+    boxElement.classList.remove('active');
+  });
+});
+</script>
+</html>

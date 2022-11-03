@@ -3,6 +3,8 @@ import { MAX_LIST_COUNT } from 'constants/type';
 
 const initialState = () => ({
   forumList: [],
+  forumCategoryList: [],
+  todayForum: {},
   hasNextPage: false,
   message: '',
   error: '',
@@ -20,9 +22,9 @@ const forumListSlice = createSlice({
       state.isLoading = true;
     },
     forumListSuccess: (state, { payload }) => {
-      console.log('list', payload.data);
-      Array.prototype.push.apply(state.forumList, payload.data);
-      // state.list = [...state.list, payload.data];
+      // Array.prototype.push.apply(state.forumList, payload.data);
+      console.log(payload);
+      state.forumList = payload.data;
       state.hasNextPage = payload.data.length === MAX_LIST_COUNT;
       state.reqCnt += 1;
       state.isLoading = false;
@@ -31,11 +33,27 @@ const forumListSlice = createSlice({
       state.error = error.payload.message;
       state.isLoading = false;
     },
+    reqAllForumList: (state) => {
+      state.isLoading = true;
+    },
+    allForumListSuccess: (state, { payload }) => {
+      if (payload.data.length > 0) {
+        state.forumCategoryList[payload.data[0].forum_category.id] = payload.data;
+      }
+      state.isLoading = false;
+    },
+    reqTodayForum: (state) => {
+      state.isLoading = true;
+    },
+    todayForumSuccess: (state, { payload }) => {
+      Object.assign(
+        state.todayForum,
+        payload.data.find(() => true)
+      );
+      state.isLoading = false;
+    },
     setSubsForum: (state, { payload }) => {
       const { forumId, subsStatus } = payload;
-      console.log(forumId, subsStatus);
-      console.log(current(state.list));
-
       const updatedList = current(state.list).map((item) =>
         item.forumId === forumId ? { ...item, subsStatus } : item
       );
@@ -44,6 +62,16 @@ const forumListSlice = createSlice({
   }
 });
 
-export const { reset, reqForumList, forumListSuccess, forumListFailure, setSubsForum } = forumListSlice.actions;
+export const {
+  reset,
+  reqForumList,
+  forumListSuccess,
+  forumListFailure,
+  reqAllForumList,
+  allForumListSuccess,
+  reqTodayForum,
+  todayForumSuccess,
+  setSubsForum
+} = forumListSlice.actions;
 
 export default forumListSlice.reducer;

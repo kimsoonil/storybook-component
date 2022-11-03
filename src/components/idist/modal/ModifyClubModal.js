@@ -6,7 +6,7 @@ import { AVD } from 'views/Admin';
 import { hideModal } from 'redux/idistStore/admin/modalSlice';
 import { getClubInit, patchClubInit } from 'redux/idistStore/clubSlice';
 
-const ModifyClubModal = () => {
+function ModifyClubModal() {
   const dispatch = useDispatch();
   const visible = useSelector((state) => state.adminModal.modifyClub?.visible);
   const club = useSelector((state) => state.adminModal.modifyClub?.data);
@@ -23,6 +23,6 @@ const ModifyClubModal = () => {
   }, [club]);
 
   return <AdminModal title={AVD.modalText.modifySave} visible={visible} onClickSubmit={onClickSubmit} />;
-};
+}
 
 export default ModifyClubModal;

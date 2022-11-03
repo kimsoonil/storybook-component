@@ -18,7 +18,7 @@ const checkClubAddressSlice = createSlice({
     reqCheckClubAddress: (state) => {
       state.isLoading = true;
     },
-    checkClubAddressSuccess: (state, { payload }) => {
+    checkClubAddressSuccess: (state) => {
       state.isLoading = false;
       state.status = loadState.SUCCESS;
       state.error = '';

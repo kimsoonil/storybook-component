@@ -41,13 +41,13 @@ function Footer() {
         <Cookie />
         <div className="copyright">© 2023 Creta. All rights reserved.</div>
         <div className="footer_menu">
-          <button onClick={() => onNavigate()} aria-hidden="true">
-            Terms of Service
+          <button className="policy" onClick={() => onNavigate()} aria-hidden="true">
+            <span>Terms of Service</span>
           </button>
-          <button onClick={() => onNavigate()} aria-hidden="true">
-            Privacy Policy
+          <button className="policy" onClick={() => onNavigate()} aria-hidden="true">
+            <span>Privacy Policy</span>
           </button>
-          <button onClick={() => onNavigate()} aria-hidden="true" className="support">
+          <button className="support" onClick={() => onNavigate()} aria-hidden="true">
             Support
           </button>
           <div className="flag_wrap">

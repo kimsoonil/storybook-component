@@ -1,3 +1,8 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
 import 'assets/scss/reset.scss';
@@ -9,8 +14,7 @@ import 'assets/scss/components.scss';
 export function Button({ primary, size, line, label, width, disabled, onClick, ...props }) {
   const variant = line ? 'line' : 'contained';
   return (
-    <div
-      type="button"
+    <button
       disabled={disabled}
       style={{ width: `${width}px` }}
       className={[
@@ -24,7 +28,7 @@ export function Button({ primary, size, line, label, width, disabled, onClick, .
       onClick={() => onClick()}
     >
       {label}
-    </div>
+    </button>
   );
 }
 

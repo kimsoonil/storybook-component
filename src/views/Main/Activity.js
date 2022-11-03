@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getActivitiesInit } from 'redux/idistStore/activitiesSlice';
 import { getUserInit } from 'redux/idistStore/userSlice';
@@ -11,18 +11,19 @@ import 'assets/scss/main.scss';
 import Profile from 'components/idist/Profile.js';
 import { dateCalculation } from 'utils/dateCalculation';
 import MainTap from './MainTap';
+import ActivityPopup from 'components/idist/popup/ActivityPopup';
 
 function Activity() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { activities } = useSelector((state) => state.activity);
   const { user } = useSelector((state) => state.user);
-
+  const [isActivityPopup, setIsActivityPopup] = useState(false);
   useEffect(() => {
     dispatch(getActivitiesInit());
     dispatch(getUserInit());
   }, [dispatch]);
+
   useEffect(() => {
     window.scrollTo(0, 914);
   }, []);
@@ -43,7 +44,7 @@ function Activity() {
               <div className="activity-title">
                 There are <span className="bold">{activities.count} unread</span> activities.
               </div>
-              <div className="activity-admin flex-center">
+              <div className="activity-admin flex-center" onClick={() => setIsActivityPopup(!isActivityPopup)}>
                 <img src={require(`images/main/admin.png`)} alt="" /> Activity settings
               </div>
             </div>
@@ -108,6 +109,7 @@ function Activity() {
           </div>
         </div>
       </div>
+      <ActivityPopup open={isActivityPopup} setOpen={setIsActivityPopup} />
     </div>
   );
 }

@@ -1,0 +1,62 @@
+.jg-modal-root {
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.jg-modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 620px;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 4px;
+  transform: translate(0, -50%);
+  box-shadow: 0px 4px 16px rgba(26, 36, 49, 0.08), 0px 16px 16px rgba(26, 36, 49, 0.04);
+}
+.jg-modal-title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 36px;
+  text-align: center;
+  color: #000000;
+}
+.jg-modal-button-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.create-club-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 620px;
+  padding: 0 60px;
+}
+.create-club-modal-title {
+  margin: 60px auto;
+  color: #000000;
+  font-size: 24px;
+}
+.create-club-modal-button-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-bottom: 40px;
+}/*# sourceMappingURL=modal.css.map */

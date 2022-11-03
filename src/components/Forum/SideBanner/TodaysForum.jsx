@@ -1,56 +1,63 @@
-import React from 'react';
-import todayThumb from 'html/img/com/today_thum.jpg';
-import todayList from 'html/img/com/today_list.jpg';
-
-function TodaysForumItem({ info }) {
-  return (
-    <li>
-      <div className="new_forum_img">
-        <img src={todayList} alt="" />
-      </div>
-      <dl>
-        <dt>
-          <span className="list_title">{info.title} </span>
-          <span className="list_num">(232)</span>
-        </dt>
-        <dd>
-          <div className="emoji_group">
-            <span className="emoji like" />
-            <span className="emoji fun" />
-            <span className="emoji_num">926</span>
-          </div>
-          <div className="view_num">
-            <span>3,467</span>
-          </div>
-        </dd>
-      </dl>
-    </li>
-  );
-}
+/* eslint-disable camelcase */
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router';
+import { addComma } from 'util/common';
+import { useDispatch, useSelector } from 'react-redux';
+import { reqTodayForum } from 'redux/store/forum/forumListSlice';
+import { reqForumIdPostList } from 'redux/store/forum/forumIdPostListSlice';
 
 function TodaysForum() {
-  const list = [
-    { id: 1, title: 'My favorite album is what is love? My favorite' },
-    { id: 2, title: 'My favorite album is what is love? My favorite' },
-    { id: 3, title: 'My favorite album is what is love? My favorite' },
-    { id: 4, title: 'My favorite album is what is love? My favorite' },
-    { id: 5, title: 'My favorite album is what is love? My favorite' },
-    { id: 6, title: 'My favorite album is what is love? My favorite' }
-  ];
+  const { thumbnail_image, title, id } = useSelector((state) => ({
+    ...state.forumList.todayForum
+  }));
+  const { forumIdPostList } = useSelector((state) => ({ ...state.forumIdPostList }));
+
+  // forumlist에서 마지막 꺼 조회 { odering : '-created' ,page_size = 1 }
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(reqTodayForum({ odering: '-created', page_size: 1 }));
+  }, []);
+
+  useEffect(() => {
+    if (id) dispatch(reqForumIdPostList({ forumId: id, page_size: 5 }));
+  }, [id]);
+
   return (
-    <div className="today_forum">
+    <div className="today_forum" onClick={() => navigate(`/forum/${id}/theme`)} aria-hidden>
       <div className="content_subtitle">
         <h4 className="h4Type eng">Today’s Forum</h4>
       </div>
       <div className="today_forum_thum">
-        <img src={todayThumb} alt="" />
+        <img src={thumbnail_image} alt="" />
         <div className="today_forum_thum_title">
-          <span>TWICE - Cheer Up</span>
+          <span>{title}</span>
         </div>
       </div>
       <ul>
-        {list.map((item) => (
-          <TodaysForumItem info={item} key={item.id} />
+        {forumIdPostList?.map((item) => (
+          <li key={item.id}>
+            <div className="new_forum_img">
+              <img src={item.thumbnail_image_url} alt="" />
+            </div>
+            <dl>
+              <dt>
+                <span className="list_title">{item.title} </span>
+                <span className="list_num">({item.post_count ? item.post_count : '0'})</span>
+              </dt>
+              <dd>
+                <div className="emoji_group">
+                  <span className="emoji like" />
+                  <span className="emoji fun" />
+                  <span className="emoji_num">{item.comment_count}</span>
+                </div>
+                <div className="view_num">
+                  <span>{addComma(item.visit_count)}</span>
+                </div>
+              </dd>
+            </dl>
+          </li>
         ))}
       </ul>
     </div>

@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcmp=self.webpackChunkcmp||[]).push([[4638],{14638:function(c,e,n){n.r(e);n(72791);var t=n(80184);e.default=function(){return console.log("Render Statics"),(0,t.jsx)("div",{children:"Statics"})}}}]);
+//# sourceMappingURL=4638.5fb2ed40.chunk.js.map

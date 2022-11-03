@@ -62,10 +62,10 @@ const dialogSlice = createSlice({
       state.deleteBoard = payload;
     },
 
-    openContentsActivationDialog: (state, { payload }) => {
+    openContentsActivationDialog: (state) => {
       state.contentsActivation = true;
     },
-    openReportHistoryDialog: (state, { payload }) => {
+    openReportHistoryDialog: (state) => {
       state.reportHistory = true;
     }
   }

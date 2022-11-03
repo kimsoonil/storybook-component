@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcmp=self.webpackChunkcmp||[]).push([[4889],{44889:function(e,s,n){n.r(s);n(72791);var c=n(80184);s.default=function(){return console.log("Render Permissions"),(0,c.jsx)("div",{children:"Permissions"})}}}]);
+//# sourceMappingURL=4889.8bad294f.chunk.js.map

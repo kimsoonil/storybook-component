@@ -55,7 +55,7 @@ const logInSlice = createSlice({
       state.isLoading = false;
     },
     signUpAfterAutoLogin: (state, { payload }) => {
-      console.log('login Slice:::', payload);
+      console.log('signUpAfterAutoLogin:::', payload);
       state.user = payload.userInfo;
       state.accessToken = payload.accessToken;
       state.isLoading = false;

@@ -89,7 +89,7 @@ function* postBoardPost({ payload }) {
       axios.post(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/club/${payload.id}/post`, payload.parameters, config)
     );
     if (response.data.message === 'ok') {
-      yield put(actionTypes.postBoardPostSuccess({ ...response.data }));
+      yield put(actionTypes.postBoardPostSuccess({ ...response.data, payload }));
       yield call(sagaCallback, payload, response?.data?.data);
       console.log(response?.data?.data);
     }

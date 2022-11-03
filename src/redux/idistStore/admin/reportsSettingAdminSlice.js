@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { immerParse } from 'utils';
 
 const initialState = () => ({
   reportChoices: [],
@@ -35,7 +34,7 @@ const reportsSettingAdminSlice = createSlice({
     patchReportChoiceInit: (state) => {
       state.patchReportChoiceLoading = true;
     },
-    patchReportChoiceSuccess: (state, { payload }) => {
+    patchReportChoiceSuccess: (state) => {
       state.patchReportChoiceLoading = false;
       // state.reportChoices = payload;
     },
@@ -47,7 +46,7 @@ const reportsSettingAdminSlice = createSlice({
     postReportChoiceInit: (state) => {
       state.postReportChoiceLoading = true;
     },
-    postReportChoiceSuccess: (state, { payload }) => {
+    postReportChoiceSuccess: (state) => {
       state.postReportChoiceLoading = false;
       // state.reportChoices = payload;
     },
@@ -59,7 +58,7 @@ const reportsSettingAdminSlice = createSlice({
     deleteReportChoiceInit: (state) => {
       state.deleteReportChoiceLoading = true;
     },
-    deleteReportChoiceSuccess: (state, { payload }) => {
+    deleteReportChoiceSuccess: (state) => {
       state.deleteReportChoiceLoading = false;
       // state.reportChoices = payload;
     },

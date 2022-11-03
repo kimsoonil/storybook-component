@@ -1,19 +1,11 @@
-/* eslint-disable */
-
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo } from 'react';
 import 'assets/scss/admin/admin-header.scss';
 import FilePicker from 'components/idist/admin/FilePicker';
+import nonSelectedImage from 'images/admin/non-selected-image.svg';
+import shareImage from 'images/admin/ic-share.svg';
+import bookmarkedImage from 'images/admin/ic-bookmarked.svg';
 
-const AdminHeader = ({
-  club,
-  hasPermission,
-  bannerImage,
-  setBannerImage,
-  profileImage,
-  setProfileImage,
-  title,
-  description
-}) => {
+function AdminHeader({ club, bannerImage, setBannerImage, profileImage, setProfileImage, title, description }) {
   const rootClassName = useMemo(() => 'admin-header', []);
 
   const bannerStyle = useMemo(
@@ -35,7 +27,7 @@ const AdminHeader = ({
       <FilePicker setData={setBannerImage} maxSize={{ value: 20, unit: 'mb' }}>
         <div className={`${rootClassName}-banner-image`} style={bannerStyle}>
           <div className={`${rootClassName}-banner-image-covered`}>
-            <img src={require('images/admin/non-selected-image.svg').default} />
+            <img src={nonSelectedImage} alt="non-selected" />
           </div>
         </div>
       </FilePicker>
@@ -65,10 +57,10 @@ const AdminHeader = ({
 
         <div className={`${rootClassName}-contents-right`}>
           <div>
-            <img src={require('images/admin/ic-share.svg').default} />
+            <img src={shareImage} alt="share" />
           </div>
           <div>
-            <img src={require('images/admin/ic-bookmarked.svg').default} />
+            <img src={bookmarkedImage} alt="bookmarked" />
           </div>
         </div>
       </div>
@@ -77,13 +69,13 @@ const AdminHeader = ({
         <div className={`${rootClassName}-profile-image-wrapper`}>
           <div className={`${rootClassName}-profile-image`} style={profileStyle}>
             <div className={`${rootClassName}-profile-image-covered`}>
-              <img src={require('images/admin/non-selected-image.svg').default} />
+              <img src={nonSelectedImage} alt="non-selected" />
             </div>
           </div>
         </div>
       </FilePicker>
     </div>
   );
-};
+}
 
 export default AdminHeader;

@@ -3,18 +3,20 @@
 import React, { useState, useEffect } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { Loader } from 'components/idist/Loader';
+import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { getClubPostsInit } from 'redux/idistStore/postsSlice';
 import { dateCalculation } from 'utils/dateCalculation';
 
 function SideEvent(props) {
   const clubId = useOutletContext();
+  const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { eventPosts } = useSelector((state) => state.post);
 
   useEffect(() => {
-    dispatch(getClubPostsInit({ id: props.id, parameters: { is_event: true }, type: 'event' }));
+    dispatch(getClubPostsInit({ id: id, parameters: { is_event: true }, type: 'event' }));
   }, [dispatch]);
 
   if (eventPosts.message !== 'ok') {
@@ -24,7 +26,7 @@ function SideEvent(props) {
       </div>
     );
   }
-  return (
+  return eventPosts.data.length !== 0 ? (
     <div className="side-box">
       <div className="flex-between">
         <div className="side-box-title">Event</div>
@@ -51,6 +53,8 @@ function SideEvent(props) {
         })}
       </div>
     </div>
+  ) : (
+    <div className="club-content-nodata"></div>
   );
 }
 

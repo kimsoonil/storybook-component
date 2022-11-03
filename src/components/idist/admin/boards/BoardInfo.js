@@ -1,28 +1,28 @@
-/* eslint-disable */
 import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { boardGroupPayload, boardPayload, boardPermissionType, boardType, viewModeType } from 'redux/idistApi/model';
-import {
-  deleteBoardInit,
-  patchBoardGroupInit,
-  patchBoardInit,
-  postBoardGroupInit,
-  postBoardInit,
-  setInfo
-} from 'redux/idistStore/admin/boardAdminSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { boardPayload, boardPermissionType, boardType, viewModeType } from 'redux/idistApi/model';
+import { deleteBoardInit, patchBoardInit, postBoardInit, setInfo } from 'redux/idistStore/admin/boardAdminSlice';
 import _ from 'lodash';
 import { IVD } from 'views/Admin';
-import JButton from '../JButton';
-import JSelect from '../JSelect';
+import albumPreviewImage from 'images/admin/album-preview.svg';
+import cardPreviewImage from 'images/admin/card-preview.svg';
+import listPreviewImage from 'images/admin/list-preview.svg';
+
+import albumActiveIcon from 'images/admin/ic-viewmode-album-active.svg';
+import albumDefaultIcon from 'images/admin/ic-viewmode-album.svg';
+import listActiveIcon from 'images/admin/ic-viewmode-list-active.svg';
+import listDefaultIcon from 'images/admin/ic-viewmode-list.svg';
+import cardActiveIcon from 'images/admin/ic-viewmode-card-active.svg';
+import cardDefaultIcon from 'images/admin/ic-viewmode-card.svg';
+
 import PermissionSelector from './PermissionSelector';
+import JButton from '../JButton';
 
 const rootClassName = 'admin-boards-info';
 
-const BoardInfo = ({ title, setTitle, setAddState }) => {
+function BoardInfo({ title, setTitle, setAddState }) {
   const dispatch = useDispatch();
   const info = useSelector((state) => state.boardAdmin.info);
-  const { id: clubId } = useSelector((state) => state.commonAdmin.club);
 
   const [isActive, setIsActive] = useState(true);
   const [titleInputState, setTitleInputState] = useState(IVD.blur);
@@ -43,21 +43,21 @@ const BoardInfo = ({ title, setTitle, setAddState }) => {
     setTitle(info?.title);
     setDescription(info?.description || '');
 
-    const _readPermission = info?.readPermission;
-    if (_readPermission > 0 && _readPermission < 7) {
+    const readPermission = info?.readPermission;
+    if (readPermission > 0 && readPermission < 7) {
       setReadOption({ value: 1, label: 'MEMBER' });
-      setReadGradeOption({ value: _readPermission, label: boardPermissionType[_readPermission] });
+      setReadGradeOption({ value: readPermission, label: boardPermissionType[readPermission] });
     } else {
-      setReadOption({ value: _readPermission, label: boardPermissionType[_readPermission] });
+      setReadOption({ value: readPermission, label: boardPermissionType[readPermission] });
       setReadGradeOption({ value: 1, label: 'BRONZE' });
     }
 
-    const _writePermission = info?.writePermission;
-    if (_writePermission > 0 && _writePermission < 7) {
+    const writePermission = info?.writePermission;
+    if (writePermission > 0 && writePermission < 7) {
       setWriteOption({ value: 1, label: 'MEMBER' });
-      setWriteGradeOption({ value: _writePermission, label: boardPermissionType[_writePermission] });
+      setWriteGradeOption({ value: writePermission, label: boardPermissionType[writePermission] });
     } else {
-      setWriteOption({ value: _writePermission, label: boardPermissionType[_writePermission] });
+      setWriteOption({ value: writePermission, label: boardPermissionType[writePermission] });
       setWriteGradeOption({ value: 1, label: 'BRONZE' });
     }
 
@@ -84,21 +84,20 @@ const BoardInfo = ({ title, setTitle, setAddState }) => {
     [writeGradeOption?.value]
   );
 
-  const activationClassName = useCallback(
-    (isActive) =>
-      isActive
-        ? {
-            button: rootClassName + '-activation-activate',
-            icon: rootClassName + '-activation-activate-icon',
-            label: rootClassName + '-activation-activate-label'
-          }
-        : {
-            button: rootClassName + '-activation-deactivate',
-            icon: rootClassName + '-activation-deactivate-icon',
-            label: rootClassName + '-activation-deactivate-label'
-          },
-    []
-  );
+  const activationClassName = useCallback((value) => {
+    if (value) {
+      return {
+        button: `${rootClassName}-activation-activate`,
+        icon: `${rootClassName}-activation-activate-icon`,
+        label: `${rootClassName}-activation-activate-label`
+      };
+    }
+    return {
+      button: `${rootClassName}-activation-deactivate`,
+      icon: `${rootClassName}-activation-deactivate-icon`,
+      label: `${rootClassName}-activation-deactivate-label`
+    };
+  }, []);
 
   const onClickActivation = useCallback((value) => {
     if (value) {
@@ -152,15 +151,15 @@ const BoardInfo = ({ title, setTitle, setAddState }) => {
     return ret;
   }, [readOption, readGradeOption, writeOption, writeGradeOption]);
 
-  const viewModePreviewImage = useMemo(
-    () =>
-      viewMode === viewModeType.ALBUM
-        ? require('images/admin/album-preview.svg').default
-        : viewMode === viewModeType.CARD
-        ? require('images/admin/card-preview.svg').default
-        : require('images/admin/list-preview.svg').default,
-    [viewMode]
-  );
+  const viewModePreviewImage = useMemo(() => {
+    if (viewMode === viewModeType.ALBUM) {
+      return albumPreviewImage;
+    }
+    if (viewMode === viewModeType.CARD) {
+      return cardPreviewImage;
+    }
+    return listPreviewImage;
+  }, [viewMode]);
 
   const hasChanged = useMemo(
     () =>
@@ -185,9 +184,8 @@ const BoardInfo = ({ title, setTitle, setAddState }) => {
   );
 
   const onClickMerge = useCallback(() => {
-    const boardId = prompt('팝업 띄우기');
+    // const boardId = prompt('팝업 띄우기');
     // 추가 중이면 처음 화면.
-
     // 수정 중이면 수정 초기 화면
   }, []);
 
@@ -231,13 +229,25 @@ const BoardInfo = ({ title, setTitle, setAddState }) => {
         <div className={`${rootClassName}-label-description`}>If disable the board, cannot access this board.</div>
 
         <div className={`${rootClassName}-activation-container`}>
-          <div className={`${activationClassName(isActive).button}`} onClick={() => onClickActivation(true)}>
+          <div
+            className={`${activationClassName(isActive).button}`}
+            onClick={() => onClickActivation(true)}
+            onKeyDown={(e) => (e.key === 'Enter' ? onClickActivation(true) : {})}
+            role="button"
+            tabIndex="0"
+          >
             <div className={`${activationClassName(isActive).icon}`} />
             <div className={`${activationClassName(isActive).label}`}>Activation</div>
           </div>
 
           {!isDefault && (
-            <div className={`${activationClassName(!isActive).button}`} onClick={() => onClickActivation(false)}>
+            <div
+              className={`${activationClassName(!isActive).button}`}
+              onClick={() => onClickActivation(false)}
+              onKeyDown={(e) => (e.key === 'Enter' ? onClickActivation(false) : {})}
+              role="button"
+              tabIndex="0"
+            >
               <div className={`${activationClassName(!isActive).icon}`} />
               <div className={`${activationClassName(!isActive).label}`}>Deactivation</div>
             </div>
@@ -290,7 +300,7 @@ const BoardInfo = ({ title, setTitle, setAddState }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             maxLength={160}
-            placeholder={'Please write a board description.'}
+            placeholder="Please write a board description."
           />
           <div className={`${rootClassName}-description-length`}>{`${description?.length || 0}/160`}</div>
         </div>
@@ -348,38 +358,36 @@ const BoardInfo = ({ title, setTitle, setAddState }) => {
           <ViewModeBox
             value={viewModeType.ALBUM}
             onClick={(e) => setViewMode(Number(e.currentTarget.id))}
-            label={'Album type'}
+            label="Album type"
             isActive={viewModeType.ALBUM === viewMode}
-            description={'Can view many images of the posts like a gallery'}
-            activeImage={require('images/admin/ic-viewmode-album-active.svg').default}
-            defaultImage={require('images/admin/ic-viewmode-album.svg').default}
+            description="Can view many images of the posts like a gallery"
+            activeImage={albumActiveIcon}
+            defaultImage={albumDefaultIcon}
           />
 
           <ViewModeBox
             value={viewModeType.LIST}
             onClick={(e) => setViewMode(Number(e.currentTarget.id))}
-            label={'List type'}
+            label="List type"
             isActive={viewModeType.LIST === viewMode}
-            description={'Can view summaries of many posts like a blog'}
-            activeImage={require('images/admin/ic-viewmode-list-active.svg').default}
-            defaultImage={require('images/admin/ic-viewmode-list.svg').default}
-            preview={require('images/admin/list-preview.svg').default}
+            description="Can view summaries of many posts like a blog"
+            activeImage={listActiveIcon}
+            defaultImage={listDefaultIcon}
           />
 
           <ViewModeBox
             value={viewModeType.CARD}
             onClick={(e) => setViewMode(Number(e.currentTarget.id))}
-            label={'Card type'}
+            label="Card type"
             isActive={viewModeType.CARD === viewMode}
-            description={'Can view post one by one larger like SNS'}
-            activeImage={require('images/admin/ic-viewmode-card-active.svg').default}
-            defaultImage={require('images/admin/ic-viewmode-card.svg').default}
-            preview={require('images/admin/card-preview.svg').default}
+            description="Can view post one by one larger like SNS"
+            activeImage={cardActiveIcon}
+            defaultImage={cardDefaultIcon}
           />
         </div>
 
         <div className={`${rootClassName}-view-mode-preview`}>
-          <img src={viewModePreviewImage} />
+          <img src={viewModePreviewImage} alt="preview" />
         </div>
       </div>
 
@@ -387,39 +395,40 @@ const BoardInfo = ({ title, setTitle, setAddState }) => {
 
       {isNormal && info?.id && (
         <div className={`${rootClassName}-merge-wrapper`}>
-          <JButton label={'Merge'} color="none" onClick={onClickMerge} />
+          <JButton label="Merge" color="none" onClick={onClickMerge} />
         </div>
       )}
 
       <div className={`${rootClassName}-bottom-container`}>
-        <JButton label={'Cancel'} color="none" outline onClick={onClickCancel} />
-        {isNormal && info?.id && <JButton label={'Delete'} color="none" outline onClick={onClickDelete} />}
+        <JButton label="Cancel" color="none" outline onClick={onClickCancel} />
+        {isNormal && info?.id && <JButton label="Delete" color="none" outline onClick={onClickDelete} />}
         <JButton
-          label={'Save'}
+          label="Save"
           disabled={!(title && titleInputState !== IVD.error) || !hasChanged}
           onClick={onClickSave}
         />
       </div>
     </div>
   );
-};
+}
 
 export default BoardInfo;
 
-const ViewModeBox = ({ value, onClick, label, isActive, description, activeImage, defaultImage }) => {
+function ViewModeBox({ value, onClick, label, isActive, description, activeImage, defaultImage }) {
   return (
-    <>
-      <div
-        id={value}
-        className={`${rootClassName}-view-mode-type ${isActive && `${rootClassName}-view-mode-type-active`}`}
-        onClick={onClick}
-      >
-        <div className={`${rootClassName}-view-mode-type-title`}>
-          <img src={isActive ? activeImage : defaultImage} />
-          {label}
-        </div>
-        <div className={`${rootClassName}-view-mode-type-description`}>{description}</div>
+    <div
+      id={value}
+      className={`${rootClassName}-view-mode-type ${isActive && `${rootClassName}-view-mode-type-active`}`}
+      onClick={onClick}
+      onKeyDown={(e) => (e.key === 'Enter' ? onClick(e) : {})}
+      role="button"
+      tabIndex="0"
+    >
+      <div className={`${rootClassName}-view-mode-type-title`}>
+        <img src={isActive ? activeImage : defaultImage} alt="icon" />
+        {label}
       </div>
-    </>
+      <div className={`${rootClassName}-view-mode-type-description`}>{description}</div>
+    </div>
   );
-};
+}

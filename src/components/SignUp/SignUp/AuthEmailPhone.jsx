@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { USER_INFO_EMAIL } from 'constants/type';
@@ -22,7 +22,7 @@ function AuthEmailPhone({ reqType = USER_INFO_EMAIL }) {
   const watchPrivacy = watch('privacy', false);
   const watchMarket = watch('market', false);
 
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const onErrors = () => console.error(errors);
 
@@ -32,7 +32,8 @@ function AuthEmailPhone({ reqType = USER_INFO_EMAIL }) {
         <AuthConfirm reqType={reqType} />
         <li>
           <div>
-            {t('label.privacy')}
+            {/* {t('label.privacy')} */}
+            privacy
             <input
               {...register('privacy')}
               name="privacy"
@@ -45,7 +46,8 @@ function AuthEmailPhone({ reqType = USER_INFO_EMAIL }) {
         <li>
           <div>
             <label htmlFor="email">
-              {t('label.market')}
+              {/* {t('label.market')} */}
+              market
               <input
                 {...register('market')}
                 name="market"
@@ -58,14 +60,16 @@ function AuthEmailPhone({ reqType = USER_INFO_EMAIL }) {
         </li>
         <li>
           <button type="button" onClick={() => navigate('/login')}>
-            {t('label.emailauth.back')}
+            {/* {t('label.emailauth.back')} */}
+            Cancel
           </button>
           <button
             type="submit"
             onClick={() => navigate('/signup/info')}
             disabled={!(isConfirm && watchPrivacy && watchMarket) && 'disabled'}
           >
-            {t('label.emailauth.signup')}
+            {/* {t('label.emailauth.signup')} */}
+            Next
           </button>
         </li>
       </ul>

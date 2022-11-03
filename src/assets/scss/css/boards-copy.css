@@ -1,0 +1,720 @@
+.boards {
+  width: 1280px;
+  margin: 0 auto;
+}
+.boards-title {
+  margin-top: 30px;
+}
+.boards-subtitle {
+  margin-top: 4px;
+}
+.boards-contents-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin-top: 65px;
+  margin-bottom: 200px;
+}
+.boards-sidebar {
+  width: 304px;
+  height: 827px;
+  padding-bottom: 40px;
+  overflow-y: auto;
+  border: 1px solid #777777;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.boards-sidebar .add-group {
+  width: inherit;
+  line-height: 30px;
+  padding: 15px 0;
+  background-color: #9013fe;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+.boards-sidebar .add-group:hover {
+  background-color: #7d0edf;
+  color: #f8f8f8;
+}
+.boards-sidebar .add-group:active {
+  background-color: #6b09c3;
+  color: #eeeeee;
+}
+.boards-sidebar .gp-name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  line-height: 50px;
+  font-weight: 700;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 6px;
+}
+.boards-sidebar .gp-name:hover {
+  background-color: #eeeeee;
+}
+.boards-sidebar .gp-name:hover .hover-option {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.boards-sidebar .gp-name-selected {
+  background-color: #eeeeee;
+}
+.boards-sidebar .gp-name-text {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  overflow: hidden;
+  white-space: pre;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+.boards-sidebar .gp-name-text-inactive {
+  color: #cdcdd1;
+}
+.boards-sidebar .gp-name .expand-image {
+  width: 20px;
+  height: 20px;
+  padding-bottom: 2px;
+  margin: 2px 10px;
+}
+.boards-sidebar .bd-name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  color: #555;
+  line-height: 40px;
+  padding: 3px 0 5px 45px;
+  font-weight: bold;
+}
+.boards-sidebar .bd-name:hover {
+  background-color: #eeeeee;
+}
+.boards-sidebar .bd-name:hover .hover-option {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.boards-sidebar .bd-name-selected {
+  background-color: #eeeeee;
+}
+.boards-sidebar .bd-name-text {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  overflow: hidden;
+  white-space: pre;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+.boards-sidebar .bd-name-text-inactive {
+  color: #cdcdd1;
+}
+.boards-sidebar .hover-option {
+  display: none;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 15px;
+  position: relative;
+  cursor: default;
+}
+.boards-sidebar .hover-option-selected {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.boards-sidebar .hover-option .drop-down {
+  display: none;
+  position: absolute;
+  background-color: white;
+  padding: 8px 0;
+  top: 32px;
+  right: 4px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+.boards-sidebar .hover-option .drop-down-selected {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.boards-sidebar .hover-option .drop-down-item {
+  padding: 5px 16px;
+  cursor: pointer;
+  line-height: 30px;
+  font-size: 14px;
+  font-weight: normal;
+  color: black;
+}
+.boards-sidebar .hover-option .drop-down-item:hover {
+  background-color: #eeeeee;
+}
+.boards-sidebar .hover-option-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 30px;
+  height: 30px;
+}
+.boards-sidebar .hover-option-button:hover {
+  background-color: #e0e0e0;
+}
+.boards-sidebar-name-input {
+  width: 100%;
+  height: 44px;
+  border: none;
+  outline: none;
+  padding: 12px;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Poppins";
+  font-style: normal;
+  margin-top: 9px;
+  margin-bottom: 3px;
+  color: #000000;
+  font-size: 14px;
+  line-height: 21px;
+  border: 1px solid #9013fe;
+}
+.boards-sidebar-name-input:focus {
+  border: 1px solid #ff45a1;
+  outline: none;
+}
+.boards-sidebar-name-input::-webkit-input-placeholder {
+  color: #777777;
+  font-weight: 300;
+}
+.boards-sidebar-name-input::-moz-placeholder {
+  color: #777777;
+  font-weight: 300;
+}
+.boards-sidebar-name-input:-ms-input-placeholder {
+  color: #777777;
+  font-weight: 300;
+}
+.boards-sidebar-name-input::-ms-input-placeholder {
+  color: #777777;
+  font-weight: 300;
+}
+.boards-sidebar-name-input::placeholder {
+  color: #777777;
+  font-weight: 300;
+}
+.boards-content-init {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 956px;
+  height: 827px;
+  padding: 0 150px;
+  border: 3px solid #999999;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 60px;
+  line-height: 73px;
+  text-align: center;
+  letter-spacing: -0.015em;
+  color: #d1d1d1;
+}
+.boards-contents {
+  width: 956px;
+  height: 827px;
+  overflow: auto;
+  border: 3px solid #999999;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 60px;
+}
+.boards-contents .info-title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: black;
+}
+.boards-contents .info-title-disabled {
+  color: #888;
+}
+.boards-contents .info-desc {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  margin-top: 4px;
+  color: black;
+}
+.boards-contents .info-desc-disabled {
+  color: #888;
+}
+.boards-contents .itxt-error {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+  color: #ff2a55;
+}
+.boards-contents .itxt-placeholder::-webkit-input-placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  color: #888888;
+}
+.boards-contents .itxt-placeholder::-moz-placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  color: #888888;
+}
+.boards-contents .itxt-placeholder:-ms-input-placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  color: #888888;
+}
+.boards-contents .itxt-placeholder::-ms-input-placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  color: #888888;
+}
+.boards-contents .itxt-placeholder::placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  color: #888888;
+}
+.boards-contents .itxt-green {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+  color: #00b78b;
+}
+.boards-contents .itxt-label {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+}
+.boards-contents .activation-radio-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 50px;
+  gap: 30px;
+}
+.boards-contents .activation-radio-wrapper .label-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 15px;
+}
+.boards-contents .activation-radio-wrapper input {
+  width: 18px;
+  height: 18px;
+  margin-bottom: 4px;
+}
+.boards-contents .activation-radio-wrapper label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.boards-contents .name-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+.boards-contents .name-wrapper .essential {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #ff0404;
+}
+.boards-contents .name-input-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 378px;
+  height: 45px;
+  border: 1px solid #c0c2c7;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+.boards-contents .name-input-wrapper-success {
+  border-color: #00b78b;
+}
+.boards-contents .name-input-wrapper-error {
+  border-color: #d30c34;
+}
+.boards-contents .name-input-wrapper-disabled {
+  background-color: #cdcdd1;
+}
+.boards-contents .name-input-wrapper .input-disabled {
+  background-color: #cdcdd1;
+}
+.boards-contents .name-input-wrapper input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  outline: none;
+  border: none;
+  padding: 0 12px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 40px;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+}
+.boards-contents .name-input-wrapper input:focus {
+  outline: none;
+  border: none;
+}
+.boards-contents .name-length {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 4px;
+  margin-right: 12px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  color: black;
+}
+.boards-contents .name-length-gray {
+  color: #888888;
+}
+.boards-contents .name-error-wrapper {
+  position: relative;
+}
+.boards-contents .name-error-wrapper .name-error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 4px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+  color: #d30c34;
+}
+.boards-contents-description {
+  margin-top: 60px;
+}
+.boards-contents-description .desc-input-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 378px;
+  height: 90px;
+  margin-top: 8px;
+  border: 1px solid #c0c2c7;
+  border-radius: 3px;
+  overflow: hidden;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  padding: 10px 12px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.boards-contents-description .desc-input-wrapper textarea {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+  resize: none;
+  border: none;
+  outline: none;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+}
+.boards-contents-description .desc-input-wrapper textarea:focus {
+  border: none;
+  outline: none;
+}
+.boards-contents-description .desc-length {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  color: black;
+}
+.boards-contents-description .desc-length-gray {
+  color: #888888;
+}
+.boards-contents-permission {
+  margin-top: 50px;
+}
+.boards-contents-permission .permission-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 30px 0;
+}
+.boards-contents-permission .permission-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  height: 30px;
+  margin-right: 70px;
+}
+.boards-contents-permission .permission-input .staff-label {
+  width: 60px;
+}
+.boards-contents-permission .permission-input .staff-label-disabled {
+  color: #888;
+}
+.boards-contents-permission .permission-input .grade-label {
+  width: 100px;
+}
+.boards-contents-permission .permission-input-text {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+}
+.boards-contents-permission .permission-input-select-wrapper {
+  height: inherit;
+  position: relative;
+}
+.boards-contents-permission .permission-input-select {
+  width: 120px;
+  height: inherit;
+  padding-left: 5px;
+}
+.boards-contents-permission .permission-input-select:disabled {
+  background-color: #cdcdd1;
+}
+.boards-contents-permission .permission-input-guide-text {
+  position: absolute;
+  top: 32px;
+  left: 2px;
+  white-space: pre;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+  color: #00b78b;
+}
+.boards-contents-view {
+  margin-top: 50px;
+}
+.boards-contents-view .view-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 170px;
+  height: 90px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 30px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  cursor: pointer;
+  font-family: "Poppins";
+  font-style: normal;
+}
+.boards-contents-view .view-button-active {
+  background-color: #9013fe;
+  color: white;
+}
+.boards-contents-view .view-button-inactive {
+  background-color: #d9d9d9;
+  color: #777777;
+}
+.boards-contents-view .view-button-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 18px;
+  margin-top: 12px;
+}
+.boards-contents-view .title-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.boards-contents-view .title-image {
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+}
+.boards-contents-view .title-text {
+  font-weight: 700;
+  font-size: 12px;
+  margin-top: 2px;
+}
+.boards-contents-view .view-subtitle {
+  font-weight: 500;
+  font-size: 10px;
+  margin-top: 8px;
+  text-align: center;
+}
+.boards-contents-view-sample {
+  width: 100%;
+  height: 720px;
+}
+.boards-contents-view-sample img {
+  margin-top: 30px;
+  width: inherit;
+}
+.boards-contents-merge {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin-top: 70px;
+}
+.boards-contents-merge button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 140px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #413c3c;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18.8px;
+  line-height: 11px;
+  letter-spacing: 0.758596px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.boards .submit-button-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 20px;
+  padding-top: 40px;
+  margin-bottom: 20px;
+}

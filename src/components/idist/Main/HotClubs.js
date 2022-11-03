@@ -16,7 +16,7 @@ function HotClubs(props) {
     setHotClubData([...props.clubsData]);
     setHotCategories([...props.categoriesData]);
   }, [props.clubsData, props.categoriesData]);
-
+  console.log('clubItem', props.clubsData);
   return (
     <div className="home-box hot-clubs">
       <div className="see-all" onClick={() => navigate(`/clubs/search/clubs`)}>
@@ -66,7 +66,7 @@ function HotClubs(props) {
                   <div className="list-img">
                     <img
                       src={
-                        clubItem.banner_image_url ? clubItem.banner_image_url : require('images/club/club-dummy.png')
+                        clubItem.profile_image_url ? clubItem.profile_image_url : require('images/club/club-dummy.png')
                       }
                       alt=""
                     />
@@ -76,7 +76,7 @@ function HotClubs(props) {
                       src={
                         clubItem.profile_image_url
                           ? clubItem.profile_image_url
-                          : require('images/club/profile-dummy.png')
+                          : require('images/club/club-profile.png')
                       }
                     />
                   </div>
@@ -89,8 +89,11 @@ function HotClubs(props) {
                         </div>
                         <div className="flex-center">
                           {clubItem.member_count}
-                          <div className="color-BRONZE" style={{ marginLeft: '6px' }}>
-                            BRONZE
+                          <div
+                            className={'color-' + clubItem?.master_profile?.grade_title}
+                            style={{ marginLeft: '6px' }}
+                          >
+                            {clubItem?.master_profile?.grade_title}
                           </div>
                         </div>
                       </div>

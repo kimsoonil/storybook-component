@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { useForm, useWatch } from 'react-hook-form';
 import CommonInput from 'components/common/InputButton/CommonInput';
 // import { useSelector } from 'react-redux';
@@ -17,7 +17,7 @@ function Step1({ setStatus, onHide }) {
     control,
     formState: { errors }
   } = useForm({ mode: 'onChange' });
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const [isFocus, setIsFocus] = useState(false);
   const watchEmail = useWatch({ control, name: 'email', defaultValue: '' });
 
@@ -58,10 +58,12 @@ function Step1({ setStatus, onHide }) {
           placeholder="E-mail"
           resetFunc={() => setValue('email', '')}
           register={register('email', {
-            required: t('validation.require', { require: 'email' }),
+            // required: t('validation.require', { require: 'email' }),
+            required: 'email is required',
             pattern: {
               value: /\S+@\S+\.\S+/,
-              message: t('validation.emailauth.email')
+              // message: t('validation.emailauth.email')
+              message: 'email format error'
             }
           })}
         />

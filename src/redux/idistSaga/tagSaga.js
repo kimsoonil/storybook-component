@@ -3,12 +3,11 @@ import { takeLatest, put, fork, call } from 'redux-saga/effects';
 import * as actionTypes from 'redux/idistStore/tagSlice';
 import axios from 'axios';
 import { getToken } from 'utils/Cookies/Cookies';
-import { sagaCallback } from 'utils';
 
 const config = getToken();
 
 // TODO: club list
-function* getTags({ payload }) {
+function* getTags() {
   try {
     const response = yield call(() =>
       axios.get(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/tags`, {

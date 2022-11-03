@@ -14,7 +14,7 @@ function Member(props) {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.club);
   const [memberState, setMemberState] = useState('member');
-
+  console.log('clubId', clubId);
   useEffect(() => {
     dispatch(getclubProfilesInit({ id: clubId.data.id }));
   }, [dispatch]);
@@ -54,14 +54,18 @@ function Member(props) {
                     onClick={() => navigate(`/club/${clubId.data.id}/memberProfile/${memberItem.id}`)}
                   >
                     <img
+                      onError={({ currentTarget }) => {
+                        currentTarget.onerror = null; // prevents looping
+                        currentTarget.src = require('images/main/temporary-profile.png');
+                      }}
                       src={
-                        memberItem.user.profile_image_url
-                          ? memberItem.user.profile_image_url
+                        memberItem?.profile?.user.profile_image_url
+                          ? memberItem?.profile?.user.profile_image_url
                           : require('images/main/temporary-profile.png')
                       }
                     />
                     <div>
-                      <div className="member-content-item-name">{memberItem.user.username}</div>
+                      <div className="member-content-item-name">{memberItem?.profile?.user.username}</div>
                       <div className={'member-content-item-reting flex-center ' + memberItem.grade_title}>
                         {memberItem.grade_title}
                       </div>
@@ -83,14 +87,18 @@ function Member(props) {
                               onClick={() => navigate(`/club/${clubId.data.id}/memberProfile/${memberItem.id}`)}
                             >
                               <img
+                                onError={({ currentTarget }) => {
+                                  currentTarget.onerror = null; // prevents looping
+                                  currentTarget.src = require('images/main/temporary-profile.png');
+                                }}
                                 src={
-                                  memberItem.user.profile_image_url
-                                    ? memberItem.user.profile_image_url
+                                  memberItem?.profile?.user.profile_image_url
+                                    ? memberItem?.profile?.user.profile_image_url
                                     : require('images/main/temporary-profile.png')
                                 }
                               />
                               <div>
-                                <div className="member-content-item-name">{memberItem.user.username}</div>
+                                <div className="member-content-item-name">{memberItem?.profile?.user.username}</div>
                                 <div className={'member-content-item-reting flex-center ' + memberItem.grade_title}>
                                   {memberItem.grade_title}
                                 </div>
@@ -108,7 +116,7 @@ function Member(props) {
         </div>
       </div>
       <div className="item">
-        {clubId.data.profile ? <Profile userData={clubId.data.profile} type={'club'} /> : <Profile type={'logout'} />}
+        {clubId.data.profile ? <Profile userData={clubId.data} type={'club'} /> : <Profile type={'logout'} />}
         <div>
           <SideEvent />
         </div>

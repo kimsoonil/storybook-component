@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getClubInit, postClubPinInit, postClubUnpinInit, postClubShareInit } from 'redux/idistStore/clubSlice';
+import { getUserInit } from 'redux/idistStore/userSlice';
 import { useParams } from 'react-router';
 import { useNavigate, Outlet } from 'react-router-dom';
-
+import ScrollTopBtn from 'components/common/ScrollTopBtn';
 import Header from 'components/common/header/Header';
 import Footer from 'components/common/footer/Footer';
 import { Loader } from 'components/idist/Loader';
@@ -13,6 +14,7 @@ import SharePopup from 'components/idist/popup/SharePopup';
 
 import 'assets/scss/club.scss';
 import 'assets/scss/reset.scss';
+import clubBanner from 'images/club/club-banner.png';
 
 function Club() {
   const dispatch = useDispatch();
@@ -20,6 +22,7 @@ function Club() {
   const { clubId, error } = useSelector((state) => state.club);
   const pamename = window.location.pathname;
   const { id } = useParams();
+
   const [openPopup, setOpenPopup] = useState(false);
   const [boardGroup, setBoradGroup] = useState('home');
   const [ArrBorad, setArrBorad] = useState([]);
@@ -29,11 +32,8 @@ function Club() {
 
   useEffect(() => {
     dispatch(getClubInit({ id: id }));
+    dispatch(getUserInit());
   }, []);
-
-  const seachFunc = () => {
-    navigate('/clubs/search/all');
-  };
 
   useEffect(() => {
     if (error.indexOf(403) > -1) {
@@ -107,13 +107,20 @@ function Club() {
       </div>
     );
   return (
-    <div id="root">
+    <div>
       <Header />
 
       <div className="club">
         <div className="main">
           <div className="relative">
-            <div className="club-banner relative" style={{ backgroundImage: `url(${clubId.data.banner_image_url})` }}>
+            <div
+              className="club-banner relative"
+              style={{
+                backgroundImage: clubId.data.banner_image_url
+                  ? `url(${clubId.data.banner_image_url})`
+                  : `url(${clubBanner})`
+              }}
+            >
               {/* <div className="club-tag">
                 {clubId.data.tags.map((tag, index) => {
                   return (
@@ -127,16 +134,21 @@ function Club() {
             <div className="club-content flex-center">
               <div className="club-content-explan">
                 <div className="club-content-info">
-                  <div className="club-content-info-box">
+                  <div className="club-content-info-box" onClick={() => navigate('./member')}>
                     <div className="club-content-info-number">{clubId.data.member_count}</div>
-                    <div className="club-content-info-title">Memeber</div>
+                    <div className="club-content-info-title">Member</div>
                   </div>
-                  <div className="club-content-info-box">
+                  <div
+                    className="club-content-info-box"
+                    onClick={() =>
+                      navigate(`/club/${clubId.data.id}/board/${clubId.data.board_groups[0].boards[0].id}`)
+                    }
+                  >
                     <div className="club-content-info-number">{clubId.data.post_count}</div>
                     <div className="club-content-info-title">Post</div>
                   </div>
-                  <div className="club-content-info-box">
-                    <div className="club-content-info-number">{clubId.data.pin_count}</div>
+                  <div className="club-content-info-box" onClick={() => navigate('./superclub')}>
+                    <div className="club-content-info-number">0</div>
                     <div className="club-content-info-title">Clubs</div>
                   </div>
                 </div>
@@ -162,10 +174,14 @@ function Club() {
               </div>
               <div className="club-profile">
                 <img
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null; // prevents looping
+                    currentTarget.src = require('images/club/club-profile.png');
+                  }}
                   src={
-                    clubId.data.profile_image_url
-                      ? clubId.data.profile_image_url
-                      : require('images/main/temporary-profile.png')
+                    clubId?.data?.profile_image_url
+                      ? clubId?.data?.profile_image_url
+                      : require('images/club/club-profile.png')
                   }
                   alt=""
                 />
@@ -213,6 +229,7 @@ function Club() {
           <Outlet context={clubId} />
         </div>
       </div>
+      <ScrollTopBtn />
       <Footer />
       <SharePopup open={openPopup} setOpen={setOpenPopup} sharefuc={handleClickShare} />
     </div>

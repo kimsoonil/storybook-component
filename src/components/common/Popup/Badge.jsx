@@ -180,7 +180,7 @@ function Badge({ onHide }) {
               <span>Post Badge</span>
             </button>
           </div>
-          {select ? <ForumBadge /> : <PostBadge />}
+          {select ? <PostBadge /> : <ForumBadge />}
         </div>
       </div>
     </div>

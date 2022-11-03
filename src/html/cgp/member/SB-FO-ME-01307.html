@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div id="container">
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+<div id="modal"></div>
+<div class="modal_popup modal_text" style="width:720px;">
+  <div class="modal_con service">
+    <button type="button" class="close"></button>
+    <h2 class="modal_title">Terms of Service</h2>
+    <div class="date_select">
+      <span class="date">Effective Date : May 06, 2022</span>
+      <div class="select_wrap">
+        <div class="select privacy">
+          <div class="selected">
+            <div class="selected-value">Previous terms</div>
+            <button type="button" class="arrow">
+              <span class="a11y">선택</span>
+            </button>
+          </div>
+          <ul>
+            <li class="option">Option 1</li>
+            <li class="option">Selected Option</li>
+            <li class="option">Option 3</li>
+            <li class="option">option 3</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="con scroll policy">
+      <p><span>ACCEPTANCE OF THE TERMS OF SERVICE</span></p>
+      <p>THE FOLLOWING TERMS AND CONDITIONS (“TERMS”) APPLY TO YOUR USE OF THE WEBSITES OF Creta. AND ITS AFFILIATES (“WE” “US” OR “OUR”), INCLUDING ANY CONTENT, FUNCTIONALITY, PRODUCTS, AND SERVICES OFFERED ON OR THROUGH SUCH WEBSITES (COLLECTIVELY, THE “WEBSITE”), WHETHER AS A GUEST OR A REGISTERED USER. THESE TERMS ALSO APPLY TO YOUR USE OF OTHER EPIC SERVICES THAT DISPLAY OR INCLUDE THESE TERMS (“ADDITIONAL SERVICES”). IN THESE TERMS, THE WEBSITE AND ADDITIONAL SERVICES ARE COLLECTIVELY REFERRED TO AS THE “SERVICES.”</p>
+      <p>PLEASE READ THESE TERMS CAREFULLY BEFORE YOU START TO USE THE SERVICES. BY USING THE SERVICES, YOU ACCEPT AND AGREE TO BE BOUND AND ABIDE BY THESE TERMS OF SERVICE. IF YOU DO NOT WANT TO AGREE TO THESE TERMS OF SERVICE, YOU MUST NOT USE THE SERVICES. IN PARTICULAR, WE WANT TO HIGHLIGHT SOME IMPORTANT TERMS, POLICIES, AND PROCEDURES IN THESE TERMS. BY ACCEPTING THESE TERMS:</p>
+      <p>1. You are also agreeing to other Epic rules and policies that are expressly incorporated into and a part of these Terms. Please read them carefully:<br/>
+          * Our Privacy Policy explains what information we collect from you and how we protect it.<br/>
+          *Our Fan Content Policy explains what you can do with Epic’s Intellectual Property in the content you create.<br/>
+         2. You and Epic agree to resolve disputes between us in individual arbitration (not in court).</p>
+      <p><span class="line">Privacy Notice</span></p>
+      <p>Please review our Privacy Notice found at https://www.Creta.com/privacypolicy, which also governs your use of the Services, to understand our practices.</p>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+
+// Select
+const selectBoxElements = document.querySelectorAll('.select');
+function toggleSelectBox(selectBox) {
+  selectBox.classList.toggle('active');
+}
+function selectOption(optionElement) {
+  const selectBox = optionElement.closest('.select');
+  const selectedElement = selectBox.querySelector('.selected-value');
+  selectedElement.textContent = optionElement.textContent;
+}
+selectBoxElements.forEach((selectBoxElement) => {
+  selectBoxElement.addEventListener('click', (e) => {
+    const targetElement = e.target;
+    const isOptionElement = targetElement.classList.contains('option');
+    if (isOptionElement) {
+      selectOption(targetElement);
+    }
+    toggleSelectBox(selectBoxElement);
+  });
+});
+
+document.addEventListener('click', (e) => {
+  const targetElement = e.target;
+  const isSelect = targetElement.classList.contains('select') || targetElement.closest('.select');
+  if (isSelect) {
+    return;
+  }
+  const allSelectBoxElements = document.querySelectorAll('.select');
+  allSelectBoxElements.forEach((boxElement) => {
+    boxElement.classList.remove('active');
+  });
+});
+</script>
+</html>

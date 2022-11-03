@@ -11,7 +11,7 @@ function* onLoadCreateForumAsync({ payload }) {
     if (response.status === CREATED) {
       yield put(forumCreateSuccess({ ...response.data }));
       console.log('create after::::', response.data);
-      navigate(`/forum/theme/${response.data.data.id}`);
+      navigate(`/forum/${response.data.data.id}/theme`);
     }
   } catch (error) {
     console.log(error);

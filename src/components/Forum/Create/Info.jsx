@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FORUM_NAME_MAXLENGTH, FORUM_DISC_MAXLENGTH } from 'constants/type';
 import { reqCategoryList } from 'redux/store/common/categoryListSlice';
 
-function Info({ forumInfo, setForumInfo, errors, setErrors }) {
+function Info({ forumInfo, setForumInfo, errors, setErrors, editType }) {
   const { catList } = useSelector((state) => ({ ...state.categoryList }));
   const [expand, setExpand] = useToggle(false);
   const dispatch = useDispatch();
@@ -14,15 +14,15 @@ function Info({ forumInfo, setForumInfo, errors, setErrors }) {
     dispatch(reqCategoryList());
   }, []);
 
-  useEffect(() => {
-    console.log('forumInfo::', forumInfo);
-  }, [forumInfo]);
+  // useEffect(() => {
+  //   console.log('forumInfo::', forumInfo);
+  // }, [forumInfo]);
 
   return (
     <div className="form_div">
       <div>
         <span className="form_title">Forum Name</span>
-        <div className="form_wrap msg default">
+        <div className={classNames('form_wrap', { msg: editType === 'create', default: editType === 'create' })}>
           <span className="form_cell form_input input_lg">
             <input
               id="forumName"
@@ -37,9 +37,11 @@ function Info({ forumInfo, setForumInfo, errors, setErrors }) {
               <span>{forumInfo.title?.length}</span>/{FORUM_NAME_MAXLENGTH}
             </span>
           </span>
-          <span className="default_txt msg" id="input_help">
-            You can change the name of the forum 30 days before the forum is created.
-          </span>
+          {editType === 'create' && (
+            <span className="default_txt msg" id="input_help">
+              You can change the name of the forum 30 days before the forum is created.
+            </span>
+          )}
           {errors.title && (
             <span className="error_txt msg" id="input_error">
               {errors.title}
@@ -50,7 +52,7 @@ function Info({ forumInfo, setForumInfo, errors, setErrors }) {
       <div>
         <span className="form_title">Category</span>
         {/* error시 error 클래스를 붙여주시고 하단에 error_txt를 보여주세요 */}
-        <div className="select_wrap error">
+        <div className={classNames('select_wrap', { error: errors.forum_category })}>
           <div className={classNames('select', { active: expand })}>
             <div className="selected" onClick={() => setExpand()} aria-hidden>
               <div className="selected-value">

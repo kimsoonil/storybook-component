@@ -88,7 +88,7 @@ function* patchClubProfileImage({ payload }) {
 // Todo - patchClubTagsInit,
 // function* patchClubTags
 
-function* _commonAdminSaga() {
+function* commonAdminSagas() {
   yield all([takeEvery(actionTypes.getClubInit, getClub)]);
   yield all([takeEvery(actionTypes.getClubByAddressInit, getClubByAddress)]);
   yield all([takeEvery(actionTypes.postClubInit, postClub)]);
@@ -96,4 +96,4 @@ function* _commonAdminSaga() {
   yield all([takeEvery(actionTypes.patchClubProfileImageInit, patchClubProfileImage)]);
 }
 
-export const commonAdminSaga = [fork(_commonAdminSaga)];
+export const commonAdminSaga = [fork(commonAdminSagas)];

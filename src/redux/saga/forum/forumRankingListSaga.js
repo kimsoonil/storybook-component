@@ -1,22 +1,20 @@
-import { takeLatest, put, fork } from 'redux-saga/effects';
+import { takeLatest, put, fork, call } from 'redux-saga/effects';
 import {
   reset,
   reqForumRankingList,
   forumRankingListSuccess,
   forumRankingListFailure
 } from 'redux/store/forum/forumRankingListSlice';
+import { SUCCESS } from 'constants/type';
 
-import Api from '../../api2';
+import { fetchForumRankingList } from '../../api';
 
 function* onLoadForumRankingListAsync({ payload }) {
-  console.log(payload);
   try {
-    // const response = yield call(Api.fetchSignUp, payload);
-    // if (response.status === SUCCESS) {
-    //   yield put(AuthEmailSuccess({ ...response.data }));
-    // }
-    const response = Api.forumRankingListMock(payload);
-    yield put(forumRankingListSuccess({ ...response }));
+    const response = yield call(fetchForumRankingList, payload);
+    if (response.status === SUCCESS) {
+      yield put(forumRankingListSuccess({ ...response.data }));
+    }
   } catch (error) {
     console.log(error);
     yield put(forumRankingListFailure(error));

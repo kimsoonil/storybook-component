@@ -31,7 +31,7 @@ function BoardList(props) {
       alert('비밀번호가 다릅니다.');
     }
   };
-
+  console.log('props.DataList', props.DataList);
   return (
     <div className="board-list">
       {props.DataList.length > 0 ? (
@@ -41,11 +41,11 @@ function BoardList(props) {
               <div className="board-list-item-container">
                 <div className="posts-list-item-profile">
                   <div className="posts-list-item-profile-img">
-                    <img src={item.profile.user.profile_imageurl} />
+                    <img src={item?.user?.profile_image_url} />
                   </div>
                   <div>
                     <div className="posts-list-item-nick">
-                      {item.profile.user.username}
+                      {item?.user.username}
                       {item?.profile?.staff_title === null ? (
                         <>
                           <div className="profile-rating flex-center">{item?.profile?.grade_title}</div>

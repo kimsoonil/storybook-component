@@ -1,32 +1,25 @@
-/* eslint-disable */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+/* eslint-disable import/no-cycle */
+import React, { useEffect, useState } from 'react';
 import 'assets/scss/admin/boards.scss';
 import { useDispatch, useSelector } from 'react-redux';
 
-import _ from 'lodash';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { getBoardGroupsInit, resetBoardAdmin } from 'redux/idistStore/admin/boardAdminSlice';
 import Sidebar from './Sidebar';
-import {
-  getBoardGroupInit,
-  getBoardGroupsInit,
-  resetBoardAdmin,
-  setInfo
-} from 'redux/idistStore/admin/boardAdminSlice';
-import { IVD } from '..';
 import Info from './Info';
 
 const rootClassName = 'admin-boards';
 
-const Boards = () => {
+function Boards() {
   const dispatch = useDispatch();
   const clubRedux = useSelector((state) => state.commonAdmin.club);
   const boardGroups = useSelector((state) => state.boardAdmin.boardGroups);
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       dispatch(resetBoardAdmin());
-    };
-  }, []);
+    },
+    []
+  );
 
   useEffect(() => {
     if (!boardGroups.length) {
@@ -56,7 +49,7 @@ const Boards = () => {
       <Info title={title} setTitle={setTitle} setAddState={setAddState} />
     </div>
   );
-};
+}
 
 export default Boards;
 
@@ -168,23 +161,17 @@ export const BVD = {
       {
         key: 'ALBUM_TYPE',
         title: 'Album type',
-        subtitle: 'Can view many images of the posts like a gallery',
-        defaultImage: require('images/admin/board/type_album_default.svg').default,
-        activeImage: require('images/admin/board/type_album_active.svg').default
+        subtitle: 'Can view many images of the posts like a gallery'
       },
       {
         key: 'LIST_TYPE',
         title: 'List type',
-        subtitle: 'Can view summaries of many posts like a blog',
-        defaultImage: require('images/admin/board/type_list_default.svg').default,
-        activeImage: require('images/admin/board/type_list_active.svg').default
+        subtitle: 'Can view summaries of many posts like a blog'
       },
       {
         key: 'CARD_TYPE',
         title: 'Card type',
-        subtitle: 'Can view post one by one larger like SNS',
-        defaultImage: require('images/admin/board/type_card_default.svg').default,
-        activeImage: require('images/admin/board/type_card_active.svg').default
+        subtitle: 'Can view post one by one larger like SNS'
       }
     ]
   },

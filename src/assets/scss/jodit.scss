@@ -11,15 +11,221 @@
   }
 }
 .jodit {
-  .jodit-toolbar-button_emoji {
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    // width: 40px;
-    // height: 40px;
-    // .jodit-icon {
-    //   width: 20px;
-    //   height: 20px;
-    // }
+
+  //a:link {
+  //  text-decoration: underline;
+  //  cursor: auto;
+  //}
+  //a:visited {
+  //  text-decoration: underline;
+  //  cursor: auto;
+  //}
+  //a:link:active {
+  //  color: (internal value);
+  //}
+  //a:visited:active {
+  //  color: (internal value);
+  //}
+  //b {
+  //  font-weight: bold;
+  //}
+  //blockquote {
+  //  display: block;
+  //  margin-top: 1em;
+  //  margin-bottom: 1em;
+  //  margin-left: 40px;
+  //  margin-right: 40px;
+  //}  div {
+  //  display: block;
+  //}
+  //em {
+  //  font-style: italic;
+  //}
+  //h1 {
+  //  display: block;
+  //  font-size: 2em;
+  //  margin-top: 0.67em;
+  //  margin-bottom: 0.67em;
+  //  margin-left: 0;
+  //  margin-right: 0;
+  //  font-weight: bold;
+  //}
+  //h2 {
+  //  display: block;
+  //  font-size: 1.5em;
+  //  margin-top: 0.83em;
+  //  margin-bottom: 0.83em;
+  //  margin-left: 0;
+  //  margin-right: 0;
+  //  font-weight: bold;
+  //}
+  //h3 {
+  //  display: block;
+  //  font-size: 1.17em;
+  //  margin-top: 1em;
+  //  margin-bottom: 1em;
+  //  margin-left: 0;
+  //  margin-right: 0;
+  //  font-weight: bold;
+  //}
+  //h4 {
+  //  display: block;
+  //  margin-top: 1.33em;
+  //  margin-bottom: 1.33em;
+  //  margin-left: 0;
+  //  margin-right: 0;
+  //  font-weight: bold;
+  //}
+  //h5 {
+  //  display: block;
+  //  font-size: .83em;
+  //  margin-top: 1.67em;
+  //  margin-bottom: 1.67em;
+  //  margin-left: 0;
+  //  margin-right: 0;
+  //  font-weight: bold;
+  //}
+  //h6 {
+  //  display: block;
+  //  font-size: .67em;
+  //  margin-top: 2.33em;
+  //  margin-bottom: 2.33em;
+  //  margin-left: 0;
+  //  margin-right: 0;
+  //  font-weight: bold;
+  //}
+  //hr {
+  //  display: block;
+  //  margin-top: 0.5em;
+  //  margin-bottom: 0.5em;
+  //  margin-left: auto;
+  //  margin-right: auto;
+  //  border-style: inset;
+  //  border-width: 1px;
+  //}
+  //i {
+  //  font-style: italic;
+  //}
+  //iframe:focus {
+  //  outline: none;
+  //}
+  //img {
+  //  display: inline-block;
+  //}
+  //li {
+  //  display: list-item;
+  //}
+  //ol {
+  //  display: block;
+  //  list-style-type: decimal;
+  //  margin-top: 1em;
+  //  margin-bottom: 1em;
+  //  margin-left: 0;
+  //  margin-right: 0;
+  //  padding-left: 40px;
+  //}
+  //p {
+  //  display: block;
+  //  margin-top: 1em;
+  //  margin-bottom: 1em;
+  //  margin-left: 0;
+  //  margin-right: 0;
+  //}
+  //pre {
+  //  display: block;
+  //  font-family: monospace;
+  //  white-space: pre;
+  //  margin: 1em 0;
+  //}
+  //small {
+  //  font-size: smaller;
+  //}
+  //strike {
+  //  text-decoration: line-through;
+  //}
+  //strong {
+  //  font-weight: bold;
+  //}
+  //sub {
+  //  vertical-align: sub;
+  //  font-size: smaller;
+  //}
+  //sup {
+  //  vertical-align: super;
+  //  font-size: smaller;
+  //}
+  //table {
+  //  display: table;
+  //  border-collapse: separate;
+  //  border-spacing: 2px;
+  //  border-color: gray;
+  //}
+  //tbody {
+  //  display: table-row-group;
+  //  vertical-align: middle;
+  //  border-color: inherit;
+  //}
+  //td {
+  //  display: table-cell;
+  //  vertical-align: inherit;
+  //}
+  //tfoot {
+  //  display: table-footer-group;
+  //  vertical-align: middle;
+  //  border-color: inherit;
+  //}
+  //th {
+  //  display: table-cell;
+  //  vertical-align: inherit;
+  //  font-weight: bold;
+  //  text-align: center;
+  //}
+  //thead {
+  //  display: table-header-group;
+  //  vertical-align: middle;
+  //  border-color: inherit;
+  //}
+  //title {
+  //  display: none;
+  //}
+  //tr {
+  //  display: table-row;
+  //  vertical-align: inherit;
+  //  border-color: inherit;
+  //}
+  //u {
+  //  text-decoration: underline;
+  //}
+  //var {
+  //  font-style: italic;
+  //}
+
+  strong {
+    font-weight: bold;
   }
+  em {
+    font-style: italic;
+  }
+  li {
+    display: list-item;
+  }
+  ol {
+    display: block;
+    list-style-type: decimal;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 40px;
+  }
+  ul {
+    display: block;
+    list-style-type: disc;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 40px;
+  }
+
 }

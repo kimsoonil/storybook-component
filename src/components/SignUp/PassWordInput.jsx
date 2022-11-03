@@ -1,18 +1,28 @@
+/* eslint-disable jsx-a11y/tabindex-no-positive */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import { useWatch } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 import PassWordInputBtn from 'components/common/InputButton/PassWordInputBtn';
 
-function PassWordInput({ control, register, trigger, errors, email = '', phoneNumber = '', isDisabled = false }) {
+function PassWordInput({
+  control,
+  register,
+  trigger,
+  errors,
+  email = '',
+  phoneNumber = '',
+  isDisabled = false,
+  tabIndex
+}) {
   const [isViewPwd, setIsViewPwd] = useState(false);
   const [isViewCfmPwd, setIsViewCfmPwd] = useState(false);
 
   const watchPwd = useWatch({ control, name: 'password', defaultValue: '' });
   const watchConfirmPwd = useWatch({ control, name: 'cfrPassword', defaultValue: '' });
 
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const checkEmailPhoneNumberInPwd = (pwd) => {
     const arrFilter = [];
@@ -28,7 +38,8 @@ function PassWordInput({ control, register, trigger, errors, email = '', phoneNu
     return true;
   };
 
-  const pwdText = t('label.userinfo.pwd');
+  // const pwdText = t('label.userinfo.pwd');
+  // const pwdText = 'Password';
   // const pwdConfirmText = t('label.userinfo.pwdConfirm');
   const PASSWORD_MIN_LENGTH = 8;
   const PASSWORD_MAX_LENGTH = 16;
@@ -45,31 +56,33 @@ function PassWordInput({ control, register, trigger, errors, email = '', phoneNu
           {
             msg: errors.password || (watchPwd && !errors.password)
           },
-          { error: errors.password },
-          { success: watchPwd && !errors.password }
+          { error: errors.password }
         )}
       >
         <span className="form_cell form_input input_lg">
           <input
             type={isViewPwd ? 'text' : 'password'}
+            tabIndex={tabIndex}
             aria-invalid="false"
             placeholder="Password"
             {...register('password', {
-              required: t('validation.require', { require: pwdText }),
+              // required: t('validation.require', { require: pwdText }),
+              required: 'Please enter a passwor',
               minLength: {
                 value: PASSWORD_MIN_LENGTH,
-                message: t('validation.userinfo.password.invalid')
+                message: 'invalid format'
               },
               maxLength: {
                 value: PASSWORD_MAX_LENGTH,
-                message: t('validation.userinfo.password.invalid')
+                message: 'invalid format'
               },
               validate: {
-                pwdVal1: (value) => !/(\w)\1\1/.test(value) || t('validation.userinfo.password.invalid'),
+                pwdVal1: (value) => !/(\w)\1\1/.test(value) || 'invalid format',
                 pwdVal2: (value) =>
                   [/[a-z]/, /[A-Z]/, /[0-9]/, /[@$!%*?&]/, /[^a-zA-Z0-9]/].every((pattern) => pattern.test(value)) ||
-                  'must include lower, upper, number, and special chars',
-                pwdVal3: (value) => checkEmailPhoneNumberInPwd(value) || 'email or phonenumber error'
+                  'invalid format',
+                pwdVal3: (value) =>
+                  checkEmailPhoneNumberInPwd(value) || 'Cannot use more than 3 characters of the same string'
               }
             })}
             onBlur={() => {
@@ -95,10 +108,11 @@ function PassWordInput({ control, register, trigger, errors, email = '', phoneNu
         <span className="form_cell form_input input_lg">
           <input
             type={isViewCfmPwd ? 'text' : 'password'}
+            tabIndex={tabIndex}
             aria-invalid="false"
             placeholder="Confirm Password"
             {...register('cfrPassword', {
-              validate: (value) => value === watchPwd || t('validation.userinfo.password', { context: 'confirmPwd' })
+              validate: (value) => value === watchPwd || 'Passwords do not match'
             })}
             disabled={isDisabled}
             onBlur={() => {

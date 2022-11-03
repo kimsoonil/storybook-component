@@ -11,11 +11,11 @@ export function dateCalculation(props) {
   const minute = date1.diff(date2, 'm');
 
   if (minute <= 60) {
-    resultDate = `${minute}m age`;
+    resultDate = `${minute}m ago`;
   } else if (minute > 60 && hours <= 24) {
-    resultDate = `${hours}h age`;
+    resultDate = `${hours}h ago`;
   } else if (hours > 24 && days <= 7) {
-    resultDate = `${days}d age`;
+    resultDate = `${days}d ago`;
   } else if (days > 7 && years < 1) {
     resultDate = dayjs(date2).format('MMM. D');
   } else if (years >= 1) {

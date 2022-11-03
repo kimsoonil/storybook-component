@@ -1,0 +1,525 @@
+.admin-banner-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 460px;
+  background-color: #cdcdd1;
+  position: relative;
+}
+.admin-banner-wrapper div button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.admin-banner-wrapper .banner-image {
+  width: 100%;
+  height: 460px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: absolute;
+}
+.admin-banner-wrapper .banner-content-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  position: relative;
+  width: 1280px;
+  margin: 0 auto;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.admin-banner-wrapper .go-back {
+  margin-top: 26px;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: Poppins;
+}
+.admin-banner-wrapper .banner-bottom-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.admin-banner-wrapper .banner-bottom-wrapper .tag-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  max-width: 840px;
+  margin-bottom: 24px;
+  gap: 4px;
+}
+.admin-banner-wrapper .banner-bottom-wrapper .banner-profile-image {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin-bottom: -80px;
+  -webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+          filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.admin-title-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 1280px;
+  margin: 0 auto;
+  height: 195px;
+}
+.admin-title-wrapper .club-name {
+  color: #bdbdbd;
+  margin-top: 40px;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 52px;
+}
+.admin-title-wrapper .club-description {
+  color: #bdbdbd;
+  font-size: 16px;
+  margin-top: 15px;
+}
+.admin-title-wrapper .writing {
+  color: #000000;
+}
+.admin-content-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 1280px;
+  margin: 0 auto;
+  color: #000000;
+}
+.admin-content-wrapper .wrapper-840 {
+  width: 840px;
+}
+.admin-content-wrapper .headline-title {
+  font-size: 30px;
+  margin-top: 120px;
+}
+.admin-content-wrapper .headline-description {
+  font-size: 16px;
+  margin-top: 15px;
+  margin-bottom: 60px;
+}
+.admin-content-wrapper .form-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 45px;
+}
+.admin-content-wrapper .form-wrapper .form-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 840px;
+  min-width: 840px;
+}
+.admin-content-wrapper .form-wrapper .form-side-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+}
+.admin-content-wrapper .form-wrapper .form-side-wrapper .form-side-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-width: 60px;
+}
+.admin-content-wrapper .form-wrapper .form-side-wrapper .error-text {
+  color: #d30c34;
+  font-size: 15px;
+  line-height: 22px;
+}
+.admin-content-wrapper .form-wrapper .form-label {
+  width: 180px;
+  margin-right: 40px;
+}
+.admin-content-wrapper .form-wrapper .form-label-title {
+  font-size: 22px;
+  line-height: 60px;
+}
+.admin-content-wrapper .form-wrapper .form-label-essential {
+  margin-top: 14px;
+  background-color: #9013fe;
+  width: 6px;
+  height: 6px;
+  border-radius: 6px;
+}
+.admin-content-wrapper .form-wrapper .form-label-description {
+  font-size: 16px;
+  line-height: 22px;
+  margin-top: 3px;
+}
+.admin-content-wrapper .form-wrapper .under-text {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  margin-top: 3px;
+  color: #777777;
+  font-size: 16px;
+  line-height: 22px;
+}
+.admin-content-wrapper .form-wrapper .name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.admin-content-wrapper .form-wrapper .address {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.admin-content-wrapper .form-wrapper .address .url-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.admin-content-wrapper .form-wrapper .address .club-url {
+  font-size: 16px;
+  margin-right: 90px;
+}
+.admin-content-wrapper .form-wrapper .address-input-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.admin-content-wrapper .form-wrapper .category {
+  position: relative;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.admin-content-wrapper .form-wrapper .image-picker .profile-size {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+}
+.admin-content-wrapper .form-wrapper .image-picker .banner-size {
+  width: 400px;
+  height: 225px;
+  padding: 3px;
+}
+.admin-content-wrapper .form-wrapper .image-picker-selected-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 2px solid #9013fe;
+  background-color: #9013fe;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: relative;
+}
+.admin-content-wrapper .form-wrapper .image-picker-selected {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.admin-content-wrapper .form-wrapper .image-picker-selected-hover {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  opacity: 0;
+}
+.admin-content-wrapper .form-wrapper .image-picker-selected-hover:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+.admin-content-wrapper .form-wrapper .image-picker-default {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #777777;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  cursor: pointer;
+}
+.admin-content-wrapper .form-wrapper .image-picker-default:hover {
+  background: #666;
+  color: #fff;
+}
+.admin-content-wrapper .form-wrapper .description-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.admin-content-wrapper .form-wrapper .description-wrapper .description-textarea {
+  height: 126px;
+  padding: 14px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  resize: none;
+  font-size: 14px;
+  font-family: Poppins;
+}
+.admin-content-wrapper .form-wrapper .description-wrapper .description-textarea::-webkit-input-placeholder {
+  color: #bdbdbd;
+  font-size: 14px;
+}
+.admin-content-wrapper .form-wrapper .description-wrapper .description-textarea::-moz-placeholder {
+  color: #bdbdbd;
+  font-size: 14px;
+}
+.admin-content-wrapper .form-wrapper .description-wrapper .description-textarea:-ms-input-placeholder {
+  color: #bdbdbd;
+  font-size: 14px;
+}
+.admin-content-wrapper .form-wrapper .description-wrapper .description-textarea::-ms-input-placeholder {
+  color: #bdbdbd;
+  font-size: 14px;
+}
+.admin-content-wrapper .form-wrapper .description-wrapper .description-textarea::placeholder {
+  color: #bdbdbd;
+  font-size: 14px;
+}
+.admin-content-wrapper .form-wrapper .description-wrapper .description-textarea:focus {
+  border-color: #000000;
+  color: #000000;
+  outline: none;
+}
+.admin-content-wrapper .form-wrapper .description-wrapper .description-textarea-success {
+  border-color: #00b78b;
+}
+.admin-content-wrapper .form-wrapper .description-wrapper .description-textarea-error {
+  border-color: #d30c34;
+}
+.admin-content-wrapper .form-wrapper .tags-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.admin-content-wrapper .form-wrapper .tags-wrapper .input-tags-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+  gap: 15px;
+}
+.admin-content-wrapper .form-wrapper .tags-wrapper .input-tags-wrapper .input-tags-text {
+  width: 100px;
+  height: 60px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  padding: 0 12px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.admin-content-wrapper .form-wrapper .tags-wrapper .input-tags-wrapper .input-tags-text::-webkit-input-placeholder {
+  color: #bdbdbd;
+}
+.admin-content-wrapper .form-wrapper .tags-wrapper .input-tags-wrapper .input-tags-text::-moz-placeholder {
+  color: #bdbdbd;
+}
+.admin-content-wrapper .form-wrapper .tags-wrapper .input-tags-wrapper .input-tags-text:-ms-input-placeholder {
+  color: #bdbdbd;
+}
+.admin-content-wrapper .form-wrapper .tags-wrapper .input-tags-wrapper .input-tags-text::-ms-input-placeholder {
+  color: #bdbdbd;
+}
+.admin-content-wrapper .form-wrapper .tags-wrapper .input-tags-wrapper .input-tags-text::placeholder {
+  color: #bdbdbd;
+}
+.admin-content-wrapper .form-wrapper .tags-wrapper .input-tags-wrapper .input-tags-button {
+  min-width: 70px;
+  height: 60px;
+  padding: 0 12px;
+  outline: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.admin-content-wrapper .form-wrapper .tags-wrapper .input-tags-wrapper .input-tags-button-hover {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #9013fe;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  color: white;
+  font-size: 14px;
+  font-family: Poppins;
+  line-height: 24px;
+}
+.admin-content-wrapper .form-wrapper .tags-wrapper .input-tags-wrapper .input-tags-button-hover:hover {
+  opacity: 0.9;
+}
+.admin-content-wrapper .form-wrapper .auto-approval-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin-top: 20px;
+}
+.admin-content-wrapper .submit-button-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 75px;
+  margin-bottom: 400px;
+  gap: 40px;
+}

@@ -1,10 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
-import { addComma } from 'util/common';
+import { addComma, checkLogin } from 'util/common';
 import ForumSummarySlide from '../Home/ForumSummarySlide';
 
 function CreateForumBanner() {
+  const isLogin = checkLogin();
   const navigate = useNavigate();
+  const onCreate = () => {
+    if (isLogin) navigate('/forum/create');
+    else navigate('/login');
+  };
   return (
     <div className="what_like">
       <dl className="what_like_title">
@@ -29,7 +34,7 @@ function CreateForumBanner() {
           </dl>
         </div>
       </ForumSummarySlide>
-      <button type="button" className="btn primary button_md forum_creat" onClick={() => navigate('/forum/create')}>
+      <button type="button" className="btn primary button_md forum_creat" onClick={onCreate}>
         <span>Create a Forum</span>
       </button>
     </div>

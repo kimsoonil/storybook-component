@@ -62,9 +62,11 @@ const boardSlice = createSlice({
       state.isLoading = true;
     },
     postBoardPostSuccess: (state, { payload }) => {
+      console.log('payload', payload.payload.parameters.is_temporary);
       state.isLoading = false;
-      state.post = payload;
-      console.log('payload', payload);
+      if (!payload.payload.parameters.is_temporary) {
+        state.post = payload;
+      }
     },
 
     patchBoardMergeInit: (state) => {

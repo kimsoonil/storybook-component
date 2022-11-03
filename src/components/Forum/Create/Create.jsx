@@ -16,8 +16,8 @@ import {
 } from 'constants/type';
 import { reqForumCreate } from 'redux/store/forum/forumCreateSlice';
 import { reqCategoryList } from 'redux/store/common/categoryListSlice';
+import AllForum from 'components/Forum/AllForum/AllForum';
 import ForumCategoryBanner from '../SideBanner/ForumCategoryBanner';
-
 import CropImg2 from './CropImg2';
 
 function Create() {
@@ -40,6 +40,9 @@ function Create() {
     [IMAGE_TYPE_THUMBNAIL]: ''
   });
 
+  const [isAllForum, setIsAllForum] = useState(false);
+  const [category, setCategory] = useState(0);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onCreate = () => {
@@ -52,14 +55,8 @@ function Create() {
       formData.append(IMAGE_TYPE_BANNER, forumInfo.banner_image, forumInfo.banner_image_filename);
     if (forumInfo.thumbnail_image)
       formData.append(IMAGE_TYPE_THUMBNAIL, forumInfo.thumbnail_image, forumInfo.thumbnail_image_filename);
-    console.log('formData::', formData);
     dispatch(reqForumCreate({ navigate, formData }));
   };
-
-  useEffect(() => {
-    // navigate(`/forum/theme/${forumInfo.id}`);
-    console.log('forumInfo::', forumInfo);
-  }, [forumInfo]);
 
   useEffect(() => {
     dispatch(reqCategoryList());
@@ -84,7 +81,13 @@ function Create() {
                 </div>
                 <div className="creat_form">
                   <span className="info title">Required Information</span>
-                  <Info forumInfo={forumInfo} setForumInfo={setForumInfo} errors={errors} setErrors={setErrors} />
+                  <Info
+                    forumInfo={forumInfo}
+                    setForumInfo={setForumInfo}
+                    errors={errors}
+                    setErrors={setErrors}
+                    editType="create"
+                  />
                   <span className="img title">Image Registration</span>
                   <div className="form_div">
                     <CropImg2
@@ -125,12 +128,13 @@ function Create() {
               <CreateForumBanner />
               {/* E : What do you like */}
               <SideImgBanner />
-              <ForumCategoryBanner />
+              <ForumCategoryBanner setIsShow={setIsAllForum} setCategory={setCategory} />
             </div>
           </div>
         </div>
         <Footer />
       </div>
+      <AllForum isShow={isAllForum} setIsShow={setIsAllForum} category={category} />
     </div>
   );
 }

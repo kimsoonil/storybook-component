@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuperClub</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+<div id="wrap">
+  <div data-include-path="../include/header.html"></div>
+  <div id="main">
+    <div class="top_slider">
+      <div class="swiper">
+        <button type="button" class="slide left">
+          <span class="a11y">좌측으로</span>
+        </button>
+        <div class="img01"><img src="../../img/temp/club_top_banner_01.png"></div>
+        <div class="img02"><img src="../../img/temp/club_top_banner_02.png"></div>
+        <div class="img03"><img src="../../img/temp/club_top_banner_03.png"></div>
+        <button type="button" class="slide right">
+          <span class="a11y">좌측으로</span>
+        </button>
+        <ul class="slick-dots">
+          <li><button type="button"></button></li>
+          <li class="slick-active"><button type="button"></button></li>
+          <li><button type="button"></button></li>
+          <li><button type="button"></button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container club">
+      <div>
+        <div class="club_list">
+          <div class="club_list_title">
+            <h2 class="h2Type eng">SUPER CLUB</h2>
+            <div>
+              <button type="button" class="tab_box active">
+                <span>All</span>
+              </button><button type="button" class="tab_box">
+                <span>GAME</span>
+              </button><button type="button" class="tab_box">
+                <span>NFT</span>
+              </button><button type="button" class="tab_box">
+                <span>STOCK</span>
+              </button><button type="button" class="tab_box">
+                <span>MARKET</span>
+              </button><button type="button" class="tab_box">
+                <span>SNS</span>
+              </button><button type="button" class="tab_box">
+                <span>DATING</span>
+              </button>
+            </div>
+          </div>
+          <div style="margin-bottom:28px;"><img src="../../img/temp/New_club_list.png"></div>
+          <div style="margin-bottom:28px;"><img src="../../img/temp/Editors_pick.png"></div>
+          <div class="club_list_sub">
+            <div>
+              <div style="margin-bottom:28px;"><img src="../../img/temp/Club_news.png"></div>
+              <div><img src="../../img/temp/Suggest_club.png"></div>
+            </div>
+            <div>
+              <div style="margin-bottom:28px;"><img src="../../img/temp/New_feeds.png"></div>
+              <div><img src="../../img/temp/Club_popular_words.png"></div>
+            </div>
+          </div>
+          <div><img src="../../img/temp/Popular_Club.png"></div>
+        </div>
+      </div>
+      <div class="right_div">
+        <div style="margin-bottom:28px;"><img src="../../img/temp/chat_layer.png"></div>
+        <div style="margin-bottom:28px;"><img src="../../img/temp/banner_byac.png"></div>
+        <div style="margin-bottom:28px;"><img src="../../img/temp/My_club.png"></div>
+        <div><img src="../../img/temp/Activity_layer.png"></div>
+      </div>
+    </div>
+    <div data-include-path="../include/footer.html"></div>
+  </div>
+</div>
+</body>
+<script>
+  window.addEventListener('load', function() {
+      var allElements = document.getElementsByTagName('*');
+      Array.prototype.forEach.call(allElements, function(el) {
+          var includePath = el.dataset.includePath;
+          if (includePath) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      el.outerHTML = this.responseText;
+                  }
+              };
+              xhttp.open('GET', includePath, true);
+              xhttp.send();
+          }
+      });
+  });
+</script>
+</html>

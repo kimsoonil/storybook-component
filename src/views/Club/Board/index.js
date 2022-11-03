@@ -25,7 +25,7 @@ function Board(props) {
     search: search,
     page_size: 20
   };
-
+  console.log('postsList', postsList);
   useEffect(() => {
     if (searchParams.get('search') !== null) {
       parameter.search = searchParams.get('search');
@@ -83,7 +83,7 @@ function Board(props) {
         />
       </div>
       <div className="item">
-        {clubId.data.profile ? <Profile userData={clubId.data.profile} type={'club'} /> : <Profile type={'logout'} />}
+        {clubId?.data?.user ? <Profile userData={clubId.data} type={'club'} /> : <Profile type={'logout'} />}
         <div>
           <HotPosts />
         </div>

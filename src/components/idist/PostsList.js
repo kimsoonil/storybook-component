@@ -142,11 +142,11 @@ function PostsList(props) {
                   <div className="posts-list-item-profile">
                     <div className="posts-list-item-profile-img">
                       <img
-                        src={
-                          postsItem.profile.user.profile_image_url
-                            ? postsItem.profile.user.profile_image_url
-                            : require('images/main/temporary-profile.png')
-                        }
+                        onError={({ currentTarget }) => {
+                          currentTarget.onerror = null; // prevents looping
+                          currentTarget.src = require('images/main/temporary-profile.png');
+                        }}
+                        src={postsItem.user.profile_image_url}
                       />
                     </div>
                     <div>

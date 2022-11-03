@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import "variables";
+@import "_variables";
 
 .common_wrap {
   margin:0 auto;
@@ -55,6 +55,7 @@
   }
   .system_msg {
     text-align:center;
+    margin-bottom:48px;
     span {
       @include eng_font(light);
       display:inline-block;
@@ -126,14 +127,20 @@
   }
   .back {
     width:200px;
-    margin:0 auto;
     display:block;
+    position:relative;
+    &:before {
+      @include content;
+      width:32px;
+      height:32px;
+      position:absolute;
+      top:50%;
+      left:43px;
+      transform: translateY(-50%);
+      background:url('#{$img_root_path}/ico/ic_goback.png') no-repeat center top / 32px 32px;
+    }
     span {
-      &:before {
-        @include content;
-        width:32px;
-        height:32px;
-      }
+      padding-left:36px;
     }
   }
 }
@@ -224,6 +231,344 @@
   .page_btn_wrap {
     .btn {
       width:200px;
+    }
+  }
+}
+
+.landing {
+  // min-height: calc(100vh - 80px);
+  background:$white_color;
+  .main_img {
+    height:900px;
+    background:url('#{$img_root_path}/com/img_landing_main.png') no-repeat center center / cover;
+    .header {
+      height:99px;
+      border-bottom:1px solid $body_color;
+      text-align:center;
+      .landing_gnb {
+        width:$max_width;
+        height:99px;
+        margin:0 auto;
+        display:flex;
+        align-items: center;
+        h1 {
+          width:100px;
+          height:57px;
+          margin-right:181px;
+          a {
+            display: inline-block;
+            width:100px;
+            height:57px;
+            position:relative;
+            &:before {
+              @include logo(wh, 100px, 57px);
+            }
+          }
+        }
+        button {
+          & + button {
+            margin-left:114px;
+          }
+          span {
+            @include eng_font(normal);
+            font-size:$font_base + 4px;
+            color:$white_color;
+          }
+          &:hover {
+            span {
+              @include eng_font(medium);
+            }
+          }
+        }
+      }
+      .landing_top_text {
+        margin-top:248px;
+        @include eng_font(semibold);
+        font-size:$font_base + 34px;
+        line-height:64px;
+        letter-spacing:-0.2px;
+        color:$white_color;
+        text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        span {
+          @include eng_font(medium);
+        }
+      }
+      .button_xl {
+        margin-top:60px;
+        width:207px;
+      }
+    }
+  }
+  .landing_con01 {
+    width:984px;
+    margin:160px auto 0;
+    text-align:center;
+    .landing_title01 {
+      @include eng_font(extra);
+      font-size:$font_base + 58px;
+      line-height:74px;
+      letter-spacing:-0.2px;
+      color:$title_text;
+    }
+    .landing_text01 {
+      margin-top:8px;
+      margin-bottom:80px;
+      @include eng_font(normal);
+      font-size:$font_base + 14px;
+      line-height:34px;
+      letter-spacing:-0.2px;
+      color:$title_text;
+    }
+    ul {
+      margin-top:80px;
+      margin-bottom:160px;
+      display:inline-flex;
+      align-items: center;
+      width:984px;
+      li {
+        width:calc(100% / 3);
+        position:relative;
+        padding-top:120px;
+        &.landing_subjext {
+          @include eng_font(medium);
+          font-size:$font_base + 6px;
+          line-height:26px;
+          letter-spacing:-0.2px;
+          color:$title_text;
+        }
+        &:before {
+          @include content;
+          width:100px;
+          height:100px;
+          position:absolute;
+          top:0;
+          left:50%;
+          transform: translateX(-50%);
+        }
+        &.img01 {
+          &:before {
+            background:url('#{$img_root_path}/ico/ic_main_chat.png') no-repeat center top / 100px 100px;
+          }
+        }
+        &.img02 {
+          &:before {
+            background:url('#{$img_root_path}/ico/ic_main_certification.png') no-repeat center top / 100px 100px;
+          }
+        }
+        &.img03 {
+          &:before {
+            background:url('#{$img_root_path}/ico/ic_main_money.png') no-repeat center top / 100px 100px;
+          }
+        }
+      }
+    }
+  }
+  .landing_con02 {
+    background:$main_color;
+    padding:160px 0;
+    .landing_title02 {
+      text-align:center;
+      margin-bottom:4px;
+      @include eng_font(normal);
+      font-size:$font_base + 14px;
+      line-height:34px;
+      letter-spacing:-0.2px;
+      color:$white_color;
+    }
+    .landing_text02 {
+      text-align:center;
+      height:101px;
+      @include eng_font(extra);
+      font-size:$font_base + 58px;
+      line-height:74px;
+      letter-spacing:-0.3px;
+      color:$white_color;
+    }
+    ul {
+      width:$max_width;
+      margin:120px auto 0;
+      li {
+        padding:62px 0 0 440px;
+        height:300px;
+        position:relative;
+        & + li {
+          margin-top:60px;
+        }
+        &:before {
+          @include content;
+          width:400px;
+          height:300px;
+          position:absolute;
+        }
+        &.right {
+          padding:80px 440px 0 0;
+          dl {
+            text-align:right;
+          }
+        }
+        dl {
+          dt {
+            @include eng_font(bold);
+            font-size:$font_base + 26px;
+            line-height:48px;
+            letter-spacing:-0.2px;
+            color:#ffe600;
+          }
+          dd {
+            padding-top:16px;
+            @include eng_font(light);
+            font-size:$font_base + 10px;
+            line-height:36px;
+            letter-spacing:-0.2px;
+            color:$white_color;
+          }
+        }
+        &.club {
+          &:before {
+            left:0;
+            top:0;
+            background:url('#{$img_root_path}/com/img_landing_superclub.png') no-repeat center center / 400px 300px;
+          }
+        }
+        &.forum {
+          &:before {
+            right:0;
+            top:0;
+            background:url('#{$img_root_path}/com/img_landing_forum.png') no-repeat center center / 400px 300px;
+          }
+        }
+        &.people {
+          &:before {
+            left:0;
+            top:0;
+            background:url('#{$img_root_path}/com/img_landing_peoples.png') no-repeat center center / 400px 300px;
+          }
+        }
+      }
+    }
+  }
+  .landing_con03 {
+    padding:160px 0;
+    width:$max_width;
+    margin:0 auto;
+    .landing_title03 {
+      text-align:center;
+      @include eng_font(normal);
+      font-size:$font_base + 14px;
+      line-height:34px;
+      letter-spacing:-0.3px;
+      color:$title_text;
+    }
+    .landing_text03 {
+      text-align:center;
+      margin-top:4px;
+      height:101px;
+      @include eng_font(extra);
+      font-size:$font_base + 58px;
+      line-height:74px;
+      letter-spacing:-0.2px;
+      color:$title_text;
+    }
+    ul {
+      margin-top:120px;
+      li {
+        padding:80px 0 0 440px;
+        height:300px;
+        position:relative;
+        & + li {
+          margin-top:60px;
+        }
+        &:before {
+          @include content;
+          width:400px;
+          height:300px;
+          position:absolute;
+        }
+        &.right {
+          padding-right:440px;
+          padding-left:0;
+          dl {
+            text-align:right;
+          }
+        }
+        dl {
+          dt {
+            @include eng_font(bold);
+            font-size:$font_base + 26px;
+            line-height:48px;
+            letter-spacing:-0.2px;
+            color:$main_color;
+          }
+          dd {
+            padding-top:16px;
+            @include eng_font(light);
+            font-size:$font_base + 10px;
+            line-height:36px;
+            letter-spacing:-0.2px;
+            color:$title_text;
+          }
+        }
+        &.community {
+          &:before {
+            left:0;
+            top:0;
+            background:url('#{$img_root_path}/com/img_landing_custom.png') no-repeat center center / 400px 300px;
+          }
+        }
+        &.chatting {
+          &:before {
+            right:0;
+            top:0;
+            background:url('#{$img_root_path}/com/img_landing_superchat.png') no-repeat center center / 400px 300px;
+          }
+        }
+        &.ranking {
+          &:before {
+            left:0;
+            top:0;
+            background:url('#{$img_root_path}/com/img_landing_ranking.png') no-repeat center center / 400px 300px;
+          }
+        }
+        &.chatting {
+          &:before {
+            right:0;
+            top:0;
+            background:url('#{$img_root_path}/com/img_landing_finance.png') no-repeat center center / 400px 300px;
+          }
+        }
+      }
+    }
+  }
+  .landing_con04 {
+    background:rgba(144, 19, 254, 0.05);
+    padding-top:20px;
+    .landing_guide {
+      width:$max_width;
+      margin:0 auto;
+      display:flex;
+      align-items:flex-end;
+      .how {
+        margin-left:70px;
+        margin-bottom:70px;
+        padding-top:138px;
+        display: inline-block;
+        width:200px;
+        position:relative;
+        @include eng_font(medium);
+        font-size:$font_base + 14px;
+        line-height:34px;
+        letter-spacing:-0.2px;
+        &:before {
+          @include logo(pp, 200px, 114px);
+        }
+      }
+      .btn_guide {
+        margin-left:240px;
+        margin-bottom:63px;
+        button {
+          width:240px;
+        }
+      }
     }
   }
 }

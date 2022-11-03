@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 export const generateRandomString = (num) => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';

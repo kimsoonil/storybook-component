@@ -28,7 +28,13 @@ const fourmPostSlice = createSlice({
       state.isLoading = true;
       state.fourmPost = payload;
     },
-
+    fourmPostCommentInit: (state) => {
+      state.isLoading = true;
+    },
+    fourmPostCommentSuccess: (state, { payload }) => {
+      state.isLoading = true;
+      state.fourmPost = payload;
+    },
     fourmPostFailure: (state, error) => {
       console.log('error : ', error.payload.message);
       state.error = error.payload.message;
@@ -43,6 +49,8 @@ export const {
   getFourmPostsSuccess,
   postFourmPostInit,
   postFourmPostSuccess,
+  fourmPostCommentInit,
+  fourmPostCommentSuccess,
   fourmPostFailure
 } = fourmPostSlice.actions;
 

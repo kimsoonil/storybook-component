@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/680.5c3f9d79.chunk.js","mappings":"0HAOA,UALgB,WAEd,OADAA,QAAQC,IAAI,mBACL,oCACR,C","sources":["views/Admin/Members.js"],"sourcesContent":["import React from 'react';\n\nconst Members = () => {\n  console.log('Render Members');\n  return <div>Members</div>;\n};\n\nexport default Members;\n"],"names":["console","log"],"sourceRoot":""}

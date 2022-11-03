@@ -1,8 +1,6 @@
 /* eslint-disable */
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
-
 import BoardAlbum from 'components/idist/Club/BoardAlbum';
 import BoardList from 'components/idist/Club/BoardList';
 import BoardCard from 'components/idist/Club/BoardCard';
@@ -18,32 +16,36 @@ function MemberProfileContent(props) {
       <div className="member-profile">
         <div>
           <img
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null; // prevents looping
+              currentTarget.src = require('images/club/member.jpeg');
+            }}
             src={
-              props.profile.data.user.profile_image_url
-                ? props.profile.data.user.profile_image_url
+              props.profile?.data?.user?.profile_image_url
+                ? props.profile?.data?.user?.profile_image_url
                 : require('images/club/member.jpeg')
             }
           />
         </div>
         <div className="member-profile-content">
-          <div className="member-profile-name">{props.profile.data.user.username}</div>
+          <div className="member-profile-name">{props?.profile?.data?.user?.username}</div>
 
           <div className="member-profile-info">
-            <div className="profile-rating flex-center">{props.profile.data.grade_title}</div>
-            <div className="profile-level flex-center">LV {props.profile.data.level}</div>
+            <div className="profile-rating flex-center">{props?.profile?.data?.grade_title}</div>
+            <div className="profile-level flex-center">LV {props?.profile?.data?.level}</div>
           </div>
           <div className="member-profile-counter ">
             <div className="member-profile-counter-info flex-center">
               <div className="member-profile-counter-info-title">Visit</div>
-              <div className="member-profile-counter-info-content">{props.profile.data.visit_count}</div>
+              <div className="member-profile-counter-info-content">{props?.profile?.data?.visit_count}</div>
             </div>
             <div className="member-profile-counter-info flex-center">
               <div className="member-profile-counter-info-title">Posts</div>
-              <div className="member-profile-counter-info-content">{props.profile.data.post_count}</div>
+              <div className="member-profile-counter-info-content">{props?.profile?.data?.post_count}</div>
             </div>
             <div className="member-profile-counter-info flex-center">
               <div className="member-profile-counter-info-title">Comments</div>
-              <div className="member-profile-counter-info-content">{props.profile.data.comment_count}</div>
+              <div className="member-profile-counter-info-content">{props?.profile?.data?.comment_count}</div>
             </div>
           </div>
         </div>
@@ -61,18 +63,22 @@ function MemberProfileContent(props) {
         >
           Comment
         </div>
-        <div
-          className={'item ' + (props.postListState === 'like' && 'active')}
-          onClick={() => props.setPostListState('like')}
-        >
-          Like
-        </div>
-        <div
-          className={'item ' + (props.postListState === 'draft' && 'active')}
-          onClick={() => props.setPostListState('draft')}
-        >
-          Draft
-        </div>
+        {
+          <>
+            <div
+              className={'item ' + (props.postListState === 'like' && 'active')}
+              onClick={() => props.setPostListState('like')}
+            >
+              Like
+            </div>
+            <div
+              className={'item ' + (props.postListState === 'draft' && 'active')}
+              onClick={() => props.setPostListState('draft')}
+            >
+              Draft
+            </div>
+          </>
+        }
       </div>
       <div className="flex-between">
         <div className="club-list-tag">
@@ -83,8 +89,8 @@ function MemberProfileContent(props) {
         </div>
         <div className="flex-center">
           <div className="feed">
-            My feed
-            <ToggleBtn id={'myFeed'} />
+            New feed
+            <ToggleBtn id={'newFeed'} />
           </div>
           <div className="fliter-icon relative">
             <div onClick={() => setOpenFilter(!openFilter)}>

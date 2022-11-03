@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const config = getToken();
 
-function* getActivities({ payload }) {
+function* getActivities() {
   try {
     const response = yield call(() =>
       axios.get(`${process.env.REACT_APP_SUPER_CLUB_URL}/api/v1/activities`, { ...config })

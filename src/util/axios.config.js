@@ -1,14 +1,8 @@
 import axios from 'axios';
-import { showPopup } from 'redux/store/common/popupSlice';
+// import { showPopup } from 'redux/store/common/popupSlice';
 import { reqLogOut } from 'redux/store/common/logInSlice';
 import { setCookie, getCookie } from 'util/cookie';
-import {
-  UNAUTHORIZED,
-  REFRESH_TOKEN,
-  REFRESH_TOKEN_MAX_AGE,
-  API_TIMEOUT_INTERVAL,
-  POPUP_TYPE_ALERT
-} from 'constants/type';
+import { UNAUTHORIZED, REFRESH_TOKEN, REFRESH_TOKEN_MAX_AGE, API_TIMEOUT_INTERVAL } from 'constants/type';
 import { getStorage } from './storage';
 
 let store;
@@ -37,11 +31,12 @@ instance.interceptors.request.use(
       config.headers['Accept-Language'] = locale;
     }
     // add auth header with jwt if account is logged in and request is to the api url
-    const isApiUrl = config.url.startsWith(process.env.REACT_APP_API_ACCOUNT_URL);
-    const isApiPlatformUrl = config.url.startsWith(process.env.REACT_APP_API_PLATFORM_URL);
-    const { accessToken } = store.getState().logIn;
-    if (accessToken && (isApiUrl || isApiPlatformUrl)) config.headers.Authorization = `Bearer ${accessToken}`;
-    console.log(config);
+    // const isApiUrl = config.url.startsWith(process.env.REACT_APP_API_ACCOUNT_URL);
+    // const isApiPlatformUrl = config.url.startsWith(process.env.REACT_APP_API_PLATFORM_URL);
+    // const { accessToken } = store.getState().logIn;
+    const accessToken = getStorage('accessToken');
+    // if (accessToken && (isApiUrl || isApiPlatformUrl)) config.headers.Authorization = `Bearer ${accessToken}`;
+    config.headers.Authorization = accessToken && `Bearer ${accessToken}`;
     return config;
   },
   (error) => {
@@ -53,7 +48,6 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     const res = response;
-    console.log(`interceptors $response`);
     return res;
   },
   (error) => {
@@ -100,13 +94,13 @@ instance.interceptors.response.use(
       return Promise.reject(error);
     }
     // error popup
-    store.dispatch(
-      showPopup({
-        type: POPUP_TYPE_ALERT,
-        title: error.name,
-        contents: Object.values(error.response.data)
-      })
-    );
+    // store.dispatch(
+    //   showPopup({
+    //     type: POPUP_TYPE_ALERT,
+    //     title: error.name,
+    //     contents: Object.values(error.response.data)
+    //   })
+    // );
 
     return Promise.reject(error);
   }
